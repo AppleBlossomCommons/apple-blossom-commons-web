@@ -36,3 +36,19 @@ export function NorthArrow({ className = "size-6" }: IconProps) {
     </svg>
   );
 }
+
+export function ChevronDown({ className = "size-3" }: IconProps) {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" className={className}>
+      <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+export function ChevronRight({ className = "size-3.5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" className={className}>
+      <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}

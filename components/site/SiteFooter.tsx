@@ -1,30 +1,70 @@
 import Link from "next/link";
-import { PLAN_DISCLAIMER } from "@/lib/districts";
-import { footerNav, mainNav, partnerLink, utilityNav } from "./nav";
-import { Wordmark } from "./Wordmark";
+import { container } from "./layout";
+import { aboutNav, connectNav, mainNav } from "./nav";
+
+const footerLink = "text-ink no-underline hover:text-green hover:underline";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-basalt text-[#f5f3ed]">
-      <div className="mx-auto grid max-w-[1360px] gap-12 px-6 pb-10 pt-16 lg:grid-cols-12 lg:px-10 lg:pt-20">
-        <div className="lg:col-span-5">
-          <Wordmark tone="paper" />
-          <p className="mt-4 max-w-[36ch] text-base text-[#c9d2cb]">
-            A generational, mixed-use community in Chelan, Washington. Planned and stewarded by Chelan Village, LP.
-          </p>
+    <footer className="border-t border-rule bg-surface-2">
+      <div className={`${container} flex flex-col gap-4 pb-6 pt-8 sm:gap-10 sm:pb-7 sm:pt-14`}>
+        <div className="flex flex-wrap justify-between gap-x-16 gap-y-10">
+          <div className="flex max-w-[360px] flex-[1_1_300px] flex-col gap-3">
+            <p className="font-serif text-[1.25rem] font-semibold sm:text-[1.375rem]">Apple Blossom Commons</p>
+            <p className="hidden text-[0.9375rem] text-ink-2 sm:block">
+              A long-range community plan in Chelan, Washington, coordinated by Chelan Village, LP.
+            </p>
+          </div>
+
+          {/* Desktop: three titled columns. */}
+          <nav aria-label="Footer" className="hidden flex-wrap gap-x-[72px] gap-y-8 text-[0.9375rem] sm:flex">
+            <FooterColumn title="EXPLORE" items={mainNav} />
+            <FooterColumn title="ABOUT" items={aboutNav} />
+            <FooterColumn title="CONNECT" items={connectNav} />
+          </nav>
         </div>
-        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-2.5 text-[0.9375rem] sm:grid-cols-3 lg:col-span-7">
-          {[...mainNav, ...utilityNav, partnerLink, ...footerNav].map((item) => (
-            <Link key={item.href} href={item.href} className="py-1 text-[#dfe5df] no-underline hover:text-white hover:underline">
-              {item.label}
-            </Link>
-          ))}
+
+        {/* Phone: two untitled columns, Explore beside About (mockup). */}
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-[0.9375rem] sm:hidden">
+          <ul className="flex flex-col gap-2.5">
+            {mainNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={footerLink}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex flex-col gap-2.5">
+            {aboutNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={footerLink}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
         </nav>
-      </div>
-      <div className="mx-auto flex max-w-[1360px] flex-col gap-2 border-t border-white/15 px-6 py-6 font-mono text-[0.75rem] text-[#b9c4bc] sm:flex-row sm:justify-between lg:px-10">
-        <p>{PLAN_DISCLAIMER}</p>
-        <p>© 2026 Chelan Village, LP</p>
+
+        <div className="hidden flex-wrap justify-between gap-3 border-t border-rule pt-[18px] font-mono text-[0.75rem] text-ink-3 sm:flex">
+          <p>Plans shown are illustrative concepts from the July 2026 masterplan and will evolve.</p>
+          <p>© 2026 Chelan Village, LP</p>
+        </div>
+        <p className="font-mono text-[0.6875rem] leading-[1.5] text-ink-3 sm:hidden">
+          Plans shown are illustrative concepts from the July 2026 masterplan. © 2026 Chelan Village, LP
+        </p>
       </div>
     </footer>
+  );
+}
+
+function FooterColumn({ title, items }: { title: string; items: readonly { href: string; label: string }[] }) {
+  return (
+    <div className="flex flex-col gap-2.5">
+      <p className="font-mono text-[0.75rem] font-medium tracking-[0.06em] text-ink-3">{title}</p>
+      <ul className="flex flex-col gap-2.5">
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className={`whitespace-nowrap ${footerLink}`}>{item.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

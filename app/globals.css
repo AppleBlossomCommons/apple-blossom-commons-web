@@ -3,45 +3,38 @@
 /*
  * Orchard Atlas design tokens (docs/04-design-direction.md).
  * Light values are the approved palette; dark values come from the 3D prototype.
- * Full dark mode approved by the owner on Oct 16, 2026.
+ * v1 is light only (homepage mockup README, rule 10): the OS setting never switches
+ * the theme. The dark block below is dormant until a dark theme is approved.
  */
 :root {
   --paper: #f5f3ed;
   --surface: #fbfaf6;
+  --surface-2: #efece4;
   --ink: #1d2621;
   --ink-2: #4a5650;
   --ink-3: #646e68;
   --green: #2f5d46;
+  --green-hover: #1f4433;
   --on-green: #f5f3ed;
   --basalt: #22372c;
   --basalt-2: #2b4436;
+  /* Text and hairlines on the basalt stages (explorer, tour). */
+  --on-basalt: #f5f3ed;
+  --on-basalt-2: #b9c4bc;
+  --basalt-rule: #3b5446;
+  --basalt-rule-2: #4f6a5b;
   --signal: #b5791c;
   --signal-text: #8f5e12;
   --signal-on-dark: #e0ae4f;
   --harvest-gold: #c9a24b;
   --lake: #3e6e8e;
   --rule: #dcd8cd;
+  /* Outline of secondary buttons, and chip borders on surface-2. */
+  --rule-strong: #b9b3a4;
+  --rule-on-surface-2: #cfc9ba;
   --plan-fill-opacity: 0.86;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #141b17;
-    --surface: #1a231e;
-    --ink: #e9ede6;
-    --ink-2: #b9c4bc;
-    --ink-3: #8e9a92;
-    --green: #7fb898;
-    --on-green: #141b17;
-    --basalt: #0f1612;
-    --basalt-2: #18221c;
-    --signal-text: #e0ae4f;
-    --rule: #2e3a33;
-    --plan-fill-opacity: 0.74;
-    color-scheme: dark;
-  }
 }
 
 :root[data-theme="dark"] {
@@ -63,18 +56,30 @@
 @theme inline {
   --color-paper: var(--paper);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-green: var(--green);
+  --color-green-hover: var(--green-hover);
   --color-on-green: var(--on-green);
   --color-basalt: var(--basalt);
   --color-basalt-2: var(--basalt-2);
+  --color-on-basalt: var(--on-basalt);
+  --color-on-basalt-2: var(--on-basalt-2);
+  --color-basalt-rule: var(--basalt-rule);
+  --color-basalt-rule-2: var(--basalt-rule-2);
+  --color-harvest-gold: var(--harvest-gold);
   --color-signal: var(--signal);
   --color-signal-text: var(--signal-text);
   --color-signal-on-dark: var(--signal-on-dark);
   --color-lake: var(--lake);
   --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-rule-on-surface-2: var(--rule-on-surface-2);
+
+  /* Header collapses to the menu button below this width (mockup README, rule 3). */
+  --breakpoint-nav: 1100px;
 
   --font-serif: var(--font-source-serif), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -83,46 +88,67 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
-  background: var(--paper);
-  -webkit-text-size-adjust: 100%;
-}
+/* Element defaults live in the base layer so Tailwind utility classes can override them. */
+@layer base {
+  html {
+    background: var(--paper);
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  font-size: 1.125rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  text-wrap: balance;
-}
+  @media (min-width: 640px) {
+    body {
+      font-size: 1.0625rem;
+    }
+  }
 
-p {
-  text-wrap: pretty;
-}
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-wrap: balance;
+  }
 
-::selection {
-  background: color-mix(in oklab, var(--green) 28%, transparent);
-  color: var(--ink);
-}
+  /*
+   * The approved mockup PNGs render Source Serif 4 at a fixed optical size of 14,
+   * which is sturdier and wider than the automatic display cut at large sizes.
+   * Pinned here so headlines match the visual target. Remove to restore auto sizing.
+   */
+  h1,
+  h2,
+  h3,
+  .font-serif {
+    font-variation-settings: "opsz" 14;
+  }
 
-:focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
+  p {
+    text-wrap: pretty;
+  }
 
-a {
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
+  ::selection {
+    background: color-mix(in oklab, var(--green) 28%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
 }
 
 .tabular {

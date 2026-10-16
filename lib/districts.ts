@@ -103,6 +103,9 @@ export function xPercent(x: number) {
 
 export type Source = {
   label: string;
+  shortLabel: string;
+  /** Date as written on the chip; null shows [SOURCE TO CONFIRM]. */
+  dateLabel: string | null;
   title: string;
   date: string | null;
   geography: string;

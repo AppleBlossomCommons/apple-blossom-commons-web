@@ -2,16 +2,53 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { MenuIcon } from "./icons";
-import { mainNav, partnerLink, utilityNav } from "./nav";
+import { useEffect, useRef, useState } from "react";
+import { buttonClass } from "./buttons";
+import { container } from "./layout";
+import { ChevronDown, MenuIcon } from "./icons";
+import { aboutNav, mainNav, partnerLink } from "./nav";
 import { Wordmark } from "./Wordmark";
+
+const navLink =
+  "whitespace-nowrap text-ink no-underline transition-colors duration-150 hover:text-green aria-[current=page]:underline aria-[current=page]:decoration-signal aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.5em]";
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
-  // Close the mobile menu whenever the route changes.
+  return (
+    <header className="sticky top-0 z-40 border-b border-rule bg-paper/94 backdrop-blur-[6px]">
+      <div className={`${container} flex h-[60px] items-center justify-between gap-6 sm:h-16`}>
+        <Wordmark />
+        <nav aria-label="Main" className="hidden nav:block">
+          <ul className="flex items-center gap-7 text-[0.9375rem] font-medium">
+            {mainNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className={navLink}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <AboutMenu isActive={isActive} />
+            </li>
+          </ul>
+        </nav>
+        <Link href={partnerLink.href} className={`max-nav:hidden ${buttonClass("primary", "sm")}`}>
+          {partnerLink.label}
+        </Link>
+        <MobileMenu isActive={isActive} />
+      </div>
+    </header>
+  );
+}
+
+/** Desktop "About" disclosure: a button that shows a short list of links. */
+function AboutMenu({ isActive }: { isActive: (href: string) => boolean }) {
+  const [open, setOpen] = useState(false);
+  const wrap = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
@@ -20,77 +57,145 @@ export function SiteHeader() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        wrap.current?.querySelector("button")?.focus();
+      }
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!wrap.current?.contains(e.target as Node)) setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("pointerdown", onPointer);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointerdown", onPointer);
+    };
   }, [open]);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const sectionActive = aboutNav.some((item) => isActive(item.href));
 
   return (
-    <header className="relative z-40 border-b border-rule bg-paper">
-      <div className="mx-auto hidden max-w-[1360px] justify-end gap-6 px-6 pt-2.5 text-[0.8125rem] text-ink-2 lg:flex lg:px-10">
-        {utilityNav.map((item) => (
-          <Link key={item.href} href={item.href} className="no-underline hover:text-ink hover:underline" aria-current={isActive(item.href) ? "page" : undefined}>
-            {item.label}
-          </Link>
+    <div
+      ref={wrap}
+      className="relative"
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="about-menu"
+        onClick={() => setOpen((v) => !v)}
+        className={`inline-flex items-center gap-1.5 ${navLink} ${sectionActive ? "underline decoration-signal decoration-2 underline-offset-[0.5em]" : ""}`}
+      >
+        About
+        <ChevronDown className={`size-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <ul
+        id="about-menu"
+        hidden={!open}
+        className="absolute right-0 top-[calc(100%+14px)] min-w-[220px] rounded-[8px] border border-rule bg-surface p-1.5 shadow-[0_12px_32px_rgb(29_38_33/0.12)]"
+      >
+        {aboutNav.map((item) => (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              className="flex min-h-10 items-center whitespace-nowrap rounded-[6px] px-3 text-ink no-underline hover:bg-surface-2 aria-[current=page]:text-green"
+            >
+              {item.label}
+            </Link>
+          </li>
         ))}
-      </div>
-      <div className="mx-auto flex h-16 max-w-[1360px] items-center gap-8 px-6 lg:h-14 lg:px-10">
-        <div className="mr-auto">
-          <Wordmark />
+      </ul>
+    </div>
+  );
+}
+
+/** Below 1,100px: a menu button that opens a full-screen panel (a modal <dialog>). */
+function MobileMenu({ isActive }: { isActive: (href: string) => boolean }) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const pathname = usePathname();
+
+  // Close the panel whenever the route changes (back/forward included).
+  useEffect(() => {
+    dialog.current?.close();
+  }, [pathname]);
+
+  // If the window widens past the breakpoint while the panel is open, close it,
+  // or the page would stay inert behind a hidden dialog.
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 1100px)");
+    const onChange = () => wide.matches && dialog.current?.close();
+    wide.addEventListener("change", onChange);
+    return () => wide.removeEventListener("change", onChange);
+  }, []);
+
+  const close = () => dialog.current?.close();
+  const linkClass =
+    "flex min-h-[52px] items-center whitespace-nowrap font-serif text-[1.375rem] text-ink no-underline aria-[current=page]:underline aria-[current=page]:decoration-signal aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]";
+
+  return (
+    <>
+      <button
+        type="button"
+        aria-haspopup="dialog"
+        onClick={() => dialog.current?.showModal()}
+        className="inline-flex size-11 items-center justify-center rounded-[6px] border border-rule text-ink nav:hidden"
+      >
+        <MenuIcon open={false} />
+        <span className="sr-only">Open menu</span>
+      </button>
+      <dialog
+        ref={dialog}
+        aria-label="Menu"
+        className="m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto bg-paper p-0 text-ink backdrop:bg-transparent nav:hidden"
+      >
+        <div className="flex h-[60px] items-center justify-between border-b border-rule px-4 sm:h-16 sm:px-6">
+          <Wordmark onClick={close} />
+          <button
+            type="button"
+            onClick={close}
+            autoFocus
+            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-rule text-ink"
+          >
+            <MenuIcon open />
+            <span className="sr-only">Close menu</span>
+          </button>
         </div>
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-6 text-[0.9375rem]">
+        <nav aria-label="Main" className="px-4 pb-10 pt-4 sm:px-6">
+          <ul className="divide-y divide-rule border-b border-rule">
             {mainNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} onClick={close} aria-current={isActive(item.href) ? "page" : undefined} className={linkClass}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 font-mono text-[0.75rem] font-medium tracking-[0.06em] text-ink-3">ABOUT</p>
+          <ul className="mt-2 divide-y divide-rule border-b border-rule">
+            {aboutNav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  onClick={close}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className="py-2 text-ink-2 no-underline transition-colors duration-150 hover:text-ink aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-signal aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.5em]"
+                  className="flex min-h-12 items-center whitespace-nowrap text-[1.0625rem] text-ink no-underline aria-[current=page]:text-green"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
+          <Link href={partnerLink.href} onClick={close} className={`mt-8 w-full ${buttonClass("primary", "lg")}`}>
+            {partnerLink.label}
+          </Link>
         </nav>
-        <Link
-          href={partnerLink.href}
-          className="hidden rounded-[3px] bg-green px-4 py-2.5 text-[0.9375rem] font-medium text-on-green no-underline transition-[filter] duration-150 hover:brightness-110 lg:inline-block"
-        >
-          {partnerLink.label}
-        </Link>
-        <button
-          type="button"
-          className="-mr-2 inline-flex size-11 items-center justify-center rounded text-ink lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <MenuIcon open={open} />
-          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-        </button>
-      </div>
-      <nav
-        id="mobile-menu"
-        aria-label="Main"
-        hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-rule bg-paper px-6 pb-8 pt-2 lg:hidden"
-      >
-        <ul className="divide-y divide-rule border-y border-rule">
-          {[...mainNav, ...utilityNav].map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className="block py-3.5 font-serif text-[1.375rem] text-ink no-underline">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <Link href={partnerLink.href} className="mt-6 inline-block rounded-[3px] bg-green px-5 py-3 font-medium text-on-green no-underline">
-          {partnerLink.label}
-        </Link>
-      </nav>
-    </header>
+      </dialog>
+    </>
   );
 }

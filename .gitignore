@@ -45,3 +45,6 @@ next-env.d.ts
 /.impeccable/questions/
 /.impeccable/hook.cache.json
 /.impeccable/*.local.json
+
+# local screenshots for mockup comparison
+/screenshots/

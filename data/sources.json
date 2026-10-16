@@ -1,11 +1,13 @@
 {
   "_meta": {
     "asOf": "2026-10-16",
-    "note": "Source registry for the Evidence Margin (docs/04). Every figure on the site references one id here. tier is the confidence tier: High, Moderate, Low, or Pending."
+    "note": "Source registry for the Evidence Margin (docs/04). Every figure on the site references one id here. tier is the confidence tier: High, Moderate, Low, or Pending. label, shortLabel and dateLabel are the words on the chip (homepage mockup, Oct 16, 2026); a null dateLabel shows [SOURCE TO CONFIRM]. ownerCheck lists sources the owner must confirm as current before launch (docs/03); it is never rendered."
   },
   "sources": {
     "masterplan-2026-07": {
-      "label": "Masterplan Jul 2026",
+      "label": "Masterplan",
+      "shortLabel": "Masterplan",
+      "dateLabel": "Jul 2026",
       "title": "Apple Blossom Commons masterplan, jeffrey mak: architect ltd",
       "date": "2026-07",
       "geography": "Apple Blossom Center planning area",
@@ -15,12 +17,52 @@
       "url": null
     },
     "acreage-tbc": {
-      "label": "Source TBC",
+      "label": "Chelan Village, LP",
+      "shortLabel": "Chelan Village, LP",
+      "dateLabel": null,
       "title": "Site acreage (about 160 acres)",
       "date": null,
       "geography": "Coordinated landholdings, Chelan, WA",
       "method": "The source for the acreage figure has not been confirmed yet.",
       "tier": "Pending",
+      "access": "public",
+      "url": null
+    },
+    "lch-board-letter-2026-01": {
+      "label": "Lake Chelan Health board letter",
+      "shortLabel": "Lake Chelan Health board letter",
+      "dateLabel": "Jan 2026",
+      "title": "Lake Chelan Health board letter, January 2026",
+      "date": "2026-01",
+      "geography": "Lake Chelan Health",
+      "method": "Letter from the Lake Chelan Health board describing new and expanded services.",
+      "tier": "High",
+      "access": "public",
+      "url": null,
+      "ownerCheck": "Confirm the letter is still current before launch (docs/03)."
+    },
+    "ems-building-record-2026": {
+      "label": "Public record",
+      "shortLabel": "Public record",
+      "dateLabel": "2026",
+      "title": "EMS and administration building, Lake Chelan Community Hospital campus",
+      "date": "2026",
+      "geography": "Lake Chelan Community Hospital campus",
+      "method": "Publicly documented state funding of $12M over two legislative sessions.",
+      "tier": "High",
+      "access": "public",
+      "url": null,
+      "ownerCheck": "Confirm the record is still current and name it before launch (docs/03)."
+    },
+    "uw-apl-migration-2010-2020": {
+      "label": "UW–Madison Applied Population Lab",
+      "shortLabel": "UW–Madison APL",
+      "dateLabel": "2010–2020",
+      "title": "Net migration by age, 2010–2020, University of Wisconsin–Madison Applied Population Laboratory",
+      "date": "2010–2020",
+      "geography": "King County and Chelan County, WA",
+      "method": "Age-specific net migration rates for the 65 to 69 age band. No public dataset links a mover's age to the county they left, so the comparison shows a pattern, not a proven flow.",
+      "tier": "Moderate",
       "access": "public",
       "url": null
     }

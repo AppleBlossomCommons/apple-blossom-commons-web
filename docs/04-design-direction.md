@@ -31,7 +31,7 @@ Blossom pink (#D9466F) is **retired**. The old tour still uses it and must be re
 
 Dark mode (from the 3D prototype): paper #141B17, surface #1A231E, ink #E9EDE6, ink-2 #B9C4BC, ink-3 #8E9A92, rule #2E3A33, green #7FB898, basalt #0F1612, basalt-2 #18221C.
 
-**Decision, Oct 16, 2026 (owner):** the whole site supports full dark mode, following the visitor's system setting, using the values above. In dark mode, text on green buttons is dark (#141B17) and `signal-text` becomes #E0AE4F. Implemented in `app/globals.css`.
+**Decision, Oct 16, 2026 (owner), superseded the same day:** an earlier call for full dark mode following the visitor's system setting was replaced when the homepage mockup was approved (`reference/homepage-mockup/README.md`, rule 10). **v1 is light theme only.** The operating system's dark mode does not switch the site. The dark values above are kept for a later, separately approved dark theme (opt-in through `data-theme="dark"` only); in that theme, text on green buttons is dark (#141B17) and `signal-text` becomes #E0AE4F.
 
 ### District colors: by land-use family, not one hue per district
 
