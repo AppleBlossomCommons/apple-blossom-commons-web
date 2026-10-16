@@ -44,8 +44,8 @@ export function DistrictLegend({ districts, viewBox, sourceChips }: Props) {
             {districts.map((d) =>
               d.labels.map(([x, y], j) => (
                 <g key={`${d.key}-r${j}`} style={{ opacity: !active || active === d.key ? 1 : 0.35, transition: "opacity 200ms var(--ease-out)" }}>
-                  <circle cx={x} cy={y} r={15} fill={active === d.key ? "var(--signal)" : "var(--paper)"} stroke={active === d.key ? "var(--signal)" : "var(--ink)"} strokeWidth={1.2} />
-                  <text x={x} y={y + 4.5} textAnchor="middle" fontFamily="var(--font-mono)" fontSize={13} fontWeight={500} fill={active === d.key ? "#fff" : "var(--ink)"}>
+                  <circle cx={x} cy={y} r={15} fill="var(--paper)" stroke={active === d.key ? "var(--signal)" : "var(--ink)"} strokeWidth={active === d.key ? 3 : 1.2} />
+                  <text x={x} y={y + 4.5} textAnchor="middle" fontFamily="var(--font-mono)" fontSize={13} fontWeight={500} fill="var(--ink)">
                     {d.n}
                   </text>
                 </g>

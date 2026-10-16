@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DragHandle } from "@/components/site/icons";
+import { DragHandle, NorthArrow } from "@/components/site/icons";
 import type { PlanDistrict } from "./types";
 import "./TodayPlanned.css";
 
-const REST = 42; // where the intro sweep stops: % from the left edge
+const REST = 50; // where the intro sweep stops and "Compare" rests: % from the left edge (keep in sync with TodayPlanned.css)
 const SWEEP_DELAY = 0.9; // s, after the outline has drawn
 const SWEEP_DURATION = 1.6; // s
 
@@ -24,14 +24,16 @@ function timeAtProgress(p: number) {
 
 type Props = {
   districts: PlanDistrict[];
-  /** Districts that hold existing uses today, with a short label. */
-  existing: { key: string; label: string }[];
+  /** Districts that hold existing uses today, with a label and a shorter phone label. */
+  existing: { key: string; label: string; short: string }[];
+  /** SVG path of the site perimeter, drawn on the Today side. */
+  perimeter: string;
   viewBox: string;
   size: [number, number];
   disclaimer: string;
 };
 
-export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }: Props) {
+export function TodayPlanned({ districts, existing, perimeter, viewBox, size, disclaimer }: Props) {
   const [split, setSplit] = useState(REST);
   const [interacted, setInteracted] = useState(false);
   const [dragging, setDragging] = useState(false);
@@ -93,7 +95,6 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
     }
   };
 
-  const plannedShare = Math.round(100 - split);
   const stageClass = [
     "tp-stage",
     interacted ? "" : "tp-intro",
@@ -115,27 +116,13 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
         className={stageClass}
         style={{ "--split": split } as React.CSSProperties}
       >
-        {/* TODAY: planning-area outlines and the uses that already exist */}
+        {/* TODAY: the site perimeter and the uses that already exist. */}
         <svg viewBox={viewBox} className="tp-layer" aria-hidden="true">
           <g className="tp-grid">{grid}</g>
-          {districts.map((d, i) =>
-            d.polys.map((poly, j) => {
-              const isExisting = existing.some((e) => e.key === d.key);
-              return (
-                <path
-                  key={`${d.key}-${j}`}
-                  d={poly}
-                  pathLength={1}
-                  className="tp-outline"
-                  style={{
-                    animationDelay: `${i * 45}ms`,
-                    fill: isExisting ? d.color : "none",
-                    fillOpacity: isExisting ? 0.3 : 0,
-                  }}
-                />
-              );
-            }),
-          )}
+          <path d={perimeter} pathLength={1} className="tp-outline" />
+          {districts
+            .filter((d) => existing.some((e) => e.key === d.key))
+            .map((d) => d.polys.map((poly, j) => <path key={`e-${d.key}-${j}`} d={poly} fill={d.color} className="tp-existing" />))}
         </svg>
         {existing.map((e) => {
           const d = districts.find((x) => x.key === e.key);
@@ -144,10 +131,11 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
           return (
             <span
               key={e.key}
-              className={`tp-existingLabel hidden rounded-[3px] border border-rule bg-paper px-1.5 py-0.5 font-mono text-[0.6875rem] text-ink-2 sm:block`}
+              className="tp-existingLabel rounded-[3px] border border-rule bg-paper px-1.5 py-0.5 font-mono text-[0.625rem] text-ink-2 sm:text-[0.6875rem]"
               style={{ left: `${xPct(p[0])}%`, top: `${yPct(p[1])}%` }}
             >
-              {e.label}
+              <span className="sm:hidden">{e.short}</span>
+              <span className="hidden sm:inline">{e.label}</span>
             </span>
           );
         })}
@@ -190,7 +178,10 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
         </svg>
 
         <span className={`tp-cornerLabel left-3 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-ink-2`}>Today</span>
-        <span className={`tp-cornerLabel right-3 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-signal-text`}>Planned</span>
+        <span className={`tp-cornerLabel right-3 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-ink-2`}>
+          Planned<span className="hidden sm:inline"> · {districts.length} districts</span>
+        </span>
+        <NorthArrow className="tp-north size-6 text-ink-2" />
 
         {showTag && (
           <span
@@ -211,8 +202,8 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
             aria-label="Compare today with the planned districts"
             aria-valuemin={0}
             aria-valuemax={100}
-            aria-valuenow={plannedShare}
-            aria-valuetext={`${plannedShare}% of the plan shows the planned districts`}
+            aria-valuenow={Math.round(split)}
+            aria-valuetext={`Divider at ${Math.round(split)}%: today on the left, planned on the right`}
             onKeyDown={onKeyDown}
             onPointerDown={(e) => {
               e.currentTarget.setPointerCapture(e.pointerId);
@@ -232,7 +223,7 @@ export function TodayPlanned({ districts, existing, viewBox, size, disclaimer }:
         <div className="flex gap-1 self-start rounded-[3px] border border-rule p-1" role="group" aria-label="Plan view">
           {[
             { label: "Today", value: 100 },
-            { label: "Compare", value: 50 },
+            { label: "Compare", value: REST },
             { label: "Planned", value: 0 },
           ].map((b) => (
             <button

@@ -31,3 +31,12 @@
 - Confidentiality acknowledgement wording.
 - Public research summary text (five summaries; see `03-content-and-tiers.md`).
 - Drone imagery: scope and budget.
+
+## Found while building the Home page (Oct 16, 2026)
+
+- **Roundel positions:** `labels` in `data/district-geometry-v1.json` are stored as `[x, z]` for the 3D prototype (z = −y). The site flips them once in `lib/districts.ts`. After flipping, the Heritage Grove roundel and Summit's second (north) roundel still fall just outside their traced outlines. Check them against the masterplan.
+- **Site perimeter:** no site boundary exists in `data/`, so the Today view draws the convex hull of all traced parcels as a stand-in (`sitePerimeterPath()` in `lib/districts.ts`). Replace with the georeferenced boundary when it arrives.
+- **Plan map scale bar:** no documented scale for the traced Districts sheet, so the plan shows a north arrow but no scale bar.
+- **Roads:** SR 97A and Apple Blossom Drive have no geometry in `data/`, so the plan can't draw them yet.
+- **Wellness District summary** in `data/districts.json` mentions "rehabilitation", which isn't in the program in `03-content-and-tiers.md`. Confirm or remove.
+- **Acreage source:** "about 160 acres" shows "Source TBC" until its source is named (`data/sources.json` → `acreage-tbc`).

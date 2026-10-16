@@ -62,7 +62,8 @@ export const districts: District[] = districtData.districts.map((d) => {
     publicFacts: d.publicFacts,
     status: d.status,
     polys: geometry.polys[key],
-    labels: geometry.labels[key],
+    // Labels in the geometry file are stored as [x, z] for the 3D prototype, where z = -y.
+    labels: geometry.labels[key].map(([x, z]) => [x, -z] as Point),
   };
 });
 
@@ -74,6 +75,25 @@ export const familyOrder: DistrictFamily[] = ["residential", "senior", "commerci
 
 export function polyToPath(poly: Point[]) {
   return "M" + poly.map(([x, y]) => `${x},${y}`).join("L") + "Z";
+}
+
+/**
+ * Stand-in site perimeter: the convex hull of every traced parcel point.
+ * No georeferenced site boundary exists yet (docs/09-open-items.md).
+ */
+export function sitePerimeterPath() {
+  const pts = districts.flatMap((d) => d.polys.flat()).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const cross = (o: Point, a: Point, b: Point) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const half = (list: Point[]) => {
+    const out: Point[] = [];
+    for (const p of list) {
+      while (out.length >= 2 && cross(out[out.length - 2], out[out.length - 1], p) <= 0) out.pop();
+      out.push(p);
+    }
+    out.pop();
+    return out;
+  };
+  return polyToPath([...half(pts), ...half([...pts].reverse())]);
 }
 
 /** Horizontal position of a point as a percentage of the plan width. */

@@ -3,14 +3,14 @@ import { SourceChip } from "@/components/evidence/SourceChip";
 import { DistrictLegend } from "@/components/plan/DistrictLegend";
 import { TodayPlanned } from "@/components/plan/TodayPlanned";
 import { ArrowRight } from "@/components/site/icons";
-import { PLAN_DISCLAIMER, PLAN_SIZE, PLAN_VIEWBOX } from "@/lib/districts";
+import { PLAN_DISCLAIMER, PLAN_SIZE, PLAN_VIEWBOX, sitePerimeterPath } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
 
 // Districts that hold existing uses today (docs/03): the hospital campus and clinics
 // sit in the Wellness District; Summit Recreation Park includes the existing sports fields.
 const existingToday = [
-  { key: "wellness", label: "Hospital campus and clinics (existing)" },
-  { key: "summit", label: "Sports fields (existing)" },
+  { key: "wellness", label: "Hospital campus and clinics (existing)", short: "Hospital (existing)" },
+  { key: "summit", label: "Sports fields (existing)", short: "Fields (existing)" },
 ];
 
 const doorways = [
@@ -69,6 +69,7 @@ export default function Home() {
           <TodayPlanned
             districts={districts}
             existing={existingToday}
+            perimeter={sitePerimeterPath()}
             viewBox={PLAN_VIEWBOX}
             size={PLAN_SIZE}
             disclaimer={PLAN_DISCLAIMER}
