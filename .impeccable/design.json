@@ -1,0 +1,905 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-16T12:20:59.176Z",
+  "title": "Design System: Apple Blossom Commons",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f5f3ed",
+        "oklch": "oklch(96.4% 0.008 91.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 91.5)",
+          "oklch(26.4% 0.008 91.5)",
+          "oklch(37.9% 0.008 91.5)",
+          "oklch(49.3% 0.008 91.5)",
+          "oklch(60.7% 0.008 91.5)",
+          "oklch(72.1% 0.008 91.5)",
+          "oklch(83.6% 0.008 91.5)",
+          "oklch(95.0% 0.008 91.5)"
+        ],
+        "darkModeToken": "paper-dark"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Surface",
+        "canonical": "#fbfaf6",
+        "oklch": "oklch(98.5% 0.005 95.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 95.1)",
+          "oklch(26.4% 0.005 95.1)",
+          "oklch(37.9% 0.005 95.1)",
+          "oklch(49.3% 0.005 95.1)",
+          "oklch(60.7% 0.005 95.1)",
+          "oklch(72.1% 0.005 95.1)",
+          "oklch(83.6% 0.005 95.1)",
+          "oklch(95.0% 0.005 95.1)"
+        ],
+        "darkModeToken": "surface-dark"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Orchard Ink",
+        "canonical": "#1d2621",
+        "oklch": "oklch(25.8% 0.016 160.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 160.7)",
+          "oklch(26.4% 0.016 160.7)",
+          "oklch(37.9% 0.016 160.7)",
+          "oklch(49.3% 0.016 160.7)",
+          "oklch(60.7% 0.016 160.7)",
+          "oklch(72.1% 0.016 160.7)",
+          "oklch(83.6% 0.016 160.7)",
+          "oklch(95.0% 0.016 160.7)"
+        ],
+        "darkModeToken": "ink-dark"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#4a5650",
+        "oklch": "oklch(44.1% 0.018 164.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 164.0)",
+          "oklch(26.4% 0.018 164.0)",
+          "oklch(37.9% 0.018 164.0)",
+          "oklch(49.3% 0.018 164.0)",
+          "oklch(60.7% 0.018 164.0)",
+          "oklch(72.1% 0.018 164.0)",
+          "oklch(83.6% 0.018 164.0)",
+          "oklch(95.0% 0.018 164.0)"
+        ],
+        "darkModeToken": "ink-2-dark"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Tertiary Ink",
+        "canonical": "#646e68",
+        "oklch": "oklch(52.8% 0.015 159.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 159.6)",
+          "oklch(26.4% 0.015 159.6)",
+          "oklch(37.9% 0.015 159.6)",
+          "oklch(49.3% 0.015 159.6)",
+          "oklch(60.7% 0.015 159.6)",
+          "oklch(72.1% 0.015 159.6)",
+          "oklch(83.6% 0.015 159.6)",
+          "oklch(95.0% 0.015 159.6)"
+        ],
+        "darkModeToken": "ink-3-dark"
+      },
+      "orchard-green": {
+        "role": "primary",
+        "displayName": "Orchard Green",
+        "canonical": "#2f5d46",
+        "oklch": "oklch(43.8% 0.064 160.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.061 160.4)",
+          "oklch(26.4% 0.064 160.4)",
+          "oklch(37.9% 0.064 160.4)",
+          "oklch(49.3% 0.064 160.4)",
+          "oklch(60.7% 0.064 160.4)",
+          "oklch(72.1% 0.064 160.4)",
+          "oklch(83.6% 0.064 160.4)",
+          "oklch(95.0% 0.061 160.4)"
+        ],
+        "darkModeToken": "orchard-green-dark"
+      },
+      "on-green": {
+        "role": "neutral",
+        "displayName": "Text on Green",
+        "canonical": "#f5f3ed",
+        "oklch": "oklch(96.4% 0.008 91.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 91.5)",
+          "oklch(26.4% 0.008 91.5)",
+          "oklch(37.9% 0.008 91.5)",
+          "oklch(49.3% 0.008 91.5)",
+          "oklch(60.7% 0.008 91.5)",
+          "oklch(72.1% 0.008 91.5)",
+          "oklch(83.6% 0.008 91.5)",
+          "oklch(95.0% 0.008 91.5)"
+        ],
+        "darkModeToken": "on-green-dark"
+      },
+      "basalt": {
+        "role": "neutral",
+        "displayName": "Basalt",
+        "canonical": "#22372c",
+        "oklch": "oklch(31.5% 0.033 160.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.033 160.8)",
+          "oklch(26.4% 0.033 160.8)",
+          "oklch(37.9% 0.033 160.8)",
+          "oklch(49.3% 0.033 160.8)",
+          "oklch(60.7% 0.033 160.8)",
+          "oklch(72.1% 0.033 160.8)",
+          "oklch(83.6% 0.033 160.8)",
+          "oklch(95.0% 0.033 160.8)"
+        ],
+        "darkModeToken": "basalt-dark"
+      },
+      "basalt-2": {
+        "role": "neutral",
+        "displayName": "Basalt Panel",
+        "canonical": "#2b4436",
+        "oklch": "oklch(36.2% 0.039 159.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.039 159.1)",
+          "oklch(26.4% 0.039 159.1)",
+          "oklch(37.9% 0.039 159.1)",
+          "oklch(49.3% 0.039 159.1)",
+          "oklch(60.7% 0.039 159.1)",
+          "oklch(72.1% 0.039 159.1)",
+          "oklch(83.6% 0.039 159.1)",
+          "oklch(95.0% 0.039 159.1)"
+        ],
+        "darkModeToken": "basalt-2-dark"
+      },
+      "harvest-amber": {
+        "role": "secondary",
+        "displayName": "Harvest Amber (signal)",
+        "canonical": "#b5791c",
+        "oklch": "oklch(62.4% 0.125 71.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.100 71.9)",
+          "oklch(26.4% 0.113 71.9)",
+          "oklch(37.9% 0.125 71.9)",
+          "oklch(49.3% 0.125 71.9)",
+          "oklch(60.7% 0.125 71.9)",
+          "oklch(72.1% 0.125 71.9)",
+          "oklch(83.6% 0.113 71.9)",
+          "oklch(95.0% 0.100 71.9)"
+        ]
+      },
+      "signal-text": {
+        "role": "secondary",
+        "displayName": "Signal Text",
+        "canonical": "#8f5e12",
+        "oklch": "oklch(52.3% 0.106 71.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.088 71.6)",
+          "oklch(26.4% 0.098 71.6)",
+          "oklch(37.9% 0.106 71.6)",
+          "oklch(49.3% 0.106 71.6)",
+          "oklch(60.7% 0.106 71.6)",
+          "oklch(72.1% 0.106 71.6)",
+          "oklch(83.6% 0.098 71.6)",
+          "oklch(95.0% 0.088 71.6)"
+        ],
+        "darkModeToken": "signal-text-dark"
+      },
+      "signal-on-dark": {
+        "role": "secondary",
+        "displayName": "Signal on Dark",
+        "canonical": "#e0ae4f",
+        "oklch": "oklch(77.9% 0.126 81.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.101 81.0)",
+          "oklch(26.4% 0.114 81.0)",
+          "oklch(37.9% 0.126 81.0)",
+          "oklch(49.3% 0.126 81.0)",
+          "oklch(60.7% 0.126 81.0)",
+          "oklch(72.1% 0.126 81.0)",
+          "oklch(83.6% 0.114 81.0)",
+          "oklch(95.0% 0.101 81.0)"
+        ]
+      },
+      "harvest-gold": {
+        "role": "tertiary",
+        "displayName": "Harvest Gold",
+        "canonical": "#c9a24b",
+        "oklch": "oklch(73.1% 0.115 85.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.093 85.0)",
+          "oklch(26.4% 0.105 85.0)",
+          "oklch(37.9% 0.115 85.0)",
+          "oklch(49.3% 0.115 85.0)",
+          "oklch(60.7% 0.115 85.0)",
+          "oklch(72.1% 0.115 85.0)",
+          "oklch(83.6% 0.105 85.0)",
+          "oklch(95.0% 0.093 85.0)"
+        ]
+      },
+      "lake": {
+        "role": "tertiary",
+        "displayName": "Lake",
+        "canonical": "#3e6e8e",
+        "oklch": "oklch(51.8% 0.073 239.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.067 239.5)",
+          "oklch(26.4% 0.073 239.5)",
+          "oklch(37.9% 0.073 239.5)",
+          "oklch(49.3% 0.073 239.5)",
+          "oklch(60.7% 0.073 239.5)",
+          "oklch(72.1% 0.073 239.5)",
+          "oklch(83.6% 0.073 239.5)",
+          "oklch(95.0% 0.067 239.5)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline Rule",
+        "canonical": "#dcd8cd",
+        "oklch": "oklch(88.2% 0.016 90.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 90.2)",
+          "oklch(26.4% 0.016 90.2)",
+          "oklch(37.9% 0.016 90.2)",
+          "oklch(49.3% 0.016 90.2)",
+          "oklch(60.7% 0.016 90.2)",
+          "oklch(72.1% 0.016 90.2)",
+          "oklch(83.6% 0.016 90.2)",
+          "oklch(95.0% 0.016 90.2)"
+        ],
+        "darkModeToken": "rule-dark"
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Night Paper",
+        "canonical": "#141b17",
+        "oklch": "oklch(21.3% 0.013 160.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 160.0)",
+          "oklch(26.4% 0.013 160.0)",
+          "oklch(37.9% 0.013 160.0)",
+          "oklch(49.3% 0.013 160.0)",
+          "oklch(60.7% 0.013 160.0)",
+          "oklch(72.1% 0.013 160.0)",
+          "oklch(83.6% 0.013 160.0)",
+          "oklch(95.0% 0.013 160.0)"
+        ]
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "canonical": "#1a231e",
+        "oklch": "oklch(24.6% 0.016 160.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 160.6)",
+          "oklch(26.4% 0.016 160.6)",
+          "oklch(37.9% 0.016 160.6)",
+          "oklch(49.3% 0.016 160.6)",
+          "oklch(60.7% 0.016 160.6)",
+          "oklch(72.1% 0.016 160.6)",
+          "oklch(83.6% 0.016 160.6)",
+          "oklch(95.0% 0.016 160.6)"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#e9ede6",
+        "oklch": "oklch(94.1% 0.010 131.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 131.4)",
+          "oklch(26.4% 0.010 131.4)",
+          "oklch(37.9% 0.010 131.4)",
+          "oklch(49.3% 0.010 131.4)",
+          "oklch(60.7% 0.010 131.4)",
+          "oklch(72.1% 0.010 131.4)",
+          "oklch(83.6% 0.010 131.4)",
+          "oklch(95.0% 0.010 131.4)"
+        ]
+      },
+      "ink-2-dark": {
+        "role": "neutral",
+        "displayName": "Night Secondary Ink",
+        "canonical": "#b9c4bc",
+        "oklch": "oklch(80.9% 0.016 154.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.016 154.4)",
+          "oklch(26.4% 0.016 154.4)",
+          "oklch(37.9% 0.016 154.4)",
+          "oklch(49.3% 0.016 154.4)",
+          "oklch(60.7% 0.016 154.4)",
+          "oklch(72.1% 0.016 154.4)",
+          "oklch(83.6% 0.016 154.4)",
+          "oklch(95.0% 0.016 154.4)"
+        ]
+      },
+      "ink-3-dark": {
+        "role": "neutral",
+        "displayName": "Night Tertiary Ink",
+        "canonical": "#8e9a92",
+        "oklch": "oklch(67.4% 0.018 156.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 156.7)",
+          "oklch(26.4% 0.018 156.7)",
+          "oklch(37.9% 0.018 156.7)",
+          "oklch(49.3% 0.018 156.7)",
+          "oklch(60.7% 0.018 156.7)",
+          "oklch(72.1% 0.018 156.7)",
+          "oklch(83.6% 0.018 156.7)",
+          "oklch(95.0% 0.018 156.7)"
+        ]
+      },
+      "orchard-green-dark": {
+        "role": "primary",
+        "displayName": "Night Orchard Green",
+        "canonical": "#7fb898",
+        "oklch": "oklch(73.4% 0.076 159.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.068 159.2)",
+          "oklch(26.4% 0.076 159.2)",
+          "oklch(37.9% 0.076 159.2)",
+          "oklch(49.3% 0.076 159.2)",
+          "oklch(60.7% 0.076 159.2)",
+          "oklch(72.1% 0.076 159.2)",
+          "oklch(83.6% 0.076 159.2)",
+          "oklch(95.0% 0.068 159.2)"
+        ]
+      },
+      "on-green-dark": {
+        "role": "neutral",
+        "displayName": "Night Text on Green",
+        "canonical": "#141b17",
+        "oklch": "oklch(21.3% 0.013 160.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 160.0)",
+          "oklch(26.4% 0.013 160.0)",
+          "oklch(37.9% 0.013 160.0)",
+          "oklch(49.3% 0.013 160.0)",
+          "oklch(60.7% 0.013 160.0)",
+          "oklch(72.1% 0.013 160.0)",
+          "oklch(83.6% 0.013 160.0)",
+          "oklch(95.0% 0.013 160.0)"
+        ]
+      },
+      "basalt-dark": {
+        "role": "neutral",
+        "displayName": "Night Basalt",
+        "canonical": "#0f1612",
+        "oklch": "oklch(19.1% 0.013 159.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 159.8)",
+          "oklch(26.4% 0.013 159.8)",
+          "oklch(37.9% 0.013 159.8)",
+          "oklch(49.3% 0.013 159.8)",
+          "oklch(60.7% 0.013 159.8)",
+          "oklch(72.1% 0.013 159.8)",
+          "oklch(83.6% 0.013 159.8)",
+          "oklch(95.0% 0.013 159.8)"
+        ]
+      },
+      "basalt-2-dark": {
+        "role": "neutral",
+        "displayName": "Night Basalt Panel",
+        "canonical": "#18221c",
+        "oklch": "oklch(24.0% 0.018 158.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.018 158.3)",
+          "oklch(26.4% 0.018 158.3)",
+          "oklch(37.9% 0.018 158.3)",
+          "oklch(49.3% 0.018 158.3)",
+          "oklch(60.7% 0.018 158.3)",
+          "oklch(72.1% 0.018 158.3)",
+          "oklch(83.6% 0.018 158.3)",
+          "oklch(95.0% 0.018 158.3)"
+        ]
+      },
+      "signal-text-dark": {
+        "role": "secondary",
+        "displayName": "Night Signal Text",
+        "canonical": "#e0ae4f",
+        "oklch": "oklch(77.9% 0.126 81.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.101 81.0)",
+          "oklch(26.4% 0.114 81.0)",
+          "oklch(37.9% 0.126 81.0)",
+          "oklch(49.3% 0.126 81.0)",
+          "oklch(60.7% 0.126 81.0)",
+          "oklch(72.1% 0.126 81.0)",
+          "oklch(83.6% 0.114 81.0)",
+          "oklch(95.0% 0.101 81.0)"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Night Rule",
+        "canonical": "#2e3a33",
+        "oklch": "oklch(33.5% 0.020 159.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.020 159.5)",
+          "oklch(26.4% 0.020 159.5)",
+          "oklch(37.9% 0.020 159.5)",
+          "oklch(49.3% 0.020 159.5)",
+          "oklch(60.7% 0.020 159.5)",
+          "oklch(72.1% 0.020 159.5)",
+          "oklch(83.6% 0.020 159.5)",
+          "oklch(95.0% 0.020 159.5)"
+        ]
+      },
+      "footer-text": {
+        "role": "neutral",
+        "displayName": "Footer Text",
+        "canonical": "#c9d2cb",
+        "oklch": "oklch(85.5% 0.014 152.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.014 152.6)",
+          "oklch(26.4% 0.014 152.6)",
+          "oklch(37.9% 0.014 152.6)",
+          "oklch(49.3% 0.014 152.6)",
+          "oklch(60.7% 0.014 152.6)",
+          "oklch(72.1% 0.014 152.6)",
+          "oklch(83.6% 0.014 152.6)",
+          "oklch(95.0% 0.014 152.6)"
+        ]
+      },
+      "footer-link": {
+        "role": "neutral",
+        "displayName": "Footer Link",
+        "canonical": "#dfe5df",
+        "oklch": "oklch(91.6% 0.010 145.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 145.5)",
+          "oklch(26.4% 0.010 145.5)",
+          "oklch(37.9% 0.010 145.5)",
+          "oklch(49.3% 0.010 145.5)",
+          "oklch(60.7% 0.010 145.5)",
+          "oklch(72.1% 0.010 145.5)",
+          "oklch(83.6% 0.010 145.5)",
+          "oklch(95.0% 0.010 145.5)"
+        ]
+      },
+      "plan-residential": {
+        "role": "tertiary",
+        "displayName": "Residential Wheat",
+        "canonical": "#d8c27f",
+        "oklch": "oklch(81.7% 0.089 92.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.077 92.0)",
+          "oklch(26.4% 0.086 92.0)",
+          "oklch(37.9% 0.089 92.0)",
+          "oklch(49.3% 0.089 92.0)",
+          "oklch(60.7% 0.089 92.0)",
+          "oklch(72.1% 0.089 92.0)",
+          "oklch(83.6% 0.086 92.0)",
+          "oklch(95.0% 0.077 92.0)"
+        ]
+      },
+      "plan-residential-2": {
+        "role": "tertiary",
+        "displayName": "Residential Wheat Deep",
+        "canonical": "#cdb06a",
+        "oklch": "oklch(76.7% 0.095 87.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.081 87.6)",
+          "oklch(26.4% 0.091 87.6)",
+          "oklch(37.9% 0.095 87.6)",
+          "oklch(49.3% 0.095 87.6)",
+          "oklch(60.7% 0.095 87.6)",
+          "oklch(72.1% 0.095 87.6)",
+          "oklch(83.6% 0.091 87.6)",
+          "oklch(95.0% 0.081 87.6)"
+        ]
+      },
+      "plan-senior": {
+        "role": "tertiary",
+        "displayName": "Senior Sage",
+        "canonical": "#a9b48a",
+        "oklch": "oklch(75.0% 0.059 119.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.058 119.8)",
+          "oklch(26.4% 0.059 119.8)",
+          "oklch(37.9% 0.059 119.8)",
+          "oklch(49.3% 0.059 119.8)",
+          "oklch(60.7% 0.059 119.8)",
+          "oklch(72.1% 0.059 119.8)",
+          "oklch(83.6% 0.059 119.8)",
+          "oklch(95.0% 0.058 119.8)"
+        ]
+      },
+      "plan-senior-2": {
+        "role": "tertiary",
+        "displayName": "Senior Sage Light",
+        "canonical": "#bec69f",
+        "oklch": "oklch(81.0% 0.054 117.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.054 117.0)",
+          "oklch(26.4% 0.054 117.0)",
+          "oklch(37.9% 0.054 117.0)",
+          "oklch(49.3% 0.054 117.0)",
+          "oklch(60.7% 0.054 117.0)",
+          "oklch(72.1% 0.054 117.0)",
+          "oklch(83.6% 0.054 117.0)",
+          "oklch(95.0% 0.054 117.0)"
+        ]
+      },
+      "plan-commercial": {
+        "role": "tertiary",
+        "displayName": "Commercial Terracotta",
+        "canonical": "#c98b6b",
+        "oklch": "oklch(69.1% 0.088 48.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.077 48.1)",
+          "oklch(26.4% 0.086 48.1)",
+          "oklch(37.9% 0.088 48.1)",
+          "oklch(49.3% 0.088 48.1)",
+          "oklch(60.7% 0.088 48.1)",
+          "oklch(72.1% 0.088 48.1)",
+          "oklch(83.6% 0.086 48.1)",
+          "oklch(95.0% 0.077 48.1)"
+        ]
+      },
+      "plan-commercial-2": {
+        "role": "tertiary",
+        "displayName": "Commercial Terracotta Deep",
+        "canonical": "#b8754f",
+        "oklch": "oklch(62.5% 0.100 49.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.084 49.7)",
+          "oklch(26.4% 0.094 49.7)",
+          "oklch(37.9% 0.100 49.7)",
+          "oklch(49.3% 0.100 49.7)",
+          "oklch(60.7% 0.100 49.7)",
+          "oklch(72.1% 0.100 49.7)",
+          "oklch(83.6% 0.094 49.7)",
+          "oklch(95.0% 0.084 49.7)"
+        ]
+      },
+      "plan-civic": {
+        "role": "tertiary",
+        "displayName": "Civic Lake Blue",
+        "canonical": "#7fa3bc",
+        "oklch": "oklch(69.8% 0.054 238.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.054 238.8)",
+          "oklch(26.4% 0.054 238.8)",
+          "oklch(37.9% 0.054 238.8)",
+          "oklch(49.3% 0.054 238.8)",
+          "oklch(60.7% 0.054 238.8)",
+          "oklch(72.1% 0.054 238.8)",
+          "oklch(83.6% 0.054 238.8)",
+          "oklch(95.0% 0.054 238.8)"
+        ]
+      },
+      "plan-civic-2": {
+        "role": "tertiary",
+        "displayName": "Civic Lake Blue Light",
+        "canonical": "#97b3c8",
+        "oklch": "oklch(75.3% 0.043 240.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.043 240.6)",
+          "oklch(26.4% 0.043 240.6)",
+          "oklch(37.9% 0.043 240.6)",
+          "oklch(49.3% 0.043 240.6)",
+          "oklch(60.7% 0.043 240.6)",
+          "oklch(72.1% 0.043 240.6)",
+          "oklch(83.6% 0.043 240.6)",
+          "oklch(95.0% 0.043 240.6)"
+        ]
+      },
+      "plan-parks": {
+        "role": "tertiary",
+        "displayName": "Parks Green",
+        "canonical": "#7fae86",
+        "oklch": "oklch(70.6% 0.077 148.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.069 148.7)",
+          "oklch(26.4% 0.077 148.7)",
+          "oklch(37.9% 0.077 148.7)",
+          "oklch(49.3% 0.077 148.7)",
+          "oklch(60.7% 0.077 148.7)",
+          "oklch(72.1% 0.077 148.7)",
+          "oklch(83.6% 0.077 148.7)",
+          "oklch(95.0% 0.069 148.7)"
+        ]
+      },
+      "plan-parks-2": {
+        "role": "tertiary",
+        "displayName": "Parks Green Deep",
+        "canonical": "#6a9e74",
+        "oklch": "oklch(65.1% 0.083 149.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.073 149.6)",
+          "oklch(26.4% 0.082 149.6)",
+          "oklch(37.9% 0.083 149.6)",
+          "oklch(49.3% 0.083 149.6)",
+          "oklch(60.7% 0.083 149.6)",
+          "oklch(72.1% 0.083 149.6)",
+          "oklch(83.6% 0.082 149.6)",
+          "oklch(95.0% 0.073 149.6)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The Home headline only. Placeholder page titles use clamp(2.25rem, 4vw, 3.5rem) at line-height 1.06."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings (h2)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Doorway titles in the ruled doorway list."
+      },
+      "title-sm": {
+        "displayName": "Title small",
+        "purpose": "District names and mobile menu items."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text at a 38-60ch measure."
+      },
+      "body-sm": {
+        "displayName": "Body small",
+        "purpose": "District summaries and the footer blurb."
+      },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "Buttons, main nav, fact lines (500 for actions)."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Segmented control, map tags, popover details."
+      },
+      "label-mono": {
+        "displayName": "Mono label",
+        "purpose": "Uppercase map corner labels and district family labels set beneath a title (0.07-0.08em tracking). Never an eyebrow above a headline."
+      },
+      "chip-mono": {
+        "displayName": "Mono chip",
+        "purpose": "Source chips."
+      },
+      "caption-mono": {
+        "displayName": "Mono caption",
+        "purpose": "Plan disclaimer, footer legal line, placeholder notes."
+      },
+      "numeral-mono": {
+        "displayName": "Mono numeral",
+        "purpose": "District numbers in roundels (13px in plan units) and legend markers; tabular figures."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overlay",
+        "value": "0 12px 40px rgb(29 38 33 / 0.18)",
+        "purpose": "Source popover in the top layer only, above a rgb(20 27 23 / 0.25) backdrop. Nothing on the page plane casts a shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "The single curve for every transition and animation."
+      },
+      {
+        "name": "duration-state",
+        "value": "150ms",
+        "purpose": "Button brightness, link and chip color, segment color, handle scale."
+      },
+      {
+        "name": "duration-focus",
+        "value": "200ms",
+        "purpose": "District fill and stroke opacity on focus or hover, list arrow nudge (4px)."
+      },
+      {
+        "name": "duration-pop",
+        "value": "320ms",
+        "purpose": "Roundel pop-in (scale 0.4 to 1) as the divider uncovers it."
+      },
+      {
+        "name": "duration-fade",
+        "value": "400ms",
+        "purpose": "Existing-use labels fade in, 600ms delay."
+      },
+      {
+        "name": "duration-jump",
+        "value": "600ms",
+        "purpose": "Divider and clip jump from the Today / Compare / Planned buttons; off while dragging."
+      },
+      {
+        "name": "duration-draw",
+        "value": "900ms",
+        "purpose": "Site perimeter draws on first paint."
+      },
+      {
+        "name": "duration-sweep",
+        "value": "1600ms",
+        "purpose": "Divider sweeps from the right edge to its 50% rest after a 900ms delay."
+      },
+      {
+        "name": "divider-rest",
+        "value": "50%",
+        "purpose": "Where the intro sweep stops and Compare rests; the reduced-motion resting position."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration and transition-duration 0.01ms; plan intro removed",
+        "purpose": "prefers-reduced-motion: no sweep, outline already drawn, divider rests at 50%, no replay on scroll."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ],
+    "focus": {
+      "value": "outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px",
+      "purpose": "Global focus ring. The divider handle uses a 2px ink outline instead, since it is itself amber."
+    },
+    "plan": {
+      "fillOpacity": {
+        "light": 0.86,
+        "dark": 0.74
+      },
+      "dimmedFillOpacity": {
+        "stage": 0.32,
+        "legend": 0.22
+      },
+      "existingFillOpacity": 0.32,
+      "strokes": {
+        "hairline": "1px non-scaling",
+        "perimeter": "ink at 0.55",
+        "district": "ink at 0.45",
+        "activeDistrict": "2px ink at 0.9",
+        "roundel": "1.2 ink",
+        "activeRoundel": "3 Harvest Amber",
+        "divider": "2px Harvest Amber"
+      }
+    },
+    "darkMode": {
+      "trigger": "prefers-color-scheme: dark on :root:not([data-theme=\"light\"]), or :root[data-theme=\"dark\"]",
+      "unchanged": [
+        "harvest-amber",
+        "signal-on-dark",
+        "harvest-gold",
+        "lake",
+        "plan family fills"
+      ]
+    },
+    "approvedDirection": "docs/04-design-direction.md (Orchard Atlas)"
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary action in a group, always paired with a green text link.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Explore the plan <svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" width=\"16\" height=\"16\"><path d=\"M2.5 8h10M9 4.5 12.5 8 9 11.5\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 3px; background: var(--green, #2f5d46); color: var(--on-green, #f5f3ed); font-family: Inter, system-ui, sans-serif; font-size: 1.125rem; font-weight: 500; text-decoration: none; transition: filter 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Link",
+      "kind": "button",
+      "refersTo": "link-secondary",
+      "description": "The secondary action beside a primary button.",
+      "html": "<a class=\"ds-link-secondary\" href=\"#\">Become a Partner</a>",
+      "css": ".ds-link-secondary { color: var(--green, #2f5d46); font-family: Inter, system-ui, sans-serif; font-size: 1.125rem; font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.3em; } .ds-link-secondary:hover { text-decoration-thickness: 2px; } .ds-link-secondary:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "custom",
+      "refersTo": "segment",
+      "description": "Today / Compare / Planned jumps for the plan divider.",
+      "html": "<div class=\"ds-seg\" role=\"group\" aria-label=\"Plan view\"><button class=\"ds-seg-btn\" aria-pressed=\"false\">Today</button><button class=\"ds-seg-btn\" aria-pressed=\"true\">Compare</button><button class=\"ds-seg-btn\" aria-pressed=\"false\">Planned</button></div>",
+      "css": ".ds-seg { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--rule, #dcd8cd); border-radius: 3px; } .ds-seg-btn { min-height: 36px; padding: 0 14px; border: 0; border-radius: 2px; background: transparent; color: var(--ink-2, #4a5650); font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-seg-btn:hover { color: var(--ink, #1d2621); } .ds-seg-btn[aria-pressed=\"true\"] { background: var(--ink, #1d2621); color: var(--paper, #f5f3ed); } .ds-seg-btn:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Source Chip",
+      "kind": "chip",
+      "refersTo": "source-chip",
+      "description": "Evidence Margin chip beside every figure; opens the source popover.",
+      "html": "<button class=\"ds-chip\" type=\"button\">Masterplan July 2026 · Planning concept</button>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; min-height: 24px; padding: 0 6px; border: 1px solid var(--rule, #dcd8cd); border-radius: 3px; background: var(--surface, #fbfaf6); color: var(--ink-2, #4a5650); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.6875rem; line-height: 1; letter-spacing: 0.02em; cursor: pointer; transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1), border-color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-chip:hover { border-color: var(--ink-3, #646e68); color: var(--ink, #1d2621); } .ds-chip:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Source Popover",
+      "kind": "card",
+      "refersTo": "source-popover",
+      "description": "Source details: title, date, geography, confidence, method. The only element with a shadow.",
+      "html": "<div class=\"ds-pop\"><p class=\"ds-pop-title\">Apple Blossom Commons masterplan</p><dl class=\"ds-pop-dl\"><dt>Date</dt><dd>July 2026</dd><dt>Geography</dt><dd>Site</dd><dt>Confidence</dt><dd>Moderate</dd></dl><button class=\"ds-pop-close\" type=\"button\">Close</button></div>",
+      "css": ".ds-pop { width: min(26rem, calc(100vw - 2rem)); padding: 20px; border: 1px solid var(--rule, #dcd8cd); border-radius: 4px; background: var(--surface, #fbfaf6); color: var(--ink, #1d2621); box-shadow: 0 12px 40px rgb(29 38 33 / 0.18); font-family: Inter, system-ui, sans-serif; } .ds-pop-title { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 600; line-height: 1.375; } .ds-pop-dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 16px 0 0; font-size: 0.875rem; } .ds-pop-dl dt { color: var(--ink-3, #646e68); } .ds-pop-dl dd { margin: 0; } .ds-pop-close { margin-top: 16px; min-height: 36px; padding: 0 12px; border: 1px solid var(--rule, #dcd8cd); border-radius: 3px; background: transparent; color: inherit; font-size: 0.875rem; font-weight: 500; cursor: pointer; } .ds-pop-close:hover { border-color: var(--ink-3, #646e68); } .ds-pop-close:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header nav on paper; the current page carries a 2px amber underline.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link\" aria-current=\"page\">The plan</a><a href=\"#\" class=\"ds-nav-link\">Districts</a><a href=\"#\" class=\"ds-nav-link\">Planning with Chelan</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule, #dcd8cd); background: var(--paper, #f5f3ed); font-family: Inter, system-ui, sans-serif; font-size: 0.9375rem; } .ds-nav-link { padding: 8px 0; color: var(--ink-2, #4a5650); text-decoration: none; transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav-link:hover { color: var(--ink, #1d2621); } .ds-nav-link[aria-current=\"page\"] { color: var(--ink, #1d2621); text-decoration: underline; text-decoration-color: var(--signal, #b5791c); text-decoration-thickness: 2px; text-underline-offset: 0.5em; } .ds-nav-link:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Doorway Row",
+      "kind": "custom",
+      "refersTo": "doorway-list",
+      "description": "Ruled list row used in place of cards; the whole row is the link.",
+      "html": "<ul class=\"ds-rows\"><li><a class=\"ds-row\" href=\"#\"><span class=\"ds-row-title\">Planning with Chelan</span><span class=\"ds-row-text\">How the plan aligns with the City's Comprehensive Plan.</span><svg class=\"ds-row-arrow\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M2.5 8h10M9 4.5 12.5 8 9 11.5\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink, #1d2621); } .ds-rows li { border-bottom: 1px solid var(--rule, #dcd8cd); } .ds-row { display: grid; grid-template-columns: 5fr 6fr 24px; gap: 32px; align-items: baseline; padding: 28px 0; color: var(--ink, #1d2621); text-decoration: none; font-family: Inter, system-ui, sans-serif; font-size: 1.125rem; } .ds-row-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.625rem; font-weight: 600; line-height: 1.25; } .ds-row-text { color: var(--ink-2, #4a5650); } .ds-row-arrow { width: 24px; height: 24px; color: var(--ink-3, #646e68); transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-row:hover .ds-row-title { text-decoration: underline; } .ds-row:hover .ds-row-arrow { transform: translateX(4px); color: var(--green, #2f5d46); } .ds-row:focus-visible { outline: 2px solid var(--signal, #b5791c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Plan Roundel and Divider Handle",
+      "kind": "custom",
+      "refersTo": "plan-roundel",
+      "description": "Numbered mono roundel (active: 3px amber stroke) and the 44px amber divider handle of the Today / Planned stage.",
+      "html": "<div class=\"ds-plan\"><span class=\"ds-roundel\">3</span><span class=\"ds-roundel ds-roundel-active\">7</span><span class=\"ds-divider\"><button class=\"ds-handle\" type=\"button\" aria-label=\"Compare today with the planned districts\"><svg viewBox=\"0 0 20 20\" fill=\"none\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M7.5 5.5 3 10l4.5 4.5M12.5 5.5 17 10l-4.5 4.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button></span></div>",
+      "css": ".ds-plan { position: relative; display: flex; gap: 24px; align-items: center; height: 140px; padding: 0 24px; border: 1px solid var(--rule, #dcd8cd); background: var(--surface, #fbfaf6); } .ds-roundel { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1.2px solid var(--ink, #1d2621); background: var(--paper, #f5f3ed); color: var(--ink, #1d2621); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; } .ds-roundel-active { border: 3px solid var(--signal, #b5791c); } .ds-divider { position: absolute; top: 0; bottom: 0; left: 60%; width: 2px; margin-left: -1px; background: var(--signal, #b5791c); } .ds-handle { position: absolute; top: 50%; left: 1px; width: 44px; height: 44px; margin: -22px 0 0 -22px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--surface, #fbfaf6); background: var(--signal, #b5791c); color: #fff; cursor: ew-resize; transition: scale 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-handle:hover { scale: 1.06; } .ds-handle:active { scale: 0.97; } .ds-handle:focus-visible { outline: 2px solid var(--ink, #1d2621); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Orchard Atlas",
+    "overview": "The site reads like a planning atlas edited by a good magazine. Warm paper ground, ink hairlines, Source Serif headlines, and a crisp 2D plan drawn in land-use family colors carry the whole world. Every figure is anchored to its source with a small mono chip. Structure comes from rules and vertical space, never from boxes, cards or shadows. The mood is grounded, unhurried, exact, warm and seasonal; it is not glossy, themed, techno-futurist or salesy.\n\nDensity is editorial: generous section spacing, a serif headline column beside a large plan, and ruled lists in place of card grids. The plan is the hero material. It sits on the raised surface tone inside a 1px rule, with a faint survey grid, numbered mono roundels, a north arrow, and a mandatory disclaimer beneath it.\n\nMotion explains space and never decorates. One ease-out curve, short interface timings, longer spatial moves, and one scroll/story reveal (Today to Planned). Under reduced motion everything jumps or rests instead of moving.",
+    "keyCharacteristics": [
+      "Warm paper and raised surface, ink text, orchard green as the only interactive brand color.",
+      "One Harvest Amber signal, used as marks only.",
+      "Hairline rules (1px) for all structure; no card grids and no shadows on page surfaces.",
+      "Source Serif 4 headlines at weight 600, Inter interface and body, IBM Plex Mono for figures, chips, roundels and map labels.",
+      "District colors grouped by land-use family, always paired with a number and a name.",
+      "Full dark mode that follows the visitor's system setting, with a manual `data-theme` override."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Harvest Amber marks the single thing that matters on a screen: the divider, the active roundel, the current page, the focused control. It is a mark, never a fill area or body text on paper; text in amber uses `signal-text`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Number-and-Name Rule",
+        "body": "A district is never identified by color alone. Every fill is paired with a numbered roundel and its name in the HTML legend.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-Means-Evidence Rule",
+        "body": "IBM Plex Mono is reserved for figures, sources, district numbers, map labels and disclaimers. Prose and headings never set in mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Kicker Rule",
+        "body": "Headlines stand on their own. Mono uppercase labels name map regions and metadata that follow a title; they are not set as eyebrows above headlines.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Page Rule",
+        "body": "Nothing on the page plane casts a shadow. Lift is expressed by dimming the rest (plan), by surface tone (hovered row), or by a stronger stroke, never by elevation.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** pair one green primary button with one green underlined text link for every call to action.",
+      "**Do** set every figure beside a mono source chip, and every plan or map beside the line \"Illustrative interpretation of the July 2026 masterplan. Not a survey or final design.\"",
+      "**Do** give every district its number, name and family color together, and give every plan an HTML list equivalent.",
+      "**Do** separate sections with 96–144px of space and, at most, one 1px rule.",
+      "**Do** use `cubic-bezier(0.22, 1, 0.36, 1)` for every transition: 150–200ms for interface states, 600ms or more for spatial moves on the plan.",
+      "**Do** keep Harvest Amber to marks: divider, active roundel, current-page underline, focus ring.",
+      "**Do** check every new surface in both light and dark mode; use tokens, not literals, so dark mode follows."
+    ],
+    "donts": [
+      "**Don't** put a shadow on anything on the page plane; only a top-layer popover may carry the Overlay shadow.",
+      "**Don't** build card grids as the main device; use ruled lists.",
+      "**Don't** set amber (`harvest-amber`) as text on paper, or Harvest Gold as text on paper.",
+      "**Don't** identify a district by color alone.",
+      "**Don't** add looping animation, parallax, count-up statistics or smooth-scroll libraries.",
+      "**Don't** put mono uppercase eyebrows or kickers above headlines.",
+      "**Don't** use Blossom pink (#D9466F); it is retired."
+    ]
+  }
+}
