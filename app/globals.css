@@ -23,6 +23,7 @@
   --on-basalt-2: #b9c4bc;
   --basalt-rule: #3b5446;
   --basalt-rule-2: #4f6a5b;
+  --basalt-divider: #2e463a;
   --signal: #b5791c;
   --signal-text: #8f5e12;
   --signal-on-dark: #e0ae4f;
@@ -69,6 +70,7 @@
   --color-on-basalt-2: var(--on-basalt-2);
   --color-basalt-rule: var(--basalt-rule);
   --color-basalt-rule-2: var(--basalt-rule-2);
+  --color-basalt-divider: var(--basalt-divider);
   --color-harvest-gold: var(--harvest-gold);
   --color-signal: var(--signal);
   --color-signal-text: var(--signal-text);

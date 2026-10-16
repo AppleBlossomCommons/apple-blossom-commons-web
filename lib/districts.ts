@@ -30,9 +30,16 @@ export type District = {
   summary: string;
   publicFacts: string[];
   status: string;
-  /** Polygons in scene units (pixels of the source sheet, origin at center). */
+  /**
+   * Polygons as stored in the geometry file: pixels of the source sheet, origin at the
+   * center, y pointing UP (y = 347 − pixel_y). The 3D model uses them as stored; SVG must
+   * negate y (see polyToPath).
+   */
   polys: Point[][];
-  /** Roundel positions (Summit has two). */
+  /**
+   * Roundel positions (Summit has two), stored as [x, z] for the 3D model. z points DOWN
+   * the sheet, so these are already SVG coordinates and are used as stored in both views.
+   */
   labels: Point[];
 };
 
@@ -62,8 +69,7 @@ export const districts: District[] = districtData.districts.map((d) => {
     publicFacts: d.publicFacts,
     status: d.status,
     polys: geometry.polys[key],
-    // Labels in the geometry file are stored as [x, z] for the 3D prototype, where z = -y.
-    labels: geometry.labels[key].map(([x, z]) => [x, -z] as Point),
+    labels: geometry.labels[key],
   };
 });
 
@@ -73,32 +79,12 @@ export function getDistrict(slug: string) {
 
 export const familyOrder: DistrictFamily[] = ["residential", "senior", "commercial", "civic", "parks"];
 
-export function polyToPath(poly: Point[]) {
-  return "M" + poly.map(([x, y]) => `${x},${y}`).join("L") + "Z";
-}
-
 /**
- * Stand-in site perimeter: the convex hull of every traced parcel point.
- * No georeferenced site boundary exists yet (docs/09-open-items.md).
+ * SVG path for one stored polygon. The geometry's y points up and SVG's y points down,
+ * so every point [x, y] is drawn at (x, −y) (fix brief, Fix 1). Never flip the group instead.
  */
-export function sitePerimeterPath() {
-  const pts = districts.flatMap((d) => d.polys.flat()).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-  const cross = (o: Point, a: Point, b: Point) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
-  const half = (list: Point[]) => {
-    const out: Point[] = [];
-    for (const p of list) {
-      while (out.length >= 2 && cross(out[out.length - 2], out[out.length - 1], p) <= 0) out.pop();
-      out.push(p);
-    }
-    out.pop();
-    return out;
-  };
-  return polyToPath([...half(pts), ...half([...pts].reverse())]);
-}
-
-/** Horizontal position of a point as a percentage of the plan width. */
-export function xPercent(x: number) {
-  return ((x + PLAN_SIZE[0] / 2) / PLAN_SIZE[0]) * 100;
+export function polyToPath(poly: Point[]) {
+  return "M" + poly.map(([x, y]) => `${x},${-y}`).join("L") + "Z";
 }
 
 export type Source = {
