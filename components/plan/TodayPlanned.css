@@ -1,0 +1,256 @@
+/* Today / Planned plan stage. Motion explains space (docs/04): the planning-area
+   outline draws, then the divider sweeps once to reveal the planned districts. */
+
+.tp-stage {
+  position: relative;
+  aspect-ratio: 1023 / 694;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  overflow: visible;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.tp-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tp-planned {
+  background: var(--surface);
+  clip-path: inset(0 0 0 calc(var(--split) * 1%));
+}
+
+.tp-outline {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-opacity: 0.7;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.tp-existing {
+  stroke: var(--ink-2);
+  stroke-opacity: 0.8;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.tp-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.tp-district {
+  fill-opacity: var(--plan-fill-opacity);
+  stroke: var(--ink);
+  stroke-opacity: 0.45;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: fill-opacity 200ms var(--ease-out), stroke-opacity 200ms var(--ease-out);
+}
+
+.tp-dimmed .tp-district {
+  fill-opacity: 0.32;
+  stroke-opacity: 0.2;
+}
+
+.tp-dimmed .tp-district[data-active="true"] {
+  fill-opacity: 1;
+  stroke-opacity: 0.9;
+  stroke-width: 2;
+}
+
+.tp-roundel circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+.tp-roundel text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tp-roundel[data-active="true"] circle {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+
+.tp-roundel[data-active="true"] text {
+  fill: #fff;
+}
+
+.tp-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--split) * 1%);
+  width: 0;
+  pointer-events: none;
+}
+
+.tp-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: var(--signal);
+}
+
+.tp-handle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: var(--signal);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: ew-resize;
+  touch-action: none;
+  box-shadow: 0 2px 10px rgb(29 38 33 / 0.22);
+  transition: scale 150ms var(--ease-out);
+}
+
+.tp-handle:hover {
+  scale: 1.06;
+}
+
+.tp-handle:active {
+  scale: 0.97;
+}
+
+.tp-handle:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Smooth jumps from the Today / Compare / Planned buttons; off while dragging. */
+.tp-settled .tp-planned {
+  transition: clip-path 600ms var(--ease-out);
+}
+
+.tp-settled .tp-divider {
+  transition: left 600ms var(--ease-out);
+}
+
+/* ---- Intro: runs from first paint, before JavaScript loads ---- */
+.tp-intro .tp-outline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tp-draw 900ms var(--ease-out) both;
+}
+
+.tp-intro .tp-planned {
+  animation: tp-sweep 1600ms var(--ease-out) 900ms both;
+}
+
+.tp-intro .tp-divider {
+  animation: tp-sweepDivider 1600ms var(--ease-out) 900ms both;
+}
+
+.tp-intro .tp-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tp-pop 320ms var(--ease-out) both;
+}
+
+.tp-intro .tp-existingLabel {
+  animation: tp-fade 400ms var(--ease-out) 600ms both;
+}
+
+@keyframes tp-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tp-sweep {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 42%);
+  }
+}
+
+@keyframes tp-sweepDivider {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 42%;
+  }
+}
+
+@keyframes tp-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tp-tag {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 22px));
+  white-space: nowrap;
+  pointer-events: none;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 4px 9px;
+  border-radius: 3px;
+  box-shadow: 0 4px 14px rgb(29 38 33 / 0.12);
+}
+
+.tp-existingLabel {
+  position: absolute;
+  transform: translate(calc(-100% + 10px), 16px);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tp-cornerLabel {
+  position: absolute;
+  top: 12px;
+  pointer-events: none;
+}
+
+/* Reduced motion: no intro at all; the stage simply shows the comparison. */
+@media (prefers-reduced-motion: reduce) {
+  .tp-intro .tp-outline,
+  .tp-intro .tp-planned,
+  .tp-intro .tp-divider,
+  .tp-intro .tp-pop,
+  .tp-intro .tp-existingLabel {
+    animation: none !important;
+  }
+
+  .tp-intro .tp-outline {
+    stroke-dasharray: none;
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "_meta": {
+    "asOf": "2026-10-16",
+    "source": "July 2026 masterplan (jeffrey mak: architect ltd) and the Aug 25, 2026 plan stats workbook, via the Apple Blossom Commons research project",
+    "note": "All figures are planning concepts. 'publicFacts' may be shown on the site; 'internalNotes' must never be rendered. Keys match data/district-geometry-v1.json.",
+    "families": {
+      "residential": { "label": "Residential", "colorFamily": "warm wheat" },
+      "senior": { "label": "Senior living", "colorFamily": "sage" },
+      "commercial": { "label": "Commercial & hospitality", "colorFamily": "terracotta" },
+      "civic": { "label": "Health & civic", "colorFamily": "lake blue" },
+      "parks": { "label": "Parks & open space", "colorFamily": "orchard green" }
+    }
+  },
+  "districts": [
+    {
+      "key": "wine", "n": 1, "slug": "wine-village", "code": "WINE",
+      "name": "Chelan Wine Village", "family": "commercial", "color": "#C98B6B",
+      "summary": "The central village: wineries and breweries, restaurants, boutique retail and gathering spaces along Vintner's Walk.",
+      "publicFacts": ["The Barrel House, Tasting Courtyard, Market Hall", "Harvest Square, the main plaza", "188,900 sf commercial · ~21 apartments (planning concept)"],
+      "status": "verified",
+      "internalNotes": "Includes the top block near Discovery Commons, the main village and the diagonal Retail High Street spine."
+    },
+    {
+      "key": "wellness", "n": 2, "slug": "wellness-district", "code": "WELL",
+      "name": "Wellness District", "family": "civic", "color": "#7FA3BC",
+      "summary": "Medical uses around the Lake Chelan Community Hospital campus, with clinics and rehabilitation close to the senior homes.",
+      "publicFacts": ["Lake Chelan Community Hospital (existing)", "Columbia Valley Community Health", "Lot 17 medical assisted living", "Two new 12,000 sf buildings (planning concept)"],
+      "status": "verified",
+      "internalNotes": "Presented as part of Apple Blossom Commons. The hospital belongs to Lake Chelan Health; do not call them a partner until they agree to be named."
+    },
+    {
+      "key": "orchardgrove", "n": 3, "slug": "orchard-grove", "code": "ORCH",
+      "name": "Orchard Grove", "family": "senior", "color": "#A9B48A",
+      "summary": "55+ cottage homes, townhomes and apartments designed for owners who want to age in place.",
+      "publicFacts": ["63 cottage homes · 30 townhomes · ~23 apartments (planning concept)", "Recreation center with gardens and track"],
+      "status": "verified",
+      "internalNotes": ""
+    },
+    {
+      "key": "heritage", "n": 4, "slug": "heritage-grove", "code": "HERIT",
+      "name": "Heritage Grove", "family": "senior", "color": "#BEC69F",
+      "summary": "Homes for seniors who prefer or require assistance, from independent living to memory care.",
+      "publicFacts": ["Independent living · assisted living", "Memory care · nursing", "335,000 sf (planning concept)"],
+      "status": "open",
+      "internalNotes": "~419 units or beds is unresolved (units vs beds). Do not publish a count."
+    },
+    {
+      "key": "abr", "n": 5, "slug": "apple-blossom-residence", "code": "ABR",
+      "name": "Apple Blossom Residence", "family": "residential", "color": "#D8C27F",
+      "summary": "Market-rate apartments, townhomes and detached homes, buffered from Chelan Falls Road and Apple Blossom Drive.",
+      "publicFacts": ["64 townhomes · 37 duplex / single-family (planning concept)", "Apartment count under review"],
+      "status": "open",
+      "internalNotes": "Not senior housing. A 75,000 sf building on the PDF is missing from the workbook; totals range 126–332 units. Do not publish a total."
+    },
+    {
+      "key": "harvest", "n": 6, "slug": "harvest-crossing", "code": "HARV",
+      "name": "Harvest Crossing", "family": "residential", "color": "#CDB06A",
+      "summary": "Workforce homes close to the village's shops and services, with a live-work zone.",
+      "publicFacts": ["200 apartments (working figure)", "32 townhomes (planning concept)"],
+      "status": "working-figure",
+      "internalNotes": "200 apartments approved by the owner for public use on Oct 16, 2026; revise if it changes."
+    },
+    {
+      "key": "summit", "n": 7, "slug": "summit-recreation-park", "code": "SUMMIT",
+      "name": "Summit Recreation Park", "family": "parks", "color": "#7FAE86",
+      "summary": "Sports fields, a seasonal roller and ice rink, a playground and a pond, in two parts north and south.",
+      "publicFacts": ["Existing soccer and baseball fields", "Decorative pond and play areas", "Trails linking the districts"],
+      "status": "verified",
+      "internalNotes": "Two separate parts; the geometry has two label positions."
+    },
+    {
+      "key": "discovery", "n": 8, "slug": "discovery-commons", "code": "DISC",
+      "name": "Discovery Commons", "family": "civic", "color": "#97B3C8",
+      "summary": "An aspiration for lifelong learning: a potential K-12 school, community center and library.",
+      "publicFacts": ["Aspirational, not a commitment", "150,000 sf shown as a concept"],
+      "status": "aspirational",
+      "internalNotes": "Always present as an aspiration."
+    },
+    {
+      "key": "preserve", "n": 9, "slug": "orchard-preserve", "code": "PRES",
+      "name": "Orchard Preserve", "family": "parks", "color": "#6A9E74",
+      "summary": "Open space with trails and a scenic overlook at the highest point of the site.",
+      "publicFacts": ["Nature trail and overlook", "Open space preserved", "RV park and campground"],
+      "status": "verified",
+      "internalNotes": ""
+    },
+    {
+      "key": "hotel", "n": 10, "slug": "grand-orchard-hotel", "code": "HOTEL",
+      "name": "Grand Orchard Hotel", "family": "commercial", "color": "#B8754F",
+      "summary": "A cottage-style hotel with event space at the edge of the village.",
+      "publicFacts": ["65 hotel cottages, 1,200 sf each (planning concept)", "Hotel apartments, 3 storeys, 30,000 sf (planning concept)", "24-hour automated retail"],
+      "status": "open",
+      "internalNotes": "Key count unresolved: masterplan text says 65 units, stats say 115 keys. Do not publish a key count."
+    }
+  ]
+}

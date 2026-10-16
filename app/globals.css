@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/*
+ * Orchard Atlas design tokens (docs/04-design-direction.md).
+ * Light values are the approved palette; dark values come from the 3D prototype.
+ * Full dark mode approved by the owner on Oct 16, 2026.
+ */
+:root {
+  --paper: #f5f3ed;
+  --surface: #fbfaf6;
+  --ink: #1d2621;
+  --ink-2: #4a5650;
+  --ink-3: #646e68;
+  --green: #2f5d46;
+  --on-green: #f5f3ed;
+  --basalt: #22372c;
+  --basalt-2: #2b4436;
+  --signal: #b5791c;
+  --signal-text: #8f5e12;
+  --signal-on-dark: #e0ae4f;
+  --harvest-gold: #c9a24b;
+  --lake: #3e6e8e;
+  --rule: #dcd8cd;
+  --plan-fill-opacity: 0.86;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141b17;
+    --surface: #1a231e;
+    --ink: #e9ede6;
+    --ink-2: #b9c4bc;
+    --ink-3: #8e9a92;
+    --green: #7fb898;
+    --on-green: #141b17;
+    --basalt: #0f1612;
+    --basalt-2: #18221c;
+    --signal-text: #e0ae4f;
+    --rule: #2e3a33;
+    --plan-fill-opacity: 0.74;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #141b17;
+  --surface: #1a231e;
+  --ink: #e9ede6;
+  --ink-2: #b9c4bc;
+  --ink-3: #8e9a92;
+  --green: #7fb898;
+  --on-green: #141b17;
+  --basalt: #0f1612;
+  --basalt-2: #18221c;
+  --signal-text: #e0ae4f;
+  --rule: #2e3a33;
+  --plan-fill-opacity: 0.74;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-green: var(--green);
+  --color-on-green: var(--on-green);
+  --color-basalt: var(--basalt);
+  --color-basalt-2: var(--basalt-2);
+  --color-signal: var(--signal);
+  --color-signal-text: var(--signal-text);
+  --color-signal-on-dark: var(--signal-on-dark);
+  --color-lake: var(--lake);
+  --color-rule: var(--rule);
+
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--green) 28%, transparent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

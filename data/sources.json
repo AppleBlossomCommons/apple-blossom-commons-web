@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "asOf": "2026-10-16",
+    "note": "Source registry for the Evidence Margin (docs/04). Every figure on the site references one id here. tier is the confidence tier: High, Moderate, Low, or Pending."
+  },
+  "sources": {
+    "masterplan-2026-07": {
+      "label": "Masterplan Jul 2026",
+      "title": "Apple Blossom Commons masterplan, jeffrey mak: architect ltd",
+      "date": "2026-07",
+      "geography": "Apple Blossom Center planning area",
+      "method": "Planning concept figures from the masterplan sheets and the Aug 25, 2026 plan stats workbook. Not commitments.",
+      "tier": "Moderate",
+      "access": "public",
+      "url": null
+    },
+    "acreage-tbc": {
+      "label": "Source TBC",
+      "title": "Site acreage (about 160 acres)",
+      "date": null,
+      "geography": "Coordinated landholdings, Chelan, WA",
+      "method": "The source for the acreage figure has not been confirmed yet.",
+      "tier": "Pending",
+      "access": "public",
+      "url": null
+    }
+  }
+}

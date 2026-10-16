@@ -1,0 +1,46 @@
+{
+  "title": "Choose the Home page layout",
+  "question": "The look is already set (Orchard Atlas). These are three ways to compose the first screen. Pick one to build for Andy.",
+  "options": [
+    {
+      "id": "legend",
+      "kind": "assigned",
+      "kicker": "THE ROLL",
+      "label": "The Legend",
+      "lineage": "The numbered legend on an architect's masterplan sheet",
+      "thesis": "The ten districts, set large as a numbered legend, are the hero itself.",
+      "palette": ["#F5F3ED", "#1D2621", "#2F5D46", "#B5791C"],
+      "materials": ["Source Serif display numerals", "hairline rules", "the 2D plan in family colors"],
+      "viewport": "Headline top left; legend rows 01 to 10 fill the left column; the live plan fills the right; hovering a row lifts its district.",
+      "risk": "Ten rows is a lot of type up front; the core story line has to stay short.",
+      "html": ".impeccable/mocks/decision/legend.html"
+    },
+    {
+      "id": "today-planned",
+      "kind": "dealt",
+      "label": "Today, then Planned",
+      "lineage": "Before-and-after survey plates",
+      "thesis": "Open on the land as it is today, then reveal the ten planned districts over it.",
+      "palette": ["#F5F3ED", "#646E68", "#2F5D46", "#B5791C"],
+      "materials": ["hairline existing anchors", "a draggable Today / Planned divider", "family-color districts"],
+      "viewport": "Full-width plan; left of a divider shows today's anchors (hospital campus, ball fields, SR 97A), right shows the planned districts; headline set over the paper margin.",
+      "risk": "The 'Today' side needs care: we only have traced outlines, not a survey.",
+      "html": ".impeccable/mocks/decision/today-planned.html"
+    },
+    {
+      "id": "three-readers",
+      "kind": "dealt",
+      "label": "Three Readers, One Plan",
+      "lineage": "A planning atlas with a lens per reader",
+      "thesis": "The three audience doorways are lenses: picking one re-lights the plan for that reader.",
+      "palette": ["#22372C", "#F5F3ED", "#E0AE4F", "#7FA3BC"],
+      "materials": ["dark basalt stage", "lens tabs", "dimmed and lifted districts"],
+      "viewport": "Headline strip on paper; below, a full-bleed dark stage with the plan and three lens tabs; 'Investment perspective' lights Wellness, senior living and hotel districts.",
+      "risk": "A dark stage on the very first screen leans toward the cinematic look docs/04 rejected; it must stay calm.",
+      "html": ".impeccable/mocks/decision/three-readers.html"
+    }
+  ],
+  "reroll": true,
+  "steer": true,
+  "buildPath": { "value": "code" }
+}
