@@ -16,7 +16,7 @@ Rejected for v1: a dark, cinematic, 3D-first landing page. It depends on assets 
 | `surface` | #FBFAF6 | Raised surfaces | — |
 | `ink` | #1D2621 | Body text, headlines | 14.0 on paper |
 | `ink-2` | #4A5650 | Secondary text | 6.9 |
-| `ink-3` | #646E68 | Tertiary text, eyebrows | 4.8 |
+| `ink-3` | #626C66 | Tertiary text, eyebrows | 4.9 (4.6 on surface-2) |
 | `orchard-green` | #2F5D46 | Primary brand, links, selected states | 6.8 |
 | `basalt` | #22372C | Dark stage background (explorer, tour, footer) | paper on basalt 11.5 |
 | `basalt-2` | #2B4436 | Panels on the dark stage | — |

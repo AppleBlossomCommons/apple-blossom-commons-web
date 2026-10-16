@@ -97,7 +97,7 @@ function AboutMenu({ isActive }: { isActive: (href: string) => boolean }) {
       <ul
         id="about-menu"
         hidden={!open}
-        className="absolute right-0 top-[calc(100%+14px)] min-w-[220px] rounded-[8px] border border-rule bg-surface p-1.5 shadow-[0_12px_32px_rgb(29_38_33/0.12)]"
+        className="absolute right-0 top-[calc(100%+14px)] min-w-[220px] origin-top-right rounded-[8px] border border-rule bg-surface p-1.5 shadow-[0_12px_32px_rgb(29_38_33/0.12)] transition-[opacity,scale] duration-150 ease-out starting:scale-[0.97] starting:opacity-0"
       >
         {aboutNav.map((item) => (
           <li key={item.href}>
@@ -152,7 +152,7 @@ function MobileMenu({ isActive }: { isActive: (href: string) => boolean }) {
       <dialog
         ref={dialog}
         aria-label="Menu"
-        className="m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto bg-paper p-0 text-ink backdrop:bg-transparent nav:hidden"
+        className="m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto overscroll-contain bg-paper p-0 text-ink transition-opacity duration-200 ease-out backdrop:bg-transparent starting:open:opacity-0 nav:hidden"
       >
         <div className="flex h-[60px] items-center justify-between border-b border-rule px-4 sm:h-16 sm:px-6">
           <Wordmark onClick={close} />

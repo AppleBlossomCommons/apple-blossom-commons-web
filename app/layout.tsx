@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   // Draft site: keep it out of search engines until the owner and Andy approve launch (Phase 5).
   robots: { index: false, follow: false },
 };
+
+// Browser UI color matches the paper ground (light theme only for v1).
+export const viewport: Viewport = { themeColor: "#f5f3ed" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

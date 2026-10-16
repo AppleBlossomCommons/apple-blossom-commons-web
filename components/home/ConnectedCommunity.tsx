@@ -42,7 +42,7 @@ export function ConnectedCommunity() {
           <p className="hidden max-w-[56ch] text-[1.125rem] text-ink-2 sm:block">
             The Wellness District brings together the Lake Chelan Community Hospital campus and Columbia Valley
             Community Health, with senior living in Orchard Grove and Heritage Grove a short walk away. Technology
-            concepts under exploration aim to support residents&apos; independence and the people who care for them,
+            concepts under exploration aim to support residents’ independence and the people who care for them,
             never to replace care.
           </p>
           <Link href="/connected-community" className="hidden self-start font-semibold text-green underline hover:text-green-hover sm:inline">

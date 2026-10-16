@@ -1,3 +1,4 @@
+import { preload } from "react-dom";
 import { ConnectedCommunity } from "@/components/home/ConnectedCommunity";
 import { DistrictExplorer } from "@/components/home/DistrictExplorer";
 import { Doorways } from "@/components/home/Doorways";
@@ -9,11 +10,16 @@ import { TourTeaser } from "@/components/home/TourTeaser";
 import { PLAN_DISCLAIMER, PLAN_VIEWBOX } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
 
+const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
+
 export default function Home() {
+  // The plan sheet sits inside an SVG <image>, which the browser can't discover early.
+  preload(PLAN_SHEET, { as: "image" });
+
   return (
     <>
       <Hero />
-      <DistrictExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} disclaimer={PLAN_DISCLAIMER} />
+      <DistrictExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} disclaimer={PLAN_DISCLAIMER} imageHref={PLAN_SHEET} />
       <KeyFacts />
       <Doorways />
       <ConnectedCommunity />

@@ -12,7 +12,8 @@
   --surface-2: #efece4;
   --ink: #1d2621;
   --ink-2: #4a5650;
-  --ink-3: #646e68;
+  /* #646E68 in docs/04 measured 4.48:1 on surface-2; one step darker passes 4.5:1 everywhere. */
+  --ink-3: #626c66;
   --green: #2f5d46;
   --green-hover: #1f4433;
   --on-green: #f5f3ed;
@@ -95,6 +96,15 @@
   html {
     background: var(--paper);
     -webkit-text-size-adjust: 100%;
+    /* Keep focused elements and anchor targets clear of the 64px sticky header. */
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: rgb(47 93 70 / 0.12);
+  }
+
+  a,
+  button,
+  summary {
+    touch-action: manipulation;
   }
 
   body {

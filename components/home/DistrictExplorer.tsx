@@ -21,10 +21,12 @@ export function DistrictExplorer({
   districts,
   viewBox,
   disclaimer,
+  imageHref,
 }: {
   districts: PlanDistrict[];
   viewBox: string;
   disclaimer: string;
+  imageHref: string;
 }) {
   const [selected, setSelected] = useState(districts[0].key);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -47,7 +49,7 @@ export function DistrictExplorer({
             <PlanMap2D
               districts={districts}
               viewBox={viewBox}
-              imageHref="/plan/districts-sheet-greyscale.webp"
+              imageHref={imageHref}
               selected={selected}
               hovered={hovered}
               onSelect={(key) => {

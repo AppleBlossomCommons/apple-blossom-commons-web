@@ -14,7 +14,7 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
     >
       <Logo size={24} className="sm:hidden" />
       <Logo size={28} className="hidden sm:block" />
-      <span className="whitespace-nowrap font-serif text-[1.125rem] font-semibold leading-none tracking-[-0.01em] sm:text-[1.25rem]">
+      <span translate="no" className="whitespace-nowrap font-serif text-[1.125rem] font-semibold leading-none tracking-[-0.01em] sm:text-[1.25rem]">
         Apple Blossom Commons
       </span>
     </Link>
