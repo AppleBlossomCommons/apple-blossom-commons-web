@@ -86,7 +86,7 @@ export function PlanMap2D({
                   onClick={() => onSelect(d.key)}
                   onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
                   onPointerLeave={() => onHover(null)}
-                  className={`pointer-events-auto absolute grid size-[22px] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-[1.5px] border-ink font-mono text-[0.625rem] font-semibold leading-none text-ink transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
+                  className={`pointer-events-auto absolute grid size-[18px] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-[1.5px] border-ink font-mono text-[0.5625rem] font-semibold leading-none text-ink transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
                     on ? "scale-[1.18] bg-signal-on-dark" : "bg-paper"
                   } ${dim ? "opacity-45" : ""}`}
                   style={{ left: `${((x - minX) / w) * 100}%`, top: `${((y - minY) / h) * 100}%` }}

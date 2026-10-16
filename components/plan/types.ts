@@ -12,7 +12,9 @@ export type PlanDistrict = {
   color: string;
   summary: string;
   publicFacts: string[];
-  /** SVG path strings, one per polygon. */
+  /** SVG path strings, one per polygon (y already flipped for SVG). */
   polys: string[];
+  /** The same polygons as stored (y up), for the 3D model. */
+  shapes: [number, number][][];
   labels: [number, number][];
 };

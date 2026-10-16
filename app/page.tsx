@@ -7,7 +7,7 @@ import { KeyFacts } from "@/components/home/KeyFacts";
 import { MigrationEvidence } from "@/components/home/MigrationEvidence";
 import { PartnerCta } from "@/components/home/PartnerCta";
 import { TourTeaser } from "@/components/home/TourTeaser";
-import { PLAN_DISCLAIMER, PLAN_VIEWBOX } from "@/lib/districts";
+import { PLAN_DISCLAIMER, PLAN_DISCLAIMER_3D, PLAN_VIEWBOX } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
 
 const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
@@ -19,7 +19,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <DistrictExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} disclaimer={PLAN_DISCLAIMER} imageHref={PLAN_SHEET} />
+      <DistrictExplorer
+        districts={planDistricts()}
+        viewBox={PLAN_VIEWBOX}
+        disclaimer={PLAN_DISCLAIMER}
+        disclaimer3D={PLAN_DISCLAIMER_3D}
+        imageHref={PLAN_SHEET}
+      />
       <KeyFacts />
       <Doorways />
       <ConnectedCommunity />

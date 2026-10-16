@@ -106,3 +106,7 @@ export type SourceId = keyof typeof sourceData.sources;
 
 export const PLAN_DISCLAIMER =
   "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design.";
+
+/** Label for the 3D model (approved homepage mockup; fix brief, Fix 3). */
+export const PLAN_DISCLAIMER_3D =
+  "Illustrative 3D interpretation of the July 2026 masterplan. Not a survey or final design.";

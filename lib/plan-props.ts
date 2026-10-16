@@ -13,6 +13,7 @@ export function planDistricts(): PlanDistrict[] {
     summary: d.summary,
     publicFacts: d.publicFacts,
     polys: d.polys.map(polyToPath),
+    shapes: d.polys,
     labels: d.labels,
   }));
 }
