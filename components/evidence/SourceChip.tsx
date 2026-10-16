@@ -39,15 +39,16 @@ export function SourceChip({
 
   const look =
     variant === "pill"
-      ? `self-start rounded-full border px-[9px] py-1 text-[0.6875rem] leading-[1.35] ${tone === "surface-2" ? "border-rule-on-surface-2" : "border-rule"} hover:border-ink-3`
-      : "self-start text-left text-[0.65625rem] leading-[1.5] hover:underline";
+      ? `inline-flex items-center self-start rounded-full border px-[9px] py-1 text-[0.6875rem] leading-[1.35] ${tone === "surface-2" ? "border-rule-on-surface-2" : "border-rule"} hover:border-ink-3`
+      : // Plain chips are inline text so they can wrap inside a sentence.
+        "inline self-start text-left text-[0.65625rem] leading-[1.5] hover:underline";
 
   return (
     <>
       <button
         type="button"
         popoverTarget={popId}
-        className={`inline-flex max-w-full items-center font-mono font-medium text-ink-2 transition-colors duration-150 hover:text-ink ${look} ${className}`}
+        className={`max-w-full font-mono font-medium text-ink-2 transition-colors duration-150 hover:text-ink ${look} ${className}`}
       >
         {text}
         <span className="sr-only"> (source details)</span>

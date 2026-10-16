@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "asOf": "2026-10-16",
+    "note": "Homepage migration chart (approved homepage mockup; docs/03, 'Who is moving to Chelan'). Values are net migration rates in percent. The caveat is required wherever these figures appear: no dataset links age to a named origin, so this shows a pattern, not a proven flow."
+  },
+  "title": "Net migration rate, ages 65 to 69, 2010 to 2020",
+  "titleShort": "Net migration rate, ages 65–69, 2010–2020",
+  "source": "uw-apl-migration-2010-2020",
+  "caveatShort": "A pattern, not a proven flow.",
+  "rows": [
+    { "id": "king", "label": "King County", "labelShort": "King", "value": -10.5, "tone": "lake" },
+    { "id": "chelan", "label": "Chelan County", "labelShort": "Chelan", "value": 11.95, "tone": "green" }
+  ]
+}

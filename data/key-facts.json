@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "asOf": "2026-10-16",
+    "note": "Homepage key facts (approved homepage mockup, Oct 16, 2026). 'short' fields are the phone wording. 'source' is an id in data/sources.json; 'chip' and 'chipShort' pick which parts the source chip shows. The district count is not stored here: it is read from data/districts.json."
+  },
+  "facts": [
+    {
+      "id": "districts",
+      "value": null,
+      "valueFrom": "districtCount",
+      "label": "districts, from senior living to open space",
+      "labelShort": "districts",
+      "source": "masterplan-2026-07",
+      "chip": ["label", "date"],
+      "chipShort": ["label", "date"]
+    },
+    {
+      "id": "acreage",
+      "value": "~160 acres",
+      "valueShort": "~160 ac",
+      "label": "of coordinated landholdings in the Apple Blossom Center planning area",
+      "labelShort": "planning area",
+      "source": "acreage-tbc",
+      "chip": ["label", "date"],
+      "chipShort": ["date"]
+    },
+    {
+      "id": "walk-rings",
+      "value": "5 · 10 · 15",
+      "valueShort": "5·10·15",
+      "label": "minute walk rings drawn from the village center",
+      "labelShort": "minute walk rings",
+      "source": "masterplan-2026-07",
+      "chip": ["label", "date"],
+      "chipShort": ["label", "date"]
+    },
+    {
+      "id": "hospital",
+      "value": "On site",
+      "label": "Lake Chelan Community Hospital, within the Wellness District",
+      "labelShort": "hospital campus",
+      "source": "masterplan-2026-07",
+      "chip": ["label", "date"],
+      "chipShort": ["label", "date"]
+    }
+  ]
+}
