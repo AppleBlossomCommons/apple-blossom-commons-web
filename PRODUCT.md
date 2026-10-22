@@ -14,7 +14,7 @@ Decided before init (see `CLAUDE.md`): Next.js App Router, React, TypeScript, Ta
 
 The public website for Apple Blossom Commons, a generational, mixed-use, master-planned community on about 160 acres in Chelan, Washington.
 
-**Whose trust comes first: the City of Chelan** (planning department, economic development, City Council). They need confidence that growth is phased, coordinated, aligned with the Comprehensive Plan, and supportive of historic Downtown Chelan. When audiences pull in different directions, the City reviewer's judgment is the bar: if a City planner would discount something as a sales pitch, it doesn't ship.
+**Whose trust comes first: neighbors and the Chelan community.** They need confidence that growth is phased, coordinated, evolves over decades, and supports historic Downtown Chelan. When audiences pull in different directions, a careful local reader's judgment is the bar: if a long-time neighbor would discount something as a sales pitch, it doesn't ship. (Updated Oct 22, 2026: the site does not name or address the City of Chelan; see the public copy rules in `CLAUDE.md`.)
 
 Other primary audiences, each with its own doorway (see `docs/01-project-brief.md` and `docs/02-sitemap.md`):
 
@@ -52,7 +52,7 @@ The core story is a community where a strong medical system, technology and reti
 - Signature features: the Plan Table district explorer (2D SVG by default, 3D optional) and the Evidence Margin (a source chip on every figure, backed by one source registry).
 - One source for each piece of data: district facts are in `data/districts.json` and geometry in `data/district-geometry-v1.json`. Page components never contain hand-typed figures.
 - Content tiers (public, gated, hold, never published) are in `docs/03-content-and-tiers.md`. Nothing outside the public tier appears on a public page.
-- The partner inquiry is called an inquiry, never an "application". The City does not use it; it reaches Chelan Village through Contact.
+- The partner inquiry is called an inquiry, never an "application". Its types: Investor · Operator or brand partner · Strategic land buyer or developer · Community organization · Other.
 - Unresolved facts are in `docs/09-open-items.md`. Contested figures stay off public pages until the owner resolves them. Examples: the Heritage Grove count, the hotel key count, the Apple Blossom Residence apartment count, and the site-wide unit total.
 - Undecided: the inquiry email recipients, the sign-in service and storage, the map tile provider, the video host and the analytics tool.
 
@@ -85,8 +85,8 @@ The core story is a community where a strong medical system, technology and reti
 
 ## Product Principles
 
-1. **Credibility over persuasion.** Every claim should survive a City planner's reading. Restraint is the persuasive move.
-2. **Show the evidence.** Every number carries its source, date and confidence. Uncertainty is shown, not hidden.
+1. **Credibility over persuasion.** Every claim should survive a careful local reader. Restraint is the persuasive move.
+2. **Show the evidence.** Every number has a source, date and confidence recorded in `data/sources.json`. Public pages show sources on Research Library pages and in footnotes, not as confidence labels or tags. Uncertainty is stated in plain words, not hidden.
 3. **Plan, not promise.** Describe intentions as planning concepts that evolve over decades, never as commitments or dates.
 4. **One community, one platform.** The ten districts, the hospital campus and Downtown Chelan are presented as parts of a whole, not as separate products.
 5. **Route each reader to a conversation.** Each audience has a clear path that ends at Contact or Become a Partner.

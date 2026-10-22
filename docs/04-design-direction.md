@@ -69,7 +69,7 @@ The whole site is drawn as a crisp 2D plan on the paper ground: ten districts in
 
 ## Signature 2: the Evidence Margin
 
-Every figure carries a small mono chip, for example `ACS 2020–24 · Moderate`. Opening it shows source, date, geography, method note, confidence tier (High / Moderate / Low) and a link. Build one **source registry** (`data/sources.json`, one ID per source with date, geography, tier and access level) that every chart, statistic and document references.
+Every figure has a source in the registry. **Updated Oct 22, 2026 (public copy rules in `CLAUDE.md`):** public pages show no confidence labels or source tags, and the homepage shows no chips. Sources appear on Research Library pages and in footnotes, as a small mono chip reading source and date (for example `ACS 2020–24`). Opening it shows source, date, geography, method note and a link. The confidence tier (High / Moderate / Low) stays in the registry and is not shown. Build one **source registry** (`data/sources.json`, one ID per source with date, geography, tier and access level) that every chart, statistic and document references.
 
 Optional third element: a Today / Planned swipe on the plan.
 
@@ -92,7 +92,7 @@ Use the emil-design-eng skill for technique. These rules set the limits:
 ## Data visualization
 
 - One finding per chart, written as its title. Direct labels, no legends. Hairline axes. Plex Mono numerals.
-- Show uncertainty: ranges as whiskers or bands, confidence tier in the source line.
+- Show uncertainty: ranges as whiskers or bands, and caveats in plain words. No confidence tier labels on public pages.
 - Every chart has a "view as table" option.
 - Orchard Green for the main series, Lake for comparison, the signal color for the one mark that matters.
 - First candidate: King County vs Chelan County net migration by five-year age band, as a mirrored bar chart with its caveat in the chart.

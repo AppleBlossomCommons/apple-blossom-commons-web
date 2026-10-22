@@ -31,9 +31,18 @@ Read `docs/01-project-brief.md` before the first task in any session. Read the o
    - Lake Chelan Health is not called a "partner" until they agree to be named.
    - Technology is presented as supporting residents and care staff, never as replacing human care.
 4. **One source for each piece of data.** District facts live in `data/districts.json` and geometry in `data/district-geometry-v1.json`. Pages read from these files. Never type figures into page components.
-5. **Every number carries a source** (the Evidence Margin pattern, see `docs/04-design-direction.md`).
+5. **Every number carries a source** in `data/sources.json` (the Evidence Margin pattern, see `docs/04-design-direction.md`). On public pages, sources show only on Research Library pages and in footnotes (see the public copy rules below).
 6. **Accessibility is part of "done":** keyboard navigation, visible focus, alt text, 4.5:1 text contrast, `prefers-reduced-motion` respected, and every 3D or map view has an HTML equivalent.
 7. **Never commit secrets.** Keys go in `.env.local`, which is git-ignored.
+
+## Public copy rules (owner decisions, 2026-10-22)
+- Never name or address the City of Chelan, its Council or its staff anywhere on the site. Do not imply that the City is working with Chelan Village, LP.
+- Call residents "neighbors" or "the Chelan community". Call approvals "the public review process" or "public hearings".
+- Do not cite or claim alignment with the Comprehensive Plan. Describe the ideas directly (walkability, aging in place, Firewise design).
+- Name Lake Chelan Health only as a neighbor ("a short walk from the hospital campus"). Never call it a partner.
+- Do not use "public agencies" as an audience or partner type.
+- Public pages show no confidence labels, source tags or placeholders like [SOURCE TO CONFIRM]. Sources belong on Research Library pages and in footnotes.
+- Do not show crowds, traffic or busy scenes. Avoid "growth corridor", "density" and unit or acreage counts in hero copy.
 
 ## Where things are
 

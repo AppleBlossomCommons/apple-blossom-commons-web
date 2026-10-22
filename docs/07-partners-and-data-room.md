@@ -15,12 +15,12 @@ The first question is "Which best describes you?":
 | Investor | Organization, investment focus (e.g. senior housing, hospitality, mixed-use), typical check size (optional), timeline |
 | Operator or brand partner: senior living, healthcare, hospitality, retail | Organization, sector, current markets, product or brand of interest |
 | Strategic land buyer or developer | Organization, product type, district(s) of interest, acreage range |
-| Public agency or community organization | Organization, topic. Show a note pointing to the Planning Framework page and Contact |
+| Community organization | Organization, topic. Show a note pointing to Contact |
 | Other | Free text |
 
 Common fields: name, email, phone (optional), message, how they heard about it, and a consent checkbox linking to `/privacy`.
 
-**The City of Chelan does not use this form.** It reaches Chelan Village through Contact and the Planning Framework page.
+Final list of types (owner decision, Oct 22, 2026): Investor · Operator or brand partner · Strategic land buyer or developer · Community organization · Other. "Public agencies" is not an audience or partner type.
 
 Build requirements:
 - Validate on the server, with clear inline errors next to each field and labels always visible.

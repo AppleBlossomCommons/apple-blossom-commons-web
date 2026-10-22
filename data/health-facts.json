@@ -1,31 +1,26 @@
 {
   "_meta": {
-    "asOf": "2026-10-16",
-    "note": "Connected Community facts on the homepage (approved homepage mockup; docs/03, Connected Community guardrails). 'textShort' is the phone wording; facts with phone: false are desktop only. 'chip' and 'chipShort' pick which source parts show; 'note' is appended to the chip. Lake Chelan Health is never called a partner."
+    "asOf": "2026-10-22",
+    "note": "Connected Community facts on the homepage (approved homepage mockup; docs/03, Connected Community guardrails). 'textShort' is the phone wording; facts with phone: false are desktop only. 'source' is an id in data/sources.json; it is kept so every figure still has a source, but the homepage does not render it (public copy rules in CLAUDE.md, Oct 22, 2026). Lake Chelan Health is named only as a neighbor, never as a partner."
   },
   "facts": [
     {
       "id": "lch-services",
-      "text": "A new cardiology service, three specialty physicians, expanded Express Care and a hospitalist program at Lake Chelan Health.",
+      "text": "At the neighboring hospital campus: a new cardiology service, three specialty physicians, expanded Express Care and a hospitalist program.",
       "textShort": "A new cardiology service, three specialty physicians, expanded Express Care and a hospitalist program.",
       "source": "lch-board-letter-2026-01",
-      "chip": ["label", "date", "tier"],
-      "chipShort": ["label", "date"],
       "phone": true
     },
     {
       "id": "ems-building",
       "text": "A new EMS and administration building on the campus, funded with $12M over two legislative sessions.",
       "source": "ems-building-record-2026",
-      "chip": ["label", "date", "tier"],
       "phone": false
     },
     {
       "id": "care-nearby",
       "text": "Clinics, therapy and medical assisted living planned within walking distance of the senior homes.",
       "source": "masterplan-2026-07",
-      "chip": ["label", "date"],
-      "note": "Planning concept",
       "phone": false
     }
   ]

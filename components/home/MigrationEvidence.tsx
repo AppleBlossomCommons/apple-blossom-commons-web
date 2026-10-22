@@ -24,7 +24,7 @@ export function MigrationEvidence() {
       </div>
       {/* 578px basis = the mockup's 520px content box plus its padding and border. */}
       <div className="min-w-0 flex-[1_1_578px]">
-        <MigrationChart uid="home-migration" />
+        <MigrationChart />
       </div>
     </section>
   );

@@ -311,7 +311,7 @@ Quiet, rectangular, confident.
 
 ### Chips (Source chip)
 - **Style:** surface fill, 1px rule border, 3px corners, 24px minimum height, mono 11px ink-2 text reading `Source label · note`.
-- **State:** hover darkens the border to ink-3 and the text to ink. Opens a native popover: surface, 1px rule border, 4px corners, 20px padding, serif 20px source title, a date / geography / confidence definition list, method note, and a ruled Close button. The popover carries the Overlay shadow.
+- **State:** hover darkens the border to ink-3 and the text to ink. Opens a native popover: surface, 1px rule border, 4px corners, 20px padding, serif 20px source title, a date / geography definition list (no confidence tier on public pages), method note, and a ruled Close button. The popover carries the Overlay shadow.
 
 ### Lists (in place of cards)
 - **Doorway list:** a strong ink top rule, rule hairlines between rows, 28px row padding; serif title, ink-2 description, arrow that turns green and nudges 4px right on hover. The whole row is the link.

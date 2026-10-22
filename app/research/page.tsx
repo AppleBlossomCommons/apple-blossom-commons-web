@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <PagePlaceholder
       title="Research Library"
-      purpose="Public summaries of the research behind the plan, each with its sources and confidence."
+      purpose="Public summaries of the research behind the plan, each with its sources."
     />
   );
 }

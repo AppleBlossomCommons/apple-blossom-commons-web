@@ -6,6 +6,7 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import type { CameraCommand } from "@/components/plan/DistrictModel3D";
 import { PlanMap2D } from "@/components/plan/PlanMap2D";
 import type { PlanDistrict } from "@/components/plan/types";
+import { buttonClass } from "@/components/site/buttons";
 import { ChevronRight } from "@/components/site/icons";
 import { container } from "@/components/site/layout";
 
@@ -318,14 +319,13 @@ function DistrictCard({ district: d, compact = false }: { district: PlanDistrict
       <p className="text-[0.9375rem] leading-[1.55]">{d.summary}</p>
       <ul className="list-disc pl-4 font-mono text-[0.8125rem] leading-[1.6] text-on-basalt-2">
         {d.publicFacts.map((f) => (
-          <li key={f}>{f}</li>
+          <li key={f}>{f.replace(/\s*\(planning concept\)$/i, "")}</li>
         ))}
       </ul>
-      <Link
-        href={`/districts/${d.slug}`}
-        className="mt-1 self-start text-[0.9375rem] font-semibold text-on-basalt underline hover:text-white"
-      >
-        Open the district page
+      {/* One line in place of a "(planning concept)" note on each fact (owner decision, Oct 22, 2026). */}
+      <p className="text-[0.8125rem] text-on-basalt-2">Figures are planning concepts, not commitments.</p>
+      <Link href={`/districts/${d.slug}`} className={`mt-1 self-start ${buttonClass("primary", "sm")}`}>
+        Learn more<span className="sr-only"> about {d.name}</span>
       </Link>
     </div>
   );

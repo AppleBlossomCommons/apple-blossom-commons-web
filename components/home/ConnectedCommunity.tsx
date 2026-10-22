@@ -1,18 +1,14 @@
 import Link from "next/link";
 import healthData from "@/data/health-facts.json";
-import { SourceChip } from "@/components/evidence/SourceChip";
 import { container, eyebrow } from "@/components/site/layout";
 import type { SourceId } from "@/lib/districts";
 
-type Part = "label" | "short" | "date" | "tier";
 type HealthFact = {
   id: string;
   text: string;
   textShort?: string;
+  /** Kept in the data so every figure has a source; not shown on the homepage. */
   source: SourceId;
-  chip: Part[];
-  chipShort?: Part[];
-  note?: string;
   phone: boolean;
 };
 
@@ -21,7 +17,7 @@ const facts = healthData.facts as HealthFact[];
 /**
  * Connected Community teaser (approved homepage mockup). Copy guardrails: docs/03 —
  * technology supports residents and care staff, never replaces care; Lake Chelan Health
- * is not called a partner.
+ * is named only as a neighbor, never a partner (public copy rules, CLAUDE.md).
  */
 export function ConnectedCommunity() {
   return (
@@ -60,8 +56,6 @@ export function ConnectedCommunity() {
             >
               <p className="text-[0.9375rem] sm:hidden">{f.textShort ?? f.text}</p>
               <p className="hidden sm:block">{f.text}</p>
-              <SourceChip id={f.source} uid={`health-${f.id}-sm`} show={f.chipShort ?? f.chip} note={f.note} variant="plain" className="sm:hidden" />
-              <SourceChip id={f.source} uid={`health-${f.id}`} show={f.chip} note={f.note} tone="surface-2" className="max-sm:hidden" />
             </li>
           ))}
         </ul>

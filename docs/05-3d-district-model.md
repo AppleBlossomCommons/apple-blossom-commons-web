@@ -4,7 +4,7 @@
 
 ## What exists
 
-A standalone page using plain three.js 0.170 (loaded from a CDN, no build step). It shows the ten districts as low colored plates extruded from traced outlines, sitting on a greyscale copy of the masterplan's Districts sheet. It was built to test three things: whether 3D reads more clearly than a flat plan for the City and land buyers, whether it runs smoothly on a phone, and whether the tracing is accurate enough.
+A standalone page using plain three.js 0.170 (loaded from a CDN, no build step). It shows the ten districts as low colored plates extruded from traced outlines, sitting on a greyscale copy of the masterplan's Districts sheet. It was built to test three things: whether 3D reads more clearly than a flat plan for neighbors and land buyers, whether it runs smoothly on a phone, and whether the tracing is accurate enough.
 
 Features to carry over:
 

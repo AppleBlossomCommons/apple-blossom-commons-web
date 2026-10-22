@@ -4,14 +4,6 @@ import { container } from "@/components/site/layout";
 // Approved homepage mockup copy (Oct 16, 2026). "short" is the phone wording.
 const doorways = [
   {
-    href: "/planning",
-    audience: "For the City of Chelan",
-    title: "Planning with Chelan",
-    text: "How the plan responds to the Comprehensive Plan: age-in-place design, walkability, Firewise principles and housing for permanent residents first.",
-    short: "How the plan responds to the Comprehensive Plan.",
-    cta: "Planning Framework",
-  },
-  {
     href: "/research",
     audience: "For investors",
     title: "Investment perspective",
@@ -29,7 +21,7 @@ const doorways = [
   },
 ];
 
-/** Three audience doorways into the site (docs/01, Audiences). */
+/** Audience doorways into the site (docs/01, Audiences). A "For neighbors" card comes with the participate page. */
 export function Doorways() {
   return (
     <section aria-labelledby="doorways-title" className={`${container} flex flex-col gap-3.5 pb-10 pt-2 sm:gap-7 sm:pb-[88px] sm:pt-10`}>

@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "asOf": "2026-10-16",
-    "note": "Homepage key facts (approved homepage mockup, Oct 16, 2026). 'short' fields are the phone wording. 'source' is an id in data/sources.json; 'chip' and 'chipShort' pick which parts the source chip shows. The district count is not stored here: it is read from data/districts.json."
+    "asOf": "2026-10-22",
+    "note": "Homepage key facts (approved homepage mockup, Oct 16, 2026; source tags removed Oct 22, 2026 per the public copy rules in CLAUDE.md). 'short' fields are the phone wording. 'source' is an id in data/sources.json; it is kept so every figure still has a source, but the homepage does not render it. The district count is not stored here: it is read from data/districts.json. The ~160 acres figure was removed until its source is confirmed."
   },
   "facts": [
     {
@@ -10,19 +10,7 @@
       "valueFrom": "districtCount",
       "label": "districts, from senior living to open space",
       "labelShort": "districts",
-      "source": "masterplan-2026-07",
-      "chip": ["label", "date"],
-      "chipShort": ["label", "date"]
-    },
-    {
-      "id": "acreage",
-      "value": "~160 acres",
-      "valueShort": "~160 ac",
-      "label": "of coordinated landholdings in the Apple Blossom Center planning area",
-      "labelShort": "planning area",
-      "source": "acreage-tbc",
-      "chip": ["label", "date"],
-      "chipShort": ["date"]
+      "source": "masterplan-2026-07"
     },
     {
       "id": "walk-rings",
@@ -30,18 +18,14 @@
       "valueShort": "5·10·15",
       "label": "minute walk rings drawn from the village center",
       "labelShort": "minute walk rings",
-      "source": "masterplan-2026-07",
-      "chip": ["label", "date"],
-      "chipShort": ["label", "date"]
+      "source": "masterplan-2026-07"
     },
     {
       "id": "hospital",
       "value": "On site",
       "label": "Lake Chelan Community Hospital, within the Wellness District",
       "labelShort": "hospital campus",
-      "source": "masterplan-2026-07",
-      "chip": ["label", "date"],
-      "chipShort": ["label", "date"]
+      "source": "masterplan-2026-07"
     }
   ]
 }

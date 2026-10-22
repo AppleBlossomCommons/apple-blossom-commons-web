@@ -1,6 +1,4 @@
 import migration from "@/data/migration-65-69.json";
-import { SourceChip } from "@/components/evidence/SourceChip";
-import type { SourceId } from "@/lib/districts";
 
 const tones = { lake: "bg-lake", green: "bg-green" } as const;
 
@@ -14,10 +12,9 @@ function formatRate(v: number) {
  * The largest bar fills 70% of its half of the track on desktop and 61% on phones, leaving
  * room for the value label. Values are visible text, so the bars themselves are aria-hidden.
  */
-export function MigrationChart({ uid }: { uid: string }) {
+export function MigrationChart() {
   const rows = migration.rows;
   const max = Math.max(...rows.map((r) => Math.abs(r.value)));
-  const source = migration.source as SourceId;
 
   return (
     <figure className="flex min-w-0 flex-col gap-3.5 sm:gap-[18px] sm:rounded-[8px] sm:border sm:border-rule sm:bg-surface sm:p-7">
@@ -57,15 +54,9 @@ export function MigrationChart({ uid }: { uid: string }) {
       <figcaption className="font-mono text-[0.65625rem] font-medium leading-[1.5] text-ink-2 sm:order-1 sm:font-sans sm:text-[0.9375rem] sm:font-semibold sm:text-ink">
         <span className="hidden sm:inline">{migration.title}</span>
         <span className="sm:hidden">
-          {migration.titleShort} ·{" "}
-          <SourceChip id={source} uid={`${uid}-sm`} show={["short", "tier"]} variant="plain" />.{" "}
-          {migration.caveatShort}
+          {migration.titleShort}. {migration.caveatShort}
         </span>
       </figcaption>
-
-      <div className="order-3 hidden sm:flex">
-        <SourceChip id={source} uid={uid} show={["label", "date", "tier"]} />
-      </div>
     </figure>
   );
 }
