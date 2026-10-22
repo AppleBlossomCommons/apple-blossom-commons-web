@@ -10,7 +10,7 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
     <Link
       href="/"
       onClick={onClick}
-      className="flex items-center gap-2 text-ink no-underline sm:gap-2.5"
+      className="flex items-center gap-2 text-hearth no-underline sm:gap-2.5"
     >
       <Logo size={24} className="sm:hidden" />
       <Logo size={28} className="hidden sm:block" />

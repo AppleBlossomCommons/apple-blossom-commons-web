@@ -21,7 +21,7 @@ const facts = healthData.facts as HealthFact[];
  */
 export function ConnectedCommunity() {
   return (
-    <section aria-labelledby="health-title" className="border-y border-rule bg-surface-2">
+    <section aria-labelledby="health-title" className="border-y border-line bg-sand">
       <div className={`${container} flex flex-wrap gap-x-[72px] gap-y-3.5 py-10 sm:gap-y-12 sm:py-[88px]`}>
         <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-3.5 sm:gap-[18px]">
           <p className={eyebrow}>Connected Community</p>
@@ -31,17 +31,17 @@ export function ConnectedCommunity() {
           >
             Planned around an established hospital campus.
           </h2>
-          <p className="text-ink-2 sm:hidden">
+          <p className="text-muted sm:hidden">
             Senior living in Orchard Grove and Heritage Grove sits a short walk from the Lake Chelan Community Hospital
             campus.
           </p>
-          <p className="hidden max-w-[56ch] text-[1.125rem] text-ink-2 sm:block">
+          <p className="hidden max-w-[56ch] text-[1.125rem] text-muted sm:block">
             The Wellness District brings together the Lake Chelan Community Hospital campus and Columbia Valley
             Community Health, with senior living in Orchard Grove and Heritage Grove a short walk away. Technology
             concepts under exploration aim to support residents’ independence and the people who care for them,
             never to replace care.
           </p>
-          <Link href="/connected-community" className="hidden self-start font-semibold text-green underline hover:text-green-hover sm:inline">
+          <Link href="/connected-community" className="hidden self-start font-semibold text-lake-deep underline hover:text-hearth sm:inline">
             Read the Connected Community vision →
           </Link>
         </div>
@@ -50,7 +50,7 @@ export function ConnectedCommunity() {
           {facts.map((f, i) => (
             <li
               key={f.id}
-              className={`flex-col gap-1.5 border-t pt-3 sm:flex sm:gap-2 sm:py-[18px] ${i === 0 ? "border-ink" : "border-rule"} ${
+              className={`flex-col gap-1.5 border-t pt-3 sm:flex sm:gap-2 sm:py-[18px] ${i === 0 ? "border-hearth" : "border-line"} ${
                 f.phone ? "flex" : "hidden"
               }`}
             >

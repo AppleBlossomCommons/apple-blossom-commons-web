@@ -62,7 +62,7 @@
     },
     {
       "key": "summit", "n": 7, "slug": "summit-recreation-park", "code": "SUMMIT",
-      "name": "Summit Recreation Park", "family": "parks", "color": "#7FAE86",
+      "name": "Summit Recreation Park", "family": "parks", "color": "#A1C4A6",
       "summary": "Sports fields, a seasonal roller and ice rink, a playground and a pond, in two parts north and south.",
       "publicFacts": ["Existing soccer and baseball fields", "Decorative pond and play areas", "Trails linking the districts"],
       "status": "verified",
@@ -78,7 +78,7 @@
     },
     {
       "key": "preserve", "n": 9, "slug": "orchard-preserve", "code": "PRES",
-      "name": "Orchard Preserve", "family": "parks", "color": "#6A9E74",
+      "name": "Orchard Preserve", "family": "parks", "color": "#83AF8C",
       "summary": "Open space with trails and a scenic overlook at the highest point of the site.",
       "publicFacts": ["Nature trail and overlook", "Open space preserved", "RV park and campground"],
       "status": "verified",

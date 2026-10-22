@@ -54,7 +54,7 @@ export function PlanMap2D({
                     d={p}
                     fill={d.color}
                     fillOpacity={on || hv ? 0.9 : dim ? 0.32 : 0.75}
-                    stroke="#1D2621"
+                    stroke="var(--hearth)"
                     strokeOpacity={dim ? 0.25 : 0.55}
                     strokeWidth={1}
                     vectorEffect="non-scaling-stroke"
@@ -69,7 +69,11 @@ export function PlanMap2D({
             .filter((d) => d.key === selected)
             .map((d) =>
               d.polys.map((p, i) => (
-                <path key={`sel-${i}`} d={p} fill="none" stroke="#E0AE4F" strokeWidth={2.5} vectorEffect="non-scaling-stroke" pointerEvents="none" />
+                <g key={`sel-${i}`} pointerEvents="none">
+                  {/* Hearth keyline under the gold outline so it reads on the yellow districts too. */}
+                  <path d={p} fill="none" stroke="var(--hearth)" strokeWidth={4.5} vectorEffect="non-scaling-stroke" />
+                  <path d={p} fill="none" stroke="var(--gold)" strokeWidth={2.5} vectorEffect="non-scaling-stroke" />
+                </g>
               )),
             )}
         </svg>
@@ -86,8 +90,8 @@ export function PlanMap2D({
                   onClick={() => onSelect(d.key)}
                   onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
                   onPointerLeave={() => onHover(null)}
-                  className={`pointer-events-auto absolute grid size-[18px] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-[1.5px] border-ink font-mono text-[0.5625rem] font-semibold leading-none text-ink transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
-                    on ? "scale-[1.18] bg-signal-on-dark" : "bg-paper"
+                  className={`pointer-events-auto absolute grid size-[18px] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-mono text-[0.5625rem] font-semibold leading-none text-hearth transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
+                    on ? "scale-[1.18] bg-gold" : "bg-linen"
                   } ${dim ? "opacity-45" : ""}`}
                   style={{ left: `${((x - minX) / w) * 100}%`, top: `${((y - minY) / h) * 100}%` }}
                 >

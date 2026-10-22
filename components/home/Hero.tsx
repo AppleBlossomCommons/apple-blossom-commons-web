@@ -18,11 +18,11 @@ export function Hero() {
         >
           A community planned to grow with Chelan, over decades.
         </h1>
-        <p className="max-w-[60ch] text-[1.0625rem] text-ink-2 sm:hidden">
+        <p className="max-w-[60ch] text-[1.0625rem] text-muted sm:hidden">
           A long-range plan around the Lake Chelan Community Hospital campus: ten districts for every stage of life,
           designed to be walkable and built in phases.
         </p>
-        <p className="hidden max-w-[60ch] text-[1.25rem] leading-[1.5] text-ink-2 sm:block">
+        <p className="hidden max-w-[60ch] text-[1.25rem] leading-[1.5] text-muted sm:block">
           Apple Blossom Commons is a long-range plan around the Lake Chelan Community Hospital campus: ten districts for every stage of life, a wine and culinary village, parks and open space, designed
           to be walkable and built in phases.
         </p>

@@ -1,85 +1,47 @@
 @import "tailwindcss";
 
 /*
- * Orchard Atlas design tokens (docs/04-design-direction.md).
- * Light values are the approved palette; dark values come from the 3D prototype.
- * v1 is light only (homepage mockup README, rule 10): the OS setting never switches
- * the theme. The dark block below is dormant until a dark theme is approved.
+ * Warm palette v1, owner-approved 2026-10-22 (docs/04-design-direction.md).
+ * Light only: there is no dark theme and no dark section background anywhere.
  */
 :root {
-  --paper: #f5f3ed;
-  --surface: #fbfaf6;
-  --surface-2: #efece4;
-  --ink: #1d2621;
-  --ink-2: #4a5650;
-  /* #646E68 in docs/04 measured 4.48:1 on surface-2; one step darker passes 4.5:1 everywhere. */
-  --ink-3: #626c66;
-  --green: #2f5d46;
-  --green-hover: #1f4433;
-  --on-green: #f5f3ed;
-  --basalt: #22372c;
-  --basalt-2: #2b4436;
-  /* Text and hairlines on the basalt stages (explorer, tour). */
-  --on-basalt: #f5f3ed;
-  --on-basalt-2: #b9c4bc;
-  --basalt-rule: #3b5446;
-  --basalt-rule-2: #4f6a5b;
-  --basalt-divider: #2e463a;
-  --signal: #b5791c;
-  --signal-text: #8f5e12;
-  --signal-on-dark: #e0ae4f;
-  --harvest-gold: #c9a24b;
-  --lake: #3e6e8e;
-  --rule: #dcd8cd;
-  /* Outline of secondary buttons, and chip borders on surface-2. */
-  --rule-strong: #b9b3a4;
-  --rule-on-surface-2: #cfc9ba;
+  /* Grounds: about 70% of every screen. */
+  --linen: #fbf6ee;
+  --sand: #f3e9da;
+  /* Text. muted is #73635a, not #7a6a60, so it passes 4.5:1 on sand as well as linen. */
+  --hearth: #3b2f2a;
+  --muted: #73635a;
+  --line: #e6daca;
+  /* Accents: at most gold plus one of sage or lake on a screen. */
+  --gold: #f2b544;
+  /* Primary button hover: a slightly deeper gold (hearth text on it is 6.1:1). */
+  --gold-hover: #e6a733;
+  --lake: #8fc1d4;
+  --lake-deep: #2f6f88;
+  --sage: #b9c9a6;
+  --sage-deep: #5e7a4f;
+  /* Rare seasonal touch; rose is for large text accents only, never body text. */
+  --blossom: #f2c4c8;
+  --rose: #b85c66;
   --plan-fill-opacity: 0.86;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
-:root[data-theme="dark"] {
-  --paper: #141b17;
-  --surface: #1a231e;
-  --ink: #e9ede6;
-  --ink-2: #b9c4bc;
-  --ink-3: #8e9a92;
-  --green: #7fb898;
-  --on-green: #141b17;
-  --basalt: #0f1612;
-  --basalt-2: #18221c;
-  --signal-text: #e0ae4f;
-  --rule: #2e3a33;
-  --plan-fill-opacity: 0.74;
-  color-scheme: dark;
-}
-
 @theme inline {
-  --color-paper: var(--paper);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-green: var(--green);
-  --color-green-hover: var(--green-hover);
-  --color-on-green: var(--on-green);
-  --color-basalt: var(--basalt);
-  --color-basalt-2: var(--basalt-2);
-  --color-on-basalt: var(--on-basalt);
-  --color-on-basalt-2: var(--on-basalt-2);
-  --color-basalt-rule: var(--basalt-rule);
-  --color-basalt-rule-2: var(--basalt-rule-2);
-  --color-basalt-divider: var(--basalt-divider);
-  --color-harvest-gold: var(--harvest-gold);
-  --color-signal: var(--signal);
-  --color-signal-text: var(--signal-text);
-  --color-signal-on-dark: var(--signal-on-dark);
+  --color-linen: var(--linen);
+  --color-sand: var(--sand);
+  --color-hearth: var(--hearth);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
   --color-lake: var(--lake);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-rule-on-surface-2: var(--rule-on-surface-2);
+  --color-lake-deep: var(--lake-deep);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-blossom: var(--blossom);
+  --color-rose: var(--rose);
 
   /* Header collapses to the menu button below this width (mockup README, rule 3). */
   --breakpoint-nav: 1100px;
@@ -94,11 +56,11 @@
 /* Element defaults live in the base layer so Tailwind utility classes can override them. */
 @layer base {
   html {
-    background: var(--paper);
+    background: var(--linen);
     -webkit-text-size-adjust: 100%;
     /* Keep focused elements and anchor targets clear of the 64px sticky header. */
     scroll-padding-top: 5rem;
-    -webkit-tap-highlight-color: rgb(47 93 70 / 0.12);
+    -webkit-tap-highlight-color: rgb(59 47 42 / 0.08);
   }
 
   a,
@@ -108,8 +70,8 @@
   }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--linen);
+    color: var(--hearth);
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.55;
@@ -147,12 +109,12 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--green) 28%, transparent);
-    color: var(--ink);
+    background: color-mix(in oklab, var(--gold) 40%, transparent);
+    color: var(--hearth);
   }
 
   :focus-visible {
-    outline: 2px solid var(--signal);
+    outline: 2px solid var(--lake-deep);
     outline-offset: 3px;
     border-radius: 2px;
   }

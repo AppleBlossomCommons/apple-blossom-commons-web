@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Browser UI color matches the paper ground (light theme only for v1).
-export const viewport: Viewport = { themeColor: "#f5f3ed" };
+// Browser UI color matches the linen ground (light theme only for v1).
+export const viewport: Viewport = { themeColor: "#fbf6ee" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -44,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
-          className="sr-only z-50 rounded bg-surface px-4 py-2 text-base text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-50 rounded bg-linen px-4 py-2 text-base text-hearth focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
           Skip to content
         </a>

@@ -1,6 +1,7 @@
 import migration from "@/data/migration-65-69.json";
 
-const tones = { lake: "bg-lake", green: "bg-green" } as const;
+// Bars use the deep accents: the light lake and sage fall below 3:1 on linen.
+const tones = { lake: "bg-lake-deep", green: "bg-sage-deep" } as const;
 
 /** "−10.50%" / "+11.95%", with a true minus sign. */
 function formatRate(v: number) {
@@ -17,8 +18,8 @@ export function MigrationChart() {
   const max = Math.max(...rows.map((r) => Math.abs(r.value)));
 
   return (
-    <figure className="flex min-w-0 flex-col gap-3.5 sm:gap-[18px] sm:rounded-[8px] sm:border sm:border-rule sm:bg-surface sm:p-7">
-      <div className="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-y-3.5 rounded-[8px] border border-rule bg-surface px-3.5 py-[18px] [--fill:0.61] sm:order-2 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-y-[18px] sm:border-0 sm:bg-transparent sm:p-0 sm:[--fill:0.7]">
+    <figure className="flex min-w-0 flex-col gap-3.5 sm:gap-[18px] sm:rounded-[8px] sm:border sm:border-line sm:bg-linen sm:p-7">
+      <div className="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-y-3.5 rounded-[8px] border border-line bg-linen px-3.5 py-[18px] [--fill:0.61] sm:order-2 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-y-[18px] sm:border-0 sm:bg-transparent sm:p-0 sm:[--fill:0.7]">
         {rows.map((r) => {
           const negative = r.value < 0;
           const width = `calc(50% * var(--fill) * ${Math.abs(r.value) / max})`;
@@ -29,7 +30,7 @@ export function MigrationChart() {
                 <span className="hidden sm:inline">{r.label}</span>
               </span>
               <div className="relative h-7 sm:h-[34px]">
-                <div aria-hidden="true" className="absolute -bottom-1.5 -top-1.5 left-1/2 w-px bg-ink-3 sm:-bottom-2 sm:-top-2" />
+                <div aria-hidden="true" className="absolute -bottom-1.5 -top-1.5 left-1/2 w-px bg-muted sm:-bottom-2 sm:-top-2" />
                 <div
                   aria-hidden="true"
                   className={`absolute top-0 h-full ${tones[r.tone as keyof typeof tones]} ${
@@ -51,7 +52,7 @@ export function MigrationChart() {
         })}
       </div>
 
-      <figcaption className="font-mono text-[0.65625rem] font-medium leading-[1.5] text-ink-2 sm:order-1 sm:font-sans sm:text-[0.9375rem] sm:font-semibold sm:text-ink">
+      <figcaption className="font-mono text-[0.65625rem] font-medium leading-[1.5] text-muted sm:order-1 sm:font-sans sm:text-[0.9375rem] sm:font-semibold sm:text-hearth">
         <span className="hidden sm:inline">{migration.title}</span>
         <span className="sm:hidden">
           {migration.titleShort}. {migration.caveatShort}
