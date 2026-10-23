@@ -10,7 +10,6 @@ export const mainNav = [
 export const aboutNav = [
   { href: "/chelan", label: "Chelan & the Region" },
   { href: "/about", label: "Stewardship" },
-  { href: "/planning", label: "Planning Framework" },
   { href: "/research", label: "Research Library" },
 ] as const;
 

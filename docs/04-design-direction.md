@@ -2,7 +2,7 @@
 
 *Approved Oct 14–15, 2026. Visual specimen: "Orchard Atlas Specimen" artifact (claude.ai/artifact/TSEz47922NjnkNG4xEYFo8).*
 
-The site should read like a planning atlas edited by a good magazine: warm paper, orchard green, serif headlines, precise cartography, and a source chip on every number. The two immersive "stages", the district explorer and the tour, open full-bleed on a dark ground inside that calm frame, then return the visitor to the page.
+The site should read like a planning atlas edited by a good magazine: warm linen ground, serif headlines, precise cartography, and a sourced number behind every figure. The two immersive "stages", the district explorer and the tour, open full-bleed on a sand ground inside that calm frame, then return the visitor to the page. (Colors updated to Warm palette v1, Oct 22, 2026; there are no dark grounds.)
 
 **Mood:** grounded, unhurried, exact, warm, seasonal. **Not:** glossy, themed (no faux-Tuscan), techno-futurist, salesy.
 
@@ -10,38 +10,48 @@ Rejected for v1: a dark, cinematic, 3D-first landing page. It depends on assets 
 
 ## Color tokens
 
+**Warm palette v1, owner-approved 2026-10-22.** It replaces the Orchard Atlas colors (paper, ink, orchard green, basalt, Harvest Amber). It is a stepping stone: a full redesign comes later. Tokens live in `app/globals.css`; components use them as Tailwind classes (`bg-linen`, `text-hearth`, `border-line` and so on), never as literal hex values. The 3D model is the one exception, because three.js needs literal colors; those literals match the tokens.
+
 | Token | Hex | Role | Contrast |
 |---|---|---|---|
-| `paper` | #F5F3ED | Page background | — |
-| `surface` | #FBFAF6 | Raised surfaces | — |
-| `ink` | #1D2621 | Body text, headlines | 14.0 on paper |
-| `ink-2` | #4A5650 | Secondary text | 6.9 |
-| `ink-3` | #626C66 | Tertiary text, eyebrows | 4.9 (4.6 on surface-2) |
-| `orchard-green` | #2F5D46 | Primary brand, links, selected states | 6.8 |
-| `basalt` | #22372C | Dark stage background (explorer, tour, footer) | paper on basalt 11.5 |
-| `basalt-2` | #2B4436 | Panels on the dark stage | — |
-| `signal` (Harvest Amber) | #B5791C | One signal per screen: selection, "you are here" (marks only) | 3.3 (marks only) |
-| `signal-text` | #8F5E12 | Signal used as text on paper | 5.0 |
-| `signal-on-dark` | #E0AE4F | Signal on basalt | — |
-| `harvest-gold` | #C9A24B | Routes, highlights on dark; never text on paper | 5.3 on basalt |
-| `lake` | #3E6E8E | Water, second data series, health/civic | 5.0 |
-| `rule` | #DCD8CD | Hairlines, grid | — |
+| `linen` | #FBF6EE | Page background, cards, panels on sand | — |
+| `sand` | #F3E9DA | Alternate section background (explorer, Connected Community, tour, footer) | — |
+| `hearth` | #3B2F2A | All body text and headings; plan outlines | 12.0 on linen, 10.8 on sand |
+| `muted` | #73635A | Secondary text, eyebrows, labels | 5.3 on linen, 4.8 on sand |
+| `line` | #E6DACA | Borders and dividers | — |
+| `gold` | #F2B544 | Primary buttons (hearth text on gold), selection, one highlight per screen | hearth on gold 7.1 |
+| `gold-hover` | #E6A733 | Primary button hover | hearth on it 6.1 |
+| `lake` | #8FC1D4 | Calm panels, map water | hearth on lake 6.6 |
+| `lake-deep` | #2F6F88 | Links and focus rings; chart series | 5.2 on linen, 4.7 on sand |
+| `sage` | #B9C9A6 | Tags, parks and open space | hearth on sage 7.4 |
+| `sage-deep` | #5E7A4F | Small icons and accents (logo mark, chart series); never text | 4.5 on linen (icons need 3:1) |
+| `blossom` | #F2C4C8 | Rare seasonal touch only | — |
+| `rose` | #B85C66 | Large text accents only, never body text | 4.1 on linen (large text needs 3:1) |
 
-Blossom pink (#D9466F) is **retired**. The old tour still uses it and must be restyled.
+`muted` is one step darker than the palette's original #7A6A60, which measured 4.31:1 on sand and failed body text (owner-approved Oct 22, 2026).
 
-Dark mode (from the 3D prototype): paper #141B17, surface #1A231E, ink #E9EDE6, ink-2 #B9C4BC, ink-3 #8E9A92, rule #2E3A33, green #7FB898, basalt #0F1612, basalt-2 #18221C.
+### Rules
 
-**Decision, Oct 16, 2026 (owner), superseded the same day:** an earlier call for full dark mode following the visitor's system setting was replaced when the homepage mockup was approved (`reference/homepage-mockup/README.md`, rule 10). **v1 is light theme only.** The operating system's dark mode does not switch the site. The dark values above are kept for a later, separately approved dark theme (opt-in through `data-theme="dark"` only); in that theme, text on green buttons is dark (#141B17) and `signal-text` becomes #E0AE4F.
+1. **No dark backgrounds anywhere.** Every section is linen or sand with hearth text: header, footer, partnership band, cards, the explorer and the tour. There is no dark theme.
+2. **Calm use of color:** about 70% linen and sand, 20% photos and text, 10% accents. No screen uses more than two accent colors at once (gold plus one of sage or lake). Blossom and rose are rare.
+3. **Text on photos or video is white,** over a soft gradient from transparent at the top to dark brown rgba(30, 22, 18, 0.55) at the bottom. At 55% white text measures 3.96:1 over a bright photo, which is enough for large text only. Behind body-size text, use 60–65% at the bottom (4.7–5.5:1).
+4. **Buttons** are fully rounded. Primary: gold background, hearth text, gold-hover on hover. Secondary: transparent with a 1.5px hearth border and hearth text; on a photo, a white border and white text. (`components/site/buttons.ts`.)
+5. **Gold replaces Harvest Amber (#E0AE4F)** everywhere, including the selected district. On the 2D plan the selected outline is gold over a hearth keyline (gold alone is 1.04:1 on the wheat districts). The 3D model's 1px outline is plain gold; the selected plate also lifts and its roundel turns gold.
+6. **Links** are lake-deep and turn hearth on hover. The focus ring is a 2px lake-deep outline at 3px offset on every ground.
+7. **Gold is never text** (1.7:1 on linen). Light lake and sage are never text or thin chart marks; charts use lake-deep and sage-deep.
+8. **Contrast:** all body text meets WCAG AA (4.5:1) on its background. Check every new pair.
 
 ### District colors: by land-use family, not one hue per district
 
-| Family | Districts | Prototype colors |
+Kept from the masterplan prototype, except the two parks greens, which were lightened in the same family so no district reads dark on the light page (Oct 22, 2026).
+
+| Family | Districts | Colors |
 |---|---|---|
 | Residential (warm wheat) | Apple Blossom Residence, Harvest Crossing | #D8C27F, #CDB06A |
 | Senior living (sage) | Orchard Grove, Heritage Grove | #A9B48A, #BEC69F |
 | Commercial & hospitality (terracotta) | Chelan Wine Village, Grand Orchard Hotel | #C98B6B, #B8754F |
 | Health & civic (lake blue) | Wellness District, Discovery Commons | #7FA3BC, #97B3C8 |
-| Parks & open space (orchard green) | Summit Recreation Park, Orchard Preserve | #7FAE86, #6A9E74 |
+| Parks & open space (green) | Summit Recreation Park, Orchard Preserve | #A1C4A6 (was #7FAE86), #83AF8C (was #6A9E74) |
 
 Districts are told apart by **numbered roundels and names**, not by color alone.
 
@@ -65,11 +75,11 @@ Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio
 
 ## Signature 1: the Plan Table (district explorer)
 
-The whole site is drawn as a crisp 2D plan on the paper ground: ten districts in their family colors, numbered roundels, the 5/10/15-minute walk rings from the masterplan, and known anchors (SR 97A, Apple Blossom Drive, Lake Chelan Community Hospital, the existing ball fields). Focusing a district lifts it and dims the rest. Selecting it moves to its district page and keeps it highlighted, using the same SVG path so the move feels continuous. A 3D model toggle is available (`05-3d-district-model.md`). Always labeled: "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design."
+The whole site is drawn as a crisp 2D plan on the linen ground: ten districts in their family colors, numbered roundels, the 5/10/15-minute walk rings from the masterplan, and known anchors (SR 97A, Apple Blossom Drive, Lake Chelan Community Hospital, the existing ball fields). Focusing a district lifts it and dims the rest. Selecting it moves to its district page and keeps it highlighted, using the same SVG path so the move feels continuous. A 3D model toggle is available (`05-3d-district-model.md`). Always labeled: "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design."
 
 ## Signature 2: the Evidence Margin
 
-Every figure carries a small mono chip, for example `ACS 2020–24 · Moderate`. Opening it shows source, date, geography, method note, confidence tier (High / Moderate / Low) and a link. Build one **source registry** (`data/sources.json`, one ID per source with date, geography, tier and access level) that every chart, statistic and document references.
+Every figure has a source in the registry. **Updated Oct 22, 2026 (public copy rules in `CLAUDE.md`):** public pages show no confidence labels or source tags, and the homepage shows no chips. Sources appear on Research Library pages and in footnotes, as a small mono chip reading source and date (for example `ACS 2020–24`). Opening it shows source, date, geography, method note and a link. The confidence tier (High / Moderate / Low) stays in the registry and is not shown. Build one **source registry** (`data/sources.json`, one ID per source with date, geography, tier and access level) that every chart, statistic and document references.
 
 Optional third element: a Today / Planned swipe on the plan.
 
@@ -85,16 +95,16 @@ Use the emil-design-eng skill for technique. These rules set the limits:
 
 ## Maps
 
-- **Plan map:** custom SVG, paper ground, hairline roads, land-use fills at reduced opacity, scale bar and north arrow.
+- **Plan map:** custom SVG, linen ground, hairline roads, land-use fills at reduced opacity, scale bar and north arrow.
 - **Context map:** real geography in a muted custom style (lake, Downtown Chelan, the site, feeder markets). Pick the tool in the build phase, and check production tile licensing.
 - **Tour map:** keeps satellite imagery but takes the new route colors and marker styling.
 
 ## Data visualization
 
 - One finding per chart, written as its title. Direct labels, no legends. Hairline axes. Plex Mono numerals.
-- Show uncertainty: ranges as whiskers or bands, confidence tier in the source line.
+- Show uncertainty: ranges as whiskers or bands, and caveats in plain words. No confidence tier labels on public pages.
 - Every chart has a "view as table" option.
-- Orchard Green for the main series, Lake for comparison, the signal color for the one mark that matters.
+- Lake-deep and sage-deep for the data series, gold for the one mark that matters (gold is never text).
 - First candidate: King County vs Chelan County net migration by five-year age band, as a mirrored bar chart with its caveat in the chart.
 
 ## Imagery

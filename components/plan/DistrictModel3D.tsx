@@ -42,8 +42,9 @@ type Props = {
   onReady: () => void;
 };
 
-const AMBER = "#E0AE4F";
-const INK = "#1D2621";
+// Warm palette v1 (docs/04): gold selection, hearth outlines. Three.js needs literal colors.
+const GOLD = "#F2B544";
+const HEARTH = "#3B2F2A";
 const CAMERA_START = HOME_TARGET.clone().addScaledVector(HOME_DIR, CAMERA_DISTANCE).toArray();
 const CONTROLS_TARGET = HOME_TARGET.toArray();
 
@@ -114,8 +115,8 @@ function Scene({
 
   return (
     <>
-      <color attach="background" args={["#2B4436"]} />
-      <hemisphereLight args={["#f5f3ed", "#2b4436", 1.25]} />
+      <color attach="background" args={["#FBF6EE"]} />
+      <hemisphereLight args={["#FBF6EE", "#73635A", 1.25]} />
       <directionalLight
         color="#fff4e0"
         intensity={1.6}
@@ -236,7 +237,7 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion
             <meshStandardMaterial color={d.color} roughness={0.7} transparent opacity={dim ? 0.32 : 0.82} />
           </mesh>
           <lineSegments geometry={p.edges}>
-            <lineBasicMaterial color={on ? AMBER : INK} transparent opacity={on ? 1 : dim ? 0.25 : 0.55} />
+            <lineBasicMaterial color={on ? GOLD : HEARTH} transparent opacity={on ? 1 : dim ? 0.25 : 0.55} />
           </lineSegments>
         </group>
       ))}
@@ -249,8 +250,8 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion
             onClick={() => onSelect(d.key)}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
             onPointerLeave={() => onHover(null)}
-            className={`grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-ink font-mono text-[0.5625rem] font-semibold leading-none text-ink transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
-              on ? "scale-[1.18] bg-signal-on-dark" : "bg-paper"
+            className={`grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-mono text-[0.5625rem] font-semibold leading-none text-hearth transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
+              on ? "scale-[1.18] bg-gold" : "bg-linen"
             } ${dim ? "opacity-45" : ""}`}
           >
             {d.n}

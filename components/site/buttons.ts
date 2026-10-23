@@ -1,14 +1,15 @@
 /**
- * Button looks from the approved homepage mockup, for use on <Link> and <button>.
- * primary: Orchard Green fill. secondary: outlined on paper. light: paper fill on basalt.
+ * Button looks (warm palette v1, docs/04), for use on <Link> and <button>. All fully rounded.
+ * primary: gold fill, hearth text. secondary: 1.5px hearth outline, transparent.
+ * onPhoto: the secondary button when it sits on a photo or video (white outline and text).
  */
 const base =
-  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-[6px] font-semibold no-underline transition-[color,background-color,border-color,scale] duration-150 ease-out active:scale-[0.97]";
+  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-semibold no-underline transition-[color,background-color,border-color,scale] duration-150 ease-out active:scale-[0.97]";
 
 const variants = {
-  primary: "bg-green text-on-green hover:bg-green-hover hover:text-on-green",
-  secondary: "border border-rule-strong text-ink hover:border-ink-3 hover:bg-surface hover:text-ink",
-  light: "bg-on-basalt text-basalt hover:bg-white hover:text-basalt",
+  primary: "bg-gold text-hearth hover:bg-gold-hover hover:text-hearth",
+  secondary: "border-[1.5px] border-hearth text-hearth hover:bg-sand hover:text-hearth",
+  onPhoto: "border-[1.5px] border-white text-white hover:bg-white/10 hover:text-white",
 } as const;
 
 const sizes = {

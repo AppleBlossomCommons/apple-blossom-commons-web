@@ -6,6 +6,7 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import type { CameraCommand } from "@/components/plan/DistrictModel3D";
 import { PlanMap2D } from "@/components/plan/PlanMap2D";
 import type { PlanDistrict } from "@/components/plan/types";
+import { buttonClass } from "@/components/site/buttons";
 import { ChevronRight } from "@/components/site/icons";
 import { container } from "@/components/site/layout";
 
@@ -51,9 +52,9 @@ class ModelBoundary extends Component<{ onError: () => void; children: ReactNode
 }
 
 const toolButton =
-  "h-[34px] whitespace-nowrap rounded-[6px] border bg-[rgb(15_22_18/0.8)] px-3 text-[0.8125rem] font-medium transition-colors duration-150 sm:h-9 sm:px-3.5 sm:text-[0.875rem]";
-const toolOn = "border-signal-on-dark text-signal-on-dark";
-const toolOff = "border-basalt-rule text-on-basalt hover:border-on-basalt-2";
+  "h-[34px] whitespace-nowrap rounded-[6px] border bg-linen/90 px-3 text-[0.8125rem] font-medium transition-colors duration-150 sm:h-9 sm:px-3.5 sm:text-[0.875rem]";
+const toolOn = "border-gold bg-gold/30 text-hearth";
+const toolOff = "border-line text-hearth hover:border-muted";
 
 /**
  * The dark "District explorer" band (approved homepage mockup). Selecting a district in the
@@ -154,14 +155,14 @@ export function DistrictExplorer({
   return (
     <section
       aria-labelledby="explorer-title"
-      className="bg-basalt text-on-basalt [&_:focus-visible]:outline-signal-on-dark"
+      className="bg-sand text-hearth"
     >
       <h2 id="explorer-title" className="sr-only">
         District explorer
       </h2>
       <div className={`${container} flex flex-wrap gap-3.5 pb-6 pt-4 sm:gap-6 sm:pb-9 sm:pt-7`}>
         <div className="flex min-w-0 flex-[999_1_640px] flex-col gap-3.5 sm:gap-3">
-          <div ref={frame} className="relative h-[270px] overflow-hidden rounded-[8px] bg-basalt-2 sm:h-auto sm:aspect-[1.63]">
+          <div ref={frame} className="relative h-[270px] overflow-hidden rounded-[8px] border border-line bg-linen sm:h-auto sm:aspect-[1.63]">
             {!show3D && (
               <PlanMap2D
                 districts={districts}
@@ -222,11 +223,11 @@ export function DistrictExplorer({
                 </button>
               </div>
             )}
-            <p className="pointer-events-none absolute bottom-3 left-3.5 hidden rounded-[4px] bg-[rgb(15_22_18/0.78)] px-2.5 py-1.5 font-mono text-[0.75rem] text-on-basalt-2 sm:block">
+            <p className="pointer-events-none absolute bottom-3 left-3.5 hidden rounded-[4px] bg-linen/90 px-2.5 py-1.5 font-mono text-[0.75rem] text-hearth sm:block">
               {show3D ? "Drag to rotate · Scroll to zoom · Select a district" : "Select a district"}
             </p>
           </div>
-          <p className="font-mono text-[0.6875rem] leading-[1.5] text-on-basalt-2 sm:text-[0.75rem]">
+          <p className="font-mono text-[0.6875rem] leading-[1.5] text-muted sm:text-[0.75rem]">
             {show3D ? disclaimer3D : disclaimer}
           </p>
         </div>
@@ -250,7 +251,7 @@ export function DistrictExplorer({
                     onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(d.key)}
                     onPointerLeave={() => setHovered(null)}
                     className={`flex min-h-10 w-full items-center gap-2.5 rounded-[6px] border px-2.5 text-left text-[0.875rem] transition-colors duration-150 ${
-                      on ? "border-signal-on-dark bg-signal-on-dark/8" : "border-transparent hover:bg-white/5"
+                      on ? "border-gold bg-gold/15" : "border-transparent hover:bg-linen"
                     }`}
                   >
                     <RowLabel district={d} />
@@ -265,7 +266,7 @@ export function DistrictExplorer({
             {districts.map((d) => {
               const open = openRow === d.key;
               return (
-                <li key={d.key} className="border-b border-basalt-divider">
+                <li key={d.key} className="border-b border-line">
                   <button
                     type="button"
                     aria-expanded={open}
@@ -278,7 +279,7 @@ export function DistrictExplorer({
                   >
                     <RowLabel district={d} />
                     <ChevronRight
-                      className={`ml-auto size-3.5 shrink-0 text-on-basalt-2 transition-transform duration-200 ease-out ${open ? "rotate-90" : ""}`}
+                      className={`ml-auto size-3.5 shrink-0 text-muted transition-transform duration-200 ease-out ${open ? "rotate-90" : ""}`}
                     />
                   </button>
                   <div id={`district-card-${d.key}`} hidden={!open} className="pb-3">
@@ -297,7 +298,7 @@ export function DistrictExplorer({
 function RowLabel({ district: d }: { district: PlanDistrict }) {
   return (
     <>
-      <span className="w-[22px] shrink-0 font-mono text-[0.75rem] font-medium text-on-basalt-2">{pad(d.n)}</span>
+      <span className="w-[22px] shrink-0 font-mono text-[0.75rem] font-medium text-muted">{pad(d.n)}</span>
       <span className="size-3 shrink-0 rounded-[2px]" style={{ background: d.color }} />
       <span>{d.name}</span>
     </>
@@ -306,26 +307,25 @@ function RowLabel({ district: d }: { district: PlanDistrict }) {
 
 function DistrictCard({ district: d, compact = false }: { district: PlanDistrict; compact?: boolean }) {
   return (
-    <div className="flex flex-col gap-2.5 rounded-[8px] border border-basalt-rule bg-basalt-2 p-5">
-      <p className="font-mono text-[0.75rem] font-medium tracking-[0.06em] text-signal-on-dark">DISTRICT {pad(d.n)}</p>
+    <div className="flex flex-col gap-2.5 rounded-[8px] border border-line bg-linen p-5">
+      <p className="font-mono text-[0.75rem] font-medium tracking-[0.06em] text-muted">DISTRICT {pad(d.n)}</p>
       {!compact && (
         <h3 className="text-[1.75rem] leading-[1.15]">{d.name}</h3>
       )}
-      <p className="inline-flex items-center gap-2 font-mono text-[0.75rem] font-medium uppercase tracking-[0.05em] text-on-basalt-2">
+      <p className="inline-flex items-center gap-2 font-mono text-[0.75rem] font-medium uppercase tracking-[0.05em] text-muted">
         <span className="size-3 shrink-0 rounded-[2px]" style={{ background: d.color }} />
         {d.familyLabel}
       </p>
       <p className="text-[0.9375rem] leading-[1.55]">{d.summary}</p>
-      <ul className="list-disc pl-4 font-mono text-[0.8125rem] leading-[1.6] text-on-basalt-2">
+      <ul className="list-disc pl-4 font-mono text-[0.8125rem] leading-[1.6] text-muted">
         {d.publicFacts.map((f) => (
-          <li key={f}>{f}</li>
+          <li key={f}>{f.replace(/\s*\(planning concept\)$/i, "")}</li>
         ))}
       </ul>
-      <Link
-        href={`/districts/${d.slug}`}
-        className="mt-1 self-start text-[0.9375rem] font-semibold text-on-basalt underline hover:text-white"
-      >
-        Open the district page
+      {/* One line in place of a "(planning concept)" note on each fact (owner decision, Oct 22, 2026). */}
+      <p className="text-[0.8125rem] text-muted">Figures are planning concepts, not commitments.</p>
+      <Link href={`/districts/${d.slug}`} className={`mt-1 self-start ${buttonClass("primary", "sm")}`}>
+        Learn more<span className="sr-only"> about {d.name}</span>
       </Link>
     </div>
   );

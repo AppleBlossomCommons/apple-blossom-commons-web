@@ -18,9 +18,11 @@ The Wellness District, anchored by the existing hospital campus, is presented as
 
 ## Audiences
 
+*Updated Oct 22, 2026 to follow the owner's public copy rules (see `CLAUDE.md`).* The site does not address the City of Chelan, its Council or its staff.
+
 | Audience | What they need from the site | Where they land |
 |---|---|---|
-| City of Chelan (planning department, economic development, City Council) | Confidence in phased, coordinated growth that matches the City's Comprehensive Plan and supports Downtown | Home doorway "Planning with Chelan" → `/planning` → ends at Contact |
+| Neighbors and the Chelan community | Confidence in phased growth that evolves over decades and supports Downtown | Home doorway "For neighbors" (comes with the participate page) → Contact |
 | Investors | The demand thesis, the evidence behind it, and a path to the gated reports | Home doorway "Investment perspective" → `/plan`, `/connected-community`, `/research` → Become a Partner |
 | Strategic land buyers and developers | Which districts and parcels fit their product, frontage, adjacencies | Home doorway "Development opportunities" → `/districts`, `/tour` → Become a Partner |
 | Operators and brand partners (senior living, healthcare, hospitality, retail) | Fit with their model | `/partners` → Become a Partner |

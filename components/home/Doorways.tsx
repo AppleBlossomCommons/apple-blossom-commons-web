@@ -4,14 +4,6 @@ import { container } from "@/components/site/layout";
 // Approved homepage mockup copy (Oct 16, 2026). "short" is the phone wording.
 const doorways = [
   {
-    href: "/planning",
-    audience: "For the City of Chelan",
-    title: "Planning with Chelan",
-    text: "How the plan responds to the Comprehensive Plan: age-in-place design, walkability, Firewise principles and housing for permanent residents first.",
-    short: "How the plan responds to the Comprehensive Plan.",
-    cta: "Planning Framework",
-  },
-  {
     href: "/research",
     audience: "For investors",
     title: "Investment perspective",
@@ -29,7 +21,7 @@ const doorways = [
   },
 ];
 
-/** Three audience doorways into the site (docs/01, Audiences). */
+/** Audience doorways into the site (docs/01, Audiences). A "For neighbors" card comes with the participate page. */
 export function Doorways() {
   return (
     <section aria-labelledby="doorways-title" className={`${container} flex flex-col gap-3.5 pb-10 pt-2 sm:gap-7 sm:pb-[88px] sm:pt-10`}>
@@ -41,17 +33,17 @@ export function Doorways() {
           <li key={d.href} className="flex">
             <Link
               href={d.href}
-              className="group flex w-full flex-col gap-1.5 rounded-[8px] border border-rule bg-surface p-[18px] text-ink no-underline transition-colors duration-150 hover:border-ink-3 sm:gap-3 sm:p-6"
+              className="group flex w-full flex-col gap-1.5 rounded-[8px] border border-line bg-linen p-[18px] text-hearth no-underline transition-colors duration-150 hover:border-muted sm:gap-3 sm:p-6"
             >
-              <span className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-ink-3 sm:text-[0.75rem]">
+              <span className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-muted sm:text-[0.75rem]">
                 {d.audience}
               </span>
               <span className="font-serif text-[1.3125rem] font-semibold leading-[1.2] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-[0.15em] sm:text-[1.625rem]">
                 {d.title}
               </span>
-              <span className="text-[0.9375rem] text-ink-2 sm:hidden">{d.short}</span>
-              <span className="hidden text-base text-ink-2 sm:block">{d.text}</span>
-              <span className="mt-auto hidden text-[0.9375rem] font-semibold text-green sm:block">{d.cta} →</span>
+              <span className="text-[0.9375rem] text-muted sm:hidden">{d.short}</span>
+              <span className="hidden text-base text-muted sm:block">{d.text}</span>
+              <span className="mt-auto hidden text-[0.9375rem] font-semibold text-lake-deep sm:block">{d.cta} →</span>
             </Link>
           </li>
         ))}

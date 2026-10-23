@@ -14,17 +14,17 @@ export function MigrationEvidence() {
         >
           Chelan County gained adults aged 65 to 69 while King County lost them.
         </h2>
-        <p className="hidden max-w-[54ch] text-ink-2 sm:block">
+        <p className="hidden max-w-[54ch] text-muted sm:block">
           Net migration rates for the same age band over 2010 to 2020 run in opposite directions. No public dataset
           links a mover’s age to the county they left, so this shows a pattern, not a proven flow.
         </p>
-        <Link href="/research" className="hidden self-start font-semibold text-green underline hover:text-green-hover sm:inline">
+        <Link href="/research" className="hidden self-start font-semibold text-lake-deep underline hover:text-hearth sm:inline">
           See the research summary →
         </Link>
       </div>
       {/* 578px basis = the mockup's 520px content box plus its padding and border. */}
       <div className="min-w-0 flex-[1_1_578px]">
-        <MigrationChart uid="home-migration" />
+        <MigrationChart />
       </div>
     </section>
   );

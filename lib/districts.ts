@@ -90,7 +90,7 @@ export function polyToPath(poly: Point[]) {
 export type Source = {
   label: string;
   shortLabel: string;
-  /** Date as written on the chip; null shows [SOURCE TO CONFIRM]. */
+  /** Date as written on the chip; null means the date is not confirmed and the chip leaves it out. */
   dateLabel: string | null;
   title: string;
   date: string | null;

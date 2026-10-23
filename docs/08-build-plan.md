@@ -21,7 +21,7 @@
 
 ## Phase 2: Story pages
 
-Home (with the three doorways), Connected Community, Chelan & the Region, Stewardship, Planning Framework, Research Library (content files), Contact. The owner supplies or approves the copy for each page; draft copy follows the rules in `03-content-and-tiers.md`. One page at a time, each one approved.
+Home (with the audience doorways), Connected Community, Chelan & the Region, Stewardship, Research Library (content files), Contact. The owner supplies or approves the copy for each page; draft copy follows the rules in `03-content-and-tiers.md`. One page at a time, each one approved.
 
 ## Phase 3: 3D model and tour
 

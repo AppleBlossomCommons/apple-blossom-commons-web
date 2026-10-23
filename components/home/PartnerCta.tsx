@@ -13,9 +13,9 @@ export function PartnerCta() {
         <h2 id="partner-title" className="text-[1.875rem] leading-[1.1] [text-wrap:wrap] sm:text-[2.75rem] sm:leading-[1.08] sm:tracking-[-0.01em]">
           A plan carried out with partners, over many years.
         </h2>
-        <p className="hidden max-w-[58ch] text-[1.125rem] text-ink-2 sm:block">
-          Chelan Village, LP coordinates the plan and works with investors, operators, healthcare and hospitality
-          partners, and public agencies as each district takes shape.
+        <p className="hidden max-w-[58ch] text-[1.125rem] text-muted sm:block">
+          Chelan Village, LP carries out the plan with investors, operators, and healthcare and hospitality partners,
+          over many years.
         </p>
       </div>
       <div className="flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-3">

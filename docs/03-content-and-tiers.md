@@ -6,14 +6,14 @@
 
 | Tier | Meaning | Items |
 |---|---|---|
-| **Public** | May appear on any page | District descriptions and planning-concept figures; Connected Community narrative; Virtual Site Tour; Planning Framework facts (once reconfirmed); BERK tourism figures; Comprehensive Plan principles; the five public research summaries below |
+| **Public** | May appear on any page | District descriptions and planning-concept figures; Connected Community narrative; Virtual Site Tour; BERK tourism figures; the five public research summaries below |
 | **Gated** | Partner Access data room only | Income & Affordability report; Competitive Supply Analysis (names local operators; pricing goes stale); Tenant Feasibility Study (hypothetical P&Ls); full Healthcare Partnership Framework; other full reports the owner or Andy release |
 | **Hold** | Not on the site yet | Consumption & Spend study (being rebuilt as v6) |
 | **Never published** | Nowhere on the site, not even gated | JLL appraisal VA-23-254063 and its values (internal use only); Operator/JV target list (names outreach targets) |
 
 ## Public research summaries at launch
 
-Each needs a data-currency check before publishing: flag data more than three years old. Each figure needs a source, date and confidence tier (Evidence Margin). The owner provides the summary text. Build the Research Library to read summaries from content files, one file per summary, so they can be added without code changes.
+Each needs a data-currency check before publishing: flag data more than three years old. Each figure needs a source, date and confidence tier, recorded in `data/sources.json`. Public pages show sources only on Research Library pages and in footnotes, never as confidence labels or source tags (public copy rules in `CLAUDE.md`, Oct 22, 2026). The owner provides the summary text. Build the Research Library to read summaries from content files, one file per summary, so they can be added without code changes.
 
 1. **Regional Economic Base:** Chelan County's economy and employment, from public government data. Caveat: some employer data is from 2015–2017 and must be flagged or replaced.
 2. **Who is moving to Chelan:** combines the Feeder Market Comparison, the age-verified migration study and the Eastern WA feeder expansion. Headline finding: King County's 65–69 age group had net migration of −10.50%, while Chelan County's was +11.95% (2010–2020), rated Moderate confidence. Required caveat: no dataset links age to a named origin, so this shows a pattern, not a proven flow.
