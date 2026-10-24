@@ -1,7 +1,7 @@
 import { preload } from "react-dom";
 import { ConnectedCommunity } from "@/components/home/ConnectedCommunity";
 import { DistrictExplorer } from "@/components/home/DistrictExplorer";
-import { Doorways } from "@/components/home/Doorways";
+import { DoorwayCards } from "@/components/site/DoorwayCards";
 import { Hero } from "@/components/home/Hero";
 import { KeyFacts } from "@/components/home/KeyFacts";
 import { MigrationEvidence } from "@/components/home/MigrationEvidence";
@@ -27,7 +27,7 @@ export default function Home() {
         imageHref={PLAN_SHEET}
       />
       <KeyFacts />
-      <Doorways />
+      <DoorwayCards />
       <ConnectedCommunity />
       <MigrationEvidence />
       <TourTeaser />

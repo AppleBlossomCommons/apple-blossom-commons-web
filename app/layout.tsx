@@ -1,18 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
+import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import "./globals.css";
 
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif",
+// Headings. The optical-size axis lets large headlines use the tighter display cut.
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
   axes: ["opsz"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+// Body and interface text. Next.js has no metrics for this font, so it can't build a
+// size-matched fallback (a build warning says so); system-ui stands in until it loads.
+const atkinson = Atkinson_Hyperlegible_Next({
+  variable: "--font-atkinson",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -39,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${sourceSerif.variable} ${inter.variable} ${plexMono.variable}`}
+      className={`${bricolage.variable} ${atkinson.variable} ${plexMono.variable}`}
     >
       <body className="flex min-h-dvh flex-col">
         <a
@@ -48,11 +53,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <MotionProvider>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );

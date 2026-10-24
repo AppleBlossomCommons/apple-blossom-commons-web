@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Local mockup-comparison tooling, git-ignored.
     "screenshots/**",
+    // Design handoff prototypes and their runtime (reference only, not app code).
+    "design_handoff_abc_web_phase1/**",
   ]),
 ]);
 

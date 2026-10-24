@@ -1,201 +1,260 @@
 "use client";
 
+import {
+  AnimatePresence,
+  animate,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  type Variants,
+} from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ease } from "@/lib/motion";
 import { buttonClass } from "./buttons";
-import { container } from "./layout";
-import { ChevronDown, MenuIcon } from "./icons";
-import { aboutNav, mainNav, partnerLink } from "./nav";
-import { Wordmark } from "./Wordmark";
+import { Logo } from "./Logo";
+import { mainNav, partnerLink } from "./nav";
 
-const navLink =
-  "whitespace-nowrap text-hearth no-underline transition-colors duration-150 hover:text-lake-deep aria-[current=page]:underline aria-[current=page]:decoration-gold aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.5em]";
+/** Header height. The phone menu sheet and the district overlay sit just below it. */
+export const HEADER_HEIGHT = 64;
+/** Scroll distance after which the header becomes a floating bar. */
+const SCROLL_THRESHOLD = 24;
+/** Below this width the nav and "Partner with Us" hide and the Menu button shows (Tailwind `nav`). */
+const NAV_BREAKPOINT = 1080;
 
+/**
+ * Sticky header (Phase 1 handoff, "Header" and "Phone menu").
+ *
+ * Scrolled state: one motion value, --k, goes from 0 (flat) to 1 (floating bar) over 450ms.
+ * CSS turns --k into the outer padding (0 → 8px 12px), corner radius (0 → 16px), shadow,
+ * inner padding (responsive → 16px) and logo size (21px → 19px). Animating one number
+ * keeps the responsive clamp() padding, which can't be tweened directly.
+ */
 export function SiteHeader() {
   const pathname = usePathname();
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const reduce = useReducedMotion();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const k = useMotionValue(0);
 
-  return (
-    <header className="sticky top-0 z-40 border-b border-line bg-linen/94 backdrop-blur-[6px]">
-      <div className={`${container} flex h-[60px] items-center justify-between gap-6 sm:h-16`}>
-        <Wordmark />
-        <nav aria-label="Main" className="hidden nav:block">
-          <ul className="flex items-center gap-7 text-[0.9375rem] font-medium">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className={navLink}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <AboutMenu isActive={isActive} />
-            </li>
-          </ul>
-        </nav>
-        <Link href={partnerLink.href} className={`max-nav:hidden ${buttonClass("primary", "sm")}`}>
-          {partnerLink.label}
-        </Link>
-        <MobileMenu isActive={isActive} />
-      </div>
-    </header>
+  // Motion's scroll tracking (batched to animation frames) tells React when to re-check.
+  // Reading window.scrollY directly also covers a reload partway down the page.
+  const { scrollY } = useScroll();
+  const subscribe = useCallback((onChange: () => void) => scrollY.on("change", onChange), [scrollY]);
+  const scrolled = useSyncExternalStore(
+    subscribe,
+    () => window.scrollY > SCROLL_THRESHOLD,
+    () => false,
   );
-}
 
-/** Desktop "About" disclosure: a button that shows a short list of links. */
-function AboutMenu({ isActive }: { isActive: (href: string) => boolean }) {
-  const [open, setOpen] = useState(false);
-  const wrap = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
+  // The bar stays flat while the phone menu is open, so the sheet joins it cleanly.
+  const floating = scrolled && !menuOpen;
+  useEffect(() => {
+    const controls = animate(k, floating ? 1 : 0, reduce ? { duration: 0 } : { duration: 0.45, ease: ease.out });
+    return () => controls.stop();
+  }, [floating, reduce, k]);
 
+  // Close the menu on navigation (links, back and forward).
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
-    setOpen(false);
+    setMenuOpen(false);
   }
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        wrap.current?.querySelector("button")?.focus();
-      }
-    };
-    const onPointer = (e: PointerEvent) => {
-      if (!wrap.current?.contains(e.target as Node)) setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    window.addEventListener("pointerdown", onPointer);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("pointerdown", onPointer);
-    };
-  }, [open]);
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
-  const sectionActive = aboutNav.some((item) => isActive(item.href));
-
-  return (
-    <div
-      ref={wrap}
-      className="relative"
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
-      }}
-    >
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls="about-menu"
-        onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-1.5 ${navLink} ${sectionActive ? "underline decoration-gold decoration-2 underline-offset-[0.5em]" : ""}`}
-      >
-        About
-        <ChevronDown className={`size-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`} />
-      </button>
-      <ul
-        id="about-menu"
-        hidden={!open}
-        className="absolute right-0 top-[calc(100%+14px)] min-w-[220px] origin-top-right rounded-[8px] border border-line bg-linen p-1.5 shadow-[0_12px_32px_rgb(59_47_42/0.12)] transition-[opacity,scale] duration-150 ease-out starting:scale-[0.97] starting:opacity-0"
-      >
-        {aboutNav.map((item) => (
-          <li key={item.href}>
-            <Link
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className="flex min-h-10 items-center whitespace-nowrap rounded-[6px] px-3 text-hearth no-underline hover:bg-sand aria-[current=page]:text-lake-deep"
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/** Below 1,100px: a menu button that opens a full-screen panel (a modal <dialog>). */
-function MobileMenu({ isActive }: { isActive: (href: string) => boolean }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  const pathname = usePathname();
-
-  // Close the panel whenever the route changes (back/forward included).
-  useEffect(() => {
-    dialog.current?.close();
-  }, [pathname]);
-
-  // If the window widens past the breakpoint while the panel is open, close it,
-  // or the page would stay inert behind a hidden dialog.
-  useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1100px)");
-    const onChange = () => wide.matches && dialog.current?.close();
-    wide.addEventListener("change", onChange);
-    return () => wide.removeEventListener("change", onChange);
+  const closeMenu = useCallback((returnFocus: boolean) => {
+    setMenuOpen(false);
+    if (returnFocus) menuButton.current?.focus();
   }, []);
 
-  const close = () => dialog.current?.close();
-  const linkClass =
-    "flex min-h-[52px] items-center whitespace-nowrap font-serif text-[1.375rem] text-hearth no-underline aria-[current=page]:underline aria-[current=page]:decoration-gold aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[0.35em]";
+  const goHome = (e: React.MouseEvent) => {
+    setMenuOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    }
+  };
 
   return (
     <>
-      <button
-        type="button"
-        aria-haspopup="dialog"
-        onClick={() => dialog.current?.showModal()}
-        className="inline-flex size-11 items-center justify-center rounded-[6px] border border-line text-hearth nav:hidden"
+      <motion.header
+        style={{ "--k": k } as React.CSSProperties}
+        className="sticky top-0 z-30 h-16 p-[calc(var(--k)*8px)_calc(var(--k)*12px)]"
       >
-        <MenuIcon open={false} />
-        <span className="sr-only">Open menu</span>
-      </button>
-      <dialog
-        ref={dialog}
-        aria-label="Menu"
-        className="m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto overscroll-contain bg-linen p-0 text-hearth transition-opacity duration-200 ease-out backdrop:bg-transparent starting:open:opacity-0 nav:hidden"
-      >
-        <div className="flex h-[60px] items-center justify-between border-b border-line px-4 sm:h-16 sm:px-6">
-          <Wordmark onClick={close} />
-          <button
-            type="button"
-            onClick={close}
-            autoFocus
-            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-line text-hearth"
+        <div className="flex h-full items-center gap-6 rounded-[calc(var(--k)*16px)] bg-linen px-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
+          <Link
+            href="/"
+            onClick={goHome}
+            className="flex items-center gap-2.5 whitespace-nowrap rounded-[10px] text-hearth no-underline"
           >
-            <MenuIcon open />
-            <span className="sr-only">Close menu</span>
-          </button>
-        </div>
-        <nav aria-label="Main" className="px-4 pb-10 pt-4 sm:px-6">
-          <ul className="divide-y divide-line border-b border-line">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={close} aria-current={isActive(item.href) ? "page" : undefined} className={linkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 font-mono text-[0.75rem] font-medium tracking-[0.06em] text-muted">ABOUT</p>
-          <ul className="mt-2 divide-y divide-line border-b border-line">
-            {aboutNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={close}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  className="flex min-h-12 items-center whitespace-nowrap text-[1.0625rem] text-hearth no-underline aria-[current=page]:text-lake-deep"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link href={partnerLink.href} onClick={close} className={`mt-8 w-full ${buttonClass("primary", "lg")}`}>
+            <Logo size={28} />
+            <span
+              translate="no"
+              className="font-display text-[length:calc(21px_-_var(--k)*2px)] font-semibold leading-none tracking-[-0.01em] max-[759px]:text-[19px]"
+            >
+              Apple Blossom Commons
+            </span>
+          </Link>
+
+          <nav aria-label="Main" className="hidden nav:block">
+            <ul className="flex items-center gap-0.5 whitespace-nowrap">
+              {mainNav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className="block rounded-[10px] px-3.5 py-2.5 text-[1.0625rem] text-hearth no-underline transition-colors duration-150 hover:bg-sand hover:text-hearth aria-[current=page]:bg-sand aria-[current=page]:font-bold"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <Link href={partnerLink.href} className={`ml-auto max-nav:hidden ${buttonClass("primary", "sm")}`}>
             {partnerLink.label}
           </Link>
-        </nav>
-      </dialog>
+
+          <button
+            ref={menuButton}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="ml-auto inline-flex h-11 items-center gap-2.5 rounded-full bg-sand px-4 text-base font-bold text-hearth nav:hidden"
+          >
+            <MenuBars open={menuOpen} reduce={!!reduce} />
+            {menuOpen ? "Close" : "Menu"}
+          </button>
+        </div>
+      </motion.header>
+
+      <PhoneMenu
+        open={menuOpen}
+        reduce={!!reduce}
+        isActive={isActive}
+        onClose={closeMenu}
+      />
     </>
+  );
+}
+
+/** Two lines that turn into an X (350ms in-out). */
+function MenuBars({ open, reduce }: { open: boolean; reduce: boolean }) {
+  const transition = reduce ? { duration: 0 } : { duration: 0.35, ease: ease.inOut };
+  const bar = "absolute inset-x-0 h-0.5 rounded-[2px] bg-hearth";
+  return (
+    <span aria-hidden="true" className="relative inline-block h-2.5 w-4">
+      <motion.span className={`${bar} top-0`} initial={false} animate={open ? { y: 4, rotate: 45 } : { y: 0, rotate: 0 }} transition={transition} />
+      <motion.span className={`${bar} bottom-0`} initial={false} animate={open ? { y: -4, rotate: -45 } : { y: 0, rotate: 0 }} transition={transition} />
+    </span>
+  );
+}
+
+/**
+ * The phone menu: a sheet under the header that unclips downward (520ms), then its links
+ * arrive one by one. Closing fades the links, then clips the sheet back up.
+ * While it's open the page behind is inert and doesn't scroll, and Esc closes it.
+ */
+function PhoneMenu({
+  open,
+  reduce,
+  isActive,
+  onClose,
+}: {
+  open: boolean;
+  reduce: boolean;
+  isActive: (href: string) => boolean;
+  onClose: (returnFocus: boolean) => void;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const page = [document.getElementById("main"), document.getElementById("site-footer")];
+    page.forEach((el) => el?.setAttribute("inert", ""));
+    const root = document.documentElement;
+    const prevOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose(true);
+    };
+    // Widening past the breakpoint hides the Menu button, so close the sheet with it.
+    const wide = window.matchMedia(`(min-width: ${NAV_BREAKPOINT}px)`);
+    const onWide = () => wide.matches && onClose(false);
+    window.addEventListener("keydown", onKey);
+    wide.addEventListener("change", onWide);
+    return () => {
+      page.forEach((el) => el?.removeAttribute("inert"));
+      root.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+      wide.removeEventListener("change", onWide);
+    };
+  }, [open, onClose]);
+
+  const sheet: Variants = reduce
+    ? {
+        hidden: { opacity: 0 },
+        open: { opacity: 1, transition: { duration: 0.2 } },
+        closed: { opacity: 0, transition: { duration: 0.15 } },
+      }
+    : {
+        hidden: { clipPath: "inset(0 0 100% 0)" },
+        open: { clipPath: "inset(0 0 0% 0)", transition: { duration: 0.52, ease: ease.inOut } },
+        closed: { clipPath: "inset(0 0 100% 0)", transition: { delay: 0.08, duration: 0.38, ease: ease.sheetClose } },
+      };
+
+  const link: Variants = reduce
+    ? {}
+    : {
+        hidden: { opacity: 0, filter: "blur(6px)", y: -14 },
+        open: (i: number) => ({
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          transition: { delay: 0.14 + i * 0.06, duration: 0.56, ease: ease.out },
+        }),
+        closed: { opacity: 0, transition: { duration: 0.16 } },
+      };
+
+  const row =
+    "flex min-h-[72px] items-center rounded-card bg-sand px-5 font-display text-[30px] font-semibold leading-[1.05] tracking-[-0.02em] text-hearth no-underline hover:text-hearth aria-[current=page]:shadow-[inset_0_0_0_2px_var(--gold)]";
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.nav
+          key="site-menu"
+          id="site-menu"
+          aria-label="Main"
+          variants={sheet}
+          initial="hidden"
+          animate="open"
+          exit="closed"
+          className="fixed inset-x-0 bottom-0 top-16 z-[29] flex flex-col gap-1.5 overflow-y-auto overscroll-contain bg-linen px-3 pb-6 pt-3 nav:hidden"
+        >
+          {mainNav.map((item, i) => (
+            <motion.div key={item.href} custom={i} variants={link}>
+              <Link
+                href={item.href}
+                onClick={() => onClose(false)}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={row}
+              >
+                {item.label}
+              </Link>
+            </motion.div>
+          ))}
+          <motion.div custom={mainNav.length} variants={link} className="mt-auto pt-4">
+            <Link href={partnerLink.href} onClick={() => onClose(false)} className={`w-full ${buttonClass("primary", "lg")}`}>
+              {partnerLink.label}
+            </Link>
+          </motion.div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }

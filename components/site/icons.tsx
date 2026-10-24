@@ -16,31 +16,11 @@ export function DragHandle({ className = "size-5" }: IconProps) {
   );
 }
 
-export function MenuIcon({ open, className = "size-5" }: IconProps & { open: boolean }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className={className}>
-      {open ? (
-        <path d="M5 5l10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      ) : (
-        <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      )}
-    </svg>
-  );
-}
-
 export function NorthArrow({ className = "size-6" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
       <path d="M12 3 16 19l-4-3-4 3 4-16Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
       <path d="M12 3v13l-4 3 4-16Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-export function ChevronDown({ className = "size-3" }: IconProps) {
-  return (
-    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" className={className}>
-      <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }

@@ -59,7 +59,7 @@ export function SourceChip({
         className="m-auto w-[min(26rem,calc(100vw-2rem))] rounded-[6px] border border-line bg-linen p-5 text-left text-hearth shadow-[0_12px_40px_rgb(59_47_42/0.18)] backdrop:bg-[rgb(59_47_42/0.2)]"
       >
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">Source</p>
-        <p className="mt-1 font-serif text-[1.25rem] font-semibold leading-snug">{s.title}</p>
+        <p className="mt-1 font-display text-[1.25rem] font-semibold leading-snug">{s.title}</p>
         <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-[0.875rem]">
           {s.dateLabel && (
             <>

@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Warm palette v1, owner-approved 2026-10-22 (docs/04-design-direction.md).
+ * Warm palette v1, owner-approved 2026-10-22 (docs/04-design-direction.md),
+ * with the "1b Open Field" type, radii and motion from the Phase 1 design handoff
+ * (design_handoff_abc_web_phase1/README.md, Oct 23, 2026).
  * Light only: there is no dark theme and no dark section background anywhere.
  */
 :root {
@@ -14,8 +16,8 @@
   --line: #e6daca;
   /* Accents: at most gold plus one of sage or lake on a screen. */
   --gold: #f2b544;
-  /* Primary button hover: a slightly deeper gold (hearth text on it is 6.1:1). */
-  --gold-hover: #e6a733;
+  /* Primary button hover: a slightly deeper gold (handoff value; hearth text on it is 6.4:1). */
+  --gold-hover: #e9a82f;
   --lake: #8fc1d4;
   --lake-deep: #2f6f88;
   --sage: #b9c9a6;
@@ -23,8 +25,9 @@
   /* Rare seasonal touch; rose is for large text accents only, never body text. */
   --blossom: #f2c4c8;
   --rose: #b85c66;
+  /* Map container ground behind the 3D model. */
+  --map-frame: #e9dfcc;
   --plan-fill-opacity: 0.86;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
@@ -42,15 +45,28 @@
   --color-sage-deep: var(--sage-deep);
   --color-blossom: var(--blossom);
   --color-rose: var(--rose);
+  --color-map-frame: var(--map-frame);
+  /* Image placeholder label pill. */
+  --color-label: rgb(251 246 238 / 0.92);
 
-  /* Header collapses to the menu button below this width (mockup README, rule 3). */
-  --breakpoint-nav: 1100px;
+  /* Header nav and "Partner with Us" hide below this width; the Menu button shows. */
+  --breakpoint-nav: 1080px;
 
-  --font-serif: var(--font-source-serif), Georgia, serif;
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* Headings: Bricolage Grotesque 600. Body and interface: Atkinson Hyperlegible Next. */
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-atkinson), system-ui, sans-serif;
+  /* Plex Mono stays for source chips and figures on Research Library pages (docs/04, Evidence Margin). */
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
+  /* Radii from the handoff: hero 32px (24px on phones), cards, tiles and map 16px, chips 12px. */
+  --radius-hero: 32px;
+  --radius-hero-sm: 24px;
+  --radius-card: 16px;
+  --radius-chip: 12px;
+
+  /* Easing curves from the handoff motion spec. lib/motion.ts holds the same curves for motion/react. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* Element defaults live in the base layer so Tailwind utility classes can override them. */
@@ -73,35 +89,19 @@
     background: var(--linen);
     color: var(--hearth);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1.125rem;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-  }
-
-  @media (min-width: 640px) {
-    body {
-      font-size: 1.0625rem;
-    }
   }
 
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
     text-wrap: balance;
-  }
-
-  /*
-   * The approved mockup PNGs render Source Serif 4 at a fixed optical size of 14,
-   * which is sturdier and wider than the automatic display cut at large sizes.
-   * Pinned here so headlines match the visual target. Remove to restore auto sizing.
-   */
-  h1,
-  h2,
-  h3,
-  .font-serif {
-    font-variation-settings: "opsz" 14;
   }
 
   p {
