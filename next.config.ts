@@ -4,9 +4,14 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
-  // The Planning Framework page was removed (owner decision, Oct 22, 2026).
   async redirects() {
-    return [{ source: "/planning", destination: "/", permanent: true }];
+    return [
+      // The Planning Framework page was removed (owner decision, Oct 22, 2026).
+      { source: "/planning", destination: "/", permanent: true },
+      // Folded into The Plan (docs/10-content-v2.md, "Redirects").
+      { source: "/connected-community", destination: "/plan#care-close-by", permanent: true },
+      { source: "/chelan", destination: "/plan#why-chelan", permanent: true },
+    ];
   },
   turbopack: {
     rules: {

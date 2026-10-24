@@ -13,6 +13,54 @@ export const HOME_DIR = new Vector3(-0.14, 0.8, 0.58).normalize();
 export const TOP_DIR = new Vector3(0, 1, 0.0001).normalize();
 /** How far the camera sits from its target along the view direction. */
 export const CAMERA_DISTANCE = 1500;
+/**
+ * The "dive" view for the Home map → district transition (handoff, step 3 of "Map → district
+ * page"): centered on the district's label point, about 26° from straight down (steeper than the
+ * home view), 2.5× closer, keeping the home view's turn.
+ */
+export const DIVE_PHI = (26 * Math.PI) / 180;
+export const DIVE_ZOOM = 2.5;
+
+/**
+ * The Plan's "fly to a district" view (handoff, "The Plan map: fly-in + side card"): 1.9× closer,
+ * about 34° from straight down with a little less turn than the home view. Top-down mode stays flat.
+ */
+export const FOCUS_PHI = (34 * Math.PI) / 180;
+export const FOCUS_ZOOM = 1.9;
+
+/** Direction from target to camera for the focus view (3D) or the flat plan (top-down). */
+export function focusDir(topDown: boolean) {
+  if (topDown) return TOP_DIR.clone();
+  const theta = Math.atan2(HOME_DIR.x, HOME_DIR.z) * 0.5;
+  return new Vector3(Math.sin(FOCUS_PHI) * Math.sin(theta), Math.cos(FOCUS_PHI), Math.sin(FOCUS_PHI) * Math.cos(theta));
+}
+
+/** Camera position and target for the dive view of a district whose label sits at `anchor`. */
+export function divePose(anchor: Vector3) {
+  const theta = Math.atan2(HOME_DIR.x, HOME_DIR.z);
+  const dir = new Vector3(Math.sin(DIVE_PHI) * Math.sin(theta), Math.cos(DIVE_PHI), Math.sin(DIVE_PHI) * Math.cos(theta));
+  return { target: anchor.clone(), position: anchor.clone().addScaledVector(dir, CAMERA_DISTANCE), zoom: DIVE_ZOOM };
+}
+
+/** Zoom of the flat, top-down start view that the Home map tilts in from. */
+export const FLAT_ZOOM = 0.9;
+
+/**
+ * The orthographic frustum's half extents, in scene units at zoom 1, for a canvas of
+ * width × height px: half-height = 694 × 0.62, half-width from the aspect, widened on narrow frames.
+ */
+export function frustum(width: number, height: number) {
+  const halfH = PLAN_H * 0.62;
+  const halfW = halfH * (width / height);
+  const fitW = PLAN_W * (width < 600 ? 0.5 : 0.56);
+  const k = Math.max(1, fitW / halfW);
+  return { halfW: halfW * k, halfH: halfH * k };
+}
+
+/** Screen pixels per scene unit at a zoom, so the 2D plan can be drawn at the 3D camera's scale. */
+export function pxPerUnit(width: number, height: number, zoom: number) {
+  return (height * zoom) / (2 * frustum(width, height).halfH);
+}
 
 export type DistrictGeometry = {
   parts: { geometry: ExtrudeGeometry; edges: EdgesGeometry }[];

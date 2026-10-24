@@ -18,6 +18,7 @@ export function PlanMap2D({
   hovered,
   onSelect,
   onHover,
+  fit,
 }: {
   districts: PlanDistrict[];
   viewBox: string;
@@ -26,13 +27,25 @@ export function PlanMap2D({
   hovered: string | null;
   onSelect: (key: string) => void;
   onHover: (key: string | null) => void;
+  /**
+   * Draw the plan at an exact width in px, moved down by offsetY px, instead of filling the frame.
+   * Home uses it to match the 3D model's flat start view, so the swap from 2D to 3D lines up.
+   */
+  fit?: { width: number; offsetY: number };
 }) {
   const [minX, minY, w, h] = viewBox.split(" ").map(Number);
 
   return (
     // Fit a box of the plan's aspect ratio inside whatever frame holds it (like object-fit: contain).
     <div className="absolute inset-0 grid place-items-center [container-type:size]">
-      <div className="relative" style={{ width: `min(100cqw, calc(100cqh * ${w / h}))`, aspectRatio: `${w} / ${h}` }}>
+      <div
+        className="relative"
+        style={{
+          width: fit ? `${fit.width}px` : `min(100cqw, calc(100cqh * ${w / h}))`,
+          aspectRatio: `${w} / ${h}`,
+          translate: fit ? `0 ${fit.offsetY}px` : undefined,
+        }}
+      >
         <svg viewBox={viewBox} aria-hidden="true" className="absolute inset-0 size-full" onPointerLeave={() => onHover(null)}>
           <image href={imageHref} x={minX} y={minY} width={w} height={h} preserveAspectRatio="none" />
           {/* Warm the greyscale sheet to the board color the 3D model uses (#D9D4C6). */}

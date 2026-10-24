@@ -48,3 +48,6 @@ next-env.d.ts
 
 # local screenshots for mockup comparison
 /screenshots/
+
+# local form submissions in development (lib/forms/deliver.ts)
+/.data/

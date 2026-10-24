@@ -1,37 +1,33 @@
 import { preload } from "react-dom";
-import { ConnectedCommunity } from "@/components/home/ConnectedCommunity";
-import { DistrictExplorer } from "@/components/home/DistrictExplorer";
-import { Doorways } from "@/components/home/Doorways";
+import { Collage } from "@/components/home/Collage";
+import { Differences } from "@/components/home/Differences";
 import { Hero } from "@/components/home/Hero";
-import { KeyFacts } from "@/components/home/KeyFacts";
-import { MigrationEvidence } from "@/components/home/MigrationEvidence";
-import { PartnerCta } from "@/components/home/PartnerCta";
+import { HomeIntro } from "@/components/home/HomeIntro";
+import { HomeMap } from "@/components/home/HomeMap";
 import { TourTeaser } from "@/components/home/TourTeaser";
-import { PLAN_DISCLAIMER, PLAN_DISCLAIMER_3D, PLAN_VIEWBOX } from "@/lib/districts";
+import { DoorwayCards } from "@/components/site/DoorwayCards";
+import { PLAN_SHEET } from "@/lib/district-image";
+import { PLAN_DISCLAIMER, PLAN_VIEWBOX } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
 
-const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
-
+/**
+ * Home (docs/10-content-v2.md, "Home"; Phase 1 handoff, Home). The hospital-campus section,
+ * migration evidence, key facts and partner band moved off Home in the content pack; their
+ * components stay in components/home for The Plan and Partner with Us.
+ */
 export default function Home() {
   // The plan sheet sits inside an SVG <image>, which the browser can't discover early.
   preload(PLAN_SHEET, { as: "image" });
 
   return (
     <>
+      <HomeIntro />
       <Hero />
-      <DistrictExplorer
-        districts={planDistricts()}
-        viewBox={PLAN_VIEWBOX}
-        disclaimer={PLAN_DISCLAIMER}
-        disclaimer3D={PLAN_DISCLAIMER_3D}
-        imageHref={PLAN_SHEET}
-      />
-      <KeyFacts />
-      <Doorways />
-      <ConnectedCommunity />
-      <MigrationEvidence />
+      <Collage />
+      <HomeMap districts={planDistricts()} viewBox={PLAN_VIEWBOX} imageHref={PLAN_SHEET} disclaimer={PLAN_DISCLAIMER} />
+      <Differences />
       <TourTeaser />
-      <PartnerCta />
+      <DoorwayCards />
     </>
   );
 }

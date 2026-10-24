@@ -23,8 +23,8 @@
     {
       "key": "wellness", "n": 2, "slug": "wellness-district", "code": "WELL",
       "name": "Wellness District", "family": "civic", "color": "#7FA3BC",
-      "summary": "Medical uses around the Lake Chelan Community Hospital campus, with clinics and rehabilitation close to the senior homes.",
-      "publicFacts": ["Lake Chelan Community Hospital (existing)", "Columbia Valley Community Health", "Lot 17 medical assisted living", "Two new 12,000 sf buildings (planning concept)"],
+      "summary": "Medical uses around the Lake Chelan Health Hospital campus, with clinics and rehabilitation close to the senior homes.",
+      "publicFacts": ["Lake Chelan Health Hospital (existing)", "Columbia Valley Community Health", "Lot 17 medical assisted living", "Two new 12,000 sf buildings (planning concept)"],
       "status": "verified",
       "internalNotes": "Presented as part of Apple Blossom Commons. The hospital belongs to Lake Chelan Health; do not call them a partner until they agree to be named."
     },

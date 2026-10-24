@@ -24,7 +24,7 @@ export function KeyFacts() {
           const value = f.valueFrom === "districtCount" ? String(districts.length) : (f.value ?? "");
           return (
             <li key={f.id} className="flex flex-col gap-1.5 border-t border-hearth pt-2.5 sm:gap-2 sm:pt-3.5">
-              <p className="font-serif text-[1.875rem] font-semibold leading-none tabular sm:text-[2.5rem]">
+              <p className="font-display text-[1.875rem] font-semibold leading-none tabular sm:text-[2.5rem]">
                 <span className="sm:hidden">{f.valueShort ?? value}</span>
                 <span className="hidden sm:inline">{value}</span>
               </p>
