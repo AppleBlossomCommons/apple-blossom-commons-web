@@ -1,14 +1,14 @@
-import Link from "next/link";
+import { DistrictLink } from "@/components/transitions/TransitionLinks";
 
 /**
  * "Next district": a full-width row between hairlines leading to the next district by number
- * (10 wraps to 1). The circle-opening transition onto the next page comes with step 4.
+ * (10 wraps to 1). The next district's image opens in a circle from the click point.
  */
-export function NextDistrict({ slug, name }: { slug: string; name: string }) {
+export function NextDistrict({ slug, name, color }: { slug: string; name: string; color: string }) {
   return (
     <nav aria-label="Next district" className="px-[clamp(16px,4vw,56px)]">
-      <Link
-        href={`/districts/${slug}`}
+      <DistrictLink
+        district={{ slug, color }}
         className="group flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-3 border-y border-line py-[clamp(28px,3vw,40px)] text-hearth no-underline transition-colors duration-200 hover:text-sage-deep"
       >
         <span className="flex flex-col gap-1.5">
@@ -21,7 +21,7 @@ export function NextDistrict({ slug, name }: { slug: string; name: string }) {
         >
           →
         </span>
-      </Link>
+      </DistrictLink>
     </nav>
   );
 }

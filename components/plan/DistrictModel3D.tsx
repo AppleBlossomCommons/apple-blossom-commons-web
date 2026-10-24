@@ -3,12 +3,14 @@
 import { Html, OrbitControls, useTexture } from "@react-three/drei";
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { cubicBezier } from "motion";
-import { memo, Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { Group, MathUtils, OrthographicCamera, Spherical, SRGBColorSpace, Vector3 } from "three";
+import { motion } from "motion/react";
+import { memo, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Group, LineBasicMaterial, MathUtils, MeshStandardMaterial, OrthographicCamera, Spherical, SRGBColorSpace, Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
   buildDistrictGeometry,
   CAMERA_DISTANCE,
+  divePose,
   easeOutQuart,
   FLAT_ZOOM,
   frustum,
@@ -28,9 +30,17 @@ import type { PlanDistrict } from "./types";
  * A camera instruction from the explorer. `seq` increases on every command so the same
  * command (for example "home" twice) still runs.
  * - focus: fly to a district.  home: fly back to the home view.  view: switch 3D ↔ top-down in place.
- * - intro: the Home "tilt into view", from the flat start view to the home view (1800ms, ease out).
+ * - intro: the Home "tilt into view", from the flat start view to the home view (1800ms).
+ * - dive: the Home map → district fly-in, closer and steeper over the district (1300ms).
+ * - surface: back out from a dive to the home view (1300ms).
+ * intro, dive and surface swing the camera around its target and ease in and out.
+ * - homeNow / diveNow: the home or dive view at once, with no flight (resets while Home is hidden).
  */
-export type CameraCommand = { kind: "none" | "focus" | "home" | "view" | "intro"; key?: string; seq: number };
+export type CameraCommand = {
+  kind: "none" | "focus" | "home" | "view" | "intro" | "dive" | "surface" | "homeNow" | "diveNow";
+  key?: string;
+  seq: number;
+};
 
 type Props = {
   districts: PlanDistrict[];
@@ -48,15 +58,25 @@ type Props = {
   interactive?: boolean;
   /** Start top-down and slightly zoomed out, ready for an "intro" command. */
   startFlat?: boolean;
+  /** Start in the dive view of this district (the return from a district page), ready for "surface". */
+  startAt?: string;
+  /** Pulse a gold ring on the selected district's roundel. */
+  pulse?: boolean;
 };
+
+/** Where each district's camera anchor sits: its (first) label point, on the ground. */
+function anchorsOf(districts: PlanDistrict[]) {
+  return Object.fromEntries(districts.map((d) => [d.key, new Vector3(d.labels[0][0], 0, d.labels[0][1])])) as Record<string, Vector3>;
+}
 
 // Warm palette v1 (docs/04): gold selection, hearth outlines. Three.js needs literal colors.
 const GOLD = "#F2B544";
 const HEARTH = "#3B2F2A";
 const CAMERA_START = HOME_TARGET.clone().addScaledVector(HOME_DIR, CAMERA_DISTANCE).toArray();
 const CAMERA_FLAT = HOME_TARGET.clone().addScaledVector(TOP_DIR, CAMERA_DISTANCE).toArray();
-// The Home tilt-in eases in and out, so it starts softly while the 2D plan fades away above it.
-const easeTilt = cubicBezier(0.65, 0, 0.35, 1);
+// The handoff's "inOut" curve. The Home tilt-in uses it too, so it starts softly while the 2D plan
+// fades away above it.
+const easeInOut = cubicBezier(0.65, 0, 0.35, 1);
 /** A slow frame (shader warm-up, texture upload) slows a flight down instead of making it skip. */
 const MAX_STEP_MS = 1000 / 30;
 const CONTROLS_TARGET = HOME_TARGET.toArray();
@@ -67,6 +87,19 @@ const CONTROLS_TARGET = HOME_TARGET.toArray();
  * beside it is the keyboard and screen-reader path.
  */
 export default function DistrictModel3D(props: Props) {
+  // The starting camera, fixed when the canvas mounts.
+  const [start] = useState(() => {
+    if (props.startAt) {
+      const anchor = anchorsOf(props.districts)[props.startAt];
+      if (anchor) {
+        const pose = divePose(anchor);
+        return { position: pose.position.toArray(), zoom: pose.zoom, target: pose.target.toArray() };
+      }
+    }
+    return props.startFlat
+      ? { position: CAMERA_FLAT, zoom: FLAT_ZOOM, target: CONTROLS_TARGET }
+      : { position: CAMERA_START, zoom: 1, target: CONTROLS_TARGET };
+  });
   return (
     // isolate: keeps the roundels' z-indexes inside the model, under anything drawn over it.
     <div aria-hidden="true" className="absolute inset-0 isolate">
@@ -82,12 +115,12 @@ export default function DistrictModel3D(props: Props) {
           manual: true,
           near: -4000,
           far: 4000,
-          zoom: props.startFlat ? FLAT_ZOOM : 1,
-          position: props.startFlat ? CAMERA_FLAT : CAMERA_START,
+          zoom: start.zoom,
+          position: start.position,
         }}
       >
         <Suspense fallback={null}>
-          <Scene {...props} />
+          <Scene {...props} controlsTarget={start.target} />
         </Suspense>
       </Canvas>
     </div>
@@ -107,11 +140,14 @@ function Scene({
   onHover,
   onReady,
   interactive = true,
-}: Props) {
+  pulse = false,
+  controlsTarget,
+}: Props & { controlsTarget: [number, number, number] }) {
   const geometries = useMemo(
     () => Object.fromEntries(districts.map((d) => [d.key, buildDistrictGeometry(d.shapes)])) as Record<string, DistrictGeometry>,
     [districts],
   );
+  const anchors = useMemo(() => anchorsOf(districts), [districts]);
   // Free GPU buffers when the model unmounts (geometries made outside JSX are not auto-disposed).
   useEffect(
     () => () => {
@@ -165,6 +201,7 @@ function Scene({
             on={on}
             hv={hv}
             dim={dim}
+            pulse={pulse && on}
             reducedMotion={reducedMotion}
             onSelect={onSelect}
             onHover={onHover}
@@ -174,7 +211,7 @@ function Scene({
       <OrbitControls
         makeDefault
         enabled={interactive}
-        target={CONTROLS_TARGET}
+        target={controlsTarget}
         enableDamping
         dampingFactor={0.09}
         minZoom={0.8}
@@ -185,7 +222,7 @@ function Scene({
         maxAzimuthAngle={1.1}
         screenSpacePanning={false}
       />
-      <CameraRig geometries={geometries} command={command} topDown={topDown} reducedMotion={reducedMotion} />
+      <CameraRig geometries={geometries} anchors={anchors} command={command} topDown={topDown} reducedMotion={reducedMotion} />
     </>
   );
 }
@@ -219,25 +256,45 @@ type PlateProps = {
   on: boolean;
   hv: boolean;
   dim: boolean;
+  pulse: boolean;
   reducedMotion: boolean;
   onSelect: (key: string) => void;
   onHover: (key: string | null) => void;
 };
 
-/** One district: extruded plates, outlines and numbered roundels, lifted on hover (+9) and select (+16). */
-const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion, onSelect, onHover }: PlateProps) {
+/** Plate and outline opacity: normal, and dimmed (about 30%) while another district is in focus. */
+const FILL = { normal: 0.82, dim: 0.32 };
+const EDGE = { normal: 0.55, dim: 0.25 };
+
+/**
+ * One district: extruded plates, outlines and numbered roundels, lifted on hover (+9) and select
+ * (+16). Dimming fades over about 600ms (handoff: "dim to 30%, 600 ease"); reduced motion jumps.
+ */
+const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reducedMotion, onSelect, onHover }: PlateProps) {
   const group = useRef<Group>(null);
+  const fills = useRef<MeshStandardMaterial[]>([]);
+  const edges = useRef<LineBasicMaterial[]>([]);
   const invalidate = useThree((s) => s.invalidate);
   const lift = on ? SEL : hv ? LIFT : 0;
+  const fillTo = dim ? FILL.dim : FILL.normal;
+  const edgeTo = on ? 1 : dim ? EDGE.dim : EDGE.normal;
 
-  // Kick a frame when the target lift changes; useFrame then eases toward it.
-  useEffect(() => invalidate(), [lift, invalidate]);
+  // Kick a frame when a target changes; useFrame then eases toward it.
+  useEffect(() => invalidate(), [lift, fillTo, edgeTo, invalidate]);
   useFrame((state, delta) => {
+    let moving = false;
+    const ease = (from: number, to: number, lambda: number, snap: number) => {
+      if (from === to) return to;
+      const next = reducedMotion ? to : MathUtils.damp(from, to, lambda, delta);
+      if (Math.abs(to - next) < snap) return to;
+      moving = true;
+      return next;
+    };
     const g = group.current;
-    if (!g || g.position.y === lift) return;
-    const next = reducedMotion ? lift : MathUtils.damp(g.position.y, lift, 12, delta);
-    g.position.y = Math.abs(lift - next) < 0.05 ? lift : next;
-    state.invalidate();
+    if (g) g.position.y = ease(g.position.y, lift, 12, 0.05);
+    for (const m of fills.current) m.opacity = ease(m.opacity, fillTo, 7, 0.003);
+    for (const m of edges.current) m.opacity = ease(m.opacity, edgeTo, 7, 0.003);
+    if (moving) state.invalidate();
   });
 
   const over = (e: ThreeEvent<PointerEvent>) => {
@@ -256,10 +313,30 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion
       {geo.parts.map((p, i) => (
         <group key={i}>
           <mesh geometry={p.geometry} castShadow receiveShadow onPointerOver={over} onPointerOut={() => onHover(null)} onClick={click}>
-            <meshStandardMaterial color={d.color} roughness={0.7} transparent opacity={dim ? 0.32 : 0.82} />
+            {/* Opacity is eased in useFrame, so it is set once when the material is created. */}
+            <meshStandardMaterial
+              ref={(m: MeshStandardMaterial | null) => {
+                if (m && fills.current[i] !== m) {
+                  m.opacity = fillTo;
+                  fills.current[i] = m;
+                }
+              }}
+              color={d.color}
+              roughness={0.7}
+              transparent
+            />
           </mesh>
           <lineSegments geometry={p.edges}>
-            <lineBasicMaterial color={on ? GOLD : HEARTH} transparent opacity={on ? 1 : dim ? 0.25 : 0.55} />
+            <lineBasicMaterial
+              ref={(m: LineBasicMaterial | null) => {
+                if (m && edges.current[i] !== m) {
+                  m.opacity = edgeTo;
+                  edges.current[i] = m;
+                }
+              }}
+              color={on ? GOLD : HEARTH}
+              transparent
+            />
           </lineSegments>
         </group>
       ))}
@@ -272,11 +349,21 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion
             onClick={() => onSelect(d.key)}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
             onPointerLeave={() => onHover(null)}
-            className={`grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-mono text-[0.5625rem] font-semibold leading-none text-hearth transition-[background-color,opacity,scale] duration-200 ease-out sm:size-7 sm:text-[0.75rem] ${
+            className={`relative grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-mono text-[0.5625rem] font-semibold leading-none text-hearth ease-out [transition:background-color_200ms,scale_200ms,opacity_600ms] sm:size-7 sm:text-[0.75rem] ${
               on ? "scale-[1.18] bg-gold" : "bg-linen"
             } ${dim ? "opacity-45" : ""}`}
           >
             {d.n}
+            {/* Gold ring pulse on the chosen district (handoff: scale 1 → 2.8, fading, 1100ms, looping). */}
+            {pulse && !reducedMotion && i === 0 && (
+              <motion.span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-[3px] rounded-full border-4 border-gold"
+                initial={{ scale: 1, opacity: 0.95 }}
+                animate={{ scale: 2.8, opacity: 0 }}
+                transition={{ duration: 1.1, ease: "easeOut", repeat: Infinity }}
+              />
+            )}
           </button>
         </Html>
       ))}
@@ -305,11 +392,13 @@ const toSpherical = (p: Vector3, t: Vector3) => new Spherical().setFromVector3(p
 /** Orthographic frustum sizing and the camera flights: 700ms as in the prototype, 1800ms for the Home tilt-in. */
 function CameraRig({
   geometries,
+  anchors,
   command,
   topDown,
   reducedMotion,
 }: {
   geometries: Record<string, DistrictGeometry>;
+  anchors: Record<string, Vector3>;
   command: CameraCommand;
   topDown: boolean;
   reducedMotion: boolean;
@@ -363,7 +452,12 @@ function CameraRig({
       target = g.center.clone();
       dir = currentDir();
       zoom = MathUtils.clamp(Math.min(viewW / (g.size[0] * 1.9), viewH / (g.size[1] * 2.1)), 1.1, 4);
-    } else if (command.kind === "intro") {
+    } else if ((command.kind === "dive" || command.kind === "diveNow") && command.key && anchors[command.key]) {
+      const pose = divePose(anchors[command.key]);
+      target = pose.target;
+      dir = pose.position.clone().sub(pose.target).normalize();
+      zoom = pose.zoom;
+    } else if (command.kind === "intro" || command.kind === "surface" || command.kind === "homeNow") {
       target = HOME_TARGET.clone();
       dir = HOME_DIR.clone();
       zoom = 1;
@@ -378,8 +472,8 @@ function CameraRig({
     }
 
     const to = { t: target, p: target.clone().addScaledVector(dir, CAMERA_DISTANCE), z: zoom };
-    if (reducedMotion) {
-      // Reduced motion: a camera cut instead of a flight.
+    if (reducedMotion || command.kind === "homeNow" || command.kind === "diveNow") {
+      // A camera cut instead of a flight (reduced motion, or an instant command).
       controls.target.copy(to.t);
       cam.position.copy(to.p);
       cam.zoom = to.z;
@@ -387,19 +481,19 @@ function CameraRig({
       controls.update();
       tween.current = null;
     } else {
-      const intro = command.kind === "intro";
+      const swing = command.kind === "intro" || command.kind === "dive" || command.kind === "surface";
       const from = { t: controls.target.clone(), p: cam.position.clone(), z: cam.zoom };
       tween.current = {
         from,
         to,
         elapsed: 0,
-        duration: intro ? 1800 : 700,
-        ease: intro ? easeTilt : easeOutQuart,
-        orbit: intro ? { from: toSpherical(from.p, from.t), to: toSpherical(to.p, to.t) } : undefined,
+        duration: command.kind === "intro" ? 1800 : swing ? 1300 : 700,
+        ease: swing ? easeInOut : easeOutQuart,
+        orbit: swing ? { from: toSpherical(from.p, from.t), to: toSpherical(to.p, to.t) } : undefined,
       };
     }
     invalidate();
-  }, [command, get, geometries, topDown, reducedMotion]);
+  }, [command, get, geometries, anchors, topDown, reducedMotion]);
 
   const orbitPos = useRef(new Spherical());
   useFrame((state, delta) => {

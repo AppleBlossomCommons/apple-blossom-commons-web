@@ -6,10 +6,9 @@ import { HomeIntro } from "@/components/home/HomeIntro";
 import { HomeMap } from "@/components/home/HomeMap";
 import { TourTeaser } from "@/components/home/TourTeaser";
 import { DoorwayCards } from "@/components/site/DoorwayCards";
+import { PLAN_SHEET } from "@/lib/district-image";
 import { PLAN_DISCLAIMER, PLAN_VIEWBOX } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
-
-const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
 
 /**
  * Home (docs/10-content-v2.md, "Home"; Phase 1 handoff, Home). The hospital-campus section,

@@ -13,6 +13,21 @@ export const HOME_DIR = new Vector3(-0.14, 0.8, 0.58).normalize();
 export const TOP_DIR = new Vector3(0, 1, 0.0001).normalize();
 /** How far the camera sits from its target along the view direction. */
 export const CAMERA_DISTANCE = 1500;
+/**
+ * The "dive" view for the Home map → district transition (handoff, step 3 of "Map → district
+ * page"): centered on the district's label point, about 26° from straight down (steeper than the
+ * home view), 2.5× closer, keeping the home view's turn.
+ */
+export const DIVE_PHI = (26 * Math.PI) / 180;
+export const DIVE_ZOOM = 2.5;
+
+/** Camera position and target for the dive view of a district whose label sits at `anchor`. */
+export function divePose(anchor: Vector3) {
+  const theta = Math.atan2(HOME_DIR.x, HOME_DIR.z);
+  const dir = new Vector3(Math.sin(DIVE_PHI) * Math.sin(theta), Math.cos(DIVE_PHI), Math.sin(DIVE_PHI) * Math.cos(theta));
+  return { target: anchor.clone(), position: anchor.clone().addScaledVector(dir, CAMERA_DISTANCE), zoom: DIVE_ZOOM };
+}
+
 /** Zoom of the flat, top-down start view that the Home map tilts in from. */
 export const FLAT_ZOOM = 0.9;
 

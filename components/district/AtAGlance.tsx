@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
+import { BackToMapLink } from "@/components/transitions/TransitionLinks";
 
 type LocatorDistrict = { key: string; color: string; polys: string[] };
 
@@ -9,7 +9,7 @@ const OTHER_FILL = "#E2D7C3";
 /**
  * "At a glance": the district's public facts (keeping their "(planning concept)" notes, per the
  * content pack) beside a small flat locator map. The map and "See it on the map →" both go back to
- * the Home map; the motion for that return comes with the map transitions.
+ * the Home map with the return transition.
  */
 export function AtAGlance({
   name,
@@ -47,8 +47,7 @@ export function AtAGlance({
 
       <Reveal kind="card" className="flex flex-col gap-3">
         {/* A mouse shortcut to the Home map; keyboard and screen-reader users have the link below. */}
-        <Link
-          href="/#map"
+        <BackToMapLink
           tabIndex={-1}
           aria-hidden="true"
           className="relative block aspect-[1023/694] w-full overflow-hidden rounded-card bg-sand shadow-[inset_0_0_0_1px_var(--line)]"
@@ -67,16 +66,15 @@ export function AtAGlance({
               )),
             )}
           </svg>
-        </Link>
+        </BackToMapLink>
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <p className="text-base text-muted">Where it sits in the plan</p>
-          <Link
-            href="/#map"
+          <BackToMapLink
             className="inline-flex min-h-11 items-center text-[17px] font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-[3px] hover:text-hearth"
           >
             See it on the map&nbsp;<span aria-hidden="true">→</span>
             <span className="sr-only"> ({name})</span>
-          </Link>
+          </BackToMapLink>
         </div>
       </Reveal>
     </section>

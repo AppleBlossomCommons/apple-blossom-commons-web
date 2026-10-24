@@ -3,6 +3,7 @@
 import { animate, type AnimationPlaybackControls } from "motion/react";
 import { useLayoutEffect, useRef } from "react";
 import { Logo } from "@/components/site/Logo";
+import { useSiteTransition } from "@/components/transitions/SiteTransition";
 import { ease } from "@/lib/motion";
 import { INTRO_SEEN_KEY, introMode, type IntroMode } from "@/lib/home-intro";
 
@@ -28,10 +29,16 @@ const END: Record<Exclude<IntroMode, "none">, number> = { full: 4.25, return: 2.
  */
 export function HomeIntro() {
   const loader = useRef<HTMLDivElement>(null);
+  const transition = useSiteTransition();
 
   // A layout effect, so on client-side navigation to Home the start state applies before paint.
   useLayoutEffect(() => {
     const html = document.documentElement;
+    // Returning from a district page: Home opens on the map, so no intro.
+    if (transition?.peekReturn()) {
+      delete html.dataset.intro;
+      return;
+    }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let seen = false;
     try {
@@ -76,6 +83,8 @@ export function HomeIntro() {
       timers.forEach(clearTimeout);
       done();
     };
+    // Runs once per visit to Home; the transition API object changes identity during a return.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useSiteTransition } from "@/components/transitions/SiteTransition";
 import { ease } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { buttonClass } from "./buttons";
@@ -73,8 +74,16 @@ export function SiteHeader() {
     if (returnFocus) menuButton.current?.focus();
   }, []);
 
+  const transition = useSiteTransition();
   const goHome = (e: React.MouseEvent) => {
     setMenuOpen(false);
+    // From a district page the logo plays the return to the map, like "Back to the map".
+    const plain = e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+    if (transition && plain && pathname.startsWith("/districts/")) {
+      e.preventDefault();
+      transition.toMap();
+      return;
+    }
     if (pathname === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });

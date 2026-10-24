@@ -43,7 +43,10 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
 
   return (
     <>
+      {/* key: a new district remounts the hero, so its text entrance plays again. */}
       <DistrictHero
+        key={district.slug}
+        slug={district.slug}
         n={district.n}
         name={district.name}
         familyLabel={district.familyLabel}
@@ -57,7 +60,7 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
         districts={locatorDistricts}
         viewBox={PLAN_VIEWBOX}
       />
-      <NextDistrict slug={next.slug} name={next.name} />
+      <NextDistrict slug={next.slug} name={next.name} color={next.color} />
       <DoorwayCards />
     </>
   );

@@ -3,6 +3,7 @@ import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque, IBM_Plex_Mono } from "
 import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { SiteTransition } from "@/components/transitions/SiteTransition";
 import { introScript } from "@/lib/home-intro";
 import "./globals.css";
 
@@ -65,11 +66,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <MotionProvider>
-          <SiteHeader />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
+          <SiteTransition>
+            <SiteHeader />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </SiteTransition>
         </MotionProvider>
       </body>
     </html>
