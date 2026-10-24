@@ -279,7 +279,7 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
               interactive={false}
               startFlat={startFlat}
               startAt={motionOk && retKey ? retKey : undefined}
-              pulse={Boolean(retKey) || pulse}
+              pulse={retKey || pulse ? "loop" : undefined}
             />
           </ModelBoundary>
         )}

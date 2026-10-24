@@ -12,6 +12,8 @@ import {
   CAMERA_DISTANCE,
   divePose,
   easeOutQuart,
+  FOCUS_ZOOM,
+  focusDir,
   FLAT_ZOOM,
   frustum,
   HOME_DIR,
@@ -29,7 +31,8 @@ import type { PlanDistrict } from "./types";
 /**
  * A camera instruction from the explorer. `seq` increases on every command so the same
  * command (for example "home" twice) still runs.
- * - focus: fly to a district.  home: fly back to the home view.  view: switch 3D ↔ top-down in place.
+ * - focus: fly to a district (The Plan).  home: back to the home view.  view: switch 3D ↔ top-down in place.
+ *   These three take 1200ms (handoff, "The Plan map").
  * - intro: the Home "tilt into view", from the flat start view to the home view (1800ms).
  * - dive: the Home map → district fly-in, closer and steeper over the district (1300ms).
  * - surface: back out from a dive to the home view (1300ms).
@@ -60,9 +63,14 @@ type Props = {
   startFlat?: boolean;
   /** Start in the dive view of this district (the return from a district page), ready for "surface". */
   startAt?: string;
-  /** Pulse a gold ring on the selected district's roundel. */
-  pulse?: boolean;
+  /**
+   * A gold ring pulse on the selected district's roundel: "loop" pulses until turned off (Home);
+   * a number pulses twice from 500ms, and a new number starts it again (The Plan).
+   */
+  pulse?: Pulse;
 };
+
+type Pulse = "loop" | number;
 
 /** Where each district's camera anchor sits: its (first) label point, on the ground. */
 function anchorsOf(districts: PlanDistrict[]) {
@@ -140,7 +148,7 @@ function Scene({
   onHover,
   onReady,
   interactive = true,
-  pulse = false,
+  pulse,
   controlsTarget,
 }: Props & { controlsTarget: [number, number, number] }) {
   const geometries = useMemo(
@@ -201,7 +209,7 @@ function Scene({
             on={on}
             hv={hv}
             dim={dim}
-            pulse={pulse && on}
+            pulse={on ? pulse : undefined}
             reducedMotion={reducedMotion}
             onSelect={onSelect}
             onHover={onHover}
@@ -217,7 +225,9 @@ function Scene({
         minZoom={0.8}
         maxZoom={6}
         minPolarAngle={0}
-        maxPolarAngle={topDown ? 0.0001 : 1.18}
+        // Top-down mode turns rotation off rather than clamping the angle, so the switch can animate.
+        enableRotate={!topDown}
+        maxPolarAngle={1.18}
         minAzimuthAngle={-1.1}
         maxAzimuthAngle={1.1}
         screenSpacePanning={false}
@@ -256,7 +266,7 @@ type PlateProps = {
   on: boolean;
   hv: boolean;
   dim: boolean;
-  pulse: boolean;
+  pulse?: Pulse;
   reducedMotion: boolean;
   onSelect: (key: string) => void;
   onHover: (key: string | null) => void;
@@ -354,14 +364,19 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
             } ${dim ? "opacity-45" : ""}`}
           >
             {d.n}
-            {/* Gold ring pulse on the chosen district (handoff: scale 1 → 2.8, fading, 1100ms, looping). */}
-            {pulse && !reducedMotion && i === 0 && (
+            {/* Gold ring pulse on the chosen district (handoff: scale 1 → 2.8, fading, 1100ms). */}
+            {pulse !== undefined && !reducedMotion && i === 0 && (
               <motion.span
+                key={pulse}
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-[3px] rounded-full border-4 border-gold"
-                initial={{ scale: 1, opacity: 0.95 }}
-                animate={{ scale: 2.8, opacity: 0 }}
-                transition={{ duration: 1.1, ease: "easeOut", repeat: Infinity }}
+                initial={{ scale: 1, opacity: 0 }}
+                animate={{ scale: [1, 2.8], opacity: [0.95, 0] }}
+                transition={
+                  pulse === "loop"
+                    ? { duration: 1.1, ease: "easeOut", repeat: Infinity }
+                    : { duration: 1.1, ease: "easeOut", repeat: 1, delay: 0.5 }
+                }
               />
             )}
           </button>
@@ -440,18 +455,14 @@ function CameraRig({
     if (!controls || command.seq === lastSeq.current) return;
     lastSeq.current = command.seq;
 
-    const currentDir = () => (topDown ? TOP_DIR.clone() : cam.position.clone().sub(controls.target).normalize());
     let target: Vector3;
     let dir: Vector3;
     let zoom: number;
 
-    if (command.kind === "focus" && command.key && geometries[command.key]) {
-      const g = geometries[command.key];
-      const viewW = cam.right - cam.left;
-      const viewH = cam.top - cam.bottom;
-      target = g.center.clone();
-      dir = currentDir();
-      zoom = MathUtils.clamp(Math.min(viewW / (g.size[0] * 1.9), viewH / (g.size[1] * 2.1)), 1.1, 4);
+    if (command.kind === "focus" && command.key && anchors[command.key]) {
+      target = anchors[command.key].clone();
+      dir = focusDir(topDown);
+      zoom = FOCUS_ZOOM;
     } else if ((command.kind === "dive" || command.kind === "diveNow") && command.key && anchors[command.key]) {
       const pose = divePose(anchors[command.key]);
       target = pose.target;
@@ -462,8 +473,9 @@ function CameraRig({
       dir = HOME_DIR.clone();
       zoom = 1;
     } else if (command.kind === "view") {
-      target = command.key && geometries[command.key] ? geometries[command.key].center.clone() : controls.target.clone();
-      dir = topDown ? TOP_DIR.clone() : HOME_DIR.clone();
+      // Switch 3D ↔ top-down where the camera is, keeping the zoom.
+      target = command.key && anchors[command.key] ? anchors[command.key].clone() : controls.target.clone();
+      dir = command.key ? focusDir(topDown) : topDown ? TOP_DIR.clone() : HOME_DIR.clone();
       zoom = cam.zoom;
     } else {
       target = HOME_TARGET.clone();
@@ -481,13 +493,14 @@ function CameraRig({
       controls.update();
       tween.current = null;
     } else {
-      const swing = command.kind === "intro" || command.kind === "dive" || command.kind === "surface";
+      // Every flight swings around its target and eases in and out; only the durations differ.
+      const swing = command.kind !== "none";
       const from = { t: controls.target.clone(), p: cam.position.clone(), z: cam.zoom };
       tween.current = {
         from,
         to,
         elapsed: 0,
-        duration: command.kind === "intro" ? 1800 : swing ? 1300 : 700,
+        duration: command.kind === "intro" ? 1800 : command.kind === "dive" || command.kind === "surface" ? 1300 : 1200,
         ease: swing ? easeInOut : easeOutQuart,
         orbit: swing ? { from: toSpherical(from.p, from.t), to: toSpherical(to.p, to.t) } : undefined,
       };

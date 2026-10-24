@@ -5,7 +5,7 @@ import type { ComponentProps } from "react";
 import { reveal, revealViewport, type RevealKind } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
-const tags = { div: motion.div, h2: motion.h2, p: motion.p, li: motion.li } as const;
+const tags = { div: motion.div, h1: motion.h1, h2: motion.h2, p: motion.p, li: motion.li } as const;
 
 type Props = {
   kind: RevealKind;
