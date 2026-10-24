@@ -3,6 +3,7 @@ import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque, IBM_Plex_Mono } from "
 import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { introScript } from "@/lib/home-intro";
 import "./globals.css";
 
 // Headings. The optical-size axis lets large headlines use the tighter display cut.
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s · Apple Blossom Commons",
   },
   description:
-    "A generational, mixed-use community in Chelan, Washington, planned around the Lake Chelan Community Hospital campus and stewarded by Chelan Village, LP.",
+    "A generational, mixed-use community in Chelan, Washington, planned around the Lake Chelan Health Hospital campus and stewarded by Chelan Village, LP.",
   // Draft site: keep it out of search engines until the owner and Andy approve launch (Phase 5).
   robots: { index: false, follow: false },
 };
@@ -45,7 +46,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${bricolage.variable} ${atkinson.variable} ${plexMono.variable}`}
+      // The intro script adds data-intro to <html> before hydration (lib/home-intro.ts).
+      suppressHydrationWarning
     >
+      <head>
+        {/* Picks the Home intro before the first paint so its start state never flashes (lib/home-intro.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        {/* Without JavaScript there is no intro: show everything. */}
+        <noscript>
+          <style>{`.home-loader{display:none!important}[data-intro-el],#site-header{opacity:1!important}`}</style>
+        </noscript>
+      </head>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

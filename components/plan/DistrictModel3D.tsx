@@ -2,13 +2,16 @@
 
 import { Html, OrbitControls, useTexture } from "@react-three/drei";
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
+import { cubicBezier } from "motion";
 import { memo, Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { Group, MathUtils, OrthographicCamera, SRGBColorSpace, Vector3 } from "three";
+import { Group, MathUtils, OrthographicCamera, Spherical, SRGBColorSpace, Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
   buildDistrictGeometry,
   CAMERA_DISTANCE,
   easeOutQuart,
+  FLAT_ZOOM,
+  frustum,
   HOME_DIR,
   HOME_TARGET,
   LIFT,
@@ -25,8 +28,9 @@ import type { PlanDistrict } from "./types";
  * A camera instruction from the explorer. `seq` increases on every command so the same
  * command (for example "home" twice) still runs.
  * - focus: fly to a district.  home: fly back to the home view.  view: switch 3D ↔ top-down in place.
+ * - intro: the Home "tilt into view", from the flat start view to the home view (1800ms, ease out).
  */
-export type CameraCommand = { kind: "none" | "focus" | "home" | "view"; key?: string; seq: number };
+export type CameraCommand = { kind: "none" | "focus" | "home" | "view" | "intro"; key?: string; seq: number };
 
 type Props = {
   districts: PlanDistrict[];
@@ -40,12 +44,21 @@ type Props = {
   onSelect: (key: string) => void;
   onHover: (key: string | null) => void;
   onReady: () => void;
+  /** False turns off drag, zoom and pan (Home, where the map is a doorway and the page must scroll). */
+  interactive?: boolean;
+  /** Start top-down and slightly zoomed out, ready for an "intro" command. */
+  startFlat?: boolean;
 };
 
 // Warm palette v1 (docs/04): gold selection, hearth outlines. Three.js needs literal colors.
 const GOLD = "#F2B544";
 const HEARTH = "#3B2F2A";
 const CAMERA_START = HOME_TARGET.clone().addScaledVector(HOME_DIR, CAMERA_DISTANCE).toArray();
+const CAMERA_FLAT = HOME_TARGET.clone().addScaledVector(TOP_DIR, CAMERA_DISTANCE).toArray();
+// The Home tilt-in eases in and out, so it starts softly while the 2D plan fades away above it.
+const easeTilt = cubicBezier(0.65, 0, 0.35, 1);
+/** A slow frame (shader warm-up, texture upload) slows a flight down instead of making it skip. */
+const MAX_STEP_MS = 1000 / 30;
 const CONTROLS_TARGET = HOME_TARGET.toArray();
 
 /**
@@ -55,7 +68,8 @@ const CONTROLS_TARGET = HOME_TARGET.toArray();
  */
 export default function DistrictModel3D(props: Props) {
   return (
-    <div aria-hidden="true" className="absolute inset-0">
+    // isolate: keeps the roundels' z-indexes inside the model, under anything drawn over it.
+    <div aria-hidden="true" className="absolute inset-0 isolate">
       <Canvas
         orthographic
         frameloop="demand"
@@ -64,7 +78,13 @@ export default function DistrictModel3D(props: Props) {
         flat
         dpr={[1, 2]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
-        camera={{ manual: true, near: -4000, far: 4000, zoom: 1, position: CAMERA_START }}
+        camera={{
+          manual: true,
+          near: -4000,
+          far: 4000,
+          zoom: props.startFlat ? FLAT_ZOOM : 1,
+          position: props.startFlat ? CAMERA_FLAT : CAMERA_START,
+        }}
       >
         <Suspense fallback={null}>
           <Scene {...props} />
@@ -86,6 +106,7 @@ function Scene({
   onSelect,
   onHover,
   onReady,
+  interactive = true,
 }: Props) {
   const geometries = useMemo(
     () => Object.fromEntries(districts.map((d) => [d.key, buildDistrictGeometry(d.shapes)])) as Record<string, DistrictGeometry>,
@@ -152,6 +173,7 @@ function Scene({
       })}
       <OrbitControls
         makeDefault
+        enabled={interactive}
         target={CONTROLS_TARGET}
         enableDamping
         dampingFactor={0.09}
@@ -262,9 +284,25 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, reducedMotion
   );
 });
 
-type Tween = { from: { t: Vector3; p: Vector3; z: number }; to: { t: Vector3; p: Vector3; z: number }; t0: number };
+type Tween = {
+  from: { t: Vector3; p: Vector3; z: number };
+  to: { t: Vector3; p: Vector3; z: number };
+  /** Milliseconds of flight so far, counted in frame steps of at most MAX_STEP_MS. */
+  elapsed: number;
+  /** Milliseconds. */
+  duration: number;
+  ease: (t: number) => number;
+  /**
+   * Swing the camera around its target (tilt and turn together) instead of moving it in a straight
+   * line. Needed from straight overhead, where a straight line would spin the view in one frame.
+   */
+  orbit?: { from: Spherical; to: Spherical };
+};
 
-/** Orthographic frustum sizing and the 700ms camera flights, as in the prototype. */
+/** The camera's position around a target as tilt (phi), turn (theta) and distance. */
+const toSpherical = (p: Vector3, t: Vector3) => new Spherical().setFromVector3(p.clone().sub(t));
+
+/** Orthographic frustum sizing and the camera flights: 700ms as in the prototype, 1800ms for the Home tilt-in. */
 function CameraRig({
   geometries,
   command,
@@ -285,17 +323,24 @@ function CameraRig({
   useLayoutEffect(() => {
     const { camera, invalidate } = get();
     const cam = camera as OrthographicCamera;
-    const halfH = PLAN_H * 0.62;
-    const halfW = halfH * (size.width / size.height);
-    const fitW = PLAN_W * (size.width < 600 ? 0.5 : 0.56);
-    const k = Math.max(1, fitW / halfW);
-    cam.left = -halfW * k;
-    cam.right = halfW * k;
-    cam.top = halfH * k;
-    cam.bottom = -halfH * k;
+    const { halfW, halfH } = frustum(size.width, size.height);
+    cam.left = -halfW;
+    cam.right = halfW;
+    cam.top = halfH;
+    cam.bottom = -halfH;
     cam.updateProjectionMatrix();
     invalidate();
   }, [get, size]);
+
+  // Aim the camera at the controls' target as soon as the controls exist. OrbitControls only
+  // re-aims it each frame while enabled, so with interactive={false} (Home) the camera would keep
+  // R3F's default aim at the origin, 10 units off, until the first flight.
+  const controls = useThree((s) => s.controls) as OrbitControlsImpl | null;
+  useEffect(() => {
+    if (!controls) return;
+    controls.update();
+    get().invalidate();
+  }, [controls, get]);
 
   // Run each new camera command once.
   const lastSeq = useRef(command.seq);
@@ -318,6 +363,10 @@ function CameraRig({
       target = g.center.clone();
       dir = currentDir();
       zoom = MathUtils.clamp(Math.min(viewW / (g.size[0] * 1.9), viewH / (g.size[1] * 2.1)), 1.1, 4);
+    } else if (command.kind === "intro") {
+      target = HOME_TARGET.clone();
+      dir = HOME_DIR.clone();
+      zoom = 1;
     } else if (command.kind === "view") {
       target = command.key && geometries[command.key] ? geometries[command.key].center.clone() : controls.target.clone();
       dir = topDown ? TOP_DIR.clone() : HOME_DIR.clone();
@@ -338,20 +387,40 @@ function CameraRig({
       controls.update();
       tween.current = null;
     } else {
-      tween.current = { from: { t: controls.target.clone(), p: cam.position.clone(), z: cam.zoom }, to, t0: performance.now() };
+      const intro = command.kind === "intro";
+      const from = { t: controls.target.clone(), p: cam.position.clone(), z: cam.zoom };
+      tween.current = {
+        from,
+        to,
+        elapsed: 0,
+        duration: intro ? 1800 : 700,
+        ease: intro ? easeTilt : easeOutQuart,
+        orbit: intro ? { from: toSpherical(from.p, from.t), to: toSpherical(to.p, to.t) } : undefined,
+      };
     }
     invalidate();
   }, [command, get, geometries, topDown, reducedMotion]);
 
-  useFrame((state) => {
+  const orbitPos = useRef(new Spherical());
+  useFrame((state, delta) => {
     const tw = tween.current;
     const controls = state.controls as OrbitControlsImpl | null;
     if (!tw || !controls) return;
     const cam = state.camera as OrthographicCamera;
-    const t = Math.min(1, (performance.now() - tw.t0) / 700);
-    const e = easeOutQuart(t);
+    tw.elapsed += Math.min(delta * 1000, MAX_STEP_MS);
+    const t = Math.min(1, tw.elapsed / tw.duration);
+    const e = tw.ease(t);
     controls.target.lerpVectors(tw.from.t, tw.to.t, e);
-    cam.position.lerpVectors(tw.from.p, tw.to.p, e);
+    if (tw.orbit) {
+      const { from, to } = tw.orbit;
+      const s = orbitPos.current;
+      s.radius = MathUtils.lerp(from.radius, to.radius, e);
+      s.phi = MathUtils.lerp(from.phi, to.phi, e);
+      s.theta = MathUtils.lerp(from.theta, to.theta, e);
+      cam.position.setFromSpherical(s).add(controls.target);
+    } else {
+      cam.position.lerpVectors(tw.from.p, tw.to.p, e);
+    }
     cam.zoom = tw.from.z + (tw.to.z - tw.from.z) * e;
     cam.updateProjectionMatrix();
     controls.update();

@@ -1,58 +1,52 @@
+"use client";
+
+import { motion } from "motion/react";
 import Link from "next/link";
+import { Reveal } from "@/components/motion/Reveal";
+import { useParallax } from "@/components/motion/useParallax";
 import { buttonClass } from "@/components/site/buttons";
-import { container, eyebrow } from "@/components/site/layout";
+import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 
 /**
- * Virtual site tour teaser (approved homepage mockup). The video still is a deliberate,
- * clearly marked placeholder until real tour stills are chosen (mockup README, rule 5).
+ * Site tour teaser (content pack, Home section 5). Sand band: text left, a tour still with a
+ * play button right (stacked below 760px, image 320px tall). The still drifts with the scroll.
  */
 export function TourTeaser() {
+  const { ref, y } = useParallax<HTMLAnchorElement>("center");
+
   return (
-    <section aria-labelledby="tour-title" className="bg-sand text-hearth">
-      <div className={`${container} flex flex-wrap items-center gap-x-[72px] gap-y-3.5 py-10 sm:gap-y-12 sm:py-[88px]`}>
-        <div className="flex min-w-0 flex-[1_1_380px] flex-col gap-3.5 sm:gap-[18px]">
-          <p className={eyebrow}>Virtual site tour</p>
-          <h2 id="tour-title" className="text-[1.875rem] leading-[1.1] [text-wrap:wrap] sm:text-[2.75rem] sm:leading-[1.08] sm:tracking-[-0.01em]">
-            See the site from the road.
-          </h2>
-          <p className="hidden max-w-[48ch] text-[1.125rem] text-muted sm:block">
-            Sixteen drive-through clips around the planning area, each paired with a map that follows the route as the
-            video plays.
-          </p>
-          <Link href="/tour" className={`self-start max-sm:hidden ${buttonClass("primary", "md")}`}>
-            Start the tour
-          </Link>
-        </div>
-
-        <div className="flex min-w-0 flex-[2_1_560px] flex-wrap gap-3.5">
-          <div className="flex aspect-[358/236] flex-[3_1_362px] sm:aspect-[16/10] items-center justify-center rounded-[8px] border border-dashed border-muted bg-linen p-4 text-center font-mono text-[0.75rem] text-muted sm:p-5 sm:text-[0.8125rem]">
-            <span className="sm:hidden">[TOUR VIDEO STILL]</span>
-            <span className="hidden sm:inline">[TOUR VIDEO STILL · e.g. Tour 1, SR 150 to Apple Blossom Drive]</span>
-          </div>
-          <div className="hidden aspect-square flex-[2_1_220px] overflow-hidden rounded-[8px] border border-line bg-linen sm:block">
-            <svg viewBox="0 0 240 240" role="img" aria-label="Route map sample" className="block size-full">
-              <path
-                d="M24 200 C 70 190, 90 130, 130 124 S 196 70, 220 40"
-                fill="none"
-                stroke="var(--hearth)"
-                strokeOpacity="0.45"
-                strokeWidth="4"
-                strokeDasharray="7 7"
-              />
-              <path d="M24 200 C 70 190, 90 130, 130 124" fill="none" stroke="var(--hearth)" strokeWidth="8" strokeLinecap="round" />
-              <path d="M24 200 C 70 190, 90 130, 130 124" fill="none" stroke="var(--gold)" strokeWidth="5" strokeLinecap="round" />
-              <circle cx="130" cy="124" r="8" fill="var(--linen)" stroke="var(--hearth)" strokeWidth="4" />
-              <text x="142" y="112" fill="var(--hearth)" fontFamily="var(--font-plex-mono), monospace" fontSize="11">
-                0:42 · Isenhart Rd
-              </text>
-            </svg>
-          </div>
-        </div>
-
-        <Link href="/tour" className={`w-full sm:hidden ${buttonClass("primary", "lg")}`}>
+    <section aria-labelledby="tour-title" className="grid min-h-[560px] grid-cols-1 bg-sand min-[760px]:grid-cols-[1fr_1.35fr]">
+      <div className="flex flex-col justify-center gap-5 px-[clamp(20px,4.5vw,64px)] py-[clamp(56px,6vw,80px)]">
+        <Reveal as="h2" kind="head" id="tour-title" className="text-[clamp(40px,4.2vw,56px)] leading-none">
+          See the land for yourself
+        </Reveal>
+        <Reveal as="p" kind="fade" className="max-w-[440px] text-xl">
+          Drive the roads around the site in sixteen short clips, each matched to a map.
+        </Reveal>
+        <Link href="/tour" className={`mt-2 self-start ${buttonClass("primary", "lg")}`}>
           Start the tour
         </Link>
       </div>
+
+      {/* The still is a mouse shortcut to the tour; keyboard and screen-reader users have the button. */}
+      <Link
+        ref={ref}
+        href="/tour"
+        tabIndex={-1}
+        aria-hidden="true"
+        className="group relative isolate flex min-h-[320px] items-center justify-center overflow-hidden min-[760px]:min-h-0"
+      >
+        <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
+          <PlaceholderImage
+            gradient="linear-gradient(175deg, #F4DFB8 0%, #E3C69A 38%, #C4A57E 66%, #9C8466 100%)"
+            className="absolute inset-0"
+          />
+        </motion.div>
+        <PlaceholderLabel inset={20}>Tour video still: empty country road between orchards and dry hills</PlaceholderLabel>
+        <span className="flex size-24 items-center justify-center rounded-full bg-linen/95 transition-[scale] duration-300 ease-out group-hover:scale-105">
+          <span className="ml-2 size-0 border-y-[16px] border-l-[26px] border-y-transparent border-l-hearth" />
+        </span>
+      </Link>
     </section>
   );
 }

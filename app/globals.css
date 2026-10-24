@@ -138,3 +138,26 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/*
+ * Home intro (handoff, "Loading intro"). lib/home-intro.ts sets html[data-intro] before the first
+ * paint: "full" (first visit), "return" (later visits) or "reduce" (first visit, reduced motion).
+ * These rules hold each animated element at its start state until HomeIntro animates it, so
+ * nothing flashes. HomeIntro removes the attribute when the sequence ends.
+ */
+.home-loader {
+  display: none;
+}
+
+html[data-intro="full"] .home-loader,
+html[data-intro="reduce"] .home-loader {
+  display: block;
+}
+
+html[data-intro="full"] #site-header,
+html[data-intro="full"] [data-petal],
+html[data-intro="full"] [data-loader="wordmark"],
+html[data-intro="full"] [data-intro-el],
+html[data-intro="return"] [data-intro-el] {
+  opacity: 0;
+}

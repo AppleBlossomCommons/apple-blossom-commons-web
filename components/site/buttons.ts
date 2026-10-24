@@ -10,7 +10,7 @@ const base =
 const variants = {
   primary: "bg-gold text-hearth hover:bg-gold-hover hover:text-hearth",
   secondary: "border-[1.5px] border-hearth text-hearth hover:bg-sand hover:text-hearth",
-  linen: "bg-linen text-hearth hover:bg-sand hover:text-hearth",
+  linen: "bg-linen/95 text-hearth hover:bg-white hover:text-hearth",
   onPhoto: "border-[1.5px] border-white text-white hover:bg-white/10 hover:text-white",
 } as const;
 

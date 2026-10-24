@@ -2,54 +2,20 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Component, useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CameraCommand } from "@/components/plan/DistrictModel3D";
+import { hasWebGL, ModelBoundary } from "@/components/plan/ModelBoundary";
 import { PlanMap2D } from "@/components/plan/PlanMap2D";
 import type { PlanDistrict } from "@/components/plan/types";
 import { buttonClass } from "@/components/site/buttons";
 import { ChevronRight } from "@/components/site/icons";
 import { container } from "@/components/site/layout";
+import { usePrefersReducedMotion as useReducedMotion } from "@/lib/use-reduced-motion";
 
 // The 3D model never renders on the server and is only fetched once the frame nears the viewport.
 const DistrictModel3D = dynamic(() => import("@/components/plan/DistrictModel3D"), { ssr: false });
 
 const pad = (n: number) => String(n).padStart(2, "0");
-
-function hasWebGL() {
-  try {
-    const c = document.createElement("canvas");
-    return Boolean(c.getContext("webgl2") ?? c.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
-
-const motionQuery = "(prefers-reduced-motion: reduce)";
-function useReducedMotion() {
-  return useSyncExternalStore(
-    (onChange) => {
-      const mq = window.matchMedia(motionQuery);
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    },
-    () => window.matchMedia(motionQuery).matches,
-    () => false,
-  );
-}
-
-/** If the 3D model throws (for example a lost WebGL context), fall back to the 2D plan. */
-class ModelBoundary extends Component<{ onError: () => void; children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  componentDidCatch() {
-    this.props.onError();
-  }
-  render() {
-    return this.state.failed ? null : this.props.children;
-  }
-}
 
 const toolButton =
   "h-[34px] whitespace-nowrap rounded-[6px] border bg-linen/90 px-3 text-[0.8125rem] font-medium transition-colors duration-150 sm:h-9 sm:px-3.5 sm:text-[0.875rem]";

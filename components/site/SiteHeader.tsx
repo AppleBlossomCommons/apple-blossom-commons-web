@@ -5,7 +5,6 @@ import {
   animate,
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   type Variants,
 } from "motion/react";
@@ -13,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ease } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { buttonClass } from "./buttons";
 import { Logo } from "./Logo";
 import { mainNav, partnerLink } from "./nav";
@@ -32,9 +32,11 @@ const NAV_BREAKPOINT = 1080;
  * inner padding (responsive → 16px) and logo size (21px → 19px). Animating one number
  * keeps the responsive clamp() padding, which can't be tweened directly.
  */
+// Phones under 420px: the wordmark scales with the screen (15–19px), the mark drops to 24px and
+// the gaps tighten, so logo, name and Menu fit on a 360px screen.
 export function SiteHeader() {
   const pathname = usePathname();
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const k = useMotionValue(0);
@@ -81,19 +83,20 @@ export function SiteHeader() {
   return (
     <>
       <motion.header
+        id="site-header"
         style={{ "--k": k } as React.CSSProperties}
         className="sticky top-0 z-30 h-16 p-[calc(var(--k)*8px)_calc(var(--k)*12px)]"
       >
-        <div className="flex h-full items-center gap-6 rounded-[calc(var(--k)*16px)] bg-linen px-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
+        <div className="flex h-full items-center gap-6 max-[419px]:gap-3 rounded-[calc(var(--k)*16px)] bg-linen px-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
           <Link
             href="/"
             onClick={goHome}
-            className="flex items-center gap-2.5 whitespace-nowrap rounded-[10px] text-hearth no-underline"
+            className="flex items-center gap-2.5 whitespace-nowrap rounded-[10px] text-hearth no-underline max-[419px]:gap-2"
           >
-            <Logo size={28} />
+            <Logo size={28} className="max-[419px]:size-6" />
             <span
               translate="no"
-              className="font-display text-[length:calc(21px_-_var(--k)*2px)] font-semibold leading-none tracking-[-0.01em] max-[759px]:text-[19px]"
+              className="font-display text-[length:calc(21px_-_var(--k)*2px)] font-semibold leading-none tracking-[-0.01em] max-[759px]:text-[clamp(15px,4.2vw,19px)]"
             >
               Apple Blossom Commons
             </span>
@@ -125,9 +128,9 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="site-menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="ml-auto inline-flex h-11 items-center gap-2.5 rounded-full bg-sand px-4 text-base font-bold text-hearth nav:hidden"
+            className="ml-auto inline-flex h-11 shrink-0 items-center gap-2.5 rounded-full bg-sand px-4 text-base font-bold text-hearth max-[419px]:px-3.5 nav:hidden"
           >
-            <MenuBars open={menuOpen} reduce={!!reduce} />
+            <MenuBars open={menuOpen} reduce={reduce} />
             {menuOpen ? "Close" : "Menu"}
           </button>
         </div>
@@ -135,7 +138,7 @@ export function SiteHeader() {
 
       <PhoneMenu
         open={menuOpen}
-        reduce={!!reduce}
+        reduce={reduce}
         isActive={isActive}
         onClose={closeMenu}
       />

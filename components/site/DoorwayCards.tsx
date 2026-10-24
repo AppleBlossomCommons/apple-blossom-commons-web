@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import { ease, revealVariants, revealViewport } from "@/lib/motion";
+import { cardHover, imageHover, reveal, revealViewport } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { PlaceholderImage, PlaceholderLabel } from "./ImagePlaceholder";
 
 // Copy from docs/10-content-v2.md, Home section 6 "Doorways". Image notes from the Phase 1 handoff.
@@ -38,21 +39,9 @@ const doorways = [
 
 const MotionLink = motion.create(Link);
 
-const reveal = revealVariants("door");
-
-// Hover: the card lifts 6px and gains a soft shadow (500ms); the image eases in to 106% (1100ms).
-const card: Variants = {
-  rest: { y: 0, boxShadow: "0 28px 50px -28px rgb(59 47 42 / 0)" },
-  hover: { y: -6, boxShadow: "0 28px 50px -28px rgb(59 47 42 / 0.55)", transition: { duration: 0.5, ease: ease.out } },
-};
-const image: Variants = {
-  rest: { scale: 1, transition: { duration: 1.1, ease: ease.out } },
-  hover: { scale: 1.06, transition: { duration: 1.1, ease: ease.out } },
-};
-
 /** Three audience doorways. They end Home and every district page (content pack, Districts). */
 export function DoorwayCards() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
 
   return (
     <section aria-labelledby="doorways-title" className="px-[clamp(8px,1.2vw,16px)] pb-4 pt-[clamp(72px,8vw,112px)]">
@@ -63,9 +52,9 @@ export function DoorwayCards() {
         {doorways.map((d, i) => (
           <motion.li
             key={d.href}
-            custom={i}
-            variants={reveal}
-            initial={reduce ? false : "hidden"}
+            custom={{ i, reduce }}
+            variants={reveal.door}
+            initial="hidden"
             whileInView="shown"
             viewport={revealViewport}
             className="flex"
@@ -75,10 +64,10 @@ export function DoorwayCards() {
               initial="rest"
               animate="rest"
               whileHover={reduce ? undefined : "hover"}
-              variants={card}
+              variants={cardHover}
               className="relative isolate flex h-[clamp(440px,38vw,520px)] w-full flex-col justify-end gap-2.5 overflow-hidden rounded-card p-[clamp(24px,2.6vw,36px)] text-white no-underline hover:text-white"
             >
-              <motion.div variants={image} className="absolute inset-0 -z-10">
+              <motion.div variants={imageHover} className="absolute inset-0 -z-10">
                 <PlaceholderImage gradient={d.gradient} className="absolute inset-0" />
               </motion.div>
               <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.7)_100%)]" />
