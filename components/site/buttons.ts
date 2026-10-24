@@ -11,6 +11,8 @@ const variants = {
   primary: "bg-gold text-hearth hover:bg-gold-hover hover:text-hearth",
   secondary: "border-[1.5px] border-hearth text-hearth hover:bg-sand hover:text-hearth",
   linen: "bg-linen/95 text-hearth hover:bg-white hover:text-hearth",
+  /** 2px hearth outline (How Can I Participate? "Get in touch"). */
+  outline: "border-2 border-hearth text-hearth hover:bg-sand hover:text-hearth",
   onPhoto: "border-[1.5px] border-white text-white hover:bg-white/10 hover:text-white",
 } as const;
 
@@ -24,6 +26,8 @@ const sizes = {
   bar: "relative h-[calc(44px_-_var(--k,0)*8px)] px-[22px] text-[1.0625rem] before:absolute before:inset-x-0 before:top-1/2 before:h-11 before:-translate-y-1/2",
   /** Secondary actions, 48px. */
   md: "h-12 px-[22px] text-[1.0625rem]",
+  /** Section actions on How Can I Participate?, 52px. */
+  tall: "h-[52px] px-[26px] text-[1.0625rem]",
   /** Hero and calls to action, 56px. */
   lg: "h-14 px-7 text-[1.125rem]",
 } as const;
