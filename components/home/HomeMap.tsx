@@ -110,7 +110,7 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
   }, [beginIfDue]);
 
   return (
-    <section aria-labelledby="map-title" className="bg-sand px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)] pt-[clamp(64px,8vw,104px)]">
+    <section id="map" aria-labelledby="map-title" className="bg-sand px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)] pt-[clamp(64px,8vw,104px)]">
       <div className="mb-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] items-end gap-x-16 gap-y-4">
         <Reveal as="h2" kind="head" id="map-title" className="text-[clamp(40px,4.5vw,60px)] leading-none">
           Ten neighborhoods, one plan

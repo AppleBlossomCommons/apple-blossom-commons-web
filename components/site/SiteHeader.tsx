@@ -29,7 +29,8 @@ const NAV_BREAKPOINT = 1080;
  *
  * Scrolled state: one motion value, --k, goes from 0 (flat) to 1 (floating bar) over 450ms.
  * CSS turns --k into the outer padding (0 → 8px 12px), corner radius (0 → 16px), shadow,
- * inner padding (responsive → 16px) and logo size (21px → 19px). Animating one number
+ * inner padding (responsive → 16px left, 6px right), logo size (21px → 19px) and the right-hand
+ * button's height (44px → 36px), so the button sits with an even 6px gap inside the 48px bar. Animating one number
  * keeps the responsive clamp() padding, which can't be tweened directly.
  */
 // Phones under 420px: the wordmark scales with the screen (15–19px), the mark drops to 24px and
@@ -87,7 +88,7 @@ export function SiteHeader() {
         style={{ "--k": k } as React.CSSProperties}
         className="sticky top-0 z-30 h-16 p-[calc(var(--k)*8px)_calc(var(--k)*12px)]"
       >
-        <div className="flex h-full items-center gap-6 max-[419px]:gap-3 rounded-[calc(var(--k)*16px)] bg-linen px-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
+        <div className="flex h-full items-center gap-6 max-[419px]:gap-3 rounded-[calc(var(--k)*16px)] bg-linen pl-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] pr-[calc(6px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_6px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
           <Link
             href="/"
             onClick={goHome}
@@ -118,7 +119,7 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <Link href={partnerLink.href} className={`ml-auto max-nav:hidden ${buttonClass("primary", "sm")}`}>
+          <Link href={partnerLink.href} className={`ml-auto max-nav:hidden ${buttonClass("primary", "bar")}`}>
             {partnerLink.label}
           </Link>
 
@@ -128,7 +129,7 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="site-menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="ml-auto inline-flex h-11 shrink-0 items-center gap-2.5 rounded-full bg-sand px-4 text-base font-bold text-hearth max-[419px]:px-3.5 nav:hidden"
+            className="relative ml-auto inline-flex h-[calc(44px_-_var(--k)*8px)] shrink-0 items-center gap-2.5 rounded-full bg-sand px-4 text-base font-bold text-hearth before:absolute before:inset-x-0 before:top-1/2 before:h-11 before:-translate-y-1/2 max-[419px]:px-3.5 nav:hidden"
           >
             <MenuBars open={menuOpen} reduce={reduce} />
             {menuOpen ? "Close" : "Menu"}

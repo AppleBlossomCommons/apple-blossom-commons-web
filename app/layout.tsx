@@ -54,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
         {/* Without JavaScript there is no intro: show everything. */}
         <noscript>
-          <style>{`.home-loader{display:none!important}[data-intro-el],#site-header{opacity:1!important}`}</style>
+          <style>{`.home-loader{display:none!important}[data-intro-el],[data-enter],#site-header{opacity:1!important;filter:none!important;transform:none!important}`}</style>
         </noscript>
       </head>
       <body className="flex min-h-dvh flex-col">

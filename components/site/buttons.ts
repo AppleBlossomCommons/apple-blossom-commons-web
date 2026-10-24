@@ -17,6 +17,11 @@ const variants = {
 const sizes = {
   /** Header and chips, 44px. */
   sm: "h-11 px-[22px] text-[1.0625rem]",
+  /**
+   * Header bar: 44px, easing to 36px as the header floats (--k, see SiteHeader), so it keeps a 6px
+   * gap inside the 48px floating bar. An invisible 44px band keeps the tap target full size.
+   */
+  bar: "relative h-[calc(44px_-_var(--k,0)*8px)] px-[22px] text-[1.0625rem] before:absolute before:inset-x-0 before:top-1/2 before:h-11 before:-translate-y-1/2",
   /** Secondary actions, 48px. */
   md: "h-12 px-[22px] text-[1.0625rem]",
   /** Hero and calls to action, 56px. */
