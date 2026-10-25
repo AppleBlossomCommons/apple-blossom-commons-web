@@ -1,17 +1,13 @@
-import { nearestFamily, whiteTextGradient } from "./card-color";
-
 /**
  * The district hero image, shared by the district page and the transition overlay so the swap
- * between them is invisible. TEMPORARY: a gradient in the district's color until the
+ * between them is invisible. TEMPORARY: a very light gradient in the district's color until the
  * "Illustrative concept" renders exist (docs/10-content-v2.md, Imagery plan).
  *
- * It starts as a light tint of the district color and deepens to its family's white-text shades
- * (lib/card-color.ts) behind the title and summary, so the white text stays readable.
+ * It runs from a pale tint (25% color, 75% white) to a soft one (70% color), mixed in oklch so the
+ * hue stays clean. Text on it is hearth, so it needs no dark fade.
  */
 export function districtImage(color: string) {
-  const family = nearestFamily(color);
-  // Stops measured with the hero's scroll drift (parallax) included, from phone to desktop sizes.
-  return whiteTextGradient({ color, deep: family.deep }, { large: 44, body: 68 });
+  return `linear-gradient(165deg, color-mix(in oklch, ${color} 25%, white) 0%, color-mix(in oklch, ${color} 70%, white) 100%)`;
 }
 
 /** The greyscale masterplan sheet under the 2D plan and on the 3D model's board. */
