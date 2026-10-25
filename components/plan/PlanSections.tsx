@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { PLAN_DISCLAIMER } from "@/lib/districts";
 
 // Copy from docs/10-content-v2.md, "The Plan (/plan)". Image notes from the Phase 1 handoff.
 
@@ -9,11 +11,19 @@ export function PlanHero() {
   return (
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
       <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
-        <PlaceholderImage
-          fill="#EAF6CF"
-          className="absolute inset-0 -z-10"
+        <Image
+          src="/plan/masterplan-color.webp"
+          alt="Color-coded masterplan of the site, showing its neighborhoods, the village, roads, trails, and parks and open space."
+          fill
+          preload
+          sizes="100vw"
+          className="-z-20 object-cover"
         />
-        <PlaceholderLabel inset={20}>Stock photo: orchard hills sloping down to the lake, soft morning light, no buildings</PlaceholderLabel>
+        {/* A soft linen fade at the bottom keeps the dark title readable over the busy map. */}
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-3/5 bg-gradient-to-t from-linen/90 via-linen/50 to-transparent" />
+        <p className="absolute left-5 top-5 max-w-[calc(100%-40px)] rounded-[14px] bg-label px-3 py-1.5 text-[13px] font-medium leading-[1.35] text-hearth sm:left-8 sm:top-8">
+          {PLAN_DISCLAIMER}
+        </p>
         <Reveal as="h1" kind="head" id="plan-title" className="text-[56px] leading-[0.95] tracking-[-0.03em] text-hearth sm:text-[clamp(72px,7.8vw,112px)]">
           The plan
         </Reveal>
