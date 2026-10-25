@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { CARD, tint, whiteTextGradient } from "@/lib/card-color";
 import { cardHover, imageHover } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
@@ -13,35 +14,35 @@ const tiles = [
     word: "Once in a Generation",
     line: "Land like this, planned with this much care, comes along rarely.",
     image: "Stock photo: wide view of orchards with the lake beyond, golden hour",
-    gradient: "linear-gradient(175deg, #FFF7EE 0%, #EAF6CF 45%, #DDF1FC 100%)",
+    gradient: whiteTextGradient(CARD.sky, { top: tint(CARD.lime.color, 0.4), large: 258, body: 120, fromBottom: true }),
   },
   {
     area: "W",
     word: "A New Way to Retire",
     line: "Walkable streets, care close by, and room for the grandkids.",
     image: "Stock photo (people): couple in their late 60s–70s biking a quiet tree-lined path",
-    gradient: "linear-gradient(160deg, #F8FCEE 0%, #EAF6CF 100%)",
+    gradient: whiteTextGradient(CARD.lime, { large: 182, body: 96, fromBottom: true }),
   },
   {
     area: "M",
     word: "Home for Every Chapter",
     line: "Stay in the community you love as your needs change.",
     image: "AI image, no people · Illustrative concept: cottage porch, two empty chairs, a folded blanket, apple blossoms",
-    gradient: "linear-gradient(170deg, #FFF5F9 0%, #FFE1ED 100%)",
+    gradient: whiteTextGradient(CARD.pink, { large: 322, body: 152, fromBottom: true }),
   },
   {
     area: "S1",
     word: "Unhurried",
     line: "Mornings with nowhere you have to be.",
     image: "AI image, no people: mug on a deck rail, morning mist",
-    gradient: "linear-gradient(180deg, #F3FAFE 0%, #DDF1FC 100%)",
+    gradient: whiteTextGradient(CARD.sky, { large: 144, body: 108, fromBottom: true }),
   },
   {
     area: "S2",
     word: "Care, Close By",
     line: "The hospital campus is a short walk from home.",
     image: "Stock photo (people): older couple on a calm path",
-    gradient: "linear-gradient(160deg, #FFF7EE 0%, #EAF6CF 100%)",
+    gradient: whiteTextGradient(CARD.lavender, { large: 278, body: 180, fromBottom: true }),
   },
 ] as const;
 
@@ -74,7 +75,7 @@ export function Collage() {
                 animate="rest"
                 whileHover={reduce ? undefined : "hover"}
                 variants={cardHover}
-                className={`relative isolate flex w-full flex-col justify-end overflow-hidden rounded-card text-hearth ${l.pad}`}
+                className={`relative isolate flex w-full flex-col justify-end overflow-hidden rounded-card text-white ${l.pad}`}
               >
                 <motion.div variants={imageHover} className="absolute inset-0 -z-10">
                   <PlaceholderImage gradient={tile.gradient} className="absolute inset-0" />

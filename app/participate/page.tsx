@@ -8,6 +8,7 @@ import { UpdateListForm } from "@/components/participate/UpdateListForm";
 import { buttonClass } from "@/components/site/buttons";
 import { JumpLink } from "@/components/site/JumpLink";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { CARD, whiteTextGradient } from "@/lib/card-color";
 
 export const metadata: Metadata = {
   title: "How Can I Participate?",
@@ -45,13 +46,13 @@ export default function ParticipatePage() {
       <section aria-labelledby="participate-title" className="px-2 sm:px-4">
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage
-            gradient="linear-gradient(170deg, #FFF5F9 0%, #FFE1ED 45%, #EAF6CF 100%)"
+            gradient={whiteTextGradient(CARD.pink, { large: 49, body: 64 })}
             className="absolute inset-0 -z-10"
           />
           <PlaceholderLabel inset={20}>
             AI image, no people: open orchard lane with a simple wooden bench, apple trees in spring bloom, soft morning light
           </PlaceholderLabel>
-          <div className="grid w-full items-end gap-3.5 text-hearth min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
+          <div className="grid w-full items-end gap-3.5 text-white min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
             <Reveal as="h1" kind="head" id="participate-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
               How can I participate?
             </Reveal>

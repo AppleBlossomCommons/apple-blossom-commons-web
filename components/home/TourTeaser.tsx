@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { useParallax } from "@/components/motion/useParallax";
 import { buttonClass } from "@/components/site/buttons";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { CARD, softGradient } from "@/lib/card-color";
 
 /**
  * Site tour teaser (content pack, Home section 5). Sand band: text left, a tour still with a
@@ -38,7 +39,7 @@ export function TourTeaser() {
       >
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
-            gradient="linear-gradient(170deg, #FFF7EE 0%, #FFE6CC 100%)"
+            gradient={softGradient(CARD.orange)}
             className="absolute inset-0"
           />
         </motion.div>

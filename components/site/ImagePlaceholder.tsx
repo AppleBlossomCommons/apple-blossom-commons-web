@@ -12,7 +12,8 @@ export function PlaceholderImage({ gradient, style, ...rest }: { gradient: strin
       aria-hidden="true"
       {...rest}
       style={{
-        background: `repeating-linear-gradient(135deg, rgb(255 255 255 / 0.07) 0 2px, rgb(255 255 255 / 0) 2px 16px), ${gradient}`,
+        // No stripe texture: it lightened the color behind white text. The label says what goes here.
+        background: gradient,
         ...style,
       }}
     />

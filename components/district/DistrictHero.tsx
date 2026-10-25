@@ -65,7 +65,7 @@ export function DistrictHero({ slug, n, name, familyLabel, color, summary }: Dis
     <section
       ref={ref}
       aria-labelledby="district-title"
-      className="relative isolate flex h-[calc(100svh-64px)] min-h-[520px] flex-col justify-end overflow-hidden px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)] text-hearth"
+      className="relative isolate flex h-[calc(100svh-64px)] min-h-[520px] flex-col justify-end overflow-hidden px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)] text-white"
     >
       <motion.div style={{ y, background: districtImage(color) }} aria-hidden="true" className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10" />
 
@@ -80,8 +80,8 @@ export function DistrictHero({ slug, n, name, familyLabel, color, summary }: Dis
       </motion.div>
 
       <div className="flex max-w-[760px] flex-col gap-4">
-        <motion.p {...part(1)} className="flex items-center gap-2.5 text-[17px] font-bold">
-          <span aria-hidden="true" className="size-3 rounded-[3px] shadow-[0_0_0_1.5px_var(--hearth)]" style={{ background: color }} />
+        <motion.p {...part(1)} className="flex items-center gap-2.5 text-[19px] font-bold">
+          <span aria-hidden="true" className="size-3 rounded-[3px] shadow-[0_0_0_2px_var(--linen)]" style={{ background: color }} />
           District {n} · {familyLabel}
         </motion.p>
         <motion.h1 {...part(0)} id="district-title" className="text-[clamp(48px,7vw,104px)] leading-[0.95] tracking-[-0.03em]">

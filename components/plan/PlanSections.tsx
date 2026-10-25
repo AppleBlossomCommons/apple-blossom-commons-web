@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { CARD, softGradient, tint, whiteTextGradient } from "@/lib/card-color";
 
 // Copy from docs/10-content-v2.md, "The Plan (/plan)". Image notes from the Phase 1 handoff.
 
@@ -10,11 +11,11 @@ export function PlanHero() {
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
       <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
         <PlaceholderImage
-          gradient="linear-gradient(175deg, #FFF7EE 0%, #EAF6CF 45%, #DDF1FC 100%)"
+          gradient={whiteTextGradient(CARD.sky, { top: tint(CARD.lime.color, 0.4), large: 72, body: 90 })}
           className="absolute inset-0 -z-10"
         />
         <PlaceholderLabel inset={20}>Stock photo: orchard hills sloping down to the lake, soft morning light, no buildings</PlaceholderLabel>
-        <Reveal as="h1" kind="head" id="plan-title" className="text-[56px] leading-[0.95] tracking-[-0.03em] text-hearth sm:text-[clamp(72px,7.8vw,112px)]">
+        <Reveal as="h1" kind="head" id="plan-title" className="text-[56px] leading-[0.95] tracking-[-0.03em] text-white sm:text-[clamp(72px,7.8vw,112px)]">
           The plan
         </Reveal>
       </div>
@@ -75,7 +76,7 @@ export function CareCloseBy() {
       className="grid gap-4 bg-sand p-2 pb-0 sm:p-4 min-[900px]:grid-cols-2"
     >
       <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(160deg, #F8FCEE 0%, #EAF6CF 100%)" className="absolute inset-0" />
+        <PlaceholderImage gradient={softGradient(CARD.lime)} className="absolute inset-0" />
         <PlaceholderLabel>Stock photo (people): older couple on a calm walking path lined with trees; no clinical imagery</PlaceholderLabel>
       </Reveal>
       <div className="flex flex-col justify-center gap-3.5 px-3 pb-12 pt-8 sm:gap-5 sm:px-14 sm:py-16">
@@ -115,9 +116,9 @@ export function WhyChelan() {
       <Reveal
         kind="card"
         index={0}
-        className="relative isolate flex h-[560px] flex-col justify-end gap-3.5 overflow-hidden rounded-card p-[22px] text-hearth sm:h-[680px] sm:gap-5 sm:p-14"
+        className="relative isolate flex h-[560px] flex-col justify-end gap-3.5 overflow-hidden rounded-card p-[22px] text-white sm:h-[680px] sm:gap-5 sm:p-14"
       >
-        <PlaceholderImage gradient="linear-gradient(170deg, #FFF7EE 0%, #FFE6CC 100%)" className="absolute inset-0 -z-10" />
+        <PlaceholderImage gradient={whiteTextGradient(CARD.orange, { large: 49, body: 59 })} className="absolute inset-0 -z-10" />
         <PlaceholderLabel>Stock photo: vineyard rows in autumn</PlaceholderLabel>
         <h2 id="why-title" className="text-[44px] leading-[0.98] sm:text-[clamp(56px,5.6vw,80px)]">
           Why Chelan
@@ -128,7 +129,7 @@ export function WhyChelan() {
         </p>
       </Reveal>
       <Reveal kind="card" index={1} className="relative h-[240px] overflow-hidden rounded-card sm:h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(180deg, #FFFFFF 0%, #EAF6FD 100%)" className="absolute inset-0" />
+        <PlaceholderImage gradient={softGradient(CARD.sky)} className="absolute inset-0" />
         <PlaceholderLabel>Stock photo: snowy trail in winter</PlaceholderLabel>
       </Reveal>
     </section>
