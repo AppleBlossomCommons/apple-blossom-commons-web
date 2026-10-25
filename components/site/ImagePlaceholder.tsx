@@ -1,18 +1,18 @@
 import type { ComponentProps } from "react";
 
 /**
- * TEMPORARY image area: a shaded gradient with a label saying what goes there
+ * TEMPORARY image area: one flat pale color with a label saying what goes there
  * (Phase 1 handoff, "Image areas are labeled placeholders"). Replace each one with the
  * licensed or generated image from the Imagery plan in docs/10-content-v2.md before launch.
  * The label is a note for reviewers, so screen readers skip it.
  */
-export function PlaceholderImage({ gradient, style, ...rest }: { gradient: string } & ComponentProps<"div">) {
+export function PlaceholderImage({ fill, style, ...rest }: { fill: string } & ComponentProps<"div">) {
   return (
     <div
       aria-hidden="true"
       {...rest}
       style={{
-        background: `repeating-linear-gradient(135deg, rgb(255 255 255 / 0.07) 0 2px, rgb(255 255 255 / 0) 2px 16px), ${gradient}`,
+        background: fill,
         ...style,
       }}
     />

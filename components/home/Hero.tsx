@@ -11,7 +11,7 @@ const HEADLINE = "A community planned to grow with Chelan, over decades.";
 const SUBLINE = "Homes for every stage of life, a short walk from the hospital campus, orchards and a small wine village.";
 
 /**
- * Home hero: an inset image card with hearth text over a very light gradient. HomeIntro animates the
+ * Home hero: an inset image card with hearth text on one flat pale color. HomeIntro animates the
  * parts marked data-intro-el (image, headline words, subline, buttons, label); the image
  * layer also drifts with the scroll (useParallax).
  *
@@ -30,7 +30,7 @@ export function Hero() {
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
             data-intro-el="media"
-            gradient="linear-gradient(185deg, #FFF7EE 0%, #FFE1ED 40%, #DDF1FC 100%)"
+            fill="#DDF1FC"
             className="absolute inset-0"
           />
         </motion.div>

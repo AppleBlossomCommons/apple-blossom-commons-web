@@ -203,7 +203,7 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 
 ## Colors
 
-**Warm palette v1** (owner-approved Oct 22, 2026), brightened with vibrant accents on Oct 25, 2026, then lightened the same day. Image placeholders are very light gradients with hearth text. The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
+**Warm palette v1** (owner-approved Oct 22, 2026), brightened with vibrant accents on Oct 25, 2026, then lightened the same day. Image placeholders are one flat, very light color with hearth text (no gradients). The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
 
 ### Grounds and text
 - **Linen** (`linen`): page background, header, cards, the map frame and district card on the explorer, roundel fill, the source popover.
