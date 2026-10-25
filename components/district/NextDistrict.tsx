@@ -17,7 +17,7 @@ export function NextDistrict({ slug, name, color }: { slug: string; name: string
         </span>
         <span
           aria-hidden="true"
-          className="flex size-14 items-center justify-center rounded-full bg-gold text-2xl text-hearth transition-[translate] duration-300 ease-out group-hover:translate-x-1"
+          className="flex size-14 items-center justify-center rounded-full bg-orange text-2xl text-hearth transition-[translate] duration-300 ease-out group-hover:translate-x-1"
         >
           →
         </span>

@@ -4,17 +4,17 @@
     "source": "July 2026 masterplan (jeffrey mak: architect ltd) and the Aug 25, 2026 plan stats workbook, via the Apple Blossom Commons research project",
     "note": "All figures are planning concepts. 'publicFacts' may be shown on the site; 'internalNotes' must never be rendered. Keys match data/district-geometry-v1.json.",
     "families": {
-      "residential": { "label": "Residential", "colorFamily": "warm wheat" },
-      "senior": { "label": "Senior living", "colorFamily": "sage" },
-      "commercial": { "label": "Commercial & hospitality", "colorFamily": "terracotta" },
-      "civic": { "label": "Health & civic", "colorFamily": "lake blue" },
-      "parks": { "label": "Parks & open space", "colorFamily": "orchard green" }
+      "residential": { "label": "Residential", "colorFamily": "warm orange" },
+      "senior": { "label": "Senior living", "colorFamily": "lavender" },
+      "commercial": { "label": "Commercial & hospitality", "colorFamily": "soft pink" },
+      "civic": { "label": "Health & civic", "colorFamily": "sky blue" },
+      "parks": { "label": "Parks & open space", "colorFamily": "lime green" }
     }
   },
   "districts": [
     {
       "key": "wine", "n": 1, "slug": "wine-village", "code": "WINE",
-      "name": "Chelan Wine Village", "family": "commercial", "color": "#C98B6B",
+      "name": "Chelan Wine Village", "family": "commercial", "color": "#FFB3D1",
       "summary": "The central village: wineries and breweries, restaurants, boutique retail and gathering spaces along Vintner's Walk.",
       "publicFacts": ["The Barrel House, Tasting Courtyard, Market Hall", "Harvest Square, the main plaza", "188,900 sf commercial · ~21 apartments (planning concept)"],
       "status": "verified",
@@ -22,7 +22,7 @@
     },
     {
       "key": "wellness", "n": 2, "slug": "wellness-district", "code": "WELL",
-      "name": "Wellness District", "family": "civic", "color": "#7FA3BC",
+      "name": "Wellness District", "family": "civic", "color": "#69B9E7",
       "summary": "Medical uses around the Lake Chelan Health Hospital campus, with clinics and rehabilitation close to the senior homes.",
       "publicFacts": ["Lake Chelan Health Hospital (existing)", "Columbia Valley Community Health", "Lot 17 medical assisted living", "Two new 12,000 sf buildings (planning concept)"],
       "status": "verified",
@@ -30,7 +30,7 @@
     },
     {
       "key": "orchardgrove", "n": 3, "slug": "orchard-grove", "code": "ORCH",
-      "name": "Orchard Grove", "family": "senior", "color": "#A9B48A",
+      "name": "Orchard Grove", "family": "senior", "color": "#B9A6EA",
       "summary": "55+ cottage homes, townhomes and apartments designed for owners who want to age in place.",
       "publicFacts": ["63 cottage homes · 30 townhomes · ~23 apartments (planning concept)", "Recreation center with gardens and track"],
       "status": "verified",
@@ -38,7 +38,7 @@
     },
     {
       "key": "heritage", "n": 4, "slug": "heritage-grove", "code": "HERIT",
-      "name": "Heritage Grove", "family": "senior", "color": "#BEC69F",
+      "name": "Heritage Grove", "family": "senior", "color": "#D0C3F1",
       "summary": "Homes for seniors who prefer or require assistance, from independent living to memory care.",
       "publicFacts": ["Independent living · assisted living", "Memory care · nursing", "335,000 sf (planning concept)"],
       "status": "open",
@@ -46,7 +46,7 @@
     },
     {
       "key": "abr", "n": 5, "slug": "apple-blossom-residence", "code": "ABR",
-      "name": "Apple Blossom Residence", "family": "residential", "color": "#D8C27F",
+      "name": "Apple Blossom Residence", "family": "residential", "color": "#F8BE88",
       "summary": "Market-rate apartments, townhomes and detached homes, buffered from Chelan Falls Road and Apple Blossom Drive.",
       "publicFacts": ["64 townhomes · 37 duplex / single-family (planning concept)", "Apartment count under review"],
       "status": "open",
@@ -54,7 +54,7 @@
     },
     {
       "key": "harvest", "n": 6, "slug": "harvest-crossing", "code": "HARV",
-      "name": "Harvest Crossing", "family": "residential", "color": "#CDB06A",
+      "name": "Harvest Crossing", "family": "residential", "color": "#F4A259",
       "summary": "Workforce homes close to the village's shops and services, with a live-work zone.",
       "publicFacts": ["200 apartments (working figure)", "32 townhomes (planning concept)"],
       "status": "working-figure",
@@ -62,7 +62,7 @@
     },
     {
       "key": "summit", "n": 7, "slug": "summit-recreation-park", "code": "SUMMIT",
-      "name": "Summit Recreation Park", "family": "parks", "color": "#A1C4A6",
+      "name": "Summit Recreation Park", "family": "parks", "color": "#C4DE8A",
       "summary": "Sports fields, a seasonal roller and ice rink, a playground and a pond, in two parts north and south.",
       "publicFacts": ["Existing soccer and baseball fields", "Decorative pond and play areas", "Trails linking the districts"],
       "status": "verified",
@@ -70,7 +70,7 @@
     },
     {
       "key": "discovery", "n": 8, "slug": "discovery-commons", "code": "DISC",
-      "name": "Discovery Commons", "family": "civic", "color": "#97B3C8",
+      "name": "Discovery Commons", "family": "civic", "color": "#9CD0EF",
       "summary": "An aspiration for lifelong learning: a potential K-12 school, community center and library.",
       "publicFacts": ["Aspirational, not a commitment", "150,000 sf shown as a concept"],
       "status": "aspirational",
@@ -78,7 +78,7 @@
     },
     {
       "key": "preserve", "n": 9, "slug": "orchard-preserve", "code": "PRES",
-      "name": "Orchard Preserve", "family": "parks", "color": "#83AF8C",
+      "name": "Orchard Preserve", "family": "parks", "color": "#A8CF55",
       "summary": "Open space with trails and a scenic overlook at the highest point of the site.",
       "publicFacts": ["Nature trail and overlook", "Open space preserved", "RV park and campground"],
       "status": "verified",
@@ -86,7 +86,7 @@
     },
     {
       "key": "hotel", "n": 10, "slug": "grand-orchard-hotel", "code": "HOTEL",
-      "name": "Grand Orchard Hotel", "family": "commercial", "color": "#B8754F",
+      "name": "Grand Orchard Hotel", "family": "commercial", "color": "#FF95BF",
       "summary": "A cottage-style hotel with event space at the edge of the village.",
       "publicFacts": ["65 hotel cottages, 1,200 sf each (planning concept)", "Hotel apartments, 3 storeys, 30,000 sf (planning concept)", "24-hour automated retail"],
       "status": "open",

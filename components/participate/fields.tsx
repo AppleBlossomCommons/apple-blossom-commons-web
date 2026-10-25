@@ -67,7 +67,7 @@ export function Honeypot() {
 export function Sent({ children }: { children: ReactNode }) {
   return (
     <div role="status" tabIndex={-1} className="flex min-h-[260px] flex-col justify-center gap-4 outline-none sm:min-h-[360px]" data-sent>
-      <span aria-hidden="true" className="flex size-14 items-center justify-center rounded-full bg-gold text-[26px] font-bold">
+      <span aria-hidden="true" className="flex size-14 items-center justify-center rounded-full bg-lime text-[26px] font-bold text-hearth">
         ✓
       </span>
       <p className="max-w-[460px] font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[34px]">{children}</p>

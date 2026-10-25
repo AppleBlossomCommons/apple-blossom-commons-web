@@ -45,7 +45,7 @@ export default function ParticipatePage() {
       <section aria-labelledby="participate-title" className="px-2 sm:px-4">
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage
-            gradient="linear-gradient(170deg, #F7E4DF 0%, #E9D3C3 35%, #C9CFA6 70%, #93A985 100%)"
+            gradient="linear-gradient(170deg, #FFE9F1 0%, #FFC4DB 30%, #B5D66E 60%, #6E9A2E 100%)"
             className="absolute inset-0 -z-10"
           />
           <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.64)_100%)]" />

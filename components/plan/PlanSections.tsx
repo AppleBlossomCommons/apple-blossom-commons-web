@@ -10,7 +10,7 @@ export function PlanHero() {
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
       <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
         <PlaceholderImage
-          gradient="linear-gradient(175deg, #F5D9A6 0%, #E5C48E 30%, #B9BC8C 58%, #8FB0AE 80%, #6A93A0 100%)"
+          gradient="linear-gradient(175deg, #FFE3B3 0%, #FBC88A 24%, #A8CF55 44%, #4F9FD2 64%, #2A78AB 100%)"
           className="absolute inset-0 -z-10"
         />
         <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_40%,rgb(45_32_24/0.6)_100%)]" />
@@ -76,7 +76,7 @@ export function CareCloseBy() {
       className="grid gap-4 bg-sand p-2 pb-0 sm:p-4 min-[900px]:grid-cols-2"
     >
       <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(160deg, #EFDDAE 0%, #C9CFA0 50%, #93A985 100%)" className="absolute inset-0" />
+        <PlaceholderImage gradient="linear-gradient(160deg, #FFF0C8 0%, #B5D66E 48%, #78A635 100%)" className="absolute inset-0" />
         <PlaceholderLabel>Stock photo (people): older couple on a calm walking path lined with trees; no clinical imagery</PlaceholderLabel>
       </Reveal>
       <div className="flex flex-col justify-center gap-3.5 px-3 pb-12 pt-8 sm:gap-5 sm:px-14 sm:py-16">
@@ -118,7 +118,7 @@ export function WhyChelan() {
         index={0}
         className="relative isolate flex h-[560px] flex-col justify-end gap-3.5 overflow-hidden rounded-card p-[22px] text-white sm:h-[680px] sm:gap-5 sm:p-14"
       >
-        <PlaceholderImage gradient="linear-gradient(170deg, #F3D6A4 0%, #E2B27E 40%, #B98C66 100%)" className="absolute inset-0 -z-10" />
+        <PlaceholderImage gradient="linear-gradient(170deg, #FFE3B3 0%, #F8BE88 38%, #E8893A 68%, #A9581F 100%)" className="absolute inset-0 -z-10" />
         <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.66)_100%)]" />
         <PlaceholderLabel>Stock photo: vineyard rows in autumn</PlaceholderLabel>
         <h2 id="why-title" className="text-[44px] leading-[0.98] sm:text-[clamp(56px,5.6vw,80px)]">
@@ -130,7 +130,7 @@ export function WhyChelan() {
         </p>
       </Reveal>
       <Reveal kind="card" index={1} className="relative h-[240px] overflow-hidden rounded-card sm:h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(180deg, #F4F1EC 0%, #DCE3E4 45%, #A9BDC4 100%)" className="absolute inset-0" />
+        <PlaceholderImage gradient="linear-gradient(180deg, #FFFFFF 0%, #DCEEFA 45%, #8CCBEF 100%)" className="absolute inset-0" />
         <PlaceholderLabel>Stock photo: snowy trail in winter</PlaceholderLabel>
       </Reveal>
     </section>

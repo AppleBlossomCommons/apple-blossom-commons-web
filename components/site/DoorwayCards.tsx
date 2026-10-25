@@ -15,7 +15,7 @@ const doorways = [
     text: "Learn how the plan is reviewed and share your views.",
     cta: "How Can I Participate?",
     image: "Stock photo (people): two neighbors talking over a garden fence",
-    gradient: "linear-gradient(165deg, #E9E3C4 0%, #C8CFA6 45%, #8EA582 100%)",
+    gradient: "linear-gradient(165deg, #E3F2FB 0%, #8CCBEF 45%, #3F94C9 100%)",
   },
   {
     href: "/participate#update-list",
@@ -24,7 +24,7 @@ const doorways = [
     text: "Join the update list for news as homes and care options take shape.",
     cta: "How Can I Participate?",
     image: "AI image, no people · Illustrative concept: cottage front door with a wreath and blossoms",
-    gradient: "linear-gradient(170deg, #F7DCD2 0%, #EBC2AC 40%, #C99D86 100%)",
+    gradient: "linear-gradient(170deg, #FFE4EE 0%, #FFB3D1 40%, #E07AA6 100%)",
   },
   {
     href: "/partners",
@@ -33,7 +33,7 @@ const doorways = [
     text: "Explore investment and development opportunities.",
     cta: "Partner with Us",
     image: "Stock photo: open orchard rows on a gentle slope, golden hour",
-    gradient: "linear-gradient(175deg, #F5D9A6 0%, #DDBF8A 40%, #A9A57A 100%)",
+    gradient: "linear-gradient(175deg, #F1F8D8 0%, #A8CF55 45%, #6E9A2E 100%)",
   },
 ];
 

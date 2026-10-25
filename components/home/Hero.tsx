@@ -30,7 +30,7 @@ export function Hero() {
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
             data-intro-el="media"
-            gradient="linear-gradient(185deg, #F7E2B8 0%, #F0C893 28%, #D8B79A 46%, #A5BFC0 64%, #6E97A3 100%)"
+            gradient="linear-gradient(185deg, #FFE3B3 0%, #FBC88A 24%, #FFB3D1 42%, #7DC2EA 60%, #2F7FB3 100%)"
             className="absolute inset-0"
           />
         </motion.div>
