@@ -2,7 +2,7 @@
 
 *Approved Oct 14–15, 2026. Visual specimen: "Orchard Atlas Specimen" artifact (claude.ai/artifact/TSEz47922NjnkNG4xEYFo8).*
 
-The site should read like a planning atlas edited by a good magazine: warm linen ground, serif headlines, precise cartography, and a sourced number behind every figure. The two immersive "stages", the district explorer and the tour, open full-bleed on a sand ground inside that calm frame, then return the visitor to the page. (Colors updated to Warm palette v1, Oct 22, 2026; there are no dark grounds.)
+The site should read like a planning atlas edited by a good magazine: warm linen ground, plain sans-serif headlines, precise cartography, and a sourced number behind every figure. The two immersive "stages", the district explorer and the tour, open full-bleed on a sand ground inside that calm frame, then return the visitor to the page. (Colors updated to Warm palette v1, Oct 22, 2026; there are no dark grounds.)
 
 **Mood:** grounded, unhurried, exact, warm, seasonal. **Not:** glossy, themed (no faux-Tuscan), techno-futurist, salesy.
 
@@ -59,11 +59,13 @@ Districts are told apart by **numbered roundels and names**, not by color alone.
 
 | Use | Typeface | Notes |
 |---|---|---|
-| Headlines, long reading | Source Serif 4 (variable, optical sizes) | weight 600 for headlines |
-| Interface, captions, navigation | Inter | 400 / 500 / 600 |
+| Headlines | Arial (system font, with Helvetica and sans-serif as fallbacks) | weight 600 |
+| Body, long reading, interface, captions, navigation | Atkinson Hyperlegible Next | 400 / 500 / 600 |
 | Figures, source chips, map labels, eyebrows | IBM Plex Mono | tabular numerals; uppercase eyebrows with letter-spacing 0.06–0.08em |
 
-Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio up to a fluid display size of about 88px. Load everything through `next/font` with no layout shift.
+(Headlines changed to Arial on Oct 24, 2026. Before that they used Bricolage Grotesque from the design handoff, which had replaced Source Serif 4. Atkinson Hyperlegible Next replaced Inter in the same handoff.)
+
+Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio up to a fluid display size of about 88px. Load the web fonts (Atkinson Hyperlegible Next, IBM Plex Mono) through `next/font` with no layout shift. Arial is a system font and is not downloaded.
 
 ## Layout
 
