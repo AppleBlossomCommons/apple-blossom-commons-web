@@ -47,12 +47,12 @@ Rejected for v1: a dark, cinematic, 3D-first landing page. It depends on assets 
 
 ### District colors: by land-use family, not one hue per district
 
-Owner-approved vibrant colors, Oct 25, 2026, lightened the same day. Each family has a main shade and a lighter one. The 2D plan and the 3D model both read these from `data/districts.json`. The 3D plates are 94% opaque with a soft glow in their own color so the light fills are not darkened by the lighting.
+Owner-approved vibrant colors, Oct 25, 2026, lightened the same day. Each family has a main shade and a lighter one, except that the owner swapped Apple Blossom Residence and Heritage Grove on Oct 25, 2026 (Residence lavender, Heritage Grove yellow), so those two no longer match their family. Districts are still told apart by number and name. The 2D plan and the 3D model both read these from `data/districts.json`. The 3D plates are 94% opaque with a soft glow in their own color so the light fills are not darkened by the lighting.
 
 | Family | Districts | Colors |
 |---|---|---|
-| Residential (warm yellow and orange) | Apple Blossom Residence, Harvest Crossing | #FFE380 (yellow, Oct 25, 2026; was #FFD9B0), #FFC88F |
-| Senior living (lavender) | Orchard Grove, Heritage Grove | #D6CBF7, #E4DCFA |
+| Residential (lavender and orange) | Apple Blossom Residence, Harvest Crossing | #E4DCFA (lavender), #FFC88F |
+| Senior living (lavender and yellow) | Orchard Grove, Heritage Grove | #D6CBF7, #FFE380 (yellow) |
 | Commercial & hospitality (soft pink) | Chelan Wine Village, Grand Orchard Hotel | #FFC4DC, #FFAED0 |
 | Health & civic (sky blue) | Wellness District, Discovery Commons | #9ED8F5, #BDE5F8 |
 | Parks & open space (lime green) | Summit Recreation Park, Orchard Preserve | #DDF2AE, #CDEB8B |

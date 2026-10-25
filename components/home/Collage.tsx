@@ -20,14 +20,14 @@ const tiles = [
     word: "A New Way to Retire",
     line: "Walkable streets, care close by, and room for the grandkids.",
     image: "Stock photo (people): couple in their late 60s–70s biking a quiet tree-lined path",
-    fill: "#EAF6CF",
+    fill: "#FFE1ED",
   },
   {
     area: "M",
     word: "Home for Every Chapter",
     line: "Stay in the community you love as your needs change.",
     image: "AI image, no people · Illustrative concept: cottage porch, two empty chairs, a folded blanket, apple blossoms",
-    fill: "#FFE1ED",
+    fill: "#EAF6CF",
   },
   {
     area: "S1",

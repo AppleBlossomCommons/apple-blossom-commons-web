@@ -4,8 +4,8 @@
     "source": "July 2026 masterplan (jeffrey mak: architect ltd) and the Aug 25, 2026 plan stats workbook, via the Apple Blossom Commons research project",
     "note": "All figures are planning concepts. 'publicFacts' may be shown on the site; 'internalNotes' must never be rendered. Keys match data/district-geometry-v1.json.",
     "families": {
-      "residential": { "label": "Residential", "colorFamily": "warm yellow and orange" },
-      "senior": { "label": "Senior living", "colorFamily": "lavender" },
+      "residential": { "label": "Residential", "colorFamily": "lavender and orange" },
+      "senior": { "label": "Senior living", "colorFamily": "lavender and yellow" },
       "commercial": { "label": "Commercial & hospitality", "colorFamily": "soft pink" },
       "civic": { "label": "Health & civic", "colorFamily": "sky blue" },
       "parks": { "label": "Parks & open space", "colorFamily": "lime green" }
@@ -38,7 +38,7 @@
     },
     {
       "key": "heritage", "n": 4, "slug": "heritage-grove", "code": "HERIT",
-      "name": "Heritage Grove", "family": "senior", "color": "#E4DCFA",
+      "name": "Heritage Grove", "family": "senior", "color": "#FFE380",
       "summary": "Homes for seniors who prefer or require assistance, from independent living to memory care.",
       "publicFacts": ["Independent living · assisted living", "Memory care · nursing", "335,000 sf (planning concept)"],
       "status": "open",
@@ -46,7 +46,7 @@
     },
     {
       "key": "abr", "n": 5, "slug": "apple-blossom-residence", "code": "ABR",
-      "name": "Apple Blossom Residence", "family": "residential", "color": "#FFE380",
+      "name": "Apple Blossom Residence", "family": "residential", "color": "#E4DCFA",
       "summary": "Market-rate apartments, townhomes and detached homes, buffered from Chelan Falls Road and Apple Blossom Drive.",
       "publicFacts": ["64 townhomes · 37 duplex / single-family (planning concept)", "Apartment count under review"],
       "status": "open",
