@@ -38,7 +38,7 @@ export function TourTeaser() {
       >
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
-            fill="#FFE6CC"
+            fill="#FFF2B3"
             className="absolute inset-0"
           />
         </motion.div>

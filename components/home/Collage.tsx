@@ -34,7 +34,7 @@ const tiles = [
     word: "Unhurried",
     line: "Mornings with nowhere you have to be.",
     image: "AI image, no people: mug on a deck rail, morning mist",
-    fill: "#FFE6CC",
+    fill: "#FFF2B3",
   },
   {
     area: "S2",
