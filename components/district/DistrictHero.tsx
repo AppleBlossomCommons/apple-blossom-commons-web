@@ -6,7 +6,7 @@ import { useParallax } from "@/components/motion/useParallax";
 import { PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 import { BackToMapLink } from "@/components/transitions/TransitionLinks";
 import { useSiteTransition } from "@/components/transitions/SiteTransition";
-import { DISTRICT_HERO_FADE, districtImage, PLAN_SHEET } from "@/lib/district-image";
+import { districtImage, PLAN_SHEET } from "@/lib/district-image";
 import { ease } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
@@ -65,10 +65,9 @@ export function DistrictHero({ slug, n, name, familyLabel, color, summary }: Dis
     <section
       ref={ref}
       aria-labelledby="district-title"
-      className="relative isolate flex h-[calc(100svh-64px)] min-h-[520px] flex-col justify-end overflow-hidden px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)] text-white"
+      className="relative isolate flex h-[calc(100svh-64px)] min-h-[520px] flex-col justify-end overflow-hidden px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)] text-hearth"
     >
       <motion.div style={{ y, background: districtImage(color) }} aria-hidden="true" className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10" />
-      <span aria-hidden="true" className="absolute inset-0 -z-10" style={{ background: DISTRICT_HERO_FADE }} />
 
       <motion.div {...part(3)} className="absolute left-4 top-4">
         <BackToMapLink className="inline-flex h-12 items-center gap-2 rounded-full bg-linen px-5 text-base font-bold text-hearth no-underline transition-colors duration-150 hover:bg-white hover:text-hearth">
@@ -82,7 +81,7 @@ export function DistrictHero({ slug, n, name, familyLabel, color, summary }: Dis
 
       <div className="flex max-w-[760px] flex-col gap-4">
         <motion.p {...part(1)} className="flex items-center gap-2.5 text-[17px] font-bold">
-          <span aria-hidden="true" className="size-3 rounded-[3px] shadow-[0_0_0_2px_var(--linen)]" style={{ background: color }} />
+          <span aria-hidden="true" className="size-3 rounded-[3px] shadow-[0_0_0_1.5px_var(--hearth)]" style={{ background: color }} />
           District {n} · {familyLabel}
         </motion.p>
         <motion.h1 {...part(0)} id="district-title" className="text-[clamp(48px,7vw,104px)] leading-[0.95] tracking-[-0.03em]">

@@ -7,26 +7,26 @@ colors:
   hearth: "#3b2f2a"
   muted: "#73635a"
   line: "#e6daca"
-  orange: "#f4a259"
-  orange-hover: "#ec9447"
-  sky: "#69b9e7"
-  lime: "#a8cf55"
-  pink: "#ffb3d1"
-  lavender: "#b9a6ea"
+  orange: "#ffc88f"
+  orange-hover: "#ffb877"
+  sky: "#9ed8f5"
+  lime: "#cdeb8b"
+  pink: "#ffc4dc"
+  lavender: "#d6cbf7"
   gold: "#f2b544"
   lake-deep: "#2f6f88"
   sage-deep: "#5e7a4f"
   rose: "#b85c66"
-  plan-residential: "#f8be88"
-  plan-residential-2: "#f4a259"
-  plan-senior: "#b9a6ea"
-  plan-senior-2: "#d0c3f1"
-  plan-commercial: "#ffb3d1"
-  plan-commercial-2: "#ff95bf"
-  plan-civic: "#69b9e7"
-  plan-civic-2: "#9cd0ef"
-  plan-parks: "#c4de8a"
-  plan-parks-2: "#a8cf55"
+  plan-residential: "#ffd9b0"
+  plan-residential-2: "#ffc88f"
+  plan-senior: "#d6cbf7"
+  plan-senior-2: "#e4dcfa"
+  plan-commercial: "#ffc4dc"
+  plan-commercial-2: "#ffaed0"
+  plan-civic: "#9ed8f5"
+  plan-civic-2: "#bde5f8"
+  plan-parks: "#ddf2ae"
+  plan-parks-2: "#cdeb8b"
 typography:
   display:
     fontFamily: "Source Serif 4, Georgia, serif"
@@ -196,14 +196,14 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 **Key Characteristics:**
 - Linen and sand grounds, hearth text, orange primary buttons, gold for selection, lake-deep for links and focus.
 - Vibrant fills (sky, lime, orange, pink, lavender) for buttons, cards, map districts and placeholder imagery; never as text.
-- Hairline rules (1px) for all structure; no card grids and no shadows on page surfaces.
+- No outlines around boxes: space and fill color separate cards, map frames and charts. Only form fields, FAQ dividers and the 3px column bars keep a line.
 - Source Serif 4 headlines at weight 600, Inter interface and body, IBM Plex Mono for figures, chips, roundels and map labels.
 - District colors grouped by land-use family, always paired with a number and a name.
 - Light only: no dark sections and no dark mode.
 
 ## Colors
 
-**Warm palette v1** (owner-approved Oct 22, 2026), brightened with vibrant accents on Oct 25, 2026. The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
+**Warm palette v1** (owner-approved Oct 22, 2026), brightened with vibrant accents on Oct 25, 2026, then lightened the same day. Image placeholders are very light gradients with hearth text. The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
 
 ### Grounds and text
 - **Linen** (`linen`): page background, header, cards, the map frame and district card on the explorer, roundel fill, the source popover.

@@ -36,7 +36,7 @@ export function AtAGlance({
         <Reveal kind="fade">
           <ul className="flex flex-col">
             {facts.map((fact) => (
-              <li key={fact} className="border-t border-line py-4 text-[19px]">
+              <li key={fact} className="py-3 text-[19px]">
                 {fact}
               </li>
             ))}
@@ -50,7 +50,7 @@ export function AtAGlance({
         <BackToMapLink
           tabIndex={-1}
           aria-hidden="true"
-          className="relative block aspect-[1023/694] w-full overflow-hidden rounded-card bg-sand shadow-[inset_0_0_0_1px_var(--line)]"
+          className="relative block aspect-[1023/694] w-full overflow-hidden rounded-card bg-sand"
         >
           <svg viewBox={viewBox} className="absolute inset-[4%] size-[92%] overflow-visible">
             {districts.map((d) =>

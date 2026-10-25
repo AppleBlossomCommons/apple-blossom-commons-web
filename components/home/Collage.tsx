@@ -13,40 +13,35 @@ const tiles = [
     word: "Once in a Generation",
     line: "Land like this, planned with this much care, comes along rarely.",
     image: "Stock photo: wide view of orchards with the lake beyond, golden hour",
-    gradient: "linear-gradient(175deg, #FFE3B3 0%, #FBC88A 24%, #A8CF55 44%, #4F9FD2 64%, #2A78AB 100%)",
-    fade: "45%",
+    gradient: "linear-gradient(175deg, #FFF7EE 0%, #EAF6CF 45%, #DDF1FC 100%)",
   },
   {
     area: "W",
     word: "A New Way to Retire",
     line: "Walkable streets, care close by, and room for the grandkids.",
     image: "Stock photo (people): couple in their late 60s–70s biking a quiet tree-lined path",
-    gradient: "linear-gradient(160deg, #EAF4C8 0%, #A8CF55 45%, #6E9A2E 100%)",
-    fade: "30%",
+    gradient: "linear-gradient(160deg, #F8FCEE 0%, #EAF6CF 100%)",
   },
   {
     area: "M",
     word: "Home for Every Chapter",
     line: "Stay in the community you love as your needs change.",
     image: "AI image, no people · Illustrative concept: cottage porch, two empty chairs, a folded blanket, apple blossoms",
-    gradient: "linear-gradient(170deg, #FFE4EE 0%, #FFB3D1 40%, #E07AA6 100%)",
-    fade: "45%",
+    gradient: "linear-gradient(170deg, #FFF5F9 0%, #FFE1ED 100%)",
   },
   {
     area: "S1",
     word: "Unhurried",
     line: "Mornings with nowhere you have to be.",
     image: "AI image, no people: mug on a deck rail, morning mist",
-    gradient: "linear-gradient(180deg, #F2F8FC 0%, #BFE0F4 40%, #4FA6DA 100%)",
-    fade: "30%",
+    gradient: "linear-gradient(180deg, #F3FAFE 0%, #DDF1FC 100%)",
   },
   {
     area: "S2",
     word: "Care, Close By",
     line: "The hospital campus is a short walk from home.",
     image: "Stock photo (people): older couple on a calm path",
-    gradient: "linear-gradient(160deg, #FFF0C8 0%, #B5D66E 48%, #78A635 100%)",
-    fade: "30%",
+    gradient: "linear-gradient(160deg, #FFF7EE 0%, #EAF6CF 100%)",
   },
 ] as const;
 
@@ -79,16 +74,11 @@ export function Collage() {
                 animate="rest"
                 whileHover={reduce ? undefined : "hover"}
                 variants={cardHover}
-                className={`relative isolate flex w-full flex-col justify-end overflow-hidden rounded-card text-white ${l.pad}`}
+                className={`relative isolate flex w-full flex-col justify-end overflow-hidden rounded-card text-hearth ${l.pad}`}
               >
                 <motion.div variants={imageHover} className="absolute inset-0 -z-10">
                   <PlaceholderImage gradient={tile.gradient} className="absolute inset-0" />
                 </motion.div>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 -z-10"
-                  style={{ background: `linear-gradient(180deg, rgb(45 32 24 / 0) ${tile.fade}, rgb(45 32 24 / 0.64) 100%)` }}
-                />
                 <PlaceholderLabel inset={tile.area.startsWith("S") ? 14 : 16}>
                   {tile.image}
                 </PlaceholderLabel>

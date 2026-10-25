@@ -11,7 +11,7 @@ const HEADLINE = "A community planned to grow with Chelan, over decades.";
 const SUBLINE = "Homes for every stage of life, a short walk from the hospital campus, orchards and a small wine village.";
 
 /**
- * Home hero: an inset image card with white text over a soft fade. HomeIntro animates the
+ * Home hero: an inset image card with hearth text over a very light gradient. HomeIntro animates the
  * parts marked data-intro-el (image, headline words, subline, buttons, label); the image
  * layer also drifts with the scroll (useParallax).
  *
@@ -30,16 +30,15 @@ export function Hero() {
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
             data-intro-el="media"
-            gradient="linear-gradient(185deg, #FFE3B3 0%, #FBC88A 24%, #FFB3D1 42%, #7DC2EA 60%, #2F7FB3 100%)"
+            gradient="linear-gradient(185deg, #FFF7EE 0%, #FFE1ED 40%, #DDF1FC 100%)"
             className="absolute inset-0"
           />
         </motion.div>
-        <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.62)_100%)]" />
         <PlaceholderLabel data-intro-el="tag">
           Stock video, 20–30 s loop: early-morning aerial, lake and orchards · still image when reduced motion is on
         </PlaceholderLabel>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] items-end gap-[clamp(20px,4vw,64px)] text-white">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] items-end gap-[clamp(20px,4vw,64px)] text-hearth">
           <h1 id="home-title" className="min-w-0 text-[clamp(44px,5.8vw,84px)] leading-[0.98]">
             {/* Screen readers get the sentence whole; the per-word spans are only for the blur-in. */}
             <span className="sr-only">{HEADLINE}</span>
@@ -60,7 +59,7 @@ export function Hero() {
               <Link href="/plan" data-intro-el="btn" className={buttonClass("primary", "lg")}>
                 Explore the plan
               </Link>
-              <Link href="/tour" data-intro-el="btn" className={buttonClass("linen", "lg")}>
+              <Link href="/tour" data-intro-el="btn" className={buttonClass("secondary", "lg")}>
                 Take the site tour
               </Link>
             </div>

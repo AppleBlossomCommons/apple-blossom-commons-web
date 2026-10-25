@@ -18,8 +18,8 @@ export function MigrationChart() {
   const max = Math.max(...rows.map((r) => Math.abs(r.value)));
 
   return (
-    <figure className="flex min-w-0 flex-col gap-3.5 sm:gap-[18px] sm:rounded-[8px] sm:border sm:border-line sm:bg-linen sm:p-7">
-      <div className="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-y-3.5 rounded-[8px] border border-line bg-linen px-3.5 py-[18px] [--fill:0.61] sm:order-2 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-y-[18px] sm:border-0 sm:bg-transparent sm:p-0 sm:[--fill:0.7]">
+    <figure className="flex min-w-0 flex-col gap-3.5 sm:gap-[18px] sm:rounded-[8px] sm:bg-linen sm:p-7">
+      <div className="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-y-3.5 rounded-[8px] bg-linen px-3.5 py-[18px] [--fill:0.61] sm:order-2 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-y-[18px] sm:border-0 sm:bg-transparent sm:p-0 sm:[--fill:0.7]">
         {rows.map((r) => {
           const negative = r.value < 0;
           const width = `calc(50% * var(--fill) * ${Math.abs(r.value) / max})`;

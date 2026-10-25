@@ -16,16 +16,16 @@
   --muted: #73635a;
   --line: #e6daca;
   /*
-   * Vibrant accents (owner-approved 2026-10-25). They are fills only: text on them is always
-   * hearth (5.5:1 or better) and they are never used as text color, because they are too light.
+   * Vibrant accents (owner-approved 2026-10-25, then lightened the same day). Fills only: text on them is always
+   * hearth (7.6:1 or better), never muted, and they are never used as text color, because they are too light.
    */
-  --orange: #f4a259;
-  /* Primary button hover: a deeper orange (hearth text on it is 5.5:1). */
-  --orange-hover: #ec9447;
-  --sky: #69b9e7;
-  --lime: #a8cf55;
-  --pink: #ffb3d1;
-  --lavender: #b9a6ea;
+  --orange: #ffc88f;
+  /* Primary button hover: a slightly deeper orange (hearth text on it is 7.6:1). */
+  --orange-hover: #ffb877;
+  --sky: #9ed8f5;
+  --lime: #cdeb8b;
+  --pink: #ffc4dc;
+  --lavender: #d6cbf7;
   /* Gold marks selection (the chosen district, pressed toggles) and form focus. Never text. */
   --gold: #f2b544;
   /* Deep tones that are dark enough for links, icons and chart marks. */

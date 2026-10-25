@@ -273,7 +273,7 @@ type PlateProps = {
 };
 
 /** Plate and outline opacity: normal, and dimmed (about 30%) while another district is in focus. */
-const FILL = { normal: 0.82, dim: 0.32 };
+const FILL = { normal: 0.94, dim: 0.32 };
 const EDGE = { normal: 0.55, dim: 0.25 };
 
 /**
@@ -332,6 +332,10 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
                 }
               }}
               color={d.color}
+              // A soft glow in the district's own color, so the light vibrant fills read close to
+              // their true color instead of being darkened by the lighting and the grey board.
+              emissive={d.color}
+              emissiveIntensity={0.3}
               roughness={0.7}
               transparent
             />
