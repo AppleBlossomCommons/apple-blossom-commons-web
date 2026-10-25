@@ -43,6 +43,7 @@ Rejected for v1: a dark, cinematic, 3D-first landing page. It depends on assets 
 7. **Vibrant colors and gold are never text** (all are 1.7:1 or less on linen). Charts use lake-deep and sage-deep for series.
 8. **Contrast:** all body text meets WCAG AA (4.5:1) on its background. White text on any vibrant color fails, and so does muted text (3.4–4.4:1), so text on a vibrant fill is always hearth. Check every new pair.
 9. **No outlines around boxes.** Cards, map frames, chart boxes and fact lists have no border or hairline; space and fill color separate them. Three kinds of line stay: form field borders (people need to see where to type), the dividers between FAQ questions, and the 3px sage-deep bars that head text columns.
+10. **Seamless card groups** (style D, owner-approved Oct 25, 2026; branch `seamless-cards`). The home collage, the doorway cards and the Participate "I'm a…" cards touch with no gaps, so no page-colored lines run between them. Only the group's outer corners are rounded. Neighboring cards must use different pale colors. The cards don't lift on hover (they would overlap): the doorway cards' button turns orange instead. Because the group clips its edges, the focus ring on these cards is drawn inside the card (`outline-offset: -6px`).
 
 ### District colors: by land-use family, not one hue per district
 
@@ -50,7 +51,7 @@ Owner-approved vibrant colors, Oct 25, 2026, lightened the same day. Each family
 
 | Family | Districts | Colors |
 |---|---|---|
-| Residential (warm orange) | Apple Blossom Residence, Harvest Crossing | #FFD9B0, #FFC88F |
+| Residential (warm yellow and orange) | Apple Blossom Residence, Harvest Crossing | #FFE380 (yellow, Oct 25, 2026; was #FFD9B0), #FFC88F |
 | Senior living (lavender) | Orchard Grove, Heritage Grove | #D6CBF7, #E4DCFA |
 | Commercial & hospitality (soft pink) | Chelan Wine Village, Grand Orchard Hotel | #FFC4DC, #FFAED0 |
 | Health & civic (sky blue) | Wellness District, Discovery Commons | #9ED8F5, #BDE5F8 |

@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { cardHover, imageHover, reveal, revealViewport } from "@/lib/motion";
+import { imageHover, reveal, revealViewport } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { PlaceholderImage, PlaceholderLabel } from "./ImagePlaceholder";
 
@@ -48,7 +48,7 @@ export function DoorwayCards() {
       <h2 id="doorways-title" className="sr-only">
         Find your way in
       </h2>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-2">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] overflow-hidden rounded-card">
         {doorways.map((d, i) => (
           <motion.li
             key={d.href}
@@ -64,8 +64,7 @@ export function DoorwayCards() {
               initial="rest"
               animate="rest"
               whileHover={reduce ? undefined : "hover"}
-              variants={cardHover}
-              className="relative isolate flex h-[clamp(440px,38vw,520px)] w-full flex-col justify-end gap-2.5 overflow-hidden rounded-card p-[clamp(24px,2.6vw,36px)] text-hearth no-underline hover:text-hearth"
+              className="group relative isolate flex h-[clamp(440px,38vw,520px)] w-full flex-col justify-end gap-2.5 overflow-hidden p-[clamp(24px,2.6vw,36px)] text-hearth no-underline outline-offset-[-6px] hover:text-hearth"
             >
               <motion.div variants={imageHover} className="absolute inset-0 -z-10">
                 <PlaceholderImage fill={d.fill} className="absolute inset-0" />
@@ -75,7 +74,7 @@ export function DoorwayCards() {
               <span className="text-[1.0625rem] font-bold">{d.audience}</span>
               <h3 className="text-[clamp(36px,3.1vw,44px)] leading-none tracking-[-0.02em]">{d.title}</h3>
               <p className="text-lg">{d.text}</p>
-              <span className="mt-2 inline-flex h-12 items-center gap-2 self-start rounded-full bg-white px-[22px] font-bold text-hearth">
+              <span className="mt-2 inline-flex h-12 items-center gap-2 self-start rounded-full bg-white px-[22px] font-bold text-hearth transition-colors duration-150 group-hover:bg-orange">
                 {d.cta} <span aria-hidden="true">→</span>
               </span>
             </MotionLink>
