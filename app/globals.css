@@ -52,8 +52,8 @@
   /* Header nav and "Partner with Us" hide below this width; the Menu button shows. */
   --breakpoint-nav: 1080px;
 
-  /* Headings: Bricolage Grotesque 600. Body and interface: Atkinson Hyperlegible Next. */
-  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  /* Headings: Arial 600 (a system font, so nothing to download). Body and interface: Atkinson Hyperlegible Next. */
+  --font-display: Arial, Helvetica, sans-serif;
   --font-sans: var(--font-atkinson), system-ui, sans-serif;
   /* Plex Mono stays for source chips and figures on Research Library pages (docs/04, Evidence Margin). */
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;

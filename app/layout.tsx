@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, IBM_Plex_Mono } from "next/font/google";
 import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -7,12 +7,7 @@ import { SiteTransition } from "@/components/transitions/SiteTransition";
 import { introScript } from "@/lib/home-intro";
 import "./globals.css";
 
-// Headings. The optical-size axis lets large headlines use the tighter display cut.
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz"],
-});
+// Headings use Arial, a system font, so it isn't loaded here (see --font-display in globals.css).
 
 // Body and interface text. Next.js has no metrics for this font, so it can't build a
 // size-matched fallback (a build warning says so); system-ui stands in until it loads.
@@ -46,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${atkinson.variable} ${plexMono.variable}`}
+      className={`${atkinson.variable} ${plexMono.variable}`}
       // The intro script adds data-intro to <html> before hydration (lib/home-intro.ts).
       suppressHydrationWarning
     >
