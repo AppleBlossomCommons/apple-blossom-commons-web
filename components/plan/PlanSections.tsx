@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { JumpLink } from "@/components/site/JumpLink";
+import { ConceptText } from "@/components/site/Places";
+import { RuleList, type RuleItem } from "@/components/site/RuleList";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
 
-// Copy from docs/10-content-v2.md, "The Plan (/plan)". Image notes from the Phase 1 handoff.
+// Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
+// docs/11-plan-and-districts-content.md, section 1. Image notes from the Phase 1 handoff and docs/11.
 
 /** Hero: an inset image card with the page title (520px tall; 380px on phones). */
 export function PlanHero() {
@@ -44,17 +48,29 @@ export function PlanIntro() {
   );
 }
 
-const fits = [
+const jumpClass =
+  "inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
+
+const fits: RuleItem[] = [
   {
     title: "Homes for every stage of life.",
     text: "Cottages and townhomes for active adults, independent and assisted living, memory care, and family homes and apartments.",
   },
   {
+    // "a lane designed for walking", not "a walkable lane" (CLAUDE.md, rule 3).
     title: "A small village.",
-    text: "Cafés, restaurants, tasting rooms and shops along a walkable lane, sized to add to downtown Chelan, not compete with it.",
+    text: "Cafés, restaurants, tasting rooms and shops along a lane designed for walking, sized to add to downtown Chelan, not compete with it.",
   },
   { title: "Parks and open space.", text: "A recreation park, trails and a large orchard preserve." },
-  { title: "Built in phases.", text: "Each neighborhood comes when there is real demand for it." },
+  {
+    title: "Built in phases.",
+    text: "Each neighborhood comes when there is real demand for it.",
+    extra: (
+      <JumpLink href="#guiding-ideas" className={jumpClass}>
+        How the plan grows&nbsp;<span aria-hidden="true">→</span>
+      </JumpLink>
+    ),
+  },
 ];
 
 /** "How it fits together": four short items under a 3px Deep Sage rule. */
@@ -64,14 +80,7 @@ export function FitsTogether() {
       <Reveal as="h2" kind="head" id="fits-title" className="mb-7 text-[34px] leading-none sm:mb-14 sm:text-[clamp(40px,4.2vw,60px)]">
         How it fits together
       </Reveal>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-7 sm:gap-10">
-        {fits.map((item, i) => (
-          <Reveal key={item.title} as="li" kind="card" index={i} className="flex flex-col gap-2 border-t-[3px] border-sage-deep pt-4 sm:gap-3 sm:pt-6">
-            <h3 className="text-[23px] leading-[1.1] tracking-[-0.015em] sm:text-[26px]">{item.title}</h3>
-            <p>{item.text}</p>
-          </Reveal>
-        ))}
-      </ul>
+      <RuleList items={fits} />
     </section>
   );
 }
@@ -86,7 +95,10 @@ export function CareCloseBy() {
     >
       <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[680px]">
         <PlaceholderImage fill="#ECE7FC" className="absolute inset-0" />
-        <PlaceholderLabel>Stock photo (people): older couple on a calm walking path lined with trees; no clinical imagery</PlaceholderLabel>
+        <PlaceholderLabel>
+          AI image, no people: sheltered garden courtyard between single-storey homes with porches, a looping level path, benches in the
+          sun, a small fountain
+        </PlaceholderLabel>
       </Reveal>
       <div className="flex flex-col justify-center gap-3.5 px-3 pb-12 pt-8 sm:gap-5 sm:px-14 sm:py-16">
         <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
@@ -96,6 +108,9 @@ export function CareCloseBy() {
           The senior neighborhoods, Orchard Grove and Heritage Grove, are planned within a short walk of the hospital campus. The Wellness District
           nearby is planned for clinics, therapy and medical-assisted living.
         </Reveal>
+        <p className="max-w-[560px]">
+          <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. Shared clubhouses are planned for the things that make a day good: a fitness room, a library, a place to have a meal or host family overnight. (concept)" />
+        </p>
         <div aria-hidden="true" className="my-2.5 h-px bg-line sm:my-4" />
         <h3 className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">Technology that supports people</h3>
         <p className="max-w-[560px]">
