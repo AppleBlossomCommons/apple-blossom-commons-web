@@ -60,7 +60,7 @@
   --color-label: rgb(251 246 238 / 0.92);
 
   /* Header nav and "Partner with Us" hide below this width; the Menu button shows. */
-  --breakpoint-nav: 1080px;
+  --breakpoint-nav: 1200px;
 
   /* Headings: Arial 600 (a system font, so nothing to download). Body and interface: Atkinson Hyperlegible Next. */
   --font-display: Arial, Helvetica, sans-serif;
