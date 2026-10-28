@@ -23,7 +23,8 @@ export const HEADER_HEIGHT = 64;
 /** Scroll distance after which the header becomes a floating bar. */
 const SCROLL_THRESHOLD = 24;
 /** Below this width the nav and "Partner with Us" hide and the Menu button shows (Tailwind `nav`). */
-const NAV_BREAKPOINT = 1080;
+// 1200px since About Us joined the nav (Oct 28, 2026): the full row needs about 1,180px with a scrollbar.
+const NAV_BREAKPOINT = 1200;
 
 /**
  * Sticky header (Phase 1 handoff, "Header" and "Phone menu").

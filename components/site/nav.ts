@@ -1,9 +1,11 @@
-// Navigation and footer from the Phase 1 content pack (docs/10-content-v2.md, "Navigation and footer").
+// Navigation and footer from docs/10-content-v2.md, "Navigation and footer", with the About Us
+// changes from docs/12-about-us-content.md, section 1.
 export const mainNav = [
   { href: "/plan", label: "The Plan" },
   { href: "/districts", label: "Districts" },
   { href: "/tour", label: "Site Tour" },
   { href: "/participate", label: "How Can I Participate?" },
+  { href: "/about", label: "About Us" },
 ] as const;
 
 export const partnerLink = { href: "/partners", label: "Partner with Us" } as const;
@@ -28,7 +30,7 @@ export const footerColumns = [
   {
     title: "About",
     items: [
-      { href: "/about", label: "Our Approach" },
+      { href: "/about", label: "About Us" },
       { href: "/research", label: "Research Library" },
     ],
   },

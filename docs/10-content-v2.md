@@ -10,6 +10,8 @@ Words in [brackets] are notes for the builder, not copy.
 
 ## Navigation and footer
 
+*Updated 2026-10-28: `docs/12-about-us-content.md` adds "About Us" to the main nav and renames the footer link "Our Approach" to "About Us". That file wins where the two differ.*
+
 **Main nav:** The Plan · Districts · Site Tour · How Can I Participate? · [button] Partner with Us
 
 **Footer columns**
