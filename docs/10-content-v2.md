@@ -77,9 +77,9 @@ Words in [brackets] are notes for the builder, not copy.
 
 ### How it fits together [short items]
 - **Homes for every stage of life.** Cottages and townhomes for active adults, independent and assisted living, memory care, and family homes and apartments.
-- **A small village.** Cafés, restaurants, tasting rooms and shops along a walkable lane, sized to add to downtown Chelan, not compete with it.
+- **A small village.** Cafés, restaurants, tasting rooms and shops along a lane designed for walking, sized to add to downtown Chelan, not compete with it.
 - **Parks and open space.** A recreation park, trails and a large orchard preserve.
-- **Built in phases.** Each neighborhood comes when there is real demand for it.
+- **Built in phases.** Each neighborhood comes when there is real demand for it. [Jump link "How the plan grows →" to #guiding-ideas, per `11-plan-and-districts-content.md`.]
 
 ### Care, close by [id="care-close-by"; was Connected Community]
 - **Heading:** Care, close by
