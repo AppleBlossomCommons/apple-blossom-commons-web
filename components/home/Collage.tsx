@@ -18,7 +18,7 @@ const tiles = [
   {
     area: "W",
     word: "A New Way to Retire",
-    line: "Walkable streets, care close by, and room for the grandkids.",
+    line: "Streets designed for walking, care close by, and room for the grandkids.",
     image: "Stock photo (people): couple in their late 60s–70s biking a quiet tree-lined path",
     fill: "#FFE1ED",
   },
