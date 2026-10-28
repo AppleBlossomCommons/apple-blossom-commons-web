@@ -8,7 +8,8 @@ type Point = [number, number];
  * TBC: NOT CONFIRMED WITH THE ARCHITECT (docs/09-open-items.md). Change the rings here only.
  *
  * Units are plan-sheet pixels in SVG orientation (origin at the sheet's center, y pointing down),
- * the same as the district roundels.
+ * the same as the district roundels. The diagram draws them over the color masterplan, placed in
+ * the same units by PLAN_COLOR_BOUNDS (lib/district-image.ts).
  *
  * - Radii are measured from the dashed 5/10/15-minute rings printed on the July 2026 masterplan
  *   sheet (Oct 28, 2026). They are not proportional to walking time; that is how they are drawn.

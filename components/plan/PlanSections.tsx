@@ -5,6 +5,7 @@ import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlace
 import { JumpLink } from "@/components/site/JumpLink";
 import { ConceptText } from "@/components/site/Places";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
+import { PLAN_COLOR } from "@/lib/district-image";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
 
 // Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
@@ -16,7 +17,7 @@ export function PlanHero() {
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
       <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
         <Image
-          src="/plan/masterplan-color.webp"
+          src={PLAN_COLOR}
           alt="Color-coded masterplan of the site, showing its neighborhoods, the village, roads, trails, and parks and open space."
           fill
           preload

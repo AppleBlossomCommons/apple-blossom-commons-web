@@ -12,3 +12,17 @@ export function districtImage(color: string) {
 
 /** The greyscale masterplan sheet under the 2D plan and on the 3D model's board. */
 export const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
+
+/** The color masterplan (the /plan header image and the walk-ring diagram). It has no printed walk rings. */
+export const PLAN_COLOR = "/plan/masterplan-color.webp";
+
+/**
+ * Where the color masterplan sits in plan-sheet coordinates (SVG orientation, the same units as the
+ * district shapes), so the two can be drawn together. It is a tighter crop than the greyscale sheet:
+ * wider on both sides, and the top ~59 units of the sheet are cut off.
+ *
+ * Measured Oct 28, 2026 by matching the roads in the two images: 1 color-image pixel = 1/1.5142
+ * sheet units, image pixel (0, 0) at sheet (−560.4, −288.2). Checked by drawing every district
+ * outline over the image.
+ */
+export const PLAN_COLOR_BOUNDS = { x: -560.4, y: -288.2, width: 1091.7, height: 628.7 } as const;
