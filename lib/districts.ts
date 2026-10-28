@@ -17,6 +17,12 @@ export type DistrictKey =
 
 type Point = [number, number];
 
+/**
+ * A named place or idea from the July 2026 masterplan, shown under "What's planned here"
+ * (docs/11-plan-and-districts-content.md). A text ending in "(concept)" shows that word muted.
+ */
+export type Place = { name: string; text: string };
+
 /** Public fields only. `internalNotes` in districts.json must never reach a page. */
 export type District = {
   key: DistrictKey;
@@ -29,6 +35,7 @@ export type District = {
   color: string;
   summary: string;
   publicFacts: string[];
+  places: Place[];
   status: string;
   /**
    * Polygons as stored in the geometry file: pixels of the source sheet, origin at the
@@ -67,6 +74,7 @@ export const districts: District[] = districtData.districts.map((d) => {
     color: d.color,
     summary: d.summary,
     publicFacts: d.publicFacts,
+    places: d.places,
     status: d.status,
     polys: geometry.polys[key],
     labels: geometry.labels[key],
@@ -76,6 +84,25 @@ export const districts: District[] = districtData.districts.map((d) => {
 export function getDistrict(slug: string) {
   return districts.find((d) => d.slug === slug);
 }
+
+export function getDistrictByKey(key: DistrictKey) {
+  const district = districts.find((d) => d.key === key);
+  if (!district) throw new Error(`No district with key "${key}" in data/districts.json`);
+  return district;
+}
+
+/**
+ * Splits a trailing "(concept)" off a place's text, so it can be shown in the muted style
+ * instead of in brackets (docs/11, section 2.1).
+ */
+export function splitConcept(text: string): { text: string; concept: boolean } {
+  const match = text.match(/^([\s\S]*?)\s*\(concept\)\s*$/);
+  return match ? { text: match[1], concept: true } : { text, concept: false };
+}
+
+/** Note under every section that names masterplan places (docs/11, section 1.9). */
+export const CONCEPT_NOTE =
+  "Names and places are ideas from the July 2026 masterplan. They're planning concepts and will change as the plan is refined.";
 
 export const familyOrder: DistrictFamily[] = ["residential", "senior", "commercial", "civic", "parks"];
 

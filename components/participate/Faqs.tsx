@@ -26,7 +26,7 @@ const groups: { title: string; items: { q: string; a: string }[] }[] = [
     items: [
       {
         q: "Will this bring traffic and crowds?",
-        a: "The plan is built around walkable neighborhoods and phased growth, so change comes gradually. Traffic and road access are studied as part of the review process.",
+        a: "The plan is built around neighborhoods designed for walking and phased growth, so change comes gradually. Traffic and road access are studied as part of the review process.",
       },
       {
         q: "Who pays for roads, water and sewer upgrades?",

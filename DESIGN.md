@@ -7,24 +7,26 @@ colors:
   hearth: "#3b2f2a"
   muted: "#73635a"
   line: "#e6daca"
+  orange: "#ffc88f"
+  orange-hover: "#ffb877"
+  sky: "#9ed8f5"
+  lime: "#cdeb8b"
+  pink: "#ffc4dc"
+  lavender: "#d6cbf7"
   gold: "#f2b544"
-  gold-hover: "#e6a733"
-  lake: "#8fc1d4"
   lake-deep: "#2f6f88"
-  sage: "#b9c9a6"
   sage-deep: "#5e7a4f"
-  blossom: "#f2c4c8"
   rose: "#b85c66"
-  plan-residential: "#d8c27f"
-  plan-residential-2: "#cdb06a"
-  plan-senior: "#a9b48a"
-  plan-senior-2: "#bec69f"
-  plan-commercial: "#c98b6b"
-  plan-commercial-2: "#b8754f"
-  plan-civic: "#7fa3bc"
-  plan-civic-2: "#97b3c8"
-  plan-parks: "#a1c4a6"
-  plan-parks-2: "#83af8c"
+  plan-residential: "#ffd9b0"
+  plan-residential-2: "#ffc88f"
+  plan-senior: "#d6cbf7"
+  plan-senior-2: "#e4dcfa"
+  plan-commercial: "#ffc4dc"
+  plan-commercial-2: "#ffaed0"
+  plan-civic: "#9ed8f5"
+  plan-civic-2: "#bde5f8"
+  plan-parks: "#ddf2ae"
+  plan-parks-2: "#cdeb8b"
 typography:
   display:
     fontFamily: "Source Serif 4, Georgia, serif"
@@ -109,14 +111,14 @@ spacing:
   container: "1360px"
 components:
   button-primary:
-    backgroundColor: "{colors.gold}"
+    backgroundColor: "{colors.orange}"
     textColor: "{colors.hearth}"
     typography: "{typography.ui}"
     rounded: "{rounded.full}"
     padding: "0 20px"
     height: "48px"
   button-primary-compact:
-    backgroundColor: "{colors.gold}"
+    backgroundColor: "{colors.orange}"
     textColor: "{colors.hearth}"
     typography: "{typography.ui}"
     rounded: "{rounded.full}"
@@ -192,16 +194,16 @@ Density is editorial: generous section spacing, a serif headline column beside a
 Motion explains space and never decorates. One ease-out curve, short interface timings, longer spatial moves, and one scroll/story reveal (Today to Planned). Under reduced motion everything jumps or rests instead of moving.
 
 **Key Characteristics:**
-- Linen and sand grounds (about 70% of every screen), hearth text, gold for primary buttons and the one highlight, lake-deep for links and focus.
-- At most two accents on a screen: gold plus one of sage or lake.
-- Hairline rules (1px) for all structure; no card grids and no shadows on page surfaces.
+- Linen and sand grounds, hearth text, orange primary buttons, gold for selection, lake-deep for links and focus.
+- Vibrant fills (sky, lime, orange, pink, lavender) for buttons, cards, map districts and placeholder imagery; never as text.
+- No outlines around boxes: space and fill color separate cards, map frames and charts. Only form fields, FAQ dividers and the 3px column bars keep a line.
 - Source Serif 4 headlines at weight 600, Inter interface and body, IBM Plex Mono for figures, chips, roundels and map labels.
 - District colors grouped by land-use family, always paired with a number and a name.
 - Light only: no dark sections and no dark mode.
 
 ## Colors
 
-**Warm palette v1** (owner-approved Oct 22, 2026). The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
+**Warm palette v1** (owner-approved Oct 22, 2026), brightened with vibrant accents on Oct 25, 2026, then lightened the same day. Image placeholders are one flat, very light color with hearth text (no gradients). The full token table, contrast figures and rules are in `docs/04-design-direction.md`; this section records how they land in the build.
 
 ### Grounds and text
 - **Linen** (`linen`): page background, header, cards, the map frame and district card on the explorer, roundel fill, the source popover.
@@ -211,16 +213,18 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 - **Line** (`line`): every hairline and border.
 
 ### Accents
-- **Gold** (`gold`): primary buttons (hearth text, `gold-hover` on hover), the selected district (outline, roundel, list row tint, active map tool), the current-page underline, the tour route. Never text.
+- **Orange** (`orange`): primary buttons (hearth text, `orange-hover` on hover) and the next-district arrow. Never text.
+- **Sky, lime, pink, lavender** (`sky`, `lime`, `pink`, `lavender`): fills only, with hearth text on top. Lime marks a sent form; all four color the map districts and placeholder imagery. Never text.
+- **Gold** (`gold`): selection only: the selected district (outline, roundel, list row tint, active map tool), the current page, form focus, the tour route. Never text.
 - **Lake-deep** (`lake-deep`): links (hearth on hover), the global focus ring, the King County chart bar.
 - **Sage-deep** (`sage-deep`): the logo mark and the Chelan County chart bar. Never text.
-- **Lake, sage, blossom, rose:** defined and mapped to utilities; not yet used on built surfaces. Lake is for calm panels and map water, sage for tags and parks, blossom is a rare seasonal touch, rose is for large text only.
+- **Rose** (`rose`): form errors and large text accents only. The light lake, sage and blossom tokens were removed on Oct 25, 2026.
 
 ### Plan family fills
-Districts are colored by land-use family, two shades per family, from `data/districts.json`: residential wheat (`plan-residential`, `plan-residential-2`), senior-living sage (`plan-senior`, `plan-senior-2`), commercial and hospitality terracotta (`plan-commercial`, `plan-commercial-2`), health and civic lake blue (`plan-civic`, `plan-civic-2`), parks and open space green (`plan-parks`, `plan-parks-2`, lightened Oct 22, 2026). Fills sit at `--plan-fill-opacity` 0.86. When one district is focused the rest dim to 0.32; the selected one gets a gold outline over a hearth keyline on the 2D plan.
+Districts are colored by land-use family, two shades per family, from `data/districts.json`: residential warm orange (`plan-residential`, `plan-residential-2`), senior-living lavender (`plan-senior`, `plan-senior-2`), commercial and hospitality soft pink (`plan-commercial`, `plan-commercial-2`), health and civic sky blue (`plan-civic`, `plan-civic-2`), parks and open space lime green (`plan-parks`, `plan-parks-2`). Vibrant family colors since Oct 25, 2026. Fills sit at `--plan-fill-opacity` 0.86. When one district is focused the rest dim to 0.32; the selected one gets a gold outline over a hearth keyline on the 2D plan.
 
 ### Named Rules
-**The Two Accent Rule.** No screen uses more than two accent colors at once: gold plus one of sage or lake. Gold marks the one thing that matters on a screen.
+**The Fills-Not-Text Rule.** The vibrant colors are fills with hearth text on top, never text themselves. Gold marks the one selected thing on a screen.
 
 **The Number-and-Name Rule.** A district is never identified by color alone. Every fill is paired with a numbered roundel and its name in the HTML legend.
 
@@ -275,7 +279,7 @@ Nearly square, except buttons, which are fully rounded (Warm palette v1). Other 
 ### Buttons
 Quiet, rounded, confident (`components/site/buttons.ts`).
 - **Shape:** fully rounded.
-- **Primary:** gold with hearth text, semibold. Hover deepens to `gold-hover` over 150ms.
+- **Primary:** orange with hearth text, semibold. Hover deepens to `orange-hover` over 150ms.
 - **Secondary:** transparent with a 1.5px hearth border and hearth text; sand on hover. On a photo or video (`onPhoto`): white border and white text.
 - **Focus:** the global ring: 2px lake-deep outline, 3px offset.
 
@@ -306,20 +310,20 @@ The signature component. A linen stage with a 1px line border and a faint line-c
 ## Do's and Don'ts
 
 ### Do:
-- **Do** pair one gold primary button with one secondary (outlined) button or lake-deep text link for every call to action.
+- **Do** pair one orange primary button with one secondary (outlined) button or lake-deep text link for every call to action.
 - **Do** set every figure beside a mono source chip, and every plan or map beside the line "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design."
 - **Do** give every district its number, name and family color together, and give every plan an HTML list equivalent.
 - **Do** separate sections with 96–144px of space and, at most, one 1px rule.
 - **Do** use `cubic-bezier(0.22, 1, 0.36, 1)` for every transition: 150–200ms for interface states, 600ms or more for spatial moves on the plan.
-- **Do** keep gold to primary buttons and the one highlight per screen: selection, current-page underline, divider.
+- **Do** keep gold to selection: the chosen district, the current page, the divider, form focus.
 - **Do** use tokens, not literals, and check 4.5:1 for every new text pair.
 
 ### Don't:
 - **Don't** put a shadow on anything on the page plane; only a top-layer popover may carry the Overlay shadow.
 - **Don't** build card grids as the main device; use ruled lists.
-- **Don't** set gold, sage-deep or light lake as text, or rose as body text.
+- **Don't** set gold, sage-deep or any vibrant fill (sky, lime, orange, pink, lavender) as text, or rose as body text. Don't put white text on a vibrant fill.
 - **Don't** use a dark section background anywhere.
 - **Don't** identify a district by color alone.
 - **Don't** add looping animation, parallax, count-up statistics or smooth-scroll libraries.
 - **Don't** put mono uppercase eyebrows or kickers above headlines.
-- **Don't** use more than two accents on a screen (gold plus one of sage or lake); keep blossom and rose rare.
+- **Don't** let vibrant fills replace the linen and sand grounds; keep rose rare.

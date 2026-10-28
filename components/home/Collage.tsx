@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
-import { cardHover, imageHover } from "@/lib/motion";
+import { imageHover } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 // Copy from docs/10-content-v2.md, Home section 2. Image notes and sizes from the handoff.
@@ -13,40 +13,35 @@ const tiles = [
     word: "Once in a Generation",
     line: "Land like this, planned with this much care, comes along rarely.",
     image: "Stock photo: wide view of orchards with the lake beyond, golden hour",
-    gradient: "linear-gradient(175deg, #F5D9A6 0%, #E5C48E 30%, #B9BC8C 58%, #8FB0AE 80%, #6A93A0 100%)",
-    fade: "45%",
+    fill: "#FFF2B3",
   },
   {
     area: "W",
     word: "A New Way to Retire",
-    line: "Walkable streets, care close by, and room for the grandkids.",
+    line: "Streets designed for walking, care close by, and room for the grandkids.",
     image: "Stock photo (people): couple in their late 60s–70s biking a quiet tree-lined path",
-    gradient: "linear-gradient(160deg, #DCDDB2 0%, #B9C9A6 45%, #8FA582 100%)",
-    fade: "30%",
+    fill: "#FFE1ED",
   },
   {
     area: "M",
     word: "Home for Every Chapter",
     line: "Stay in the community you love as your needs change.",
     image: "AI image, no people · Illustrative concept: cottage porch, two empty chairs, a folded blanket, apple blossoms",
-    gradient: "linear-gradient(170deg, #F7DCD2 0%, #EBC2AC 40%, #C99D86 100%)",
-    fade: "45%",
+    fill: "#EAF6CF",
   },
   {
     area: "S1",
     word: "Unhurried",
     line: "Mornings with nowhere you have to be.",
     image: "AI image, no people: mug on a deck rail, morning mist",
-    gradient: "linear-gradient(180deg, #F1E8DC 0%, #D6DAD1 45%, #9DB5B8 100%)",
-    fade: "30%",
+    fill: "#DDF1FC",
   },
   {
     area: "S2",
     word: "Care, Close By",
     line: "The hospital campus is a short walk from home.",
     image: "Stock photo (people): older couple on a calm path",
-    gradient: "linear-gradient(160deg, #EFDDAE 0%, #C9CFA0 50%, #93A985 100%)",
-    fade: "30%",
+    fill: "#ECE7FC",
   },
 ] as const;
 
@@ -61,14 +56,16 @@ const look = {
 
 /**
  * The five-tile bento collage. Desktop: 2fr 1fr 1fr 1.3fr columns, two 340px rows.
- * Below 760px: one column. Tiles rise in one after another and lift on hover.
+ * Below 760px: one column. Tiles rise in one after another. The tiles touch, with no gaps, and only
+ * the outer corners are rounded (seamless style, owner-approved Oct 25, 2026), so they don't lift on
+ * hover; the image layer still eases in.
  */
 export function Collage() {
   const reduce = usePrefersReducedMotion();
 
   return (
     <section aria-labelledby="collage-title" className="px-[clamp(8px,1.2vw,16px)] pb-[clamp(72px,8vw,112px)] pt-2">
-      <div className="grid grid-cols-1 grid-rows-[440px_300px_320px_260px_260px] gap-2 [grid-template-areas:'L'_'W'_'M'_'S1'_'S2'] min-[760px]:grid-cols-[2fr_1fr_1fr_1.3fr] min-[760px]:grid-rows-[340px_340px] min-[760px]:[grid-template-areas:'L_W_W_M'_'L_S1_S2_M']">
+      <div className="grid grid-cols-1 grid-rows-[440px_300px_320px_260px_260px] overflow-hidden rounded-card [grid-template-areas:'L'_'W'_'M'_'S1'_'S2'] min-[760px]:grid-cols-[2fr_1fr_1fr_1.3fr] min-[760px]:grid-rows-[340px_340px] min-[760px]:[grid-template-areas:'L_W_W_M'_'L_S1_S2_M']">
         {tiles.map((tile, i) => {
           const l = look[tile.area];
           const Title = tile.area === "L" ? "h2" : "h3";
@@ -78,17 +75,11 @@ export function Collage() {
                 initial="rest"
                 animate="rest"
                 whileHover={reduce ? undefined : "hover"}
-                variants={cardHover}
-                className={`relative isolate flex w-full flex-col justify-end overflow-hidden rounded-card text-white ${l.pad}`}
+                className={`relative isolate flex w-full flex-col justify-end overflow-hidden text-hearth ${l.pad}`}
               >
                 <motion.div variants={imageHover} className="absolute inset-0 -z-10">
-                  <PlaceholderImage gradient={tile.gradient} className="absolute inset-0" />
+                  <PlaceholderImage fill={tile.fill} className="absolute inset-0" />
                 </motion.div>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 -z-10"
-                  style={{ background: `linear-gradient(180deg, rgb(45 32 24 / 0) ${tile.fade}, rgb(45 32 24 / 0.64) 100%)` }}
-                />
                 <PlaceholderLabel inset={tile.area.startsWith("S") ? 14 : 16}>
                   {tile.image}
                 </PlaceholderLabel>

@@ -2,7 +2,7 @@
 
 *Approved Oct 14–15, 2026. Visual specimen: "Orchard Atlas Specimen" artifact (claude.ai/artifact/TSEz47922NjnkNG4xEYFo8).*
 
-The site should read like a planning atlas edited by a good magazine: warm linen ground, serif headlines, precise cartography, and a sourced number behind every figure. The two immersive "stages", the district explorer and the tour, open full-bleed on a sand ground inside that calm frame, then return the visitor to the page. (Colors updated to Warm palette v1, Oct 22, 2026; there are no dark grounds.)
+The site should read like a planning atlas edited by a good magazine: warm linen ground, plain sans-serif headlines, precise cartography, and a sourced number behind every figure. The two immersive "stages", the district explorer and the tour, open full-bleed on a sand ground inside that calm frame, then return the visitor to the page. (Colors updated to Warm palette v1, Oct 22, 2026, and brightened with vibrant accents on Oct 25, 2026; there are no dark grounds.)
 
 **Mood:** grounded, unhurried, exact, warm, seasonal. **Not:** glossy, themed (no faux-Tuscan), techno-futurist, salesy.
 
@@ -10,48 +10,56 @@ Rejected for v1: a dark, cinematic, 3D-first landing page. It depends on assets 
 
 ## Color tokens
 
-**Warm palette v1, owner-approved 2026-10-22.** It replaces the Orchard Atlas colors (paper, ink, orchard green, basalt, Harvest Amber). It is a stepping stone: a full redesign comes later. Tokens live in `app/globals.css`; components use them as Tailwind classes (`bg-linen`, `text-hearth`, `border-line` and so on), never as literal hex values. The 3D model is the one exception, because three.js needs literal colors; those literals match the tokens.
+**Warm palette v1, owner-approved 2026-10-22, brightened with vibrant accents on 2026-10-25, then lightened the same day (experiment on the `vibrant-palette-light` branch).** Feedback was that the site was not vibrant enough, so the owner approved four vibrant colors (sky blue, lime green, warm orange, bright soft pink) plus lavender for senior living. A second round of feedback asked for lighter, brighter colors (like the baby blue in the masterplan drawing), very light image placeholders, and no outlines around boxes. Linen, sand and white stay as the grounds, and all text stays hearth. Tokens live in `app/globals.css`; components use them as Tailwind classes (`bg-linen`, `text-hearth`, `bg-orange` and so on), never as literal hex values. The 3D model is the one exception, because three.js needs literal colors; those literals match the tokens. Image placeholder gradients are also literal, because they stand in for photos.
 
 | Token | Hex | Role | Contrast |
 |---|---|---|---|
 | `linen` | #FBF6EE | Page background, cards, panels on sand | — |
-| `sand` | #F3E9DA | Alternate section background (explorer, Connected Community, tour, footer) | — |
+| `sand` | #F3E9DA | Alternate section background (explorer, care section, tour, footer) | — |
 | `hearth` | #3B2F2A | All body text and headings; plan outlines | 12.0 on linen, 10.8 on sand |
 | `muted` | #73635A | Secondary text, eyebrows, labels | 5.3 on linen, 4.8 on sand |
 | `line` | #E6DACA | Borders and dividers | — |
-| `gold` | #F2B544 | Primary buttons (hearth text on gold), selection, one highlight per screen | hearth on gold 7.1 |
-| `gold-hover` | #E6A733 | Primary button hover | hearth on it 6.1 |
-| `lake` | #8FC1D4 | Calm panels, map water | hearth on lake 6.6 |
+| `orange` | #FFC88F | Primary buttons and action arrows (hearth text on orange) | hearth on orange 8.6 |
+| `orange-hover` | #FFB877 | Primary button hover | hearth on it 7.6 |
+| `sky` | #9ED8F5 | Fills: panels, cards, placeholder imagery; health and civic districts | hearth on sky 8.4 |
+| `lime` | #CDEB8B | Fills: success marks, cards, placeholder imagery; parks districts | hearth on lime 9.8 |
+| `pink` | #FFC4DC | Fills: cards, placeholder imagery; commercial and hospitality districts | hearth on pink 8.7 |
+| `lavender` | #D6CBF7 | Senior living districts | hearth on lavender 8.5 |
+| `gold` | #F2B544 | Selection only: the chosen district, pressed map toggles, current page, form focus | hearth on gold 7.1 |
 | `lake-deep` | #2F6F88 | Links and focus rings; chart series | 5.2 on linen, 4.7 on sand |
-| `sage` | #B9C9A6 | Tags, parks and open space | hearth on sage 7.4 |
-| `sage-deep` | #5E7A4F | Small icons and accents (logo mark, chart series); never text | 4.5 on linen (icons need 3:1) |
-| `blossom` | #F2C4C8 | Rare seasonal touch only | — |
-| `rose` | #B85C66 | Large text accents only, never body text | 4.1 on linen (large text needs 3:1) |
+| `sage-deep` | #5E7A4F | Small icons and accents (logo mark, chart series, link underlines); never text | 4.5 on linen (icons need 3:1) |
+| `rose` | #B85C66 | Large text accents and form errors only, never body text | 4.1 on linen (large text needs 3:1) |
 
-`muted` is one step darker than the palette's original #7A6A60, which measured 4.31:1 on sand and failed body text (owner-approved Oct 22, 2026).
+`muted` is one step darker than the palette's original #7A6A60, which measured 4.31:1 on sand and failed body text (owner-approved Oct 22, 2026). The light `lake`, `sage` and `blossom` tokens were removed on Oct 25, 2026: no component used them, and sky, lime and pink take their place.
 
 ### Rules
 
-1. **No dark backgrounds anywhere.** Every section is linen or sand with hearth text: header, footer, partnership band, cards, the explorer and the tour. There is no dark theme.
-2. **Calm use of color:** about 70% linen and sand, 20% photos and text, 10% accents. No screen uses more than two accent colors at once (gold plus one of sage or lake). Blossom and rose are rare.
-3. **Text on photos or video is white,** over a soft gradient from transparent at the top to dark brown rgba(30, 22, 18, 0.55) at the bottom. At 55% white text measures 3.96:1 over a bright photo, which is enough for large text only. Behind body-size text, use 60–65% at the bottom (4.7–5.5:1).
-4. **Buttons** are fully rounded. Primary: gold background, hearth text, gold-hover on hover. Secondary: transparent with a 1.5px hearth border and hearth text; on a photo, a white border and white text. (`components/site/buttons.ts`.)
-5. **Gold replaces Harvest Amber (#E0AE4F)** everywhere, including the selected district. On the 2D plan the selected outline is gold over a hearth keyline (gold alone is 1.04:1 on the wheat districts). The 3D model's 1px outline is plain gold; the selected plate also lifts and its roundel turns gold.
+1. **No dark backgrounds anywhere.** Every section is linen, sand or white with hearth text: header, footer, partnership band, cards, the explorer and the tour. There is no dark theme.
+2. **Vibrant fills on a calm ground:** linen and sand stay the main ground of every screen. Sky, lime, orange, pink and lavender are used as fills (buttons, cards, map districts, placeholder imagery), never as text or thin lines.
+3. **Image placeholders are one flat, very light color** (no gradient, no stripe texture), with hearth text and no dark fade (owner decision, Oct 25, 2026). The pale fills are sky #DDF1FC, lime #EAF6CF, pink #FFE1ED, peach #FFE6CC, yellow #FFF2B3 (added Oct 25, 2026), lavender #ECE7FC and winter #EAF6FD; neighboring cards use different ones. District heroes are the district color mixed half and half with white (`lib/district-image.ts`). A lighter-to-deeper gradient with white text was tried and set aside (commit 2c09857, reverted). When real photos or video replace a placeholder, text on them goes back to white over a soft dark-brown gradient at the bottom (60–65% behind body-size text).
+4. **Buttons** are fully rounded. Primary: orange background, hearth text, orange-hover on hover. Secondary: transparent with a 1.5px hearth border and hearth text (also on the light home hero); on a real photo, a white border and white text. (`components/site/buttons.ts`.)
+5. **Gold marks selection.** The selected district, the pressed 2D/3D toggle, the current page and form focus use gold. On the 2D plan the selected outline is gold over a hearth keyline (gold alone is about 1.1:1 on the orange districts). The 3D model's 1px outline is plain gold; the selected plate also lifts and its roundel turns gold.
 6. **Links** are lake-deep and turn hearth on hover. The focus ring is a 2px lake-deep outline at 3px offset on every ground.
-7. **Gold is never text** (1.7:1 on linen). Light lake and sage are never text or thin chart marks; charts use lake-deep and sage-deep.
-8. **Contrast:** all body text meets WCAG AA (4.5:1) on its background. Check every new pair.
+7. **Vibrant colors and gold are never text** (all are 1.7:1 or less on linen). Charts use lake-deep and sage-deep for series.
+8. **Contrast:** all body text meets WCAG AA (4.5:1) on its background. White text on any vibrant color fails, and so does muted text (3.4–4.4:1), so text on a vibrant fill is always hearth. Check every new pair.
+9. **No outlines around boxes.** Cards, map frames, chart boxes and fact lists have no border or hairline; space and fill color separate them. Three kinds of line stay: form field borders (people need to see where to type), the dividers between FAQ questions, and the 3px sage-deep bars that head text columns.
+10. **Seamless card groups** (style D, owner-approved Oct 25, 2026; branch `seamless-cards`). The home collage, the doorway cards and the Participate "I'm a…" cards touch with no gaps, so no page-colored lines run between them. Only the group's outer corners are rounded. Neighboring cards must use different pale colors. The cards don't lift on hover (they would overlap): the doorway cards' button turns orange instead. Because the group clips its edges, the focus ring on these cards is drawn inside the card (`outline-offset: -6px`).
 
 ### District colors: by land-use family, not one hue per district
 
-Kept from the masterplan prototype, except the two parks greens, which were lightened in the same family so no district reads dark on the light page (Oct 22, 2026).
+Owner-approved vibrant colors, Oct 25, 2026, lightened the same day. Each family has a main shade and a lighter one, except that the owner swapped Apple Blossom Residence and Heritage Grove on Oct 25, 2026 (Residence lavender, Heritage Grove yellow), so those two no longer match their family. Districts are still told apart by number and name. The 2D plan and the 3D model both read these from `data/districts.json`. The 3D plates are 94% opaque with a soft glow in their own color so the light fills are not darkened by the lighting.
 
 | Family | Districts | Colors |
 |---|---|---|
-| Residential (warm wheat) | Apple Blossom Residence, Harvest Crossing | #D8C27F, #CDB06A |
-| Senior living (sage) | Orchard Grove, Heritage Grove | #A9B48A, #BEC69F |
-| Commercial & hospitality (terracotta) | Chelan Wine Village, Grand Orchard Hotel | #C98B6B, #B8754F |
-| Health & civic (lake blue) | Wellness District, Discovery Commons | #7FA3BC, #97B3C8 |
-| Parks & open space (green) | Summit Recreation Park, Orchard Preserve | #A1C4A6 (was #7FAE86), #83AF8C (was #6A9E74) |
+| Residential (lavender and orange) | Apple Blossom Residence, Harvest Crossing | #E4DCFA (lavender), #FFC88F |
+| Senior living (lavender and yellow) | Orchard Grove, Heritage Grove | #D6CBF7, #FFE380 (yellow) |
+| Commercial & hospitality (soft pink) | Chelan Wine Village, Grand Orchard Hotel | #FFC4DC, #FFAED0 |
+| Health & civic (sky blue) | Wellness District, Discovery Commons | #9ED8F5, #BDE5F8 |
+| Parks & open space (lime green) | Summit Recreation Park, Orchard Preserve | #DDF2AE, #CDEB8B |
+
+The first vibrant round (commit 5b0f738, branch `vibrant-palette`) used deeper shades: #F8BE88, #F4A259; #B9A6EA, #D0C3F1; #FFB3D1, #FF95BF; #69B9E7, #9CD0EF; #C4DE8A, #A8CF55.
+
+Before Oct 25, 2026 the families were wheat, sage, terracotta, lake blue and green (#D8C27F, #CDB06A; #A9B48A, #BEC69F; #C98B6B, #B8754F; #7FA3BC, #97B3C8; #A1C4A6, #83AF8C).
 
 Districts are told apart by **numbered roundels and names**, not by color alone.
 
@@ -59,11 +67,13 @@ Districts are told apart by **numbered roundels and names**, not by color alone.
 
 | Use | Typeface | Notes |
 |---|---|---|
-| Headlines, long reading | Source Serif 4 (variable, optical sizes) | weight 600 for headlines |
-| Interface, captions, navigation | Inter | 400 / 500 / 600 |
+| Headlines | Arial (system font, with Helvetica and sans-serif as fallbacks) | weight 600 |
+| Body, long reading, interface, captions, navigation | Atkinson Hyperlegible Next | 400 / 500 / 600 |
 | Figures, source chips, map labels, eyebrows | IBM Plex Mono | tabular numerals; uppercase eyebrows with letter-spacing 0.06–0.08em |
 
-Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio up to a fluid display size of about 88px. Load everything through `next/font` with no layout shift.
+(Headlines changed to Arial on Oct 24, 2026. Before that they used Bricolage Grotesque from the design handoff, which had replaced Source Serif 4. Atkinson Hyperlegible Next replaced Inter in the same handoff.)
+
+Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio up to a fluid display size of about 88px. Load the web fonts (Atkinson Hyperlegible Next, IBM Plex Mono) through `next/font` with no layout shift. Arial is a system font and is not downloaded.
 
 ## Layout
 

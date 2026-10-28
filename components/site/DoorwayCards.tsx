@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { cardHover, imageHover, reveal, revealViewport } from "@/lib/motion";
+import { imageHover, reveal, revealViewport } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { PlaceholderImage, PlaceholderLabel } from "./ImagePlaceholder";
 
@@ -15,7 +15,7 @@ const doorways = [
     text: "Learn how the plan is reviewed and share your views.",
     cta: "How Can I Participate?",
     image: "Stock photo (people): two neighbors talking over a garden fence",
-    gradient: "linear-gradient(165deg, #E9E3C4 0%, #C8CFA6 45%, #8EA582 100%)",
+    fill: "#DDF1FC",
   },
   {
     href: "/participate#update-list",
@@ -24,7 +24,7 @@ const doorways = [
     text: "Join the update list for news as homes and care options take shape.",
     cta: "How Can I Participate?",
     image: "AI image, no people · Illustrative concept: cottage front door with a wreath and blossoms",
-    gradient: "linear-gradient(170deg, #F7DCD2 0%, #EBC2AC 40%, #C99D86 100%)",
+    fill: "#FFE1ED",
   },
   {
     href: "/partners",
@@ -33,7 +33,7 @@ const doorways = [
     text: "Explore investment and development opportunities.",
     cta: "Partner with Us",
     image: "Stock photo: open orchard rows on a gentle slope, golden hour",
-    gradient: "linear-gradient(175deg, #F5D9A6 0%, #DDBF8A 40%, #A9A57A 100%)",
+    fill: "#EAF6CF",
   },
 ];
 
@@ -48,7 +48,7 @@ export function DoorwayCards() {
       <h2 id="doorways-title" className="sr-only">
         Find your way in
       </h2>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-2">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] overflow-hidden rounded-card">
         {doorways.map((d, i) => (
           <motion.li
             key={d.href}
@@ -64,19 +64,17 @@ export function DoorwayCards() {
               initial="rest"
               animate="rest"
               whileHover={reduce ? undefined : "hover"}
-              variants={cardHover}
-              className="relative isolate flex h-[clamp(440px,38vw,520px)] w-full flex-col justify-end gap-2.5 overflow-hidden rounded-card p-[clamp(24px,2.6vw,36px)] text-white no-underline hover:text-white"
+              className="group relative isolate flex h-[clamp(440px,38vw,520px)] w-full flex-col justify-end gap-2.5 overflow-hidden p-[clamp(24px,2.6vw,36px)] text-hearth no-underline outline-offset-[-6px] hover:text-hearth"
             >
               <motion.div variants={imageHover} className="absolute inset-0 -z-10">
-                <PlaceholderImage gradient={d.gradient} className="absolute inset-0" />
+                <PlaceholderImage fill={d.fill} className="absolute inset-0" />
               </motion.div>
-              <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.7)_100%)]" />
               <PlaceholderLabel>{d.image}</PlaceholderLabel>
 
               <span className="text-[1.0625rem] font-bold">{d.audience}</span>
               <h3 className="text-[clamp(36px,3.1vw,44px)] leading-none tracking-[-0.02em]">{d.title}</h3>
               <p className="text-lg">{d.text}</p>
-              <span className="mt-2 inline-flex h-12 items-center gap-2 self-start rounded-full bg-linen/95 px-[22px] font-bold text-hearth">
+              <span className="mt-2 inline-flex h-12 items-center gap-2 self-start rounded-full bg-white px-[22px] font-bold text-hearth transition-colors duration-150 group-hover:bg-orange">
                 {d.cta} <span aria-hidden="true">→</span>
               </span>
             </MotionLink>

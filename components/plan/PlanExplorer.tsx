@@ -163,13 +163,12 @@ export function PlanExplorer({
                 />
               </div>
             )}
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] rounded-card shadow-[inset_0_0_0_1px_#E0D2BC]" />
 
             {show3D && (
               <div
                 role="toolbar"
                 aria-label="View controls"
-                className="absolute left-2.5 top-2.5 z-[3] flex flex-wrap gap-1 rounded-full bg-linen p-1 shadow-[inset_0_0_0_1px_var(--line)] sm:left-4 sm:top-4"
+                className="absolute left-2.5 top-2.5 z-[3] flex flex-wrap gap-1 rounded-full bg-linen p-1 sm:left-4 sm:top-4"
               >
                 <button type="button" aria-pressed={!topDown} onClick={() => setView(false)} className={`${toolBtn} ${!topDown ? "bg-gold font-bold" : "font-medium hover:bg-sand"}`}>
                   <span className="sm:hidden">3D</span>

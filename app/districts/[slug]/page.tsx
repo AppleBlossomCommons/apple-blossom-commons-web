@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { AtAGlance } from "@/components/district/AtAGlance";
 import { DistrictHero } from "@/components/district/DistrictHero";
 import { NextDistrict } from "@/components/district/NextDistrict";
+import { WhatsPlannedHere } from "@/components/district/WhatsPlannedHere";
 import { DoorwayCards } from "@/components/site/DoorwayCards";
 import { districts, getDistrict, PLAN_VIEWBOX, polyToPath } from "@/lib/districts";
 
@@ -18,7 +19,13 @@ export async function generateMetadata({ params }: PageProps<"/districts/[slug]"
 }
 
 // The locator map draws every district: only shapes and colors, never internal notes.
-const locatorDistricts = districts.map((d) => ({ key: d.key, color: d.color, polys: d.polys.map(polyToPath) }));
+const locatorDistricts = districts.map((d) => ({
+  key: d.key,
+  n: d.n,
+  color: d.color,
+  polys: d.polys.map(polyToPath),
+  labels: d.labels,
+}));
 
 /**
  * District page (Phase 1 handoff, "District page"): the same template for all ten districts,
@@ -56,11 +63,13 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
       <AtAGlance
         name={district.name}
         current={district.key}
+        color={district.color}
         facts={district.publicFacts}
         districts={locatorDistricts}
         viewBox={PLAN_VIEWBOX}
       />
-      <NextDistrict slug={next.slug} name={next.name} color={next.color} />
+      <WhatsPlannedHere districtKey={district.key} places={district.places} aspirational={district.status === "aspirational"} />
+      <NextDistrict slug={next.slug} n={next.n} name={next.name} color={next.color} />
       <DoorwayCards />
     </>
   );

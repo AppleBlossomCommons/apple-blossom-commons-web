@@ -305,7 +305,6 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
           )}
         </AnimatePresence>
         {/* Hairline frame drawn over the canvas. */}
-        <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] rounded-card shadow-[inset_0_0_0_1px_#E0D2BC]" />
         <p aria-hidden="true" className="pointer-events-none absolute bottom-4 left-4 z-[2] rounded-full bg-label px-3.5 py-1.5 text-[15px]">
           Select a district
         </p>
@@ -325,7 +324,7 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
               onPointerLeave={() => setHovered(null)}
               onFocus={() => setHovered(d.key)}
               onBlur={() => setHovered(null)}
-              className="inline-flex min-h-11 items-center gap-2.5 rounded-chip bg-linen px-3.5 text-base font-medium text-hearth no-underline shadow-[inset_0_0_0_1px_var(--line)] transition-shadow duration-300 hover:text-hearth hover:shadow-[inset_0_0_0_2px_#E2C88E]"
+              className="inline-flex min-h-11 items-center gap-2.5 rounded-chip bg-linen px-3.5 text-base font-medium text-hearth no-underline transition-shadow duration-300 hover:text-hearth hover:shadow-[inset_0_0_0_2px_#E2C88E]"
             >
               <span aria-hidden="true" className="size-2.5 rounded-[3px]" style={{ background: d.color }} />
               {d.n}. {d.name}

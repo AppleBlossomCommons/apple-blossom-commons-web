@@ -15,12 +15,13 @@ export const metadata: Metadata = {
 };
 
 // Copy from docs/10-content-v2.md, "How Can I Participate? (/participate)".
-const doorways: { href: `#${string}`; label: string }[] = [
-  { href: "#neighbors", label: "I'm a Chelan neighbor" },
-  { href: "#update-list", label: "I'm thinking about living here" },
-  { href: "#families", label: "I'm helping a parent plan ahead" },
-  { href: "#community", label: "I'm with a community group" },
-  { href: "#partners", label: "I'm an investor or land buyer" },
+// Each card has its own pale color, because the cards touch (seamless style) and would otherwise merge.
+const doorways: { href: `#${string}`; label: string; fill: string }[] = [
+  { href: "#neighbors", label: "I'm a Chelan neighbor", fill: "#DDF1FC" },
+  { href: "#update-list", label: "I'm thinking about living here", fill: "#FFE1ED" },
+  { href: "#families", label: "I'm helping a parent plan ahead", fill: "#ECE7FC" },
+  { href: "#community", label: "I'm with a community group", fill: "#EAF6CF" },
+  { href: "#partners", label: "I'm an investor or land buyer", fill: "#FFF2B3" },
 ];
 
 const neighborItems = [
@@ -45,14 +46,13 @@ export default function ParticipatePage() {
       <section aria-labelledby="participate-title" className="px-2 sm:px-4">
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage
-            gradient="linear-gradient(170deg, #F7E4DF 0%, #E9D3C3 35%, #C9CFA6 70%, #93A985 100%)"
+            fill="#FFE1ED"
             className="absolute inset-0 -z-10"
           />
-          <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.64)_100%)]" />
           <PlaceholderLabel inset={20}>
             AI image, no people: open orchard lane with a simple wooden bench, apple trees in spring bloom, soft morning light
           </PlaceholderLabel>
-          <div className="grid w-full items-end gap-3.5 text-white min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
+          <div className="grid w-full items-end gap-3.5 text-hearth min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
             <Reveal as="h1" kind="head" id="participate-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
               How can I participate?
             </Reveal>
@@ -66,12 +66,13 @@ export default function ParticipatePage() {
 
       {/* Doorways: jump links that glide to the sections below (components/site/JumpLink.tsx) */}
       <nav aria-label="Choose what fits you" className="px-2 pt-2 sm:px-4">
-        <ul className="grid gap-1.5 sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:gap-2">
+        <ul className="grid overflow-hidden rounded-[14px] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:rounded-card">
           {doorways.map((d) => (
             <li key={d.href} className="flex">
               <JumpLink
                 href={d.href}
-                className="flex min-h-[60px] w-full items-center justify-between gap-3 rounded-[14px] bg-sand px-[18px] font-display text-[21px] font-semibold leading-[1.1] tracking-[-0.015em] text-hearth no-underline transition-shadow duration-200 hover:text-hearth hover:shadow-[inset_0_0_0_2px_var(--gold)] sm:min-h-[132px] sm:flex-col sm:items-start sm:rounded-card sm:px-6 sm:py-[22px] sm:text-2xl"
+                style={{ background: d.fill }}
+                className="flex min-h-[60px] w-full items-center justify-between gap-3 px-[18px] outline-offset-[-6px] font-display text-[21px] font-semibold leading-[1.1] tracking-[-0.015em] text-hearth no-underline transition-shadow duration-200 hover:text-hearth hover:shadow-[inset_0_0_0_2px_var(--gold)] sm:min-h-[132px] sm:flex-col sm:items-start sm:px-6 sm:py-[22px] sm:text-2xl"
               >
                 {d.label}
                 <span aria-hidden="true" className="text-[22px]">

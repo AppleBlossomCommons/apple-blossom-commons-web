@@ -3,7 +3,7 @@
 import { animate, type AnimationPlaybackControls } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { DISTRICT_HERO_FADE, districtImage } from "@/lib/district-image";
+import { districtImage } from "@/lib/district-image";
 import { ease } from "@/lib/motion";
 
 export type DistrictRef = { slug: string; color: string };
@@ -238,7 +238,6 @@ export function SiteTransition({ children }: { children: React.ReactNode }) {
         className="pointer-events-none invisible fixed inset-x-0 top-16 z-[25] h-[calc(100svh-64px)] min-h-[520px] overflow-hidden"
       >
         <div ref={media} className="absolute inset-x-0 -bottom-[10%] -top-[10%]" />
-        <span className="absolute inset-0" style={{ background: DISTRICT_HERO_FADE }} />
       </div>
     </TransitionContext.Provider>
   );

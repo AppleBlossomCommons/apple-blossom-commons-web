@@ -35,7 +35,7 @@ Words in [brackets] are notes for the builder, not copy.
 | Tile | Word | Line |
 |---|---|---|
 | Large | **Once in a Generation** | Land like this, planned with this much care, comes along rarely. |
-| Wide | **A New Way to Retire** | Walkable streets, care close by, and room for the grandkids. |
+| Wide | **A New Way to Retire** | Streets designed for walking, care close by, and room for the grandkids. |
 | Medium | **Home for Every Chapter** | Stay in the community you love as your needs change. |
 | Small | **Unhurried** | Mornings with nowhere you have to be. |
 | Small | **Care, Close By** | The hospital campus is a short walk from home. |
@@ -77,9 +77,9 @@ Words in [brackets] are notes for the builder, not copy.
 
 ### How it fits together [short items]
 - **Homes for every stage of life.** Cottages and townhomes for active adults, independent and assisted living, memory care, and family homes and apartments.
-- **A small village.** Cafés, restaurants, tasting rooms and shops along a walkable lane, sized to add to downtown Chelan, not compete with it.
+- **A small village.** Cafés, restaurants, tasting rooms and shops along a lane designed for walking, sized to add to downtown Chelan, not compete with it.
 - **Parks and open space.** A recreation park, trails and a large orchard preserve.
-- **Built in phases.** Each neighborhood comes when there is real demand for it.
+- **Built in phases.** Each neighborhood comes when there is real demand for it. [Jump link "How the plan grows →" to #guiding-ideas, per `11-plan-and-districts-content.md`.]
 
 ### Care, close by [id="care-close-by"; was Connected Community]
 - **Heading:** Care, close by
@@ -140,7 +140,7 @@ I'm a Chelan neighbor · I'm thinking about living here · I'm helping a parent 
 - **When might the first homes or businesses open?** It's too early to say. We'll share timing as plans firm up.
 
 **For neighbors**
-- **Will this bring traffic and crowds?** The plan is built around walkable neighborhoods and phased growth, so change comes gradually. Traffic and road access are studied as part of the review process.
+- **Will this bring traffic and crowds?** The plan is built around neighborhoods designed for walking and phased growth, so change comes gradually. Traffic and road access are studied as part of the review process.
 - **Who pays for roads, water and sewer upgrades?** It's too early to say. These questions are worked out during the review process, and we'll share answers as they're settled.
 - **Will homes be used as short-term rentals?** It's too early to say. We know this matters to Chelan, and we'll share our approach as plans firm up.
 - **Will there be housing for local workers and families?** The plan includes family homes and apartments as well as senior living. Details are still being worked out.

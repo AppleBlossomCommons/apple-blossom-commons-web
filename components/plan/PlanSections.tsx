@@ -1,21 +1,35 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import { JumpLink } from "@/components/site/JumpLink";
+import { ConceptText } from "@/components/site/Places";
+import { RuleList, type RuleItem } from "@/components/site/RuleList";
+import { PLAN_COLOR } from "@/lib/district-image";
+import { PLAN_DISCLAIMER } from "@/lib/districts";
 
-// Copy from docs/10-content-v2.md, "The Plan (/plan)". Image notes from the Phase 1 handoff.
+// Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
+// docs/11-plan-and-districts-content.md, section 1. Image notes from the Phase 1 handoff and docs/11.
 
 /** Hero: an inset image card with the page title (520px tall; 380px on phones). */
 export function PlanHero() {
   return (
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
       <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
-        <PlaceholderImage
-          gradient="linear-gradient(175deg, #F5D9A6 0%, #E5C48E 30%, #B9BC8C 58%, #8FB0AE 80%, #6A93A0 100%)"
-          className="absolute inset-0 -z-10"
+        <Image
+          src={PLAN_COLOR}
+          alt="Color-coded masterplan of the site, showing its neighborhoods, the village, roads, trails, and parks and open space."
+          fill
+          preload
+          sizes="100vw"
+          className="-z-20 object-cover"
         />
-        <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_40%,rgb(45_32_24/0.6)_100%)]" />
-        <PlaceholderLabel inset={20}>Stock photo: orchard hills sloping down to the lake, soft morning light, no buildings</PlaceholderLabel>
-        <Reveal as="h1" kind="head" id="plan-title" className="text-[56px] leading-[0.95] tracking-[-0.03em] text-white sm:text-[clamp(72px,7.8vw,112px)]">
+        {/* A soft linen fade at the bottom keeps the dark title readable over the busy map. */}
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-3/5 bg-gradient-to-t from-linen/90 via-linen/50 to-transparent" />
+        <p className="absolute left-5 top-5 max-w-[calc(100%-40px)] rounded-[14px] bg-label px-3 py-1.5 text-[13px] font-medium leading-[1.35] text-hearth sm:left-8 sm:top-8">
+          {PLAN_DISCLAIMER}
+        </p>
+        <Reveal as="h1" kind="head" id="plan-title" className="text-[56px] leading-[0.95] tracking-[-0.03em] text-hearth sm:text-[clamp(72px,7.8vw,112px)]">
           The plan
         </Reveal>
       </div>
@@ -35,17 +49,29 @@ export function PlanIntro() {
   );
 }
 
-const fits = [
+const jumpClass =
+  "inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
+
+const fits: RuleItem[] = [
   {
     title: "Homes for every stage of life.",
     text: "Cottages and townhomes for active adults, independent and assisted living, memory care, and family homes and apartments.",
   },
   {
+    // "a lane designed for walking", not "a walkable lane" (CLAUDE.md, rule 3).
     title: "A small village.",
-    text: "Cafés, restaurants, tasting rooms and shops along a walkable lane, sized to add to downtown Chelan, not compete with it.",
+    text: "Cafés, restaurants, tasting rooms and shops along a lane designed for walking, sized to add to downtown Chelan, not compete with it.",
   },
   { title: "Parks and open space.", text: "A recreation park, trails and a large orchard preserve." },
-  { title: "Built in phases.", text: "Each neighborhood comes when there is real demand for it." },
+  {
+    title: "Built in phases.",
+    text: "Each neighborhood comes when there is real demand for it.",
+    extra: (
+      <JumpLink href="#guiding-ideas" className={jumpClass}>
+        How the plan grows&nbsp;<span aria-hidden="true">→</span>
+      </JumpLink>
+    ),
+  },
 ];
 
 /** "How it fits together": four short items under a 3px Deep Sage rule. */
@@ -55,14 +81,7 @@ export function FitsTogether() {
       <Reveal as="h2" kind="head" id="fits-title" className="mb-7 text-[34px] leading-none sm:mb-14 sm:text-[clamp(40px,4.2vw,60px)]">
         How it fits together
       </Reveal>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-7 sm:gap-10">
-        {fits.map((item, i) => (
-          <Reveal key={item.title} as="li" kind="card" index={i} className="flex flex-col gap-2 border-t-[3px] border-sage-deep pt-4 sm:gap-3 sm:pt-6">
-            <h3 className="text-[23px] leading-[1.1] tracking-[-0.015em] sm:text-[26px]">{item.title}</h3>
-            <p>{item.text}</p>
-          </Reveal>
-        ))}
-      </ul>
+      <RuleList items={fits} />
     </section>
   );
 }
@@ -76,8 +95,11 @@ export function CareCloseBy() {
       className="grid gap-4 bg-sand p-2 pb-0 sm:p-4 min-[900px]:grid-cols-2"
     >
       <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(160deg, #EFDDAE 0%, #C9CFA0 50%, #93A985 100%)" className="absolute inset-0" />
-        <PlaceholderLabel>Stock photo (people): older couple on a calm walking path lined with trees; no clinical imagery</PlaceholderLabel>
+        <PlaceholderImage fill="#ECE7FC" className="absolute inset-0" />
+        <PlaceholderLabel>
+          AI image, no people: sheltered garden courtyard between single-storey homes with porches, a looping level path, benches in the
+          sun, a small fountain
+        </PlaceholderLabel>
       </Reveal>
       <div className="flex flex-col justify-center gap-3.5 px-3 pb-12 pt-8 sm:gap-5 sm:px-14 sm:py-16">
         <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
@@ -87,6 +109,9 @@ export function CareCloseBy() {
           The senior neighborhoods, Orchard Grove and Heritage Grove, are planned within a short walk of the hospital campus. The Wellness District
           nearby is planned for clinics, therapy and medical-assisted living.
         </Reveal>
+        <p className="max-w-[560px]">
+          <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. Shared clubhouses are planned for the things that make a day good: a fitness room, a library, a place to have a meal or host family overnight. (concept)" />
+        </p>
         <div aria-hidden="true" className="my-2.5 h-px bg-line sm:my-4" />
         <h3 className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">Technology that supports people</h3>
         <p className="max-w-[560px]">
@@ -116,10 +141,9 @@ export function WhyChelan() {
       <Reveal
         kind="card"
         index={0}
-        className="relative isolate flex h-[560px] flex-col justify-end gap-3.5 overflow-hidden rounded-card p-[22px] text-white sm:h-[680px] sm:gap-5 sm:p-14"
+        className="relative isolate flex h-[560px] flex-col justify-end gap-3.5 overflow-hidden rounded-card p-[22px] text-hearth sm:h-[680px] sm:gap-5 sm:p-14"
       >
-        <PlaceholderImage gradient="linear-gradient(170deg, #F3D6A4 0%, #E2B27E 40%, #B98C66 100%)" className="absolute inset-0 -z-10" />
-        <span aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(45_32_24/0)_30%,rgb(45_32_24/0.66)_100%)]" />
+        <PlaceholderImage fill="#FFE6CC" className="absolute inset-0 -z-10" />
         <PlaceholderLabel>Stock photo: vineyard rows in autumn</PlaceholderLabel>
         <h2 id="why-title" className="text-[44px] leading-[0.98] sm:text-[clamp(56px,5.6vw,80px)]">
           Why Chelan
@@ -130,7 +154,7 @@ export function WhyChelan() {
         </p>
       </Reveal>
       <Reveal kind="card" index={1} className="relative h-[240px] overflow-hidden rounded-card sm:h-[680px]">
-        <PlaceholderImage gradient="linear-gradient(180deg, #F4F1EC 0%, #DCE3E4 45%, #A9BDC4 100%)" className="absolute inset-0" />
+        <PlaceholderImage fill="#EAF6FD" className="absolute inset-0" />
         <PlaceholderLabel>Stock photo: snowy trail in winter</PlaceholderLabel>
       </Reveal>
     </section>

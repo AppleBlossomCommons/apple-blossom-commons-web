@@ -1,96 +1,377 @@
 {
   "_meta": {
-    "asOf": "2026-10-16",
+    "asOf": "2026-10-28",
     "source": "July 2026 masterplan (jeffrey mak: architect ltd) and the Aug 25, 2026 plan stats workbook, via the Apple Blossom Commons research project",
-    "note": "All figures are planning concepts. 'publicFacts' may be shown on the site; 'internalNotes' must never be rendered. Keys match data/district-geometry-v1.json.",
+    "note": "All figures are planning concepts. 'publicFacts' and 'places' may be shown on the site; 'internalNotes' must never be rendered. Keys match data/district-geometry-v1.json. 'places' are named places and ideas from the July 2026 masterplan, shown under 'What's planned here' (docs/11-plan-and-districts-content.md). A text ending in '(concept)' is shown with that word muted.",
     "families": {
-      "residential": { "label": "Residential", "colorFamily": "warm wheat" },
-      "senior": { "label": "Senior living", "colorFamily": "sage" },
-      "commercial": { "label": "Commercial & hospitality", "colorFamily": "terracotta" },
-      "civic": { "label": "Health & civic", "colorFamily": "lake blue" },
-      "parks": { "label": "Parks & open space", "colorFamily": "orchard green" }
+      "residential": {
+        "label": "Residential",
+        "colorFamily": "lavender and orange"
+      },
+      "senior": {
+        "label": "Senior living",
+        "colorFamily": "lavender and yellow"
+      },
+      "commercial": {
+        "label": "Commercial & hospitality",
+        "colorFamily": "soft pink"
+      },
+      "civic": {
+        "label": "Health & civic",
+        "colorFamily": "sky blue"
+      },
+      "parks": {
+        "label": "Parks & open space",
+        "colorFamily": "lime green"
+      }
     }
   },
   "districts": [
     {
-      "key": "wine", "n": 1, "slug": "wine-village", "code": "WINE",
-      "name": "Chelan Wine Village", "family": "commercial", "color": "#C98B6B",
-      "summary": "The central village: wineries and breweries, restaurants, boutique retail and gathering spaces along Vintner's Walk.",
-      "publicFacts": ["The Barrel House, Tasting Courtyard, Market Hall", "Harvest Square, the main plaza", "188,900 sf commercial · ~21 apartments (planning concept)"],
+      "key": "wine",
+      "n": 1,
+      "slug": "wine-village",
+      "code": "WINE",
+      "name": "Chelan Wine Village",
+      "family": "commercial",
+      "color": "#FFC4DC",
+      "summary": "The heart of the community: a small village of tasting rooms, cafés, restaurants and shops, laid out for people on foot along Vintner's Walk.",
+      "publicFacts": [
+        "The Barrel House, Tasting Courtyard, Market Hall",
+        "Harvest Square, the main plaza",
+        "188,900 sf commercial · ~21 apartments (planning concept)"
+      ],
+      "places": [
+        {
+          "name": "Harvest Square",
+          "text": "The main plaza at the center of the village, where the trails and neighborhoods meet. A place for markets, music and seasonal events."
+        },
+        {
+          "name": "Vintner's Walk",
+          "text": "A lane for walking, not driving, lined with coffee shops and small stores along the village's central spine."
+        },
+        {
+          "name": "The Tasting Courtyard",
+          "text": "A courtyard of small tasting rooms for local wineries, so you can try wines from around the valley in one place without driving between them."
+        },
+        {
+          "name": "Market Hall",
+          "text": "An indoor-outdoor market for local food, crafts and wine, with small kitchens run by local cooks next to the tasting rooms."
+        },
+        {
+          "name": "The Barrel House",
+          "text": "A shared winemaking hall for local wineries, with production space, barrel storage, tastings and a restaurant."
+        },
+        {
+          "name": "Neighborhood shops",
+          "text": "Smaller corner shops are planned near each neighborhood, so everyday errands stay close to home."
+        }
+      ],
       "status": "verified",
       "internalNotes": "Includes the top block near Discovery Commons, the main village and the diagonal Retail High Street spine."
     },
     {
-      "key": "wellness", "n": 2, "slug": "wellness-district", "code": "WELL",
-      "name": "Wellness District", "family": "civic", "color": "#7FA3BC",
-      "summary": "Medical uses around the Lake Chelan Health Hospital campus, with clinics and rehabilitation close to the senior homes.",
-      "publicFacts": ["Lake Chelan Health Hospital (existing)", "Columbia Valley Community Health", "Lot 17 medical assisted living", "Two new 12,000 sf buildings (planning concept)"],
+      "key": "wellness",
+      "n": 2,
+      "slug": "wellness-district",
+      "code": "WELL",
+      "name": "Wellness District",
+      "family": "civic",
+      "color": "#9ED8F5",
+      "summary": "Medical uses next to the hospital campus, with clinics, therapy and rehabilitation close to the senior homes.",
+      "publicFacts": [
+        "Next to the hospital campus",
+        "Clinics, physical therapy and rehabilitation (planning concept)",
+        "Medical assisted living (planning concept)",
+        "Two new 12,000 sf buildings (planning concept)"
+      ],
+      "places": [
+        {
+          "name": "Clinics and therapy",
+          "text": "Clinics, physical therapists and rehabilitation services planned close to the senior homes, within reach on foot or by car. (concept)"
+        },
+        {
+          "name": "Medical assisted living",
+          "text": "Assisted living with medical support, planned beside the hospital campus. (concept)"
+        },
+        {
+          "name": "A short walk to the hospital campus",
+          "text": "The district sits next to the existing hospital campus, so care is planned to be close by."
+        }
+      ],
       "status": "verified",
-      "internalNotes": "Presented as part of Apple Blossom Commons. The hospital belongs to Lake Chelan Health; do not call them a partner until they agree to be named."
+      "internalNotes": "Presented as part of Apple Blossom Commons. The hospital belongs to Lake Chelan Health; do not call them a partner until they agree to be named. Oct 28, 2026: hospital and Columbia Valley Community Health removed from publicFacts (neighbor-only rule); 'Lot 17' is the parcel for medical assisted living; rehabilitation confirmed by the masterplan Wellness sheet."
     },
     {
-      "key": "orchardgrove", "n": 3, "slug": "orchard-grove", "code": "ORCH",
-      "name": "Orchard Grove", "family": "senior", "color": "#A9B48A",
-      "summary": "55+ cottage homes, townhomes and apartments designed for owners who want to age in place.",
-      "publicFacts": ["63 cottage homes · 30 townhomes · ~23 apartments (planning concept)", "Recreation center with gardens and track"],
+      "key": "orchardgrove",
+      "n": 3,
+      "slug": "orchard-grove",
+      "code": "ORCH",
+      "name": "Orchard Grove",
+      "family": "senior",
+      "color": "#D6CBF7",
+      "summary": "Cottage homes, townhomes and apartments for active adults, designed for people who want to stay in their homes as their needs change.",
+      "publicFacts": [
+        "63 cottage homes · 30 townhomes · ~23 apartments (planning concept)",
+        "Recreation center with gardens, tennis courts, a walking track and an event hall"
+      ],
+      "places": [
+        {
+          "name": "Cottage homes",
+          "text": "Single-family cottages for individuals and couples, with privacy of their own and community amenities nearby. Designed with accessibility in mind for aging in place."
+        },
+        {
+          "name": "Senior townhomes",
+          "text": "A range of townhomes, giving neighbors more than one kind of home to choose from. (concept)"
+        },
+        {
+          "name": "The Recreation Center",
+          "text": "Gardens, tennis courts, a walking track and a hall for community events."
+        },
+        {
+          "name": "Everyday life, taken care of",
+          "text": "Ideas being explored include home and grounds maintenance, shared meals made with local food, group hikes and outings, and pet-friendly homes. (concept)"
+        }
+      ],
       "status": "verified",
-      "internalNotes": ""
+      "internalNotes": "Oct 28, 2026: masterplan Life Plan bullets on fees and priority care access left out (promises). 'Affordable senior housing' shown as 'senior townhomes' until its meaning is confirmed. 55+ wording conflicts with the FAQ; see docs/09."
     },
     {
-      "key": "heritage", "n": 4, "slug": "heritage-grove", "code": "HERIT",
-      "name": "Heritage Grove", "family": "senior", "color": "#BEC69F",
-      "summary": "Homes for seniors who prefer or require assistance, from independent living to memory care.",
-      "publicFacts": ["Independent living · assisted living", "Memory care · nursing", "335,000 sf (planning concept)"],
+      "key": "heritage",
+      "n": 4,
+      "slug": "heritage-grove",
+      "code": "HERIT",
+      "name": "Heritage Grove",
+      "family": "senior",
+      "color": "#FFE380",
+      "summary": "Homes for seniors who prefer or need support, from independent living to assisted living, memory care and nursing care, planned around garden courtyards.",
+      "publicFacts": [
+        "Independent living · assisted living",
+        "Memory care · nursing",
+        "335,000 sf (planning concept)"
+      ],
+      "places": [
+        {
+          "name": "Independent living",
+          "text": "For people who manage on their own but like the ease of a senior community."
+        },
+        {
+          "name": "Assisted living",
+          "text": "Help with daily routines for people who no longer want to live alone."
+        },
+        {
+          "name": "Memory care",
+          "text": "Homes designed for people living with Alzheimer's or dementia."
+        },
+        {
+          "name": "Nursing care",
+          "text": "Around-the-clock care for people who need it."
+        },
+        {
+          "name": "Garden courtyards",
+          "text": "Each group of homes is planned around a protected courtyard for short walks and time in the sun, with paths to the rest of the community."
+        },
+        {
+          "name": "Shared clubhouses",
+          "text": "One clubhouse for independent and assisted living, with a club room, fitness room, movie room, library, quiet room and guest suites. A second for memory and nursing care, with guest suites, a library, a salon, dining and nursing staff on hand around the clock. (concept)"
+        }
+      ],
       "status": "open",
       "internalNotes": "~419 units or beds is unresolved (units vs beds). Do not publish a count."
     },
     {
-      "key": "abr", "n": 5, "slug": "apple-blossom-residence", "code": "ABR",
-      "name": "Apple Blossom Residence", "family": "residential", "color": "#D8C27F",
-      "summary": "Market-rate apartments, townhomes and detached homes, buffered from Chelan Falls Road and Apple Blossom Drive.",
-      "publicFacts": ["64 townhomes · 37 duplex / single-family (planning concept)", "Apartment count under review"],
+      "key": "abr",
+      "n": 5,
+      "slug": "apple-blossom-residence",
+      "code": "ABR",
+      "name": "Apple Blossom Residence",
+      "family": "residential",
+      "color": "#E4DCFA",
+      "summary": "Market-rate apartments, townhomes and detached homes for families and households of every kind, with green buffers along Chelan Falls Road and Apple Blossom Drive.",
+      "publicFacts": [
+        "64 townhomes · 37 duplex / single-family (planning concept)",
+        "Apartment count under review",
+        "Green buffers along the main roads"
+      ],
+      "places": [
+        {
+          "name": "Townhomes and apartments",
+          "text": "Larger family-sized townhomes and apartments."
+        },
+        {
+          "name": "Detached homes",
+          "text": "Single-family homes with private backyards, for people who want a bit more room and privacy."
+        },
+        {
+          "name": "Green buffers",
+          "text": "Planted edges along Chelan Falls Road and Apple Blossom Drive, so homes face green rather than traffic."
+        }
+      ],
       "status": "open",
       "internalNotes": "Not senior housing. A 75,000 sf building on the PDF is missing from the workbook; totals range 126–332 units. Do not publish a total."
     },
     {
-      "key": "harvest", "n": 6, "slug": "harvest-crossing", "code": "HARV",
-      "name": "Harvest Crossing", "family": "residential", "color": "#CDB06A",
-      "summary": "Workforce homes close to the village's shops and services, with a live-work zone.",
-      "publicFacts": ["200 apartments (working figure)", "32 townhomes (planning concept)"],
+      "key": "harvest",
+      "n": 6,
+      "slug": "harvest-crossing",
+      "code": "HARV",
+      "name": "Harvest Crossing",
+      "family": "residential",
+      "color": "#FFC88F",
+      "summary": "Homes for people who work in Chelan, close to the village's shops and services, with a live-work zone.",
+      "publicFacts": [
+        "200 apartments (working figure)",
+        "32 townhomes (planning concept)",
+        "Studio and one-bedroom homes"
+      ],
+      "places": [
+        {
+          "name": "Apartments near the village",
+          "text": "Studio and one-bedroom apartments a short walk from the village's shops and services."
+        },
+        {
+          "name": "Live-work zone",
+          "text": "Homes with space to run a small business on the ground floor. (concept)"
+        }
+      ],
       "status": "working-figure",
-      "internalNotes": "200 apartments approved by the owner for public use on Oct 16, 2026; revise if it changes."
+      "internalNotes": "200 apartments approved by the owner for public use on Oct 16, 2026; revise if it changes. Oct 28, 2026: masterplan calls these an 'affordable option'; not used publicly (no pricing claims)."
     },
     {
-      "key": "summit", "n": 7, "slug": "summit-recreation-park", "code": "SUMMIT",
-      "name": "Summit Recreation Park", "family": "parks", "color": "#A1C4A6",
-      "summary": "Sports fields, a seasonal roller and ice rink, a playground and a pond, in two parts north and south.",
-      "publicFacts": ["Existing soccer and baseball fields", "Decorative pond and play areas", "Trails linking the districts"],
+      "key": "summit",
+      "n": 7,
+      "slug": "summit-recreation-park",
+      "code": "SUMMIT",
+      "name": "Summit Recreation Park",
+      "family": "parks",
+      "color": "#DDF2AE",
+      "summary": "Sports fields, a seasonal rink, a playground and a pond, in two parts north and south, joined by trails.",
+      "publicFacts": [
+        "Existing soccer and baseball fields",
+        "Seasonal rink: roller in summer, ice in winter (planning concept)",
+        "Children's play area and a small pond",
+        "Trails linking the districts"
+      ],
+      "places": [
+        {
+          "name": "Seasonal rink",
+          "text": "A rink that could be used for roller skating in the warm months and ice skating in winter. (concept)"
+        },
+        {
+          "name": "Sports fields",
+          "text": "The existing soccer and baseball fields, plus another field for pickup games."
+        },
+        {
+          "name": "Children's discovery park",
+          "text": "Nature-inspired play for kids, next to an interactive water feature."
+        },
+        {
+          "name": "The pond",
+          "text": "A small pond planned to add habitat and a quiet place to sit."
+        },
+        {
+          "name": "Vineyard hiking trail",
+          "text": "Trails with native planting that tie the park to the village and the neighborhoods."
+        }
+      ],
       "status": "verified",
       "internalNotes": "Two separate parts; the geometry has two label positions."
     },
     {
-      "key": "discovery", "n": 8, "slug": "discovery-commons", "code": "DISC",
-      "name": "Discovery Commons", "family": "civic", "color": "#97B3C8",
+      "key": "discovery",
+      "n": 8,
+      "slug": "discovery-commons",
+      "code": "DISC",
+      "name": "Discovery Commons",
+      "family": "civic",
+      "color": "#BDE5F8",
       "summary": "An aspiration for lifelong learning: a potential K-12 school, community center and library.",
-      "publicFacts": ["Aspirational, not a commitment", "150,000 sf shown as a concept"],
+      "publicFacts": [
+        "Aspirational, not a commitment",
+        "150,000 sf shown as a concept"
+      ],
+      "places": [
+        {
+          "name": "A place to learn",
+          "text": "Land set aside for a potential school in the future."
+        },
+        {
+          "name": "Community center",
+          "text": "Space for gatherings, events and indoor recreation for all ages."
+        },
+        {
+          "name": "Library",
+          "text": "A library near the learning and recreation areas, for readers young and old."
+        }
+      ],
       "status": "aspirational",
       "internalNotes": "Always present as an aspiration."
     },
     {
-      "key": "preserve", "n": 9, "slug": "orchard-preserve", "code": "PRES",
-      "name": "Orchard Preserve", "family": "parks", "color": "#83AF8C",
+      "key": "preserve",
+      "n": 9,
+      "slug": "orchard-preserve",
+      "code": "PRES",
+      "name": "Orchard Preserve",
+      "family": "parks",
+      "color": "#CDEB8B",
       "summary": "Open space with trails and a scenic overlook at the highest point of the site.",
-      "publicFacts": ["Nature trail and overlook", "Open space preserved", "RV park and campground"],
+      "publicFacts": [
+        "Nature trail and overlook",
+        "Open space preserved",
+        "RV park and campground (planning concept)"
+      ],
+      "places": [
+        {
+          "name": "Scenic overlook",
+          "text": "A trail to the highest point of the site, with a view out over the town."
+        },
+        {
+          "name": "Open hillside",
+          "text": "Much of the land is planned to stay open, keeping its natural character."
+        },
+        {
+          "name": "Bike and walking trails",
+          "text": "Trails that link the neighborhoods, the parks and the village."
+        },
+        {
+          "name": "RV park and campground",
+          "text": "A small area for visiting RVs and campers. (concept)"
+        }
+      ],
       "status": "verified",
       "internalNotes": ""
     },
     {
-      "key": "hotel", "n": 10, "slug": "grand-orchard-hotel", "code": "HOTEL",
-      "name": "Grand Orchard Hotel", "family": "commercial", "color": "#B8754F",
+      "key": "hotel",
+      "n": 10,
+      "slug": "grand-orchard-hotel",
+      "code": "HOTEL",
+      "name": "Grand Orchard Hotel",
+      "family": "commercial",
+      "color": "#FFAED0",
       "summary": "A cottage-style hotel with event space at the edge of the village.",
-      "publicFacts": ["65 hotel cottages, 1,200 sf each (planning concept)", "Hotel apartments, 3 storeys, 30,000 sf (planning concept)", "24-hour automated retail"],
+      "publicFacts": [
+        "Cottage-style rooms for families (planning concept)",
+        "Hotel apartments, 3 storeys, 30,000 sf (planning concept)",
+        "Event space for gatherings (planning concept)"
+      ],
+      "places": [
+        {
+          "name": "Hotel cottages",
+          "text": "Small cottage-style rooms suited to families, at the edge of the village."
+        },
+        {
+          "name": "Event space",
+          "text": "Rooms for weddings, meetings and community gatherings."
+        },
+        {
+          "name": "Self-serve shop",
+          "text": "A small shop open around the clock for guests' everyday needs. (concept)"
+        }
+      ],
       "status": "open",
-      "internalNotes": "Key count unresolved: masterplan text says 65 units, stats say 115 keys. Do not publish a key count."
+      "internalNotes": "Key count unresolved: masterplan text says 65 units, stats say 115 keys. Do not publish a key count. Oct 28, 2026: '65 hotel cottages' removed from publicFacts to match this note. Possible reconciliation to confirm: 65 cottages + ~50 hotel apartments = 115 keys."
     }
   ]
 }
