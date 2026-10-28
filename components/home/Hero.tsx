@@ -22,10 +22,13 @@ export function Hero() {
   const { ref, y } = useParallax("top");
 
   return (
-    <section aria-labelledby="home-title" className="px-[clamp(8px,1.2vw,16px)]">
+    // The card fills the screen below the sticky 64px header, leaving the same small gap at the
+    // bottom as on the sides, so the next section starts below the fold. The 540px floor keeps
+    // the text from crowding on short screens (landscape phones), where the card simply scrolls.
+    <section aria-labelledby="home-title" className="px-[clamp(8px,1.2vw,16px)] pb-[clamp(8px,1.2vw,16px)]">
       <div
         ref={ref}
-        className="relative isolate flex h-[clamp(540px,calc(100svh-96px),760px)] flex-col justify-end overflow-hidden rounded-[clamp(24px,2.4vw,32px)] px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)]"
+        className="relative isolate flex h-[max(540px,calc(100svh-64px-clamp(8px,1.2vw,16px)))] flex-col justify-end overflow-hidden rounded-[clamp(24px,2.4vw,32px)] px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)]"
       >
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <PlaceholderImage
