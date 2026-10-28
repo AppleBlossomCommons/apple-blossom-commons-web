@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { AtAGlance } from "@/components/district/AtAGlance";
 import { DistrictHero } from "@/components/district/DistrictHero";
 import { NextDistrict } from "@/components/district/NextDistrict";
+import { WhatsPlannedHere } from "@/components/district/WhatsPlannedHere";
 import { DoorwayCards } from "@/components/site/DoorwayCards";
 import { districts, getDistrict, PLAN_VIEWBOX, polyToPath } from "@/lib/districts";
 
@@ -60,6 +61,7 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
         districts={locatorDistricts}
         viewBox={PLAN_VIEWBOX}
       />
+      <WhatsPlannedHere districtKey={district.key} places={district.places} aspirational={district.status === "aspirational"} />
       <NextDistrict slug={next.slug} name={next.name} color={next.color} />
       <DoorwayCards />
     </>
