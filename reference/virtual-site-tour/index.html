@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Apple Blossom Commons — Virtual Site Tour</title>
+<link rel="stylesheet" href="lib/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 28px 32px 18px; border-bottom: 1px solid var(--line); background: var(--surface); }
+  .top h1 { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 4px 0 6px; letter-spacing: -.01em; }
+  .top p { margin: 0; color: var(--ink-2); max-width: 70ch; }
+  .top .count { color: var(--ink-3); font-size: 13px; white-space: nowrap; }
+  .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 0; min-height: calc(100vh - 120px); }
+  .tours { border-right: 1px solid var(--line); background: var(--surface); padding: 16px 12px; overflow-y: auto; max-height: calc(100vh - 110px); position: sticky; top: 0; }
+  .tours h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 4px 8px 10px; font-weight: 600; }
+  .tours ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .tour-item { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; width: 100%; text-align: left; border: 1px solid transparent; background: none; border-radius: 8px; padding: 9px 10px; cursor: pointer; }
+  .tour-item:hover { background: var(--surface-2); }
+  .tour-item[aria-current="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .tour-item .num { font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 600; color: var(--ink-3); padding-top: 2px; }
+  .tour-item[aria-current="true"] .num { color: var(--accent); }
+  .tour-item .t { font-weight: 600; font-size: 14px; line-height: 1.3; }
+  .tour-item .meta { display: flex; gap: 6px; align-items: center; margin-top: 4px; font-size: 12px; color: var(--ink-3); flex-wrap: wrap; }
+
+  .stage { padding: 22px 28px 32px; min-width: 0; }
+  .stage-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 14px; }
+  .stage-head h2 { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 2px 0 2px; line-height: 1.2; }
+  .stage-head p { margin: 0; color: var(--ink-2); }
+  .nav { display: flex; gap: 8px; flex-shrink: 0; }
+  .panes { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; height: clamp(340px, 56vh, 600px); }
+  .video-wrap, .map-wrap { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #0b0d0c; }
+  video { width: 100%; height: 100%; display: block; object-fit: contain; background: #0b0d0c; }
+  #map { position: absolute; inset: 0; }
+  .map-tools { position: absolute; top: 10px; right: 10px; z-index: 600; display: flex; gap: 6px; }
+  .map-tools .btn { font-size: 12px; padding: 4px 9px; box-shadow: var(--shadow); }
+  .video-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: #e8ece9; font-size: 14px; }
+  .video-msg[hidden] { display: none; }
+  .upnext { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); background: rgba(15,20,17,.9); color: #fff; border-radius: 10px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; font-size: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.4); max-width: calc(100% - 32px); }
+  .upnext[hidden] { display: none; }
+  .upnext .btn { background: #fff; color: #111; border-color: #fff; }
+
+  .track { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; margin-top: 18px; }
+  .time { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--ink-2); min-width: 38px; }
+  .bar { position: relative; height: 34px; cursor: pointer; touch-action: none; }
+  .bar .rail { position: absolute; left: 0; right: 0; top: 15px; height: 4px; border-radius: 2px; background: var(--line); }
+  .bar .fill { position: absolute; left: 0; top: 15px; height: 4px; border-radius: 2px; background: var(--accent); width: 0; }
+  .bar .knob { position: absolute; top: 9px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); box-shadow: var(--shadow); left: 0; }
+  .bar .tick { position: absolute; top: 8px; width: 2px; height: 18px; margin-left: -1px; background: var(--blossom); border-radius: 1px; }
+  .bar .tick::after { content: ""; position: absolute; top: -5px; left: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--blossom); }
+  .landmarks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip { display: inline-flex; align-items: baseline; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; cursor: pointer; font-size: 13px; }
+  .chip b { font-variant-numeric: tabular-nums; color: var(--blossom); font-weight: 600; }
+  .chip:hover { border-color: var(--ink-3); }
+  .chip.on { border-color: var(--blossom); background: color-mix(in srgb, var(--blossom) 10%, var(--surface)); }
+  .draft-note { margin-top: 16px; font-size: 13px; color: var(--ink-3); }
+  footer { padding: 16px 32px 28px; font-size: 12px; color: var(--ink-3); border-top: 1px solid var(--line); }
+
+  @media (max-width: 1000px) {
+    .top { padding: 20px 16px 14px; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .top h1 { font-size: 24px; }
+    .layout { grid-template-columns: 1fr; }
+    .tours { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--line); padding: 10px 0 10px 16px; }
+    .tours h2 { display: none; }
+    .tours ol { grid-auto-flow: column; grid-auto-columns: 220px; overflow-x: auto; padding-right: 16px; scroll-snap-type: x proximity; }
+    .tour-item { scroll-snap-align: start; border-color: var(--line); }
+    .stage { padding: 16px; }
+    .stage-head { flex-direction: column; align-items: flex-start; }
+    .panes { grid-template-columns: 1fr; height: auto; }
+    .video-wrap { aspect-ratio: 16 / 9; }
+    .video-wrap.portrait { aspect-ratio: 3 / 4; max-height: 70vh; }
+    .map-wrap { height: 320px; }
+    footer { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="eyebrow">Apple Blossom Commons · Chelan, Washington</div>
+    <h1>Virtual Site Tour</h1>
+    <p>Drive and walk the Apple Blossom Center planning area from anywhere. Each clip is paired with a map that follows the route as the video plays.</p>
+  </div>
+  <div class="count" id="count"></div>
+</header>
+
+<div class="layout">
+  <aside class="tours" aria-label="Tours">
+    <h2>Tours</h2>
+    <ol id="tourList"></ol>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-head">
+      <div>
+        <div class="eyebrow" id="tourIndex"></div>
+        <h2 id="tourTitle"></h2>
+        <p id="tourSub"></p>
+      </div>
+      <div class="nav">
+        <button class="btn" id="prevBtn" type="button">← Previous</button>
+        <button class="btn" id="nextBtn" type="button">Next →</button>
+      </div>
+    </div>
+
+    <div class="panes">
+      <div class="video-wrap">
+        <video id="video" controls playsinline preload="metadata"></video>
+        <div class="video-msg" id="videoMsg" hidden></div>
+        <div class="upnext" id="upnext" hidden><span>Up next: <strong id="upnextTitle"></strong></span><button class="btn" id="upnextBtn" type="button">Play</button></div>
+      </div>
+      <div class="map-wrap">
+        <div id="map" role="application" aria-label="Site map"></div>
+        <div class="map-tools">
+          <button class="btn active" id="followBtn" type="button" aria-pressed="true">Follow</button>
+          <button class="btn" id="fitBtn" type="button">Whole route</button>
+        </div>
+        <div class="map-note" id="mapNote" hidden></div>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="time" id="tCur">0:00</span>
+      <div class="bar" id="bar" role="slider" aria-label="Tour progress" tabindex="0" aria-valuemin="0">
+        <div class="rail"></div><div class="fill" id="fill"></div><div id="ticks"></div><div class="knob" id="knob"></div>
+      </div>
+      <span class="time" id="tDur">0:00</span>
+    </div>
+    <div class="landmarks" id="landmarks"></div>
+    <p class="draft-note" id="draftNote" hidden></p>
+  </main>
+</div>
+
+<footer>
+  Routes are matched to the footage by hand; between pinned moments the map marker’s position is approximate.
+  Imagery © Esri, Maxar, Earthstar Geographics · Road data © OpenStreetMap contributors.
+</footer>
+
+<script src="lib/leaflet.js"></script>
+<script src="tour-core.js"></script>
+<script src="tours.js"></script>
+<script>
+(function () {
+  "use strict";
+  var TC = window.TourCore, CFG = window.ABC_TOUR_CONFIG || {}, TOURS = window.ABC_TOURS || [];
+  try { // Pick up unsaved edits from the authoring tool when previewing on the same computer.
+    var saved = localStorage.getItem("abc-tours-draft");
+    if (saved && /[?&]preview=draft\b/.test(location.search)) TOURS = JSON.parse(saved).tours || TOURS;
+  } catch (e) {}
+
+  var $ = function (id) { return document.getElementById(id); };
+  var video = $("video"), bar = $("bar"), follow = true;
+  var cur = -1, tl = null, tour = null, lastT = -1, raf = 0;
+
+  /* ---------- Map ---------- */
+  var map = L.map("map", { zoomControl: true, attributionControl: true, maxZoom: 20 }).setView(CFG.siteCenter || [47.8388, -119.988], CFG.siteZoom || 16);
+  var imagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxNativeZoom: 19, maxZoom: 20, attribution: "Imagery © Esri, Maxar, Earthstar Geographics" });
+  var roadsRef = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", { maxNativeZoom: 19, maxZoom: 20, opacity: .75 });
+  var labelsRef = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", { maxNativeZoom: 19, maxZoom: 20 });
+  var streets = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, maxNativeZoom: 19, attribution: "© OpenStreetMap contributors" });
+  var satellite = L.layerGroup([imagery, roadsRef, labelsRef]).addTo(map);
+  L.control.layers({ "Satellite": satellite, "Streets": streets }, null, { position: "bottomleft" }).addTo(map);
+  map.attributionControl.setPrefix(false);
+
+  var others = L.layerGroup().addTo(map), active = L.layerGroup().addTo(map);
+  var remainLine, doneLine, marker, landmarkDots = L.layerGroup().addTo(map);
+
+  function markerIcon(kind) {
+    return L.divIcon({ className: "", iconSize: [26, 26], iconAnchor: [13, 13],
+      html: '<div class="tour-marker ' + kind + '"><div class="arrow"></div><div class="dot"></div></div>' });
+  }
+
+  function drawOthers() {
+    others.clearLayers();
+    TOURS.forEach(function (t, i) {
+      if (i === cur) return;
+      var l;
+      if (t.route && t.route.length > 1) l = L.polyline(t.route, { color: "#ffffff", weight: 4, opacity: .55, dashArray: "2 7" });
+      else if (t.point) l = L.circleMarker(t.point, { radius: 6, color: "#fff", weight: 2, fillColor: "#fff", fillOpacity: .35 });
+      if (!l) return;
+      l.bindTooltip((i + 1) + ". " + t.title, { sticky: true, className: "route-tip" });
+      l.on("click", function () { select(i, true); });
+      l.addTo(others);
+    });
+  }
+
+  function fitActive() {
+    if (!tour) return;
+    if (tour.route && tour.route.length > 1) map.fitBounds(L.latLngBounds(tour.route), { padding: [40, 40], maxZoom: 18 });
+    else if (tour.point) map.setView(tour.point, 18);
+    else map.setView(CFG.siteCenter, CFG.siteZoom);
+  }
+
+  /* ---------- Tour list ---------- */
+  function statusLabel(s) { return s === "draft" ? "Draft route" : s === "unmapped" ? "Route pending" : "Verified"; }
+  function buildList() {
+    var ol = $("tourList");
+    ol.textContent = "";
+    TOURS.forEach(function (t, i) {
+      var li = document.createElement("li"), b = document.createElement("button");
+      b.className = "tour-item"; b.type = "button"; b.dataset.i = i;
+      var num = document.createElement("span"); num.className = "num"; num.textContent = ("0" + (i + 1)).slice(-2);
+      var body = document.createElement("span");
+      var tt = document.createElement("div"); tt.className = "t"; tt.textContent = t.title;
+      var meta = document.createElement("div"); meta.className = "meta";
+      meta.appendChild(document.createTextNode((t.kind === "walk" ? "On foot" : "Drive") + " · " + TC.fmt(t.duration)));
+      if (t.status !== "verified") { var bd = document.createElement("span"); bd.className = "badge " + t.status; bd.textContent = statusLabel(t.status); meta.appendChild(bd); }
+      body.appendChild(tt); body.appendChild(meta);
+      b.appendChild(num); b.appendChild(body);
+      b.addEventListener("click", function () { select(i, true); });
+      li.appendChild(b); ol.appendChild(li);
+    });
+    $("count").textContent = TOURS.length + " tours · " + TC.fmt(TOURS.reduce(function (a, t) { return a + (t.duration || 0); }, 0)) + " of footage";
+  }
+
+  /* ---------- Select a tour ---------- */
+  function select(i, autoplay) {
+    if (i < 0 || i >= TOURS.length) return;
+    cur = i; tour = TOURS[i]; tl = new TC.Timeline(tour); lastT = -1;
+    document.querySelectorAll(".tour-item").forEach(function (b) {
+      var on = +b.dataset.i === i; b.setAttribute("aria-current", on ? "true" : "false");
+      if (on && b.scrollIntoView) b.scrollIntoView({ block: "nearest", inline: "nearest" });
+    });
+    $("tourIndex").textContent = "Tour " + (i + 1) + " of " + TOURS.length + (tour.kind === "walk" ? " · On foot" : " · Drive");
+    $("tourTitle").textContent = tour.title;
+    $("tourSub").textContent = tour.subtitle || "";
+    $("prevBtn").disabled = i === 0; $("nextBtn").disabled = i === TOURS.length - 1;
+    $("upnext").hidden = true; $("videoMsg").hidden = true;
+    if (location.hash.slice(1) !== tour.id) history.replaceState(null, "", "#" + tour.id);
+
+    video.pause();
+    video.src = TC.videoUrl(CFG.VIDEO_BASE, tour.file);
+    video.load();
+    video.currentTime = 0;
+    if (autoplay) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+
+    // Active route
+    active.clearLayers(); landmarkDots.clearLayers(); drawOthers();
+    remainLine = doneLine = marker = null;
+    var mapped = tour.status !== "unmapped" && ((tour.route && tour.route.length > 1) || tour.point);
+    if (tour.route && tour.route.length > 1) {
+      L.polyline(tour.route, { color: "#000", weight: 9, opacity: .25 }).addTo(active);
+      remainLine = L.polyline(tour.route, { color: "#ffffff", weight: 5, opacity: .9, dashArray: "8 8" }).addTo(active);
+      doneLine = L.polyline([], { color: "#f0b43c", weight: 6, opacity: 1 }).addTo(active);
+      L.circleMarker(tour.route[0], { radius: 6, color: "#fff", weight: 2, fillColor: "#2f5d46", fillOpacity: 1 }).bindTooltip("Start").addTo(active);
+      L.circleMarker(tour.route[tour.route.length - 1], { radius: 6, color: "#fff", weight: 2, fillColor: "#1d2621", fillOpacity: 1 }).bindTooltip("End").addTo(active);
+      remainLine.on("click", onRouteClick); doneLine.on("click", onRouteClick);
+    }
+    if (mapped) {
+      marker = L.marker((tour.route && tour.route[0]) || tour.point, { icon: markerIcon(tour.kind === "walk" && !tour.route ? "walk" : ""), keyboard: false, interactive: false, zIndexOffset: 1000 }).addTo(active);
+    }
+    var note = $("mapNote");
+    if (!mapped) { note.textContent = "The route for this clip hasn’t been mapped yet. Other tours are shown on the map — click one to switch."; note.hidden = false; }
+    else if (tour.point && !(tour.route && tour.route.length > 1)) { note.textContent = "Short walk — the marker shows the approximate viewpoint."; note.hidden = false; }
+    else note.hidden = true;
+    $("draftNote").hidden = tour.status !== "draft";
+    $("draftNote").textContent = "Draft: this route and its timing are approximate and still being checked against the video.";
+    fitActive();
+    buildLandmarks();
+    update(0, true);
+  }
+
+  function onRouteClick(e) {
+    if (!tl) return;
+    var pr = tl.path.project([e.latlng.lat, e.latlng.lng]);
+    if (!pr) return;
+    video.currentTime = Math.min(tour.duration, tl.timeAt(pr.m));
+    update(video.currentTime, true);
+  }
+
+  /* ---------- Landmarks + progress ---------- */
+  function buildLandmarks() {
+    var wrap = $("landmarks"), ticks = $("ticks"), lms = (tour.landmarks || []).slice().sort(function (a, b) { return a.t - b.t; });
+    wrap.textContent = ""; ticks.textContent = "";
+    var dur = tour.duration || video.duration || 1;
+    lms.forEach(function (lm) {
+      var c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.dataset.t = lm.t;
+      var b = document.createElement("b"); b.textContent = TC.fmt(lm.t);
+      c.appendChild(b); c.appendChild(document.createTextNode(lm.label));
+      c.addEventListener("click", function () { seek(lm.t); });
+      wrap.appendChild(c);
+      var tk = document.createElement("div"); tk.className = "tick"; tk.style.left = (100 * lm.t / dur) + "%"; tk.title = TC.fmt(lm.t) + " · " + lm.label;
+      tk.addEventListener("click", function (ev) { ev.stopPropagation(); seek(lm.t); });
+      ticks.appendChild(tk);
+      if (tl && tour.route && tour.route.length > 1 && tour.status !== "unmapped") {
+        var p = tl.positionAt(lm.t);
+        if (p) L.circleMarker(p.ll, { radius: 5, color: "#fff", weight: 2, fillColor: "#d9466f", fillOpacity: 1 })
+          .bindTooltip(lm.label, { direction: "top", offset: [0, -4] }).on("click", function () { seek(lm.t); }).addTo(landmarkDots);
+      }
+    });
+    if (!lms.length) { var s = document.createElement("span"); s.className = "muted"; s.style.fontSize = "13px"; s.textContent = "Landmarks for this clip are still being added."; wrap.appendChild(s); }
+  }
+
+  function seek(t) { video.currentTime = Math.max(0, Math.min(t, (video.duration || tour.duration) - 0.05)); update(video.currentTime, true); }
+
+  function update(t, force) {
+    if (!tour) return;
+    if (!force && Math.abs(t - lastT) < 0.01) return;
+    lastT = t;
+    var dur = video.duration && isFinite(video.duration) ? video.duration : tour.duration;
+    var pct = Math.max(0, Math.min(100, 100 * t / (dur || 1)));
+    $("fill").style.width = pct + "%"; $("knob").style.left = pct + "%";
+    $("tCur").textContent = TC.fmt(t); $("tDur").textContent = TC.fmt(dur);
+    bar.setAttribute("aria-valuenow", Math.round(t)); bar.setAttribute("aria-valuemax", Math.round(dur));
+    document.querySelectorAll(".chip").forEach(function (c) { var ct = +c.dataset.t; c.classList.toggle("on", t >= ct - 0.25 && t < ct + 4); });
+    if (marker && tl) {
+      var pos = tl.positionAt(t);
+      if (pos) {
+        marker.setLatLng(pos.ll);
+        var el = marker.getElement && marker.getElement();
+        var arrow = el && el.querySelector(".arrow");
+        if (arrow) { arrow.style.transform = "rotate(" + pos.heading + "deg)"; arrow.style.display = tour.route && tour.route.length > 1 ? "" : "none"; }
+        if (doneLine) doneLine.setLatLngs(tl.path.slice(0, pos.m));
+        if (follow && !video.paused && !map.getBounds().pad(-0.22).contains(pos.ll)) map.panTo(pos.ll, { animate: true, duration: .6 });
+      }
+    }
+  }
+
+  function loop() { update(video.currentTime); raf = requestAnimationFrame(loop); }
+  video.addEventListener("play", function () { $("upnext").hidden = true; cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); });
+  video.addEventListener("pause", function () { cancelAnimationFrame(raf); update(video.currentTime, true); });
+  video.addEventListener("seeked", function () { update(video.currentTime, true); });
+  video.addEventListener("timeupdate", function () { if (video.paused) update(video.currentTime); });
+  video.addEventListener("loadedmetadata", function () {
+    if (tour && !tour.duration) tour.duration = video.duration;
+    video.parentNode.classList.toggle("portrait", video.videoHeight > video.videoWidth);
+    buildLandmarks(); update(video.currentTime, true);
+  });
+  video.addEventListener("ended", function () {
+    if (cur < TOURS.length - 1) { $("upnextTitle").textContent = TOURS[cur + 1].title; $("upnext").hidden = false; }
+  });
+  video.addEventListener("error", function () {
+    var m = $("videoMsg"); m.hidden = false;
+    m.textContent = "This video couldn’t be loaded (" + tour.file + "). Check that the file is in the videos folder set by VIDEO_BASE in tours.js.";
+  });
+
+  /* Scrubbing on the progress bar */
+  function barSeek(ev) {
+    var r = bar.getBoundingClientRect(), f = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+    var dur = video.duration && isFinite(video.duration) ? video.duration : tour.duration;
+    seek(f * dur);
+  }
+  var dragging = false;
+  bar.addEventListener("pointerdown", function (e) { dragging = true; bar.setPointerCapture(e.pointerId); barSeek(e); });
+  bar.addEventListener("pointermove", function (e) { if (dragging) barSeek(e); });
+  bar.addEventListener("pointerup", function () { dragging = false; });
+  bar.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { seek(video.currentTime + 5); e.preventDefault(); }
+    if (e.key === "ArrowLeft") { seek(video.currentTime - 5); e.preventDefault(); }
+  });
+
+  $("prevBtn").addEventListener("click", function () { select(cur - 1, true); });
+  $("nextBtn").addEventListener("click", function () { select(cur + 1, true); });
+  $("upnextBtn").addEventListener("click", function () { select(cur + 1, true); });
+  $("fitBtn").addEventListener("click", fitActive);
+  $("followBtn").addEventListener("click", function () {
+    follow = !follow; this.classList.toggle("active", follow); this.setAttribute("aria-pressed", follow);
+  });
+  window.addEventListener("hashchange", function () {
+    var i = TOURS.findIndex(function (t) { return t.id === location.hash.slice(1); });
+    if (i >= 0 && i !== cur) select(i, false);
+  });
+
+  buildList();
+  var start = TOURS.findIndex(function (t) { return t.id === location.hash.slice(1); });
+  select(start >= 0 ? start : 0, false);
+})();
+</script>
+</body>
+</html>

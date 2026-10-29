@@ -1,3 +1,5 @@
+> **Oct 28, 2026:** The integration plan below (iframe) is superseded. The tour is now a native rebuild with Esri keyed tiles and Vercel Blob video. See `13-site-tour.md`. The "How it works" section below still describes the prototype.
+
 # 06 — Virtual Site Tour
 
 *Built Sept 27–30, 2026. 16 tours, all routed, pinned and marked Verified.*

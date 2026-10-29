@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible_Next, IBM_Plex_Mono } from "next/font/google";
+import { Atkinson_Hyperlegible_Next } from "next/font/google";
 import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -17,11 +17,7 @@ const atkinson = Atkinson_Hyperlegible_Next({
   fallback: ["system-ui", "sans-serif"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-});
+// No monospace font: IBM Plex Mono was removed site-wide (owner decision, Oct 28, 2026).
 
 export const metadata: Metadata = {
   title: {
@@ -41,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${atkinson.variable} ${plexMono.variable}`}
+      className={atkinson.variable}
       // The intro script adds data-intro to <html> before hydration (lib/home-intro.ts).
       suppressHydrationWarning
     >

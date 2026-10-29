@@ -14,7 +14,7 @@ Read `docs/01-project-brief.md` before the first task in any session. Read the o
 
 - Next.js (App Router) + React + TypeScript + Tailwind CSS. Deploy target: Vercel.
 - 3D: three.js through React Three Fiber (`@react-three/fiber`) and Drei (`@react-three/drei`). R3F v9 pairs with React 19. Check current stable versions when installing; don't guess versions from memory.
-- Fonts: headings in Arial (a system font, not downloaded). Atkinson Hyperlegible Next for body and interface, and IBM Plex Mono, both through `next/font`.
+- Fonts: headings in Arial (a system font, not downloaded). Atkinson Hyperlegible Next for body, interface, labels and figures, through `next/font`. No monospace font: IBM Plex Mono was removed site-wide (owner decision, Oct 28, 2026).
 - Partner Access (later phase): a managed sign-in service. Never hand-written authentication or file-security code.
 - Use pnpm or npm, whichever is set up first, and stay consistent.
 

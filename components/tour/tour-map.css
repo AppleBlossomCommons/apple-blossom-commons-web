@@ -1,0 +1,133 @@
+/*
+ * Site Tour map: Leaflet's controls restyled with the site tokens (docs/13 §7).
+ * Flat: no shadows. Everything is scoped to .tour-map so other Leaflet maps are untouched.
+ */
+
+.tour-map.leaflet-container {
+  background: var(--map-frame);
+  border-radius: var(--radius-card);
+  font-family: var(--font-sans);
+  color: var(--hearth);
+}
+
+/* Zoom buttons: linen, hearth icons, 44px targets, no shadow. */
+.tour-map .leaflet-bar {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.tour-map .leaflet-bar a,
+.tour-map .leaflet-bar a:hover {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--hearth);
+  background: var(--linen);
+  border-bottom: 1px solid var(--line);
+}
+
+.tour-map .leaflet-bar a:hover {
+  background: #fff;
+}
+
+.tour-map .leaflet-bar a:last-child {
+  border-bottom: 0;
+}
+
+.tour-map .leaflet-bar a.leaflet-disabled {
+  color: var(--muted);
+  background: var(--linen);
+}
+
+.tour-map .leaflet-touch .leaflet-bar,
+.tour-map.leaflet-touch .leaflet-bar {
+  border: 0;
+}
+
+/* Attribution is a license condition: always visible, 12px sans, hearth on linen at 90%. */
+.tour-map .leaflet-control-attribution {
+  padding: 3px 8px;
+  border-top-left-radius: 3px;
+  background: rgb(251 246 238 / 0.9);
+  color: var(--hearth);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tour-map .leaflet-control-attribution a {
+  color: var(--hearth);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* Map tags: tooltips for landmarks and the other tours. */
+.tour-map .leaflet-tooltip.tour-map-tag {
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: none;
+  background: var(--linen);
+  color: var(--hearth);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.tour-map .leaflet-tooltip-top.tour-map-tag::before {
+  border-top-color: var(--linen);
+}
+
+.tour-map .leaflet-tooltip-bottom.tour-map-tag::before {
+  border-bottom-color: var(--linen);
+}
+
+/* The traveller: a hearth dot with a linen ring and a linen heading arrow. No pulse. */
+.tour-map .tour-marker-icon {
+  background: none;
+  border: 0;
+}
+
+.tour-marker {
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.tour-marker-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid var(--linen);
+  border-radius: 50%;
+  background: var(--hearth);
+}
+
+.tour-marker-arrow {
+  position: absolute;
+  inset: 0;
+}
+
+.tour-marker-arrow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  margin-left: -7px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid var(--linen);
+  /* A hearth hairline keeps the linen arrow readable on bright imagery. */
+  filter: drop-shadow(0 0 1px var(--hearth));
+}
+
+.tour-marker-arrow[hidden] {
+  display: none;
+}
