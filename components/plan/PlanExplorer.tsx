@@ -125,7 +125,7 @@ export function PlanExplorer({
   const current = districts.find((d) => d.key === selected) ?? districts[0];
 
   return (
-    <section aria-label="3D district model" className="bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]">
+    <section id="explore" aria-label="3D district model" className="bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]">
       <div className="grid items-start gap-6 min-[1000px]:grid-cols-[minmax(0,1fr)_400px]">
         <div className="flex min-w-0 flex-col gap-3.5">
           <div

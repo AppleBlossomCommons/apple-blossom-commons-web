@@ -1,8 +1,10 @@
 // Navigation and footer from docs/10-content-v2.md, "Navigation and footer", with the About Us
 // changes from docs/12-about-us-content.md, section 1.
+// "Districts" opens a menu of the ten district pages instead of linking to an index page
+// (owner decision, Oct 28, 2026; /districts redirects to the map on The Plan).
 export const mainNav = [
   { href: "/plan", label: "The Plan" },
-  { href: "/districts", label: "Districts" },
+  { href: "/districts", label: "Districts", menu: "districts" },
   { href: "/tour", label: "Site Tour" },
   { href: "/participate", label: "How Can I Participate?" },
   { href: "/about", label: "About Us" },
@@ -15,7 +17,7 @@ export const footerColumns = [
     title: "Explore",
     items: [
       { href: "/plan", label: "The Plan" },
-      { href: "/districts", label: "Districts" },
+      { href: "/plan#explore", label: "Districts" },
       { href: "/tour", label: "Site Tour" },
     ],
   },

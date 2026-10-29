@@ -137,3 +137,10 @@ export const PLAN_DISCLAIMER =
 /** Label for the 3D model (approved homepage mockup; fix brief, Fix 3). */
 export const PLAN_DISCLAIMER_3D =
   "Illustrative 3D interpretation of the July 2026 masterplan. Not a survey or final design.";
+
+/** What the header's Districts menu needs: number, slug, name and color, in legend order. */
+export type DistrictNavItem = Pick<District, "n" | "slug" | "name" | "color">;
+
+export function districtNavItems(): DistrictNavItem[] {
+  return districts.map(({ n, slug, name, color }) => ({ n, slug, name, color }));
+}

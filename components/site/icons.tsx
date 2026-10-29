@@ -73,3 +73,11 @@ export function ChevronRight({ className = "size-3.5" }: IconProps) {
     </svg>
   );
 }
+
+export function ChevronDown({ className = "size-3.5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" className={className}>
+      <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
