@@ -22,7 +22,7 @@ Words in [brackets] are notes for the builder, not copy.
 
 **Footer line:** Apple Blossom Commons is a long-range community plan for land near the Lake Chelan hospital campus, carried out by Chelan Village, LP over many years. Plans shown are illustrative and will change as they are refined.
 
-**Redirects:** /connected-community → /plan#care-close-by · /chelan → /plan#why-chelan · /planning → / (already done)
+**Redirects:** /connected-community → /plan#care-close-by · /chelan → /plan#why-chelan · /planning → / (already done) · /districts → /plan#explore (added Oct 28, 2026: "Districts" in the main nav is a menu of the ten district pages, not an index page; see `docs/02-sitemap.md`)
 
 ---
 

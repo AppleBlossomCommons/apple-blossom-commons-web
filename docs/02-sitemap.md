@@ -7,8 +7,7 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 ```
 /                          Home: vision in one screen + audience doorways
 ├── /plan                  The Plan: Plan Table explorer (2D map + 3D model toggle)
-├── /districts             Districts index: 10 cards
-│   └── /districts/[slug]  District page: one shared template, ten pages
+├── /districts/[slug]      District page: one shared template, ten pages (no index page, see below)
 ├── /connected-community   Healthcare + technology + retirement living story
 ├── /tour                  Virtual Site Tour (16 verified tours)
 ├── /chelan                Chelan & the Region
@@ -25,6 +24,8 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 **Header utility links:** Research Library · Partner with Us.
 
 *Updated Oct 22, 2026 to follow the owner's public copy rules (see `CLAUDE.md`).* The Planning Framework page (`/planning`) was removed and redirects permanently to `/`.
+
+*Updated Oct 28, 2026 (owner decision):* there is no Districts index page. "Districts" in the header opens a menu listing the ten district pages in legend order, plus "See all districts on the map". `/districts` redirects permanently to the district model on The Plan (`/plan#explore`), and the footer's "Districts" link goes there too. The Plan already shows all ten districts together.
 **Footer:** Contact · Privacy · Terms, plus the illustrative-plan disclaimer.
 
 ## District slugs (legend order)
@@ -37,7 +38,6 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 |---|---|---|---|---|
 | Home | Vision in one screen; route each audience | All | Core story, Plan Table preview, audience doorways (investors, land buyers; "For neighbors" comes with the participate page) | Public |
 | The Plan | Explore the whole site | All | Plan Table: 2D map plus 3D model toggle from the geometry file; the 10 districts in legend order; "evolves over decades" in place of phasing dates | Public |
-| Districts index | Compare districts at a glance | Investors, land buyers | One card per district: family, program, planning-concept figures | Public |
 | District page (×10) | One district in depth | Varies | Role in the community, what's planned, map highlight, neighbors, related research, "see this from the road" tour clips (later) | Public |
 | Connected Community | The healthcare + technology story | Investors, operators, neighbors | Hospital campus facts (Lake Chelan Health named only as a neighbor), technology as support for care, precedent places (precedent, not promise) | Public |
 | Site Tour | Remote site visit | Investors, land buyers | Virtual Site Tour (see `06-virtual-site-tour.md`) | Public |
@@ -53,7 +53,7 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 | Audience | Doorway on Home | Path | Ends at |
 |---|---|---|---|
 | Investors | "Investment perspective" | The Plan → Connected Community → Research Library | Become a Partner |
-| Strategic land buyers | "Development opportunities" | Districts index → District page → Site Tour | Become a Partner |
+| Strategic land buyers | "Development opportunities" | Districts menu (or the map on The Plan) → District page → Site Tour | Become a Partner |
 
 ## Deliberately left out of v1
 

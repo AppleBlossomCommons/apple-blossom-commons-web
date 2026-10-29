@@ -3,6 +3,7 @@ import { Atkinson_Hyperlegible_Next } from "next/font/google";
 import { MotionProvider } from "@/components/site/MotionProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { districtNavItems } from "@/lib/districts";
 import { SiteTransition } from "@/components/transitions/SiteTransition";
 import { introScript } from "@/lib/home-intro";
 import "./globals.css";
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <MotionProvider>
           <SiteTransition>
-            <SiteHeader />
+            <SiteHeader districts={districtNavItems()} />
             <main id="main" className="flex-1">
               {children}
             </main>

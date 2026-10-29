@@ -10,11 +10,14 @@ import {
 } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { useSiteTransition } from "@/components/transitions/SiteTransition";
+import type { DistrictNavItem } from "@/lib/districts";
 import { ease } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { buttonClass } from "./buttons";
+import { DISTRICTS_OVERVIEW, DistrictRoundel, DistrictsMenu } from "./DistrictsMenu";
+import { ArrowRight, ChevronDown } from "./icons";
 import { Logo } from "./Logo";
 import { mainNav, partnerLink } from "./nav";
 
@@ -37,7 +40,7 @@ const NAV_BREAKPOINT = 1200;
  */
 // Phones under 420px: the wordmark scales with the screen (15–19px), the mark drops to 24px and
 // the gaps tighten, so logo, name and Menu fit on a 360px screen.
-export function SiteHeader() {
+export function SiteHeader({ districts }: { districts: DistrictNavItem[] }) {
   const pathname = usePathname();
   const reduce = usePrefersReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -117,13 +120,17 @@ export function SiteHeader() {
             <ul className="flex items-center gap-0.5 whitespace-nowrap">
               {mainNav.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className="block rounded-[10px] px-3.5 py-2.5 text-[1.0625rem] text-hearth no-underline transition-colors duration-150 hover:bg-sand hover:text-hearth aria-[current=page]:bg-sand aria-[current=page]:font-bold"
-                  >
-                    {item.label}
-                  </Link>
+                  {"menu" in item ? (
+                    <DistrictsMenu items={districts} pathname={pathname} reduce={reduce} />
+                  ) : (
+                    <Link
+                      href={item.href}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      className="block rounded-[10px] px-3.5 py-2.5 text-[1.0625rem] text-hearth no-underline transition-colors duration-150 hover:bg-sand hover:text-hearth aria-[current=page]:bg-sand aria-[current=page]:font-bold"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -150,6 +157,8 @@ export function SiteHeader() {
       <PhoneMenu
         open={menuOpen}
         reduce={reduce}
+        districts={districts}
+        pathname={pathname}
         isActive={isActive}
         onClose={closeMenu}
       />
@@ -177,11 +186,15 @@ function MenuBars({ open, reduce }: { open: boolean; reduce: boolean }) {
 function PhoneMenu({
   open,
   reduce,
+  districts,
+  pathname,
   isActive,
   onClose,
 }: {
   open: boolean;
   reduce: boolean;
+  districts: DistrictNavItem[];
+  pathname: string;
   isActive: (href: string) => boolean;
   onClose: (returnFocus: boolean) => void;
 }) {
@@ -252,14 +265,24 @@ function PhoneMenu({
         >
           {mainNav.map((item, i) => (
             <motion.div key={item.href} custom={i} variants={link}>
-              <Link
-                href={item.href}
-                onClick={() => onClose(false)}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={row}
-              >
-                {item.label}
-              </Link>
+              {"menu" in item ? (
+                <PhoneDistricts
+                  items={districts}
+                  pathname={pathname}
+                  reduce={reduce}
+                  rowClass={row}
+                  onNavigate={() => onClose(false)}
+                />
+              ) : (
+                <Link
+                  href={item.href}
+                  onClick={() => onClose(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={row}
+                >
+                  {item.label}
+                </Link>
+              )}
             </motion.div>
           ))}
           <motion.div custom={mainNav.length} variants={link} className="mt-auto pt-4">
@@ -270,5 +293,84 @@ function PhoneMenu({
         </motion.nav>
       )}
     </AnimatePresence>
+  );
+}
+
+/**
+ * "Districts" in the phone menu: a row that expands in place to list the ten district pages
+ * and a link to the map. It starts open on a district page, so the current one is in view.
+ */
+function PhoneDistricts({
+  items,
+  pathname,
+  reduce,
+  rowClass,
+  onNavigate,
+}: {
+  items: DistrictNavItem[];
+  pathname: string;
+  reduce: boolean;
+  rowClass: string;
+  onNavigate: () => void;
+}) {
+  const onDistrictPage = pathname.startsWith("/districts/");
+  const [expanded, setExpanded] = useState(onDistrictPage);
+  const listId = useId();
+  const item =
+    "flex min-h-12 items-center gap-3 rounded-chip px-3 text-[1.1875rem] text-hearth no-underline hover:bg-linen hover:text-hearth aria-[current=page]:bg-linen aria-[current=page]:font-bold";
+
+  return (
+    <div className="rounded-card bg-sand">
+      <button
+        type="button"
+        aria-expanded={expanded}
+        aria-controls={listId}
+        onClick={() => setExpanded((v) => !v)}
+        className={`${rowClass} w-full justify-between text-left ${onDistrictPage ? "shadow-[inset_0_0_0_2px_var(--gold)]" : ""}`}
+      >
+        Districts
+        <ChevronDown
+          className={`size-5 transition-transform duration-300 ease-out motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="phone-districts"
+            id={listId}
+            initial={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            animate={reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }}
+            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            transition={{ duration: reduce ? 0.15 : 0.32, ease: ease.inOut }}
+            className="overflow-hidden"
+          >
+            <ul className="flex flex-col gap-0.5 px-2 pb-2">
+              {items.map((d) => {
+                const href = `/districts/${d.slug}`;
+                return (
+                  <li key={d.slug}>
+                    <Link
+                      href={href}
+                      onClick={onNavigate}
+                      aria-current={pathname === href ? "page" : undefined}
+                      className={item}
+                    >
+                      <DistrictRoundel item={d} className="size-8 text-sm" />
+                      {d.name}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li className="mt-1 border-t border-line pt-1">
+                <Link href={DISTRICTS_OVERVIEW} onClick={onNavigate} className={`${item} font-bold`}>
+                  See all districts on the map
+                  <ArrowRight />
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
