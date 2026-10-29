@@ -17,6 +17,10 @@ colors:
   lake-deep: "#2f6f88"
   sage-deep: "#5e7a4f"
   rose: "#b85c66"
+  tint-sky: "#ddf1fc"
+  tint-pink: "#ffe1ed"
+  tint-lime: "#eaf6cf"
+  tint-butter: "#fff2b3"
   plan-residential: "#ffd9b0"
   plan-residential-2: "#ffc88f"
   plan-senior: "#d6cbf7"
@@ -29,65 +33,65 @@ colors:
   plan-parks-2: "#cdeb8b"
 typography:
   display:
-    fontFamily: "Source Serif 4, Georgia, serif"
+    fontFamily: "Arial, Helvetica, sans-serif"
     fontSize: "clamp(2.5rem, 4.4vw, 4rem)"
     fontWeight: 600
     lineHeight: 1.04
     letterSpacing: "-0.015em"
   headline:
-    fontFamily: "Source Serif 4, Georgia, serif"
+    fontFamily: "Arial, Helvetica, sans-serif"
     fontSize: "clamp(1.875rem, 3vw, 2.5rem)"
     fontWeight: 600
     lineHeight: 1.25
   title:
-    fontFamily: "Source Serif 4, Georgia, serif"
+    fontFamily: "Arial, Helvetica, sans-serif"
     fontSize: "1.625rem"
     fontWeight: 600
     lineHeight: 1.25
   title-sm:
-    fontFamily: "Source Serif 4, Georgia, serif"
+    fontFamily: "Arial, Helvetica, sans-serif"
     fontSize: "1.375rem"
     fontWeight: 600
     lineHeight: 1.25
   body:
-    fontFamily: "Inter, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.6
   body-sm:
-    fontFamily: "Inter, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
   ui:
-    fontFamily: "Inter, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 500
     lineHeight: 1.5
   caption:
-    fontFamily: "Inter, system-ui, sans-serif"
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 400
     lineHeight: 1.5
-  label-mono:
-    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+  label:
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.6875rem"
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "0.08em"
-  chip-mono:
-    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+  chip:
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.6875rem"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "0.02em"
-  caption-mono:
-    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+  caption-sm:
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 400
     lineHeight: 1.375
-  numeral-mono:
-    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+  numeral:
+    fontFamily: "Atkinson Hyperlegible Next, system-ui, sans-serif"
     fontSize: "0.8125rem"
     fontWeight: 500
     lineHeight: 1
@@ -139,7 +143,7 @@ components:
   source-chip:
     backgroundColor: "{colors.linen}"
     textColor: "{colors.muted}"
-    typography: "{typography.chip-mono}"
+    typography: "{typography.chip}"
     rounded: "{rounded.sm}"
     padding: "0 6px"
     height: "24px"
@@ -154,7 +158,7 @@ components:
   plan-roundel:
     backgroundColor: "{colors.linen}"
     textColor: "{colors.hearth}"
-    typography: "{typography.numeral-mono}"
+    typography: "{typography.numeral}"
     rounded: "{rounded.full}"
     size: "30px"
   divider-handle:
@@ -187,9 +191,9 @@ The approved direction is **Orchard Atlas**, pinned in `docs/04-design-direction
 
 **Creative North Star: "The Orchard Atlas"**
 
-The site reads like a planning atlas edited by a good magazine. Warm linen and sand grounds, hearth text and line hairlines, Source Serif headlines, and a crisp 2D plan drawn in land-use family colors carry the whole world. Every figure is anchored to its source with a small mono chip. Structure comes from rules and vertical space, never from boxes, cards or shadows. The mood is grounded, unhurried, exact, warm and seasonal; it is not glossy, themed, techno-futurist or salesy.
+The site reads like a planning atlas edited by a good magazine. Warm linen and sand grounds, hearth text and line hairlines, Source Serif headlines, and a crisp 2D plan drawn in land-use family colors carry the whole world. Every figure is anchored to its source with a small chip. Structure comes from rules and vertical space, never from boxes, cards or shadows. The mood is grounded, unhurried, exact, warm and seasonal; it is not glossy, themed, techno-futurist or salesy.
 
-Density is editorial: generous section spacing, a serif headline column beside a large plan, and ruled lists in place of card grids. The plan is the hero material. It sits on linen inside a 1px line border, with a faint survey grid, numbered mono roundels, a north arrow, and a mandatory disclaimer beneath it.
+Density is editorial: generous section spacing, a serif headline column beside a large plan, and ruled lists in place of card grids. The plan is the hero material. It sits on linen inside a 1px line border, with a faint survey grid, numbered roundels, a north arrow, and a mandatory disclaimer beneath it.
 
 Motion explains space and never decorates. One ease-out curve, short interface timings, longer spatial moves, and one scroll/story reveal (Today to Planned). Under reduced motion everything jumps or rests instead of moving.
 
@@ -197,7 +201,7 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 - Linen and sand grounds, hearth text, orange primary buttons, gold for selection, lake-deep for links and focus.
 - Vibrant fills (sky, lime, orange, pink, lavender) for buttons, cards, map districts and placeholder imagery; never as text.
 - No outlines around boxes: space and fill color separate cards, map frames and charts. Only form fields, FAQ dividers and the 3px column bars keep a line.
-- Source Serif 4 headlines at weight 600, Inter interface and body, IBM Plex Mono for figures, chips, roundels and map labels.
+- Arial headlines at weight 600, and Atkinson Hyperlegible Next for everything else: body, interface, figures, chips, roundels and map labels. There is no monospace font (IBM Plex Mono was removed site-wide, owner decision, Oct 28, 2026).
 - District colors grouped by land-use family, always paired with a number and a name.
 - Light only: no dark sections and no dark mode.
 
@@ -215,6 +219,7 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 ### Accents
 - **Orange** (`orange`): primary buttons (hearth text, `orange-hover` on hover) and the next-district arrow. Never text.
 - **Sky, lime, pink, lavender** (`sky`, `lime`, `pink`, `lavender`): fills only, with hearth text on top. Lime marks a sent form; all four color the map districts and placeholder imagery. Never text.
+- **Soft tints** (`tint-sky`, `tint-pink`, `tint-lime`, `tint-butter`): the pale colors of the home page cards, for large surfaces and chips: the Site Tour intro (sky) and closing card (pink), and its landmark chips in turn. Hearth and muted text both pass 4.5:1 on all four. Added Oct 28, 2026.
 - **Gold** (`gold`): selection only: the selected district (outline, roundel, list row tint, active map tool), the current page, form focus, the tour route. Never text.
 - **Lake-deep** (`lake-deep`): links (hearth on hover), the global focus ring, the King County chart bar.
 - **Sage-deep** (`sage-deep`): the logo mark and the Chelan County chart bar. Never text.
@@ -230,11 +235,11 @@ Districts are colored by land-use family, two shades per family, from `data/dist
 
 ## Typography
 
-**Display Font:** Source Serif 4 (variable with optical sizes, fallback Georgia, serif)
-**Body Font:** Inter (fallback system-ui, sans-serif)
-**Label/Mono Font:** IBM Plex Mono, weights 400 and 500 (fallback ui-monospace, monospace)
+**Display Font:** Arial, weight 600 (a system font, nothing to download; fallback Helvetica, sans-serif)
+**Body Font:** Atkinson Hyperlegible Next (fallback system-ui, sans-serif), through `next/font`
+**No monospace font.** IBM Plex Mono was removed site-wide (owner decision, Oct 28, 2026). Labels, chips, captions and figures use the body font; figures use tabular numerals (`.tabular`).
 
-**Character:** A bookish serif for statements and names, a neutral grotesque for everything the visitor reads or operates, and a plain mono for anything that is a figure, a source, or a mark on the map. Headlines use `text-wrap: balance`, paragraphs `text-wrap: pretty`. All three load through `next/font`.
+**Character:** A plain, sturdy sans for statements and names, and a highly legible sans for everything the visitor reads or operates, including figures, sources and marks on the map. Headlines use `text-wrap: balance`, paragraphs `text-wrap: pretty`.
 
 ### Hierarchy
 - **Display** (600, clamp 40–64px, line-height 1.04, tracking -0.015em): the Home headline only. Placeholder page titles use a smaller clamp (36–56px, line-height 1.06). The direction allows up to about 88px; the build caps at 64px so the plan keeps the first viewport.
@@ -242,15 +247,15 @@ Districts are colored by land-use family, two shades per family, from `data/dist
 - **Title** (600, 26px): doorway titles in the ruled doorway list. **Title small** (22px) for district names and mobile menu items.
 - **Body** (400, 18px, line-height 1.6): all running text, measured at 38–60ch (supporting paragraphs mostly 56–60ch). Body small (16px) for district summaries and the footer blurb.
 - **UI** (500 for actions, 15px): buttons, main nav, fact lines. Utility nav at 13px. Caption (14px) for segmented control, map tags, popover details.
-- **Mono label** (400, 11px, uppercase, tracking 0.07–0.08em): map corner labels (Today / Planned), district family labels set beneath the district name.
-- **Mono chip** (400, 11px, tracking 0.02em): source chips.
-- **Mono caption** (400, 12px): the plan disclaimer, footer legal line, placeholder notes.
-- **Mono numeral** (500, 13px): district numbers in roundels and legend markers. Figures use tabular numerals (`.tabular`).
+- **Label** (700, 12–13px, uppercase, tracking 0.08em): small labels such as "ABOUT US", map corner labels (Today / Planned), district family labels set beneath the district name.
+- **Chip** (500, 11–12px): source chips.
+- **Small caption** (400, 12–14px): the plan disclaimer, footer legal line, placeholder notes, the Site Tour caption.
+- **Numeral** (600, 9–13px): district numbers in roundels and legend markers, tour times. Figures use tabular numerals (`.tabular`).
 
 ### Named Rules
-**The Mono-Means-Evidence Rule.** IBM Plex Mono is reserved for figures, sources, district numbers, map labels and disclaimers. Prose and headings never set in mono.
+**The Tabular-Figures Rule.** Figures that change or line up (times, counts, chart values, district numbers) use tabular numerals (`.tabular`), so they never jitter or misalign.
 
-**The No-Kicker Rule.** Headlines stand on their own. Mono uppercase labels name map regions and metadata that follow a title; they are not set as eyebrows above headlines.
+**The No-Kicker Rule.** Headlines stand on their own. Small uppercase labels name map regions and metadata that follow a title; they are not set as eyebrows above headlines.
 
 ## Layout
 
@@ -288,20 +293,20 @@ Quiet, rounded, confident (`components/site/buttons.ts`).
 - **State:** pressed segment fills hearth with linen text; hover darkens text to hearth over 150ms.
 
 ### Chips (Source chip)
-- **Style:** linen fill, 1px line border, 3px corners, 24px minimum height, mono 11px muted text reading `Source label · note`.
+- **Style:** linen fill, 1px line border, 3px corners, 24px minimum height, 11px muted text reading `Source label · note`.
 - **State:** hover darkens the border to muted and the text to hearth. Opens a native popover: linen, 1px line border, 4px corners, 20px padding, serif 20px source title, a date / geography definition list (no confidence tier on public pages), method note, and a ruled Close button. The popover carries the Overlay shadow.
 
 ### Lists (in place of cards)
 - **Doorway list:** a strong hearth top rule, line hairlines between rows, 28px row padding; serif title, muted description, arrow that turns lake-deep and nudges 4px right on hover. The whole row is the link.
-- **District list:** rule top and row hairlines, a 32px numbered family-color marker, serif name, mono family label, summary, fact line, source chip. Hover or focus tints the row with linen and lifts the matching district on the sticky plan beside it.
+- **District list:** rule top and row hairlines, a 32px numbered family-color marker, name, family label, summary, fact line, source chip. Hover or focus tints the row with linen and lifts the matching district on the sticky plan beside it.
 
 ### Navigation
 - **Header:** linen ground with a line bottom border. Main links are 15px hearth, lake-deep on hover; the current page has a 2px gold underline at 0.5em offset. The compact primary button closes the row.
 - **Mobile:** a 44px menu button opens a full-width ruled list of serif 22px links and a primary button. Escape and route changes close it.
-- **Footer:** sand ground, hearth wordmark and links (lake-deep on hover), a line rule, then a mono legal line in muted carrying the plan disclaimer.
+- **Footer:** sand ground, hearth wordmark and links (lake-deep on hover), a line rule, then a small legal line in muted carrying the plan disclaimer.
 
 ### Plan stage (Today / Planned)
-The signature component. A linen stage with a 1px line border and a faint line-colored survey grid. Today (left) shows the site perimeter in hearth at 55% and existing uses at low fill with mono labels on linen tags. Planned (right) is clipped by the divider and shows the ten districts in family fills with numbered roundels. A 2px gold divider with a 44px gold handle (hearth chevrons) splits them. The handle is a keyboard slider (arrow keys step 5, Shift 20, Home/End, PageUp/PageDown) and a pointer drag; the segmented control jumps to 100 / 50 / 0. Hovering a district dims the rest and shows a linen map tag with its zero-padded number and name. Mono corner labels, a north arrow, and the mono disclaimer beneath are always present.
+The signature component. A linen stage with a 1px line border and a faint line-colored survey grid. Today (left) shows the site perimeter in hearth at 55% and existing uses at low fill with small labels on linen tags. Planned (right) is clipped by the divider and shows the ten districts in family fills with numbered roundels. A 2px gold divider with a 44px gold handle (hearth chevrons) splits them. The handle is a keyboard slider (arrow keys step 5, Shift 20, Home/End, PageUp/PageDown) and a pointer drag; the segmented control jumps to 100 / 50 / 0. Hovering a district dims the rest and shows a linen map tag with its zero-padded number and name. Corner labels, a north arrow, and the disclaimer beneath are always present.
 
 **Motion:** on first paint the perimeter draws (900ms), existing labels fade in (400ms at 600ms), then the divider sweeps from the right edge to its 50% rest (1600ms after a 900ms delay) while each roundel pops in (320ms, scale 0.4 to 1) at the moment the divider uncovers it. If the stage first appears below the fold, the intro replays when it scrolls half into view. Button jumps animate the divider over 600ms; dragging is immediate. Hover state changes take 150–200ms. Everything uses `cubic-bezier(0.22, 1, 0.36, 1)`.
 
@@ -311,7 +316,7 @@ The signature component. A linen stage with a 1px line border and a faint line-c
 
 ### Do:
 - **Do** pair one orange primary button with one secondary (outlined) button or lake-deep text link for every call to action.
-- **Do** set every figure beside a mono source chip, and every plan or map beside the line "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design."
+- **Do** set every figure beside a source chip, and every plan or map beside the line "Illustrative interpretation of the July 2026 masterplan. Not a survey or final design."
 - **Do** give every district its number, name and family color together, and give every plan an HTML list equivalent.
 - **Do** separate sections with 96–144px of space and, at most, one 1px rule.
 - **Do** use `cubic-bezier(0.22, 1, 0.36, 1)` for every transition: 150–200ms for interface states, 600ms or more for spatial moves on the plan.
@@ -325,5 +330,5 @@ The signature component. A linen stage with a 1px line border and a faint line-c
 - **Don't** use a dark section background anywhere.
 - **Don't** identify a district by color alone.
 - **Don't** add looping animation, parallax, count-up statistics or smooth-scroll libraries.
-- **Don't** put mono uppercase eyebrows or kickers above headlines.
+- **Don't** put small uppercase eyebrows or kickers above headlines.
 - **Don't** let vibrant fills replace the linen and sand grounds; keep rose rare.
