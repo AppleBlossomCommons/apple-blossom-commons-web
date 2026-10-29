@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "screenshots/**",
     // Design handoff prototypes and their runtime (reference only, not app code).
     "design_handoff_abc_web_phase1/**",
+    // Old prototypes kept for behavior reference (e.g. the virtual site tour).
+    "reference/**",
   ]),
 ]);
 

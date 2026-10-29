@@ -51,3 +51,6 @@ next-env.d.ts
 
 # local form submissions in development (lib/forms/deliver.ts)
 /.data/
+
+# prepared Site Tour videos (scripts/tour-videos; uploaded to Vercel Blob, never committed)
+/.tour-videos/
