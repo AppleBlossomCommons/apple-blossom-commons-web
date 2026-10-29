@@ -33,6 +33,14 @@
   --sage-deep: #5e7a4f;
   /* Large text accents and form errors only, never body text. */
   --rose: #b85c66;
+  /*
+   * Soft tints: the pale sky, pink, lime and butter of the home page cards, for large surfaces
+   * (cards, chips). Hearth and muted text both pass 4.5:1 on all four.
+   */
+  --tint-sky: #ddf1fc;
+  --tint-pink: #ffe1ed;
+  --tint-lime: #eaf6cf;
+  --tint-butter: #fff2b3;
   /* Map container ground behind the 3D model. */
   --map-frame: #e9dfcc;
   --plan-fill-opacity: 0.86;
@@ -56,6 +64,10 @@
   --color-sage-deep: var(--sage-deep);
   --color-rose: var(--rose);
   --color-map-frame: var(--map-frame);
+  --color-tint-sky: var(--tint-sky);
+  --color-tint-pink: var(--tint-pink);
+  --color-tint-lime: var(--tint-lime);
+  --color-tint-butter: var(--tint-butter);
   /* Image placeholder label pill. */
   --color-label: rgb(251 246 238 / 0.92);
 
@@ -65,8 +77,7 @@
   /* Headings: Arial 600 (a system font, so nothing to download). Body and interface: Atkinson Hyperlegible Next. */
   --font-display: Arial, Helvetica, sans-serif;
   --font-sans: var(--font-atkinson), system-ui, sans-serif;
-  /* Plex Mono stays for source chips and figures on Research Library pages (docs/04, Evidence Margin). */
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  /* No monospace font: IBM Plex Mono was removed site-wide (owner decision, Oct 28, 2026). Figures use .tabular. */
 
   /* Radii from the handoff: hero 32px (24px on phones), cards, tiles and map 16px, chips 12px. */
   --radius-hero: 32px;

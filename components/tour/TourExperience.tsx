@@ -7,7 +7,7 @@ import { scrollToElement } from "@/lib/smooth-scroll";
 import { fmt, type LatLng } from "@/lib/tour-core";
 import type { Tour } from "@/lib/tours";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
-import { TourList, kindLabel } from "./TourList";
+import { KindTag, TourList } from "./TourList";
 import { TourMap } from "./TourMap";
 import { TourProgress } from "./TourProgress";
 
@@ -46,6 +46,9 @@ const noSubscribe = () => () => {};
 /** What we know about the clip on screen. It resets whenever a different tour is shown. */
 type Clip = { id: string; time: number; duration: number | null; ended: boolean; failed: boolean };
 const freshClip = (id: string): Clip => ({ id, time: 0, duration: null, ended: false, failed: false });
+
+/** Landmark chips take the home page tints in turn; the one playing turns gold (selection). */
+const chipTints = ["bg-tint-pink", "bg-tint-lime", "bg-tint-sky", "bg-tint-butter"];
 
 /** How a tour was chosen: from the list or Previous/Next (plays unless reduced motion), "Up next" (plays), or just shown. */
 type SelectHow = "autoplay" | "play" | "show";
@@ -208,8 +211,9 @@ export function TourExperience({
             <p id="tour-clip-description" className="mt-2 max-w-[64ch] text-muted">
               {tour.subtitle}
             </p>
-            <p className="mt-1 font-mono text-[0.875rem] tabular text-muted">
-              {kindLabel(tour.kind)} · {fmt(tour.duration)}
+            <p className="mt-3 flex items-center gap-2 text-[0.9375rem] tabular text-muted">
+              <KindTag kind={tour.kind} />
+              {fmt(tour.duration)}
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-3">
@@ -222,7 +226,7 @@ export function TourExperience({
               <ChevronLeft />
               Previous
             </button>
-            <span className="min-w-[4.5em] whitespace-nowrap text-center font-mono text-[0.875rem] tabular text-muted">
+            <span className="min-w-[4.5em] whitespace-nowrap text-center text-[0.9375rem] tabular text-muted">
               {index + 1} of {n}
             </span>
             <button
@@ -335,7 +339,7 @@ export function TourExperience({
                 {playing ? <Pause /> : <Play className="ml-0.5 size-5" />}
               </button>
               <TourProgress time={time} duration={duration} landmarks={tour.landmarks} onSeek={seek} />
-              <span className="shrink-0 font-mono text-[0.8125rem] tabular text-muted sm:text-[0.875rem]">
+              <span className="shrink-0 text-[0.875rem] tabular text-muted sm:text-[0.9375rem]">
                 {fmt(time)} / {fmt(duration)}
               </span>
               {canFullscreen && (
@@ -377,9 +381,9 @@ export function TourExperience({
                   seek(l.t);
                 }}
                 aria-current={i === activeLandmark ? "time" : undefined}
-                className="inline-flex min-h-11 items-center gap-2.5 rounded-chip bg-linen px-3.5 py-2 text-left text-[0.9375rem] leading-snug transition-colors duration-150 ease-out hover:bg-white aria-[current=time]:bg-gold"
+                className={`inline-flex min-h-11 items-center gap-2.5 rounded-chip px-3.5 py-2 text-left text-[0.9375rem] leading-snug transition-[background-color,filter] duration-150 ease-out hover:brightness-[0.96] aria-[current=time]:bg-gold ${chipTints[i % chipTints.length]}`}
               >
-                <span className="font-mono text-[0.8125rem] tabular">{fmt(l.t)}</span>
+                <span className="font-bold tabular">{fmt(l.t)}</span>
                 <span className="sr-only">, </span>
                 <span>{l.label}</span>
               </button>
@@ -387,7 +391,7 @@ export function TourExperience({
           </div>
         )}
 
-        <p className="mt-6 max-w-[90ch] font-mono text-[0.8125rem] leading-relaxed text-muted">
+        <p className="mt-6 max-w-[80ch] text-[0.875rem] leading-relaxed text-muted">
           Filmed September 27, 2026. Routes are matched to the footage by hand; between pinned moments the map marker&apos;s position is
           approximate. Clips play without sound.
         </p>

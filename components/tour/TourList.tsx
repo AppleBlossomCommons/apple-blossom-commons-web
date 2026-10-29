@@ -6,6 +6,19 @@ import type { Tour } from "@/lib/tours";
 
 export const kindLabel = (kind: Tour["kind"]) => (kind === "walk" ? "On foot" : "Drive");
 
+/** "Drive" on sky, "On foot" on lime: small accent tags (hearth text, as on every accent fill). */
+export function KindTag({ kind }: { kind: Tour["kind"] }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[0.8125rem] font-bold leading-normal text-hearth ${
+        kind === "walk" ? "bg-lime" : "bg-sky"
+      }`}
+    >
+      {kindLabel(kind)}
+    </span>
+  );
+}
+
 /**
  * The ruled list of all clips (docs/13 §7, §10): an <ol> of buttons on the sand stage. The
  * selected row has a gold tint and aria-current. Memoized so it doesn't redraw as the video plays.
@@ -29,13 +42,14 @@ export const TourList = memo(function TourList({
             aria-current={i === current ? "true" : undefined}
             className="group flex min-h-16 w-full items-baseline gap-4 px-3 py-3.5 text-left transition-colors duration-150 ease-out hover:bg-linen aria-[current=true]:bg-gold/35"
           >
-            <span className="w-6 shrink-0 font-mono text-[0.875rem] tabular text-muted group-aria-[current=true]:text-hearth">
+            <span className="w-6 shrink-0 text-[0.9375rem] font-bold tabular text-muted group-aria-[current=true]:text-hearth">
               {String(t.order).padStart(2, "0")}
             </span>
-            <span className="flex min-w-0 flex-col gap-0.5">
+            <span className="flex min-w-0 flex-col gap-1.5">
               <span className="font-bold leading-snug">{t.title}</span>
-              <span className="text-[0.9375rem] tabular text-muted group-aria-[current=true]:text-hearth">
-                {kindLabel(t.kind)} · {fmt(t.duration)}
+              <span className="flex items-center gap-2 text-[0.9375rem] tabular text-muted group-aria-[current=true]:text-hearth">
+                <KindTag kind={t.kind} />
+                {fmt(t.duration)}
               </span>
             </span>
           </button>
