@@ -3,7 +3,7 @@
 import type { PlanDistrict } from "./types";
 
 /**
- * The 2D district plan: the greyscale masterplan sheet with the ten districts drawn over it
+ * The 2D district plan: the cream masterplan sheet with the ten districts drawn over it
  * (fix brief, Fixes 1 and 2) and numbered roundels. Used inside the district explorer until
  * the 3D model is ready, and afterwards as its loading and no-WebGL fallback.
  *
@@ -48,8 +48,6 @@ export function PlanMap2D({
       >
         <svg viewBox={viewBox} aria-hidden="true" className="absolute inset-0 size-full" onPointerLeave={() => onHover(null)}>
           <image href={imageHref} x={minX} y={minY} width={w} height={h} preserveAspectRatio="none" />
-          {/* Warm the greyscale sheet to the board color the 3D model uses (#D9D4C6). */}
-          <rect x={minX} y={minY} width={w} height={h} fill="#D9D4C6" style={{ mixBlendMode: "multiply" }} />
           {districts.map((d) => {
             const on = d.key === selected;
             const hv = d.key === hovered;
