@@ -1,18 +1,18 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { useParallax } from "@/components/motion/useParallax";
 import { buttonClass } from "@/components/site/buttons";
-import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 
 /**
- * Site tour teaser (content pack, Home section 5). Sand band: text left, a tour still with a
- * play button right (stacked below 760px, image 320px tall). The still drifts with the scroll.
+ * Site tour teaser (content pack, Home section 5). Sand band: text left, a tour poster frame with
+ * a play button right (stacked below 760px, image 320px tall). The still drifts with the scroll.
  */
 export function TourTeaser() {
-  const { ref, y } = useParallax<HTMLAnchorElement>("center");
+  const { ref, y } = useParallax<HTMLDivElement>("center");
 
   return (
     <section aria-labelledby="tour-title" className="grid min-h-[560px] grid-cols-1 bg-sand min-[760px]:grid-cols-[1fr_1.35fr]">
@@ -28,25 +28,29 @@ export function TourTeaser() {
         </Link>
       </div>
 
-      {/* The still is a mouse shortcut to the tour; keyboard and screen-reader users have the button. */}
-      <Link
-        ref={ref}
-        href="/tour"
-        tabIndex={-1}
-        aria-hidden="true"
-        className="group relative isolate flex min-h-[320px] items-center justify-center overflow-hidden min-[760px]:min-h-0"
-      >
+      {/* A poster frame from tour 13 (Southern slopes and valley view). It drifts with the scroll. */}
+      <div ref={ref} className="relative isolate min-h-[320px] overflow-hidden min-[760px]:min-h-0">
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
-          <PlaceholderImage
-            fill="#FFF2B3"
-            className="absolute inset-0"
+          <Image
+            src="/tour/posters/valley-view.jpg"
+            alt="Dirt lane between orchard rows and a dry, grassy field, with hills under a cloudy sky."
+            fill
+            sizes="(min-width: 760px) 58vw, 100vw"
+            className="object-cover"
           />
         </motion.div>
-        <PlaceholderLabel inset={20}>Tour video still: empty country road between orchards and dry hills</PlaceholderLabel>
-        <span className="flex size-24 items-center justify-center rounded-full bg-linen/95 transition-[scale] duration-300 ease-out group-hover:scale-105">
-          <span className="ml-2 size-0 border-y-[16px] border-l-[26px] border-y-transparent border-l-hearth" />
-        </span>
-      </Link>
+        {/* The still is a mouse shortcut to the tour; keyboard and screen-reader users have the button. */}
+        <Link
+          href="/tour"
+          tabIndex={-1}
+          aria-hidden="true"
+          className="group absolute inset-0 flex items-center justify-center"
+        >
+          <span className="flex size-24 items-center justify-center rounded-full bg-linen/95 transition-[scale] duration-300 ease-out group-hover:scale-105">
+            <span className="ml-2 size-0 border-y-[16px] border-l-[26px] border-y-transparent border-l-hearth" />
+          </span>
+        </Link>
+      </div>
     </section>
   );
 }
