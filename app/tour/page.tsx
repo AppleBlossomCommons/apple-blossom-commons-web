@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { preconnect } from "react-dom";
 import { buttonClass } from "@/components/site/buttons";
 import { TourExperience } from "@/components/tour/TourExperience";
 import { tourMapStart, tours, tourVideoBase } from "@/lib/tours";
@@ -16,6 +17,11 @@ const pad = "px-5 sm:px-[clamp(16px,4vw,56px)]";
  * map, landmarks and clip list, then a linen closing band.
  */
 export default function TourPage() {
+  // The map tiles load straight away, and the clips on demand: open those connections early.
+  preconnect("https://ibasemaps-api.arcgis.com");
+  preconnect("https://static-map-tiles-api.arcgis.com");
+  if (tourVideoBase) preconnect(new URL(tourVideoBase).origin);
+
   return (
     <>
       <section aria-labelledby="tour-page-title" className={`${pad} pb-10 pt-10 sm:pb-16 sm:pt-[88px]`}>

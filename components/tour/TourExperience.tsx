@@ -55,7 +55,15 @@ type SelectHow = "autoplay" | "play" | "show";
  * Previous/Next, the video with custom controls beside the map, landmark chips, the caption and
  * the list of all clips. Only the selected clip loads, and it plays muted.
  */
-export function TourExperience({ tours, videoBase }: { tours: Tour[]; videoBase: string; mapStart: { center: LatLng; zoom: number } }) {
+export function TourExperience({
+  tours,
+  videoBase,
+  mapStart,
+}: {
+  tours: Tour[];
+  videoBase: string;
+  mapStart: { center: LatLng; zoom: number };
+}) {
   const reduce = usePrefersReducedMotion();
   const hash = useSyncExternalStore(subscribeHash, readHash, () => "");
   const index = Math.max(0, tours.findIndex((t) => t.id === hash));
@@ -144,6 +152,9 @@ export function TourExperience({ tours, videoBase }: { tours: Tour[]; videoBase:
     [select],
   );
 
+  // Another tour's line on the map was clicked: the player is already in view.
+  const chooseFromMap = useCallback((i: number) => select(i, "autoplay"), [select]);
+
   const seek = (t: number) => {
     const v = videoRef.current;
     if (!v) return;
@@ -194,7 +205,9 @@ export function TourExperience({ tours, videoBase }: { tours: Tour[]; videoBase:
         <div ref={stageTopRef} className="flex flex-col gap-5 min-[900px]:flex-row min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-10">
           <div className="min-w-0">
             <h2 className="text-[28px] leading-[1.08] sm:text-[clamp(30px,2.6vw,40px)]">{tour.title}</h2>
-            <p className="mt-2 max-w-[64ch] text-muted">{tour.subtitle}</p>
+            <p id="tour-clip-description" className="mt-2 max-w-[64ch] text-muted">
+              {tour.subtitle}
+            </p>
             <p className="mt-1 font-mono text-[0.875rem] tabular text-muted">
               {kindLabel(tour.kind)} · {fmt(tour.duration)}
             </p>
@@ -248,6 +261,8 @@ export function TourExperience({ tours, videoBase }: { tours: Tour[]; videoBase:
                 playsInline
                 preload={activated ? "metadata" : "none"}
                 aria-label={tour.title}
+                // The clips are silent: the subtitle (and the landmark list) is their text description.
+                aria-describedby="tour-clip-description"
                 onClick={togglePlay}
                 onPlay={() => {
                   setPlayingId(tour.id);
@@ -337,7 +352,16 @@ export function TourExperience({ tours, videoBase }: { tours: Tour[]; videoBase:
           </div>
 
           <div className="flex min-h-[320px] min-w-0 flex-col">
-            <TourMap />
+            <TourMap
+              tours={tours}
+              index={index}
+              time={time}
+              playing={playing}
+              reduce={reduce}
+              start={mapStart}
+              onSeek={seek}
+              onSelect={chooseFromMap}
+            />
           </div>
         </div>
 
