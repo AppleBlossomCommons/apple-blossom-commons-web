@@ -39,7 +39,7 @@ export function MigrationChart() {
                   style={{ width }}
                 />
                 <span
-                  className={`absolute top-1/2 -translate-y-1/2 font-mono text-[0.75rem] font-medium tabular sm:text-[0.875rem] ${
+                  className={`absolute top-1/2 -translate-y-1/2 font-sans text-[0.75rem] font-medium tabular sm:text-[0.875rem] ${
                     negative ? "left-0 sm:left-auto sm:right-[calc(50%+8px+var(--w))]" : "right-0 sm:right-auto sm:left-[calc(50%+8px+var(--w))]"
                   }`}
                   style={{ ["--w" as string]: width }}
@@ -52,7 +52,7 @@ export function MigrationChart() {
         })}
       </div>
 
-      <figcaption className="font-mono text-[0.65625rem] font-medium leading-[1.5] text-muted sm:order-1 sm:font-sans sm:text-[0.9375rem] sm:font-semibold sm:text-hearth">
+      <figcaption className="font-sans text-[0.65625rem] font-medium leading-[1.5] text-muted sm:order-1 sm:text-[0.9375rem] sm:font-semibold sm:text-hearth">
         <span className="hidden sm:inline">{migration.title}</span>
         <span className="sm:hidden">
           {migration.titleShort}. {migration.caveatShort}

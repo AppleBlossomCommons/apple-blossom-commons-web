@@ -98,7 +98,7 @@ export function AtAGlance({
                 <text
                   textAnchor="middle"
                   dominantBaseline="central"
-                  className="fill-hearth font-mono text-[17px] font-semibold"
+                  className="fill-hearth font-sans text-[17px] font-semibold"
                 >
                   {here.n}
                 </text>

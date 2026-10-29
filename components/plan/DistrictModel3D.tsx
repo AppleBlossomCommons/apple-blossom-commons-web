@@ -363,7 +363,7 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
             onClick={() => onSelect(d.key)}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
             onPointerLeave={() => onHover(null)}
-            className={`relative grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-mono text-[0.5625rem] font-semibold leading-none text-hearth ease-out [transition:background-color_200ms,scale_200ms,opacity_600ms] sm:size-7 sm:text-[0.75rem] ${
+            className={`relative grid size-[18px] cursor-pointer place-items-center rounded-full border-[1.5px] border-hearth font-sans text-[0.5625rem] font-semibold leading-none text-hearth ease-out [transition:background-color_200ms,scale_200ms,opacity_600ms] sm:size-7 sm:text-[0.75rem] ${
               on ? "scale-[1.18] bg-gold" : "bg-linen"
             } ${dim ? "opacity-45" : ""}`}
           >
