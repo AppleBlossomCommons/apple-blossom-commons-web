@@ -5,8 +5,8 @@ import { PLAN_DISCLAIMER } from "@/lib/districts";
 
 type LocatorDistrict = { key: string; n: number; color: string; polys: string[]; labels: [number, number][] };
 
-/** The board color the 3D model uses; the greyscale sheet is multiplied by it (as in PlanMap2D). */
-const BOARD = "#D9D4C6";
+/** The cream sheet's paper color (matches the 3D model's board edges), shown while the sheet loads. */
+const BOARD = "#EBE5D8";
 
 /**
  * "At a glance": one card in two halves that touch (seamless style, Oct 25, 2026). Left: the
@@ -66,9 +66,7 @@ export function AtAGlance({
         {/* A mouse shortcut to the Home map; keyboard and screen-reader users have the link beside it. */}
         <BackToMapLink tabIndex={-1} aria-hidden="true" className="absolute inset-0 block overflow-hidden">
           <svg viewBox={viewBox} preserveAspectRatio="xMidYMid meet" className="absolute inset-0 size-full">
-            <image href={PLAN_SHEET} x={minX} y={minY} width={w} height={h} preserveAspectRatio="none" />
-            <rect x={minX} y={minY} width={w} height={h} fill={BOARD} style={{ mixBlendMode: "multiply" }} />
-            {districts
+            <image href={PLAN_SHEET} x={minX} y={minY} width={w} height={h} preserveAspectRatio="none" />            {districts
               .filter((d) => d.key !== current)
               .map((d) =>
                 d.polys.map((p, i) => (

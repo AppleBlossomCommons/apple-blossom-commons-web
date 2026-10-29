@@ -237,7 +237,7 @@ function Scene({
   );
 }
 
-/** The plan as a model base: a 1023 × 16 × 694 box with the greyscale sheet on its top face only. */
+/** The plan as a model base: a 1023 × 16 × 694 box with the cream masterplan sheet on its top face only. */
 function Board({ href }: { href: string }) {
   const get = useThree((s) => s.get);
   // sRGB color space and maximum anisotropy, set once when the texture loads.
@@ -248,15 +248,24 @@ function Board({ href }: { href: string }) {
   });
 
   return (
-    <mesh position={[0, -8, 0]} receiveShadow>
-      <boxGeometry args={[PLAN_W, 16, PLAN_H]} />
-      <meshStandardMaterial attach="material-0" color="#d9d4c6" roughness={1} />
-      <meshStandardMaterial attach="material-1" color="#d9d4c6" roughness={1} />
-      <meshStandardMaterial attach="material-2" map={tex} roughness={0.95} />
-      <meshStandardMaterial attach="material-3" color="#bdb7a8" />
-      <meshStandardMaterial attach="material-4" color="#d9d4c6" roughness={1} />
-      <meshStandardMaterial attach="material-5" color="#d9d4c6" roughness={1} />
-    </mesh>
+    <>
+      <mesh position={[0, -8, 0]}>
+        <boxGeometry args={[PLAN_W, 16, PLAN_H]} />
+        {/* Edges in the cream sheet's paper color, the underside a shade darker. */}
+        <meshStandardMaterial attach="material-0" color="#ebe5d8" roughness={1} />
+        <meshStandardMaterial attach="material-1" color="#ebe5d8" roughness={1} />
+        {/* The top face is unlit, so the sheet shows its true colors, as on the 2D plan. */}
+        <meshBasicMaterial attach="material-2" map={tex} />
+        <meshStandardMaterial attach="material-3" color="#cfc8ba" />
+        <meshStandardMaterial attach="material-4" color="#ebe5d8" roughness={1} />
+        <meshStandardMaterial attach="material-5" color="#ebe5d8" roughness={1} />
+      </mesh>
+      {/* A clear sheet just above the board that shows only the plates' shadows, for depth. */}
+      <mesh position={[0, 0.05, 0]} rotation-x={-Math.PI / 2} receiveShadow>
+        <planeGeometry args={[PLAN_W, PLAN_H]} />
+        <shadowMaterial opacity={0.2} color="#3b2f2a" />
+      </mesh>
+    </>
   );
 }
 
@@ -333,7 +342,7 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
               }}
               color={d.color}
               // A soft glow in the district's own color, so the light vibrant fills read close to
-              // their true color instead of being darkened by the lighting and the grey board.
+              // their true color instead of being darkened by the lighting and the board.
               emissive={d.color}
               emissiveIntensity={0.3}
               roughness={0.7}

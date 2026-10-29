@@ -10,8 +10,8 @@ export function districtImage(color: string) {
   return `color-mix(in oklch, ${color} 50%, white)`;
 }
 
-/** The greyscale masterplan sheet under the 2D plan and on the 3D model's board. */
-export const PLAN_SHEET = "/plan/districts-sheet-greyscale.webp";
+/** The masterplan sheet under the 2D plan and on the 3D board, lightened to warm cream (paper ≈ #EBE5D8). Draw it as is, untinted. */
+export const PLAN_SHEET = "/plan/districts-sheet-cream.webp";
 
 /** The color masterplan (the /plan header image and the walk-ring diagram). It has no printed walk rings. */
 export const PLAN_COLOR = "/plan/masterplan-color.webp";
