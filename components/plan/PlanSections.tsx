@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 import { JumpLink } from "@/components/site/JumpLink";
 import { ConceptText } from "@/components/site/Places";
+import { eyebrow } from "@/components/site/layout";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
 import { PLAN_COLOR } from "@/lib/district-image";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
@@ -11,18 +12,18 @@ import { PLAN_DISCLAIMER } from "@/lib/districts";
 // Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
 // docs/11-plan-and-districts-content.md, section 1. Image notes from the Phase 1 handoff and docs/11.
 
-/** Hero: an inset image card with the page title (520px tall; 380px on phones). */
+/** Hero: an inset image card with the page title (640px tall; 380px on phones), cropped toward the middle of the plan. */
 export function PlanHero() {
   return (
     <section aria-labelledby="plan-title" className="px-2 sm:px-4">
-      <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[520px] sm:rounded-hero sm:px-16 sm:pb-14">
+      <div className="relative isolate flex h-[380px] items-end overflow-hidden rounded-hero-sm px-5 pb-6 sm:h-[640px] sm:rounded-hero sm:px-16 sm:pb-14">
         <Image
           src={PLAN_COLOR}
           alt="Color-coded masterplan of the site, showing its neighborhoods, the village, roads, trails, and parks and open space."
           fill
           preload
           sizes="100vw"
-          className="-z-20 object-cover"
+          className="-z-20 object-cover object-[55%_42%]"
         />
         {/* A soft linen fade at the bottom keeps the dark title readable over the busy map. */}
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-3/5 bg-gradient-to-t from-linen/90 via-linen/50 to-transparent" />
@@ -37,10 +38,17 @@ export function PlanHero() {
   );
 }
 
+/** Intro: a small "Overview" label under a 3px Deep Sage rule on the left, the paragraph on the right (stacked on phones). */
 export function PlanIntro() {
   return (
-    <section className="px-5 pb-14 pt-10 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-[88px]">
-      <Reveal as="p" kind="fade" className="max-w-[960px] text-xl leading-normal sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
+    <section
+      aria-labelledby="plan-overview"
+      className="grid gap-5 px-5 pb-14 pt-10 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-[88px] lg:grid-cols-[minmax(180px,1fr)_3fr] lg:gap-10"
+    >
+      <h2 id="plan-overview" className={`${eyebrow} self-start border-t-[3px] border-sage-deep pt-3 lg:mt-3`}>
+        Overview
+      </h2>
+      <Reveal as="p" kind="fade" className="max-w-[860px] text-xl leading-normal sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
         Apple Blossom Commons is a long-range plan for about 160 acres near Lake Chelan. It is meant to grow slowly, one neighborhood at a time,
         over many years. Each part is planned to work with the others: homes near care, a small village within walking distance, and parks and
         open space throughout.
