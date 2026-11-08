@@ -1,22 +1,21 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "@/components/home/HeroVideo";
 import { useParallax } from "@/components/motion/useParallax";
 import { buttonClass } from "@/components/site/buttons";
-import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
+import heroStill from "@/public/images/home/hero-still.jpg";
 
 // Copy from docs/10-content-v2.md, Home section 1.
 const HEADLINE = "A community planned to grow with Chelan, over decades.";
 const SUBLINE = "Homes for every stage of life, a short walk from the hospital campus, orchards and a small wine village.";
 
 /**
- * Home hero: an inset image card with hearth text on one flat pale color. HomeIntro animates the
- * parts marked data-intro-el (image, headline words, subline, buttons, label); the image
- * layer also drifts with the scroll (useParallax).
- *
- * TODO when the stock video arrives: add a visible pause/play button (autoplaying motion longer
- * than 5 seconds needs one, WCAG 2.2.2), and show the still image with reduced motion.
+ * Home hero: an inset card with Andy's drone clip of the site (scripts/home-video), white text on
+ * a soft dark-brown fade (docs/04-design-direction.md, rule 3). HomeIntro animates the parts
+ * marked data-intro-el (image, headline words, subline, buttons, video button); the image layer
+ * also drifts with the scroll (useParallax). HeroVideo plays the clip once and holds.
  */
 export function Hero() {
   const { ref, y } = useParallax("top");
@@ -30,18 +29,21 @@ export function Hero() {
         ref={ref}
         className="relative isolate flex h-[max(540px,calc(100svh-64px-clamp(8px,1.2vw,16px)))] flex-col justify-end overflow-hidden rounded-[clamp(24px,2.4vw,32px)] px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)]"
       >
-        <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
-          <PlaceholderImage
-            data-intro-el="media"
-            fill="#DDF1FC"
-            className="absolute inset-0"
-          />
-        </motion.div>
-        <PlaceholderLabel data-intro-el="tag">
-          Stock video, 20–30 s loop: early-morning aerial, lake and orchards · still image when reduced motion is on
-        </PlaceholderLabel>
+        <HeroVideo
+          y={y}
+          // Decorative: the headline carries the message, so the image has empty alt text.
+          still={
+            <Image src={heroStill} alt="" fill preload sizes="100vw" placeholder="blur" className="object-cover" />
+          }
+        />
+        {/* The dark fade keeps the white text at 4.5:1 or better (3:1 for the headline), even over the
+            white rooftops. Narrow screens stack the text higher, so the fade there is taller and darker. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(59_47_42/0.8)_0%,rgb(59_47_42/0.74)_40%,rgb(59_47_42/0.62)_65%,rgb(59_47_42/0)_95%)] lg:bg-[linear-gradient(to_top,rgb(59_47_42/0.74)_0%,rgb(59_47_42/0.66)_30%,rgb(59_47_42/0.5)_55%,rgb(59_47_42/0)_85%)]"
+        />
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] items-end gap-[clamp(20px,4vw,64px)] text-hearth">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] items-end gap-[clamp(20px,4vw,64px)] text-white">
           <h1 id="home-title" className="min-w-0 text-[clamp(44px,5.8vw,84px)] leading-[0.98]">
             {/* Screen readers get the sentence whole; the per-word spans are only for the blur-in. */}
             <span className="sr-only">{HEADLINE}</span>
@@ -62,7 +64,7 @@ export function Hero() {
               <Link href="/plan" data-intro-el="btn" className={buttonClass("primary", "lg")}>
                 Explore the plan
               </Link>
-              <Link href="/tour" data-intro-el="btn" className={buttonClass("secondary", "lg")}>
+              <Link href="/tour" data-intro-el="btn" className={buttonClass("onPhoto", "lg")}>
                 Take the site tour
               </Link>
             </div>

@@ -19,8 +19,20 @@ function markSeen() {
   } catch {}
 }
 
-/** When each sequence has finished, in seconds (the last step is the image label). */
-const END: Record<Exclude<IntroMode, "none">, number> = { full: 4.25, return: 2.1, reduce: 1 };
+/**
+ * How much slower than the handoff spec the hero entrance runs (image, headline, subline,
+ * buttons, video button). 1 is the spec; 1.3 follows review feedback that it felt fast
+ * (Nov 7, 2026). The loader before it keeps the spec timing.
+ */
+const PACE = 1.4;
+
+/** When the hero entrance starts, and when each sequence has finished, in seconds. */
+const HERO_START = { full: 2.25, return: 0.1 };
+const END: Record<Exclude<IntroMode, "none">, number> = {
+  full: HERO_START.full + 2 * PACE,
+  return: HERO_START.return + 2 * PACE,
+  reduce: 1,
+};
 
 /**
  * The Home loading intro and hero entrance (handoff, "Loading intro"). The loader layer renders
@@ -151,24 +163,37 @@ function play(mode: Exclude<IntroMode, "none">, loader: HTMLDivElement, timers: 
     );
     hideLoaderAt(t + 1.1);
 
-    a.push(...hero("media").map((el) => animate(el, { scale: [1.14, 1], filter: ["blur(14px)", "blur(0px)"] }, { delay: 1.4, duration: 2.6, ease: ease.out })));
+    // The image fades in as it sharpens (the CSS start state holds it at opacity 0).
+    a.push(
+      ...hero("media").map((el) =>
+        animate(
+          el,
+          { opacity: [0, 1], scale: [1.14, 1], filter: ["blur(14px)", "blur(0px)"] },
+          { delay: 1.4, duration: 2.6 * PACE, ease: ease.out },
+        ),
+      ),
+    );
     const header = document.getElementById("site-header");
     if (header) a.push(animate(header, { opacity: [0, 1], y: [-10, 0] }, { delay: 2.05, duration: 0.8, ease: ease.out }));
-    t = 2.25;
+    t = HERO_START.full;
   } else {
-    a.push(...hero("media").map((el) => animate(el, { scale: [1.06, 1], filter: ["blur(6px)", "blur(0px)"] }, { duration: 1.4, ease: ease.out })));
-    t = 0.1;
+    a.push(
+      ...hero("media").map((el) =>
+        animate(el, { opacity: [0, 1], scale: [1.06, 1], filter: ["blur(6px)", "blur(0px)"] }, { duration: 1.4 * PACE, ease: ease.out }),
+      ),
+    );
+    t = HERO_START.return;
   }
 
-  // Headline word by word, then the subline, the buttons and the image label.
+  // Headline word by word, then the subline, the buttons and the video button, slowed by PACE.
   hero("word").forEach((el, i) => {
     const rise = parseFloat(getComputedStyle(el).fontSize) * 0.3;
-    a.push(animate(el, { opacity: [0, 1], filter: ["blur(18px)", "blur(0px)"], y: [rise, 0] }, { delay: t + i * 0.08, duration: 1.1, ease: ease.out }));
+    a.push(animate(el, { opacity: [0, 1], filter: ["blur(18px)", "blur(0px)"], y: [rise, 0] }, { delay: t + i * 0.08 * PACE, duration: 1.1 * PACE, ease: ease.out }));
   });
   hero("sub").forEach((el) =>
-    a.push(animate(el, { opacity: [0, 1], filter: ["blur(8px)", "blur(0px)"], y: [14, 0] }, { delay: t + 0.9, duration: 0.9, ease: ease.out })),
+    a.push(animate(el, { opacity: [0, 1], filter: ["blur(8px)", "blur(0px)"], y: [14, 0] }, { delay: t + 0.9 * PACE, duration: 0.9 * PACE, ease: ease.out })),
   );
-  hero("btn").forEach((el, i) => a.push(animate(el, { opacity: [0, 1], y: [14, 0] }, { delay: t + 1.1 + i * 0.1, duration: 0.8, ease: ease.out })));
-  hero("tag").forEach((el) => a.push(animate(el, { opacity: [0, 1] }, { delay: t + 1.4, duration: 0.6, ease: ease.css })));
+  hero("btn").forEach((el, i) => a.push(animate(el, { opacity: [0, 1], y: [14, 0] }, { delay: t + (1.1 + i * 0.1) * PACE, duration: 0.8 * PACE, ease: ease.out })));
+  hero("tag").forEach((el) => a.push(animate(el, { opacity: [0, 1] }, { delay: t + 1.4 * PACE, duration: 0.6 * PACE, ease: ease.css })));
   return a;
 }

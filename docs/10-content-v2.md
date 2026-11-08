@@ -222,7 +222,7 @@ Rules: AI images may show **no people**. People appear only in licensed stock wi
 
 | Slot | Source | Brief |
 |---|---|---|
-| Home hero video | Licensed stock (Pond5, Shutterstock, Adobe Stock; search "Lake Chelan drone", "Chelan orchards") | 20–30 s loop, golden hour or early morning, lake and orchards, slow aerial, no crowds or boats in clusters |
+| Home hero video | **Done (Nov 7, 2026):** Andy's commissioned drone footage, `DJI_0150.MP4` 0:13–0:28 (see `drone-videos/README.md`) | 15 s, plays once and holds on the last frame (no loop, per the motion rules); still image with reduced motion |
 | Once in a Generation | Licensed stock photo | Wide view of orchards with the lake beyond, golden hour |
 | A New Way to Retire | Licensed stock with people | Couple in their late 60s–70s walking or biking on a quiet tree-lined path |
 | Home for Every Chapter | AI, no people (label: Illustrative concept) | Cottage porch with two empty chairs and a blanket, apple blossoms, warm evening light |

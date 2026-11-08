@@ -54,3 +54,10 @@ next-env.d.ts
 
 # prepared Site Tour videos (scripts/tour-videos; uploaded to Vercel Blob, never committed)
 /.tour-videos/
+
+# original drone videos (kept locally, prepared and uploaded to Vercel Blob, never committed)
+/drone-videos/*
+!/drone-videos/README.md
+
+# prepared Home hero clip (scripts/home-video; served locally in development, uploaded to Vercel Blob, never committed)
+/public/local-video/
