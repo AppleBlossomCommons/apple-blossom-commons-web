@@ -28,12 +28,14 @@ export function TourTeaser() {
         </Link>
       </div>
 
-      {/* A poster frame from tour 13 (Southern slopes and valley view). It drifts with the scroll. */}
+      {/* The poster frame from tour 13 (Southern slopes and valley view), retouched with a clear sky
+          and warmer light. The tour itself keeps the original poster so it matches its video.
+          It drifts with the scroll. */}
       <div ref={ref} className="relative isolate min-h-[320px] overflow-hidden min-[760px]:min-h-0">
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <Image
-            src="/tour/posters/valley-view.jpg"
-            alt="Dirt lane between orchard rows and a dry, grassy field, with hills under a cloudy sky."
+            src="/images/home/tour-teaser-valley-sunny.jpg"
+            alt="Dirt lane between orchard rows and a dry, grassy field, with hills under a blue sky."
             fill
             sizes="(min-width: 760px) 58vw, 100vw"
             className="object-cover"
