@@ -37,7 +37,7 @@ Words in [brackets] are notes for the builder, not copy.
 | Tile | Word | Line |
 |---|---|---|
 | Large | **Once in a Generation** | Land like this, planned with this much care, comes along rarely. |
-| Wide | **A New Way to Retire** | Streets designed for walking, care close by, and room for the grandkids. |
+| Wide | **A New Way to Retire** | Paths designed for walking and biking, care close by, and room for the grandkids. |
 | Medium | **Home for Every Chapter** | Stay in the community you love as your needs change. |
 | Small | **Unhurried** | Mornings with nowhere you have to be. |
 | Small | **Care, Close By** | The hospital campus is a short walk from home. |
