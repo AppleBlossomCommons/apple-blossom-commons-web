@@ -30,7 +30,7 @@ const values = [
   },
   {
     title: "Protecting what makes Chelan special.",
-    text: "The views, the open space, the orchards and a small-town pace. A large orchard preserve is part of the plan.",
+    text: "The views, the open hillsides and a small-town pace. A large share of the land is planned to stay open, with trails and a scenic overlook.",
   },
   {
     title: "Adding to downtown, not competing with it.",
@@ -75,7 +75,7 @@ export default function AboutPage() {
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage fill="#FFE6CC" className="absolute inset-0 -z-10" />
           <PlaceholderLabel inset={20}>
-            AI image, no people: quiet orchard lane in spring bloom, lake glimpsed between the trees, soft morning light
+            AI image, no people: quiet tree-lined lane in spring bloom, lake glimpsed between the trees, soft morning light
           </PlaceholderLabel>
           <div className="grid w-full items-end gap-3.5 text-hearth min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
             <div className="flex flex-col gap-4">
@@ -107,10 +107,10 @@ export default function AboutPage() {
       >
         <div className="flex flex-col gap-5 sm:gap-6">
           <Reveal as="h2" kind="head" id="our-story-title" className={sectionTitle}>
-            It started with an orchard
+            It started with a view
           </Reveal>
           <Reveal kind="fade" className="flex max-w-[600px] flex-col gap-4 sm:text-xl">
-            <p>The land where Apple Blossom Commons will grow was once orchard, rows of fruit trees on the edge of town.</p>
+            <p>The land where Apple Blossom Commons will grow sits on open hillsides at the edge of town, looking out over the lake and the valley.</p>
             <p>
               When Andy Yeung looked at it, he saw the start of a village. A place where retirees and young families could live side by side.
               Where a cup of coffee, a visit to the doctor and a walk among the trees could all be close to home. Where people could stay in the
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <Reveal kind="card" className="relative aspect-[4/3] overflow-hidden rounded-card">
           <PlaceholderImage fill="#FFE1ED" className="absolute inset-0" />
           <PlaceholderLabel>
-            AI image, no people · Illustrative concept: close-up of apple blossoms on a branch, orchard rows softly out of focus behind
+            AI image, no people · Illustrative concept: close-up of apple blossoms on a branch, open hillside and lake softly out of focus behind
           </PlaceholderLabel>
         </Reveal>
       </section>

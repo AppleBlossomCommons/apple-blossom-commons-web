@@ -42,8 +42,8 @@ const groups: { title: string; items: { q: string; a: string }[] }[] = [
       },
       { q: "Will the parks and trails be open to the public?", a: "It's too early to say. We'll share plans as the parks are designed." },
       {
-        q: "What happens to the orchards and the views?",
-        a: "Protecting open space and scenic views is a core part of the plan, including a large orchard preserve.",
+        q: "What happens to the open space and the views?",
+        a: "Protecting open space and scenic views is a core part of the plan. A large share of the land is planned to stay open, with trails and a scenic overlook.",
       },
       {
         q: "How will wildfire and evacuation be handled?",

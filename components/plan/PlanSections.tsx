@@ -70,7 +70,7 @@ const fits: RuleItem[] = [
     title: "A small village.",
     text: "Cafés, restaurants, tasting rooms and shops along a lane designed for walking, sized to add to downtown Chelan, not compete with it.",
   },
-  { title: "Parks and open space.", text: "A recreation park, trails and a large orchard preserve." },
+  { title: "Parks and open space.", text: "A recreation park, trails and a large open-space preserve with a scenic overlook." },
   {
     title: "Built in phases.",
     text: "Each neighborhood comes when there is real demand for it.",
@@ -157,7 +157,7 @@ export function WhyChelan() {
           Why Chelan
         </h2>
         <p className="max-w-[640px] sm:text-[21px]">
-          Four seasons, the lake, orchards and vineyards, and a small-town pace. People come to Chelan for the same reasons they stay. The plan is
+          Four seasons, the lake, the vineyards and a small-town pace. People come to Chelan for the same reasons they stay. The plan is
           shaped to protect what makes this place special: the views, the open space and a town that knows its neighbors.
         </p>
       </Reveal>

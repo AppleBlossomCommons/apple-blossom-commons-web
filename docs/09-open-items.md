@@ -49,3 +49,7 @@ From `11-plan-and-districts-content.md`, section 5.
 - **"Affordable senior housing"** in Orchard Grove: is it meant as income-restricted housing? Until answered, it's "a range of senior townhomes".
 - **Masterplan renderings:** ask the architect for full-size originals, whether each is AI-generated or a licensed photo, and permission for web use. Until then the site uses labeled placeholders.
 - **Self-driving carts:** "Lanes without cars" on The Plan describes "low-speed shuttles or carts" as a concept. It's built; owner to confirm it should be public before launch.
+
+## No orchards in the plan (Nov 13, 2026)
+
+Per Andy: Apple Blossom Commons will not include orchards. All public copy, image notes, alt text and tour labels that mentioned orchards were rewritten (hero subline, About, Plan, Participate FAQ, home collage and doorway cards, tour 12). The About "Our story" section now opens "It started with a view" instead of describing the land's past orchard use.

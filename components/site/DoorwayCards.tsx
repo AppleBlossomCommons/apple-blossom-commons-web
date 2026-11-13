@@ -61,7 +61,7 @@ const homeDoorways: Doorway[] = [
     title: "Build with us.",
     text: "Explore investment and development opportunities.",
     cta: "Partner with Us",
-    image: "Stock photo: open orchard rows on a gentle slope, golden hour",
+    image: "Stock photo: open land on a gentle slope, golden hour",
     fill: "#EAF6CF",
     // First frame (0:00) of the owner's drone clip DJI_0147, location data removed.
     photo: siteFromAbove,

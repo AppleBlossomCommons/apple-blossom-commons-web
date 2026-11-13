@@ -123,7 +123,7 @@ export function Outdoors() {
           Parks, trails and open space
         </Reveal>
         <Reveal as="p" kind="fade" className={introClass}>
-          A large share of the land is planned to stay open: orchards, trails, play areas and a lookout at the top of the site.
+          A large share of the land is planned to stay open: open hillside, trails, play areas and a lookout at the top of the site.
         </Reveal>
       </div>
       <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">

@@ -30,7 +30,7 @@ const tiles: Tile[] = [
     area: "L",
     word: "Once in a Generation",
     line: "Land like this, planned with this much care, comes along rarely.",
-    image: "Stock photo: wide view of orchards with the lake beyond, golden hour",
+    image: "Stock photo: wide view of open hillsides with the lake beyond, golden hour",
     fill: "#FFF2B3",
     photo: lakeView,
   },

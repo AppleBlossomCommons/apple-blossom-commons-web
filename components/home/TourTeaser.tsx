@@ -35,7 +35,7 @@ export function TourTeaser() {
         <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
           <Image
             src="/images/home/tour-teaser-valley-sunny.jpg"
-            alt="Dirt lane between orchard rows and a dry, grassy field, with hills under a blue sky."
+            alt="Dirt lane between rows of trees and a dry, grassy field, with hills under a blue sky."
             fill
             sizes="(min-width: 760px) 58vw, 100vw"
             className="object-cover"

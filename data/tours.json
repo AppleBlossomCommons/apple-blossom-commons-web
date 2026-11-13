@@ -940,7 +940,7 @@
    "id": "rural-edge",
    "order": 12,
    "title": "Isenhart and Edwin Road round trip — side view",
-   "subtitle": "Fields, farmhouses and orchard edges from the passenger window",
+   "subtitle": "Fields, farmhouses and open country from the passenger window",
    "kind": "drive",
    "duration": 150.07,
    "orientation": "landscape",
@@ -1248,7 +1248,7 @@
     },
     {
      "t": 61,
-     "label": "Orchard rows along Willmorth Dr"
+     "label": "Farmland along Willmorth Dr"
     }
    ]
   },

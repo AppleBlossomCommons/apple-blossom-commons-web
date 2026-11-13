@@ -50,7 +50,7 @@ export default function ParticipatePage() {
             className="absolute inset-0 -z-10"
           />
           <PlaceholderLabel inset={20}>
-            AI image, no people: open orchard lane with a simple wooden bench, apple trees in spring bloom, soft morning light
+            AI image, no people: quiet tree-lined path with a simple wooden bench, flowering trees in spring bloom, soft morning light
           </PlaceholderLabel>
           <div className="grid w-full items-end gap-3.5 text-hearth min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
             <Reveal as="h1" kind="head" id="participate-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
