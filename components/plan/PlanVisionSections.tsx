@@ -55,7 +55,7 @@ export function Vision() {
       </div>
       <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-3">
         {pillars.map((p, i) => (
-          <PlaceCard key={p.place.name} place={p.place} image={visionImages[p.image]} index={i} />
+          <PlaceCard key={p.place.name} place={p.place} image={visionImages[p.image]} index={i} sizes="(min-width: 760px) 33vw, 100vw" />
         ))}
       </ul>
       <Reveal as="p" kind="fade" className="mt-12 max-w-[860px] text-xl leading-normal sm:mt-16 sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
@@ -251,7 +251,13 @@ export function HeritageGrove() {
       </ul>
       <ul aria-label="Everyday life" className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
         {everyday.map((place, i) => (
-          <PlaceCard key={place.name} place={place} image={getPlaceImage("heritage", place.name)} index={i % 3} />
+          <PlaceCard
+            key={place.name}
+            place={place}
+            image={getPlaceImage("heritage", place.name)}
+            index={i % 3}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          />
         ))}
       </ul>
       <div className="mt-10 flex flex-col gap-6 sm:mt-14">

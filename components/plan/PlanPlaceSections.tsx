@@ -92,6 +92,7 @@ export function Village() {
             image={getPlaceImage("wine", place.name)}
             index={i < 2 ? i : i - 2}
             className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}
+            sizes={i < 2 ? "(min-width: 640px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
           />
         ))}
       </ul>
