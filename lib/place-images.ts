@@ -36,3 +36,22 @@ const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
 export function getPlaceImage(district: DistrictKey, placeName: string): PlaceImage | undefined {
   return placeImages[district]?.[placeName];
 }
+
+/**
+ * TEMPORARY image areas for The Plan's "A different kind of retirement" pillars
+ * (docs/14-plan-vision-content.md, section 8.2, slots V1–V3).
+ */
+export const visionImages = {
+  home: {
+    label: "AI image, no people: single-storey cottage with a deep porch, two rocking chairs, a level path to the door, morning light",
+    fill: "#FFE6CC",
+  },
+  care: {
+    label: "Licensed stock with people: senior couple walking a sunny garden path; no hospital or clinical scenes",
+    fill: "#EAF6CF",
+  },
+  technology: {
+    label: "AI image, no people: bright cottage living room, small tablet on a side table, soft hallway night lighting, view to golden hills",
+    fill: "#EAF6FD",
+  },
+} satisfies Record<string, PlaceImage>;

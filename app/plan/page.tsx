@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PlanExplorer } from "@/components/plan/PlanExplorer";
 import { GuidingIdeas, Outdoors, Village, Walking } from "@/components/plan/PlanPlaceSections";
+import { Vision } from "@/components/plan/PlanVisionSections";
 import { CareCloseBy, FitsTogether, PlanHero, PlanIntro, WhyChelan } from "@/components/plan/PlanSections";
 import { PLAN_SHEET } from "@/lib/district-image";
 import { PLAN_DISCLAIMER_3D, PLAN_VIEWBOX } from "@/lib/districts";
@@ -9,7 +10,7 @@ import { planDistricts } from "@/lib/plan-props";
 export const metadata: Metadata = {
   title: "The Plan",
   description:
-    "A long-range plan near Lake Chelan: homes for every stage of life, a small village at the center, care close by, and parks and trails throughout, growing one neighborhood at a time.",
+    "A long-range plan near Lake Chelan for a different kind of retirement: homes for every stage of life, care a short walk away, technology that supports people, and a small village at the center.",
 };
 
 /**
@@ -22,6 +23,7 @@ export default function PlanPage() {
     <>
       <PlanHero />
       <PlanIntro />
+      <Vision />
       <PlanExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} imageHref={PLAN_SHEET} disclaimer={PLAN_DISCLAIMER_3D} />
       <FitsTogether />
       <Walking />

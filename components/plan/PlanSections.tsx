@@ -10,7 +10,8 @@ import { PLAN_COLOR } from "@/lib/district-image";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
 
 // Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
-// docs/11-plan-and-districts-content.md, section 1. Image notes from the Phase 1 handoff and docs/11.
+// docs/11-plan-and-districts-content.md, section 1, and docs/14-plan-vision-content.md (which wins
+// where they differ). Image notes from the Phase 1 handoff and docs/11.
 
 /** Hero: an inset image card with the page title (640px tall; 380px on phones), cropped toward the middle of the plan. */
 export function PlanHero() {
@@ -49,7 +50,8 @@ export function PlanIntro() {
         Overview
       </h2>
       <Reveal as="p" kind="fade" className="max-w-[860px] text-xl leading-normal sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
-        Apple Blossom Commons is a long-range plan for about 160 acres near Lake Chelan. It is meant to grow slowly, one neighborhood at a time,
+        Apple Blossom Commons is planned around a simple idea: the years after work are better when a good home, good care and good neighbors
+        are close together. Apple Blossom Commons is a long-range plan for about 160 acres near Lake Chelan. It is meant to grow slowly, one neighborhood at a time,
         over many years. Each part is planned to work with the others: homes near care, a small village within walking distance, and parks and
         open space throughout.
       </Reveal>
