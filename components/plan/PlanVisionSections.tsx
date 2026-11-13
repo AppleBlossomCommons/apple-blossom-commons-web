@@ -14,7 +14,7 @@ const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
 const headingClass = "text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]";
 const introClass = "max-w-[760px] text-xl leading-normal sm:text-[23px]";
 const subheadingClass = "text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]";
-const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
+const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:decoration-hearth";
 
 const pillars: { place: Place; image: keyof typeof visionImages }[] = [
   {
@@ -102,7 +102,6 @@ function CarePath() {
           </span>
           <div className="flex flex-col gap-2 pt-1.5 min-[900px]:pt-0">
             <h4 className="text-[23px] leading-[1.1] tracking-[-0.015em] sm:text-[26px]">
-              <span className="sr-only">Step {i + 1}: </span>
               {step.title}
             </h4>
             <p className="max-w-[340px]">{step.text}</p>
