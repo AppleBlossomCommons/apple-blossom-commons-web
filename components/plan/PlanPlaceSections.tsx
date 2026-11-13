@@ -17,7 +17,7 @@ const linkClass =
   "inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
 
 /** A link to a district page that opens it with the circle transition. */
-function DistrictPageLink({ districtKey, children }: { districtKey: DistrictKey; children: ReactNode }) {
+export function DistrictPageLink({ districtKey, children }: { districtKey: DistrictKey; children: ReactNode }) {
   const d = getDistrictByKey(districtKey);
   return (
     <DistrictLink district={{ slug: d.slug, color: d.color }} className={linkClass}>

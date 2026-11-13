@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PlanExplorer } from "@/components/plan/PlanExplorer";
 import { GuidingIdeas, Outdoors, Village, Walking } from "@/components/plan/PlanPlaceSections";
-import { Vision } from "@/components/plan/PlanVisionSections";
+import { LifePlan, Vision } from "@/components/plan/PlanVisionSections";
 import { CareCloseBy, FitsTogether, PlanHero, PlanIntro, WhyChelan } from "@/components/plan/PlanSections";
 import { PLAN_SHEET } from "@/lib/district-image";
 import { PLAN_DISCLAIMER_3D, PLAN_VIEWBOX } from "@/lib/districts";
@@ -26,6 +26,7 @@ export default function PlanPage() {
       <Vision />
       <PlanExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} imageHref={PLAN_SHEET} disclaimer={PLAN_DISCLAIMER_3D} />
       <FitsTogether />
+      <LifePlan />
       <Walking />
       <Village />
       <CareCloseBy />
