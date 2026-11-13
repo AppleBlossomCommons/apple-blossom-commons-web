@@ -111,6 +111,8 @@ The full proposed file is `docs/11-districts-proposed.json`. Summary of changes:
 
 **What's in the masterplan.** The masterplan's 15 pictures are mood images: Vintner's Walk, Harvest Square, the Barrel House, Market Hall, cottages, an age-in-place courtyard, an overlook bench and an aerial view of the village. **Don't use them on the site.** Most show people (AI images may not), four have titles baked in (one misspelled "Vitner's Walk"), two show busy patios, several look like stock photos of unknown origin, and the copies we have are thumbnails. They're useful as art direction only. Andy is asking the architect for the originals and their sources (section 5).
 
+> **Note (Nov 13, 2026):** for The Plan page, `docs/14-plan-vision-content.md` section 8 replaces the image rules and the "no people in AI images" rule in this section and in `docs/10-content-v2.md`. It keeps AI images free of people **and animals**, allows people only in licensed stock with model releases (now including the "A different kind of retirement" pillars and the Heritage Grove cards), and gives the file names, alt text and Gemini prompts to use.
+
 **Until then,** use the existing placeholder pattern (`PlaceholderImage` + `PlaceholderLabel`). The briefs below follow the imagery rules in `docs/10-content-v2.md`: no people in AI images, label "Illustrative concept", no crowds, traffic or real landmarks.
 
 | Slot | Source | Brief (art direction from the masterplan renderings) |

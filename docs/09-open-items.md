@@ -53,3 +53,19 @@ From `11-plan-and-districts-content.md`, section 5.
 ## No orchards in the plan (Nov 13, 2026)
 
 Per Andy: Apple Blossom Commons will not include orchards. All public copy, image notes, alt text and tour labels that mentioned orchards were rewritten (hero subline, About, Plan, Participate FAQ, home collage and doorway cards, tour 12). The About "Our story" section now opens "It started with a view" instead of describing the land's past orchard use.
+
+## Added by the Plan vision content pack (Nov 13, 2026)
+
+From `14-plan-vision-content.md`, section 11.
+
+- **Life Plan Community:** confirm with Andy that Orchard Grove and Heritage Grove together are "the Life Plan Community", and whether the Wellness District's medical-assisted living is part of it.
+- **Contract model** (entrance fee, rental, other): not decided. The FAQ stays "too early to say".
+- **"Affordable senior housing"** on the masterplan: what it means (carried from `docs/11`). The Plan says "Homes at more than one price" until answered.
+- **Self-driving shuttles, robots and an AI assistant:** shown on The Plan as concepts. Revisit once the Connected Community work has an operating partner.
+
+Raised while building it:
+
+- **"Meals worth sharing"** drops "and orchards" from the pack's "food from the valley's own farms and orchards", to follow the no-orchards decision above. Owner to confirm, or restore it if the valley's orchards are fine to mention.
+- **Two FAQ wordings:** The Plan asks "Is it only for people 55 and older? Will there be entrance fees?" and its care answer includes nursing care, as in `docs/14`. The Participate FAQ still says "Is senior living 55+?" and leaves out nursing care. Pick one wording for both pages.
+- **Image alt text:** `docs/14` gives alt text only for the five village images. The pillar and Heritage Grove alt texts in `lib/place-images.ts` are drafts; rewrite each one to match the chosen picture, especially the stock photos.
+- **Image credits:** licensed stock needs its source and license recorded (`docs/14`, 8.3). There is no image-credits list yet.

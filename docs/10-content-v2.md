@@ -218,6 +218,8 @@ All three forms send to **andyhyeung@gmail.com** and **appleblossomcommons@gmail
 
 ## Imagery plan
 
+> **Note (Nov 13, 2026):** for The Plan page, `docs/14-plan-vision-content.md` section 8 replaces the image rules and the "no people in AI images" rule in this section. It keeps AI images free of people **and animals**, allows people only in licensed stock with model releases (now including the "A different kind of retirement" pillars and the Heritage Grove cards), and gives the file names, alt text and Gemini prompts to use.
+
 Rules: AI images may show **no people**. People appear only in licensed stock with model releases. AI images never depict real Lake Chelan landmarks as photos; anything showing ABC buildings is labeled "Illustrative concept". No crowds, traffic, busy patios or construction.
 
 | Slot | Source | Brief |
