@@ -174,6 +174,22 @@
         {
           "name": "Shared clubhouses",
           "text": "One clubhouse for independent and assisted living, with a club room, fitness room, movie room, library, quiet room and guest suites. A second for memory and nursing care, with guest suites, a library, a salon, dining and nursing staff on hand around the clock. (concept)"
+        },
+        {
+          "name": "Fitness for every age",
+          "text": "Classes built for strength, balance and flexibility, in a fitness room close to home. (concept)"
+        },
+        {
+          "name": "Dining",
+          "text": "More than one place to eat, with menus made from local food and choices for different diets. (concept)"
+        },
+        {
+          "name": "Activities and classes",
+          "text": "Art, music, reading groups and outings, in every home and at the clubhouses, to keep body and mind active. (concept)"
+        },
+        {
+          "name": "Pet-friendly homes",
+          "text": "Room for a dog or cat, with places nearby for a walk. Pets are good company and good for health. (concept)"
         }
       ],
       "status": "open",

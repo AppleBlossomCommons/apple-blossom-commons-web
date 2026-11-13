@@ -31,6 +31,35 @@ const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
       fill: "#FFE6CC",
     },
   },
+  // Heritage Grove (docs/14-plan-vision-content.md, 8.3, slots H1–H10). Licensed stock (people OK,
+  // with model releases) for the four levels of care; AI, no people, for the spaces.
+  heritage: {
+    "Independent living": { label: "Licensed stock with people: active senior couple on a cottage porch", fill: "#FFF2B3" },
+    "Assisted living": { label: "Licensed stock with people: caregiver and senior woman smiling in a living room", fill: "#FFE1ED" },
+    "Memory care": { label: "Licensed stock with people: senior woman and caregiver reading together", fill: "#ECE7FC" },
+    "Nursing care": { label: "Licensed stock with people: nurse with a senior woman in a garden; nothing like a hospital ward", fill: "#EAF6CF" },
+    "Garden courtyards": {
+      label: "AI image, no people: sheltered garden courtyard, looping level path, benches in the sun, small fountain, herb beds",
+      fill: "#EAF6CF",
+    },
+    "Shared clubhouses": {
+      label: "AI image, no people: clubhouse library and lounge, bookshelves, stone fireplace, armchairs, card table",
+      fill: "#FFE6CC",
+    },
+    "Fitness for every age": {
+      label: "AI image, no people: bright senior fitness studio, light weights, balance bars, mats, big windows",
+      fill: "#EAF6FD",
+    },
+    Dining: { label: "AI image, no people: warm bistro dining room set for lunch, linen napkins, bowl of local apples", fill: "#FFF2B3" },
+    "Activities and classes": {
+      label: "AI image, no people: art studio with easels and half-finished watercolor landscapes, tall windows",
+      fill: "#FFE1ED",
+    },
+    "Pet-friendly homes": {
+      label: "AI image, no people or animals: small fenced dog run in a courtyard, bench with a leash and a ball",
+      fill: "#ECE7FC",
+    },
+  },
 };
 
 export function getPlaceImage(district: DistrictKey, placeName: string): PlaceImage | undefined {

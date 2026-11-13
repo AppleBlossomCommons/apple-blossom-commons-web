@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 import { DistrictPageLink } from "@/components/plan/PlanPlaceSections";
 import { FaqItem } from "@/components/site/FaqItem";
-import { PlaceCard } from "@/components/site/Places";
+import { ConceptNote, PlaceCard } from "@/components/site/Places";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
-import type { Place } from "@/lib/districts";
-import { visionImages } from "@/lib/place-images";
+import { getDistrictByKey, type Place } from "@/lib/districts";
+import { getPlaceImage, visionImages } from "@/lib/place-images";
 
 // Copy from docs/14-plan-vision-content.md (The Plan: the whole vision). General explainer copy
 // lives here, like the other Plan sections; district places come from data/districts.json.
@@ -219,6 +219,46 @@ export function LifePlan() {
       <div className="mt-10 flex flex-col gap-x-10 gap-y-2 sm:mt-14 sm:flex-row sm:flex-wrap">
         <DistrictPageLink districtKey="orchardgrove">Explore Orchard Grove</DistrictPageLink>
         <DistrictPageLink districtKey="heritage">Explore Heritage Grove</DistrictPageLink>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * "Heritage Grove: support, when it's needed" (#heritage-grove, docs/14 section 5). Names and text
+ * come from `places` on the heritage entry of data/districts.json: the first four are the levels of
+ * care (2 × 2), the rest are everyday life (3 × 2).
+ */
+export function HeritageGrove() {
+  const heritage = getDistrictByKey("heritage");
+  const care = heritage.places.slice(0, 4);
+  const everyday = heritage.places.slice(4);
+  return (
+    <section id="heritage-grove" aria-labelledby="heritage-title" className={sectionPad}>
+      <div className="mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-5">
+        <Reveal as="h2" kind="head" id="heritage-title" className={headingClass}>
+          Heritage Grove: support, when it&apos;s needed
+        </Reveal>
+        <Reveal as="p" kind="fade" className={introClass}>
+          Heritage Grove is planned for people who prefer or need support. Each group of homes is planned around a protected garden courtyard,
+          with clubhouses for meals, fitness, reading and visits from family.
+        </Reveal>
+      </div>
+      <h3 className="sr-only">Levels of care</h3>
+      <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">
+        {care.map((place, i) => (
+          <PlaceCard key={place.name} place={place} image={getPlaceImage("heritage", place.name)} index={i % 2} />
+        ))}
+      </ul>
+      <h3 className="sr-only">Everyday life</h3>
+      <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+        {everyday.map((place, i) => (
+          <PlaceCard key={place.name} place={place} image={getPlaceImage("heritage", place.name)} index={i % 3} />
+        ))}
+      </ul>
+      <div className="mt-10 flex flex-col gap-6 sm:mt-14">
+        <DistrictPageLink districtKey="heritage">Explore Heritage Grove</DistrictPageLink>
+        <ConceptNote />
       </div>
     </section>
   );
