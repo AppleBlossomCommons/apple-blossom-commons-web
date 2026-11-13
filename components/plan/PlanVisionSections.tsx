@@ -244,14 +244,12 @@ export function HeritageGrove() {
           with clubhouses for meals, fitness, reading and visits from family.
         </Reveal>
       </div>
-      <h3 className="sr-only">Levels of care</h3>
-      <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">
+      <ul aria-label="Levels of care" className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">
         {care.map((place, i) => (
           <PlaceCard key={place.name} place={place} image={getPlaceImage("heritage", place.name)} index={i % 2} />
         ))}
       </ul>
-      <h3 className="sr-only">Everyday life</h3>
-      <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+      <ul aria-label="Everyday life" className="mt-14 grid grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
         {everyday.map((place, i) => (
           <PlaceCard key={place.name} place={place} image={getPlaceImage("heritage", place.name)} index={i % 3} />
         ))}

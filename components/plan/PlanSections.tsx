@@ -96,39 +96,64 @@ export function FitsTogether() {
   );
 }
 
-/** "Care, close by" (#care-close-by; was Connected Community). Names the hospital campus only. */
+// "Technology that supports people" (docs/14 section 6). Every item is a concept, shown muted.
+const technology: RuleItem[] = [
+  { title: "Virtual visits.", text: "Seeing a specialist by video from home, without a long drive. (concept)" },
+  {
+    title: "A home that notices.",
+    text: "Sensors that can notice a fall or a change in routine and alert a caregiver or family member. (concept)",
+  },
+  {
+    title: "Robots for routine tasks.",
+    text: "Robots that carry meals, linens and supplies, so staff can spend that time with residents. (concept)",
+  },
+  { title: "Shuttles on car-free lanes.", text: "Slow, self-driving shuttles linking homes, clinics and the village. (concept)" },
+  {
+    title: "A helpful assistant.",
+    text: "A simple AI assistant for reminders, appointments and questions, for residents who want one. (concept)",
+  },
+  {
+    title: "Homes that help.",
+    text: "Lighting that guides the way at night, voice controls, and doors and appliances that are easy to use. (concept)",
+  },
+];
+
+/**
+ * "Care, close by" (#care-close-by; was Connected Community): the courtyard image beside the care
+ * text, then "Technology that supports people" across the full width. Names the hospital campus only.
+ */
 export function CareCloseBy() {
   return (
-    <section
-      id="care-close-by"
-      aria-labelledby="care-title"
-      className="grid gap-4 bg-sand p-2 pb-0 sm:p-4 min-[900px]:grid-cols-2"
-    >
-      <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[680px]">
-        <PlaceholderImage fill="#ECE7FC" className="absolute inset-0" />
-        <PlaceholderLabel>
-          AI image, no people: sheltered garden courtyard between single-storey homes with porches, a looping level path, benches in the
-          sun, a small fountain
-        </PlaceholderLabel>
-      </Reveal>
-      <div className="flex flex-col justify-center gap-3.5 px-3 pb-12 pt-8 sm:gap-5 sm:px-14 sm:py-16">
-        <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
-          Care, close by
+    <section id="care-close-by" aria-labelledby="care-title" className="bg-sand p-2 sm:p-4">
+      <div className="grid gap-4 min-[900px]:grid-cols-2">
+        <Reveal kind="card" className="relative h-[300px] overflow-hidden rounded-card min-[900px]:h-auto min-[900px]:min-h-[560px]">
+          <PlaceholderImage fill="#ECE7FC" className="absolute inset-0" />
+          <PlaceholderLabel>
+            AI image, no people: sheltered garden courtyard between single-storey homes with porches, a looping level path, benches in the
+            sun, a small fountain
+          </PlaceholderLabel>
         </Reveal>
-        <Reveal as="p" kind="fade" className="max-w-[560px] sm:text-xl">
-          The senior neighborhoods, Orchard Grove and Heritage Grove, are planned within a short walk of the hospital campus. The Wellness District
-          nearby is planned for clinics, therapy and medical-assisted living.
-        </Reveal>
-        <p className="max-w-[560px]">
-          <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. Shared clubhouses are planned for the things that make a day good: a fitness room, a library, a place to have a meal or host family overnight. (concept)" />
-        </p>
-        <div aria-hidden="true" className="my-2.5 h-px bg-line sm:my-4" />
+        <div className="flex flex-col justify-center gap-3.5 px-3 pb-4 pt-8 sm:gap-5 sm:px-14 sm:py-16">
+          <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+            Care, close by
+          </Reveal>
+          <Reveal as="p" kind="fade" className="max-w-[560px] sm:text-xl">
+            The senior neighborhoods, Orchard Grove and Heritage Grove, are planned within a short walk of the hospital campus. The Wellness
+            District nearby is planned for clinics, therapy and medical-assisted living.
+          </Reveal>
+          <p className="max-w-[560px]">
+            <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. Shared clubhouses are planned for the things that make a day good: a fitness room, a library, a place to have a meal or host family overnight. (concept)" />
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 px-3 pb-12 pt-10 sm:gap-5 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-20">
         <h3 className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">Technology that supports people</h3>
-        <p className="max-w-[560px]">
-          We&apos;re exploring ideas like virtual visits with specialists, home sensors that can alert a caregiver, and walking paths designed for
-          everyday health. These are ideas for supporting independence and caregivers. They will never replace the people who give care, and
-          residents will decide how their own information is used.
+        <p className="mb-4 max-w-[760px] text-xl leading-normal sm:mb-8 sm:text-[23px]">
+          Technology is planned to take on the routine work, so the people who give care have more time for the people they care for. It will
+          never replace them.
         </p>
+        <RuleList items={technology} layout="three" titleAs="h4" />
+        <p className="mt-6 max-w-[760px] sm:mt-10 sm:text-xl">Residents will decide how their own information is used.</p>
         <Link
           href="/research"
           className="inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth"
