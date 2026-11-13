@@ -14,9 +14,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * The Plan (docs/10-content-v2.md, "The Plan (/plan)", and docs/11-plan-and-districts-content.md,
- * section 1): hero, intro, the 3D model with its side card and list, How it fits together, walking,
- * the village, Care, close by, parks and trails, What guides the plan and Why Chelan.
+ * The Plan, in the order from docs/14-plan-vision-content.md, section 1 (which wins over docs/10
+ * and docs/11 for this page): hero, intro, A different kind of retirement, the 3D model, How it fits
+ * together, What is a Life Plan Community?, Heritage Grove, Care, close by, the village, walking,
+ * parks and trails, What guides the plan and Why Chelan.
  */
 export default function PlanPage() {
   return (
@@ -28,9 +29,9 @@ export default function PlanPage() {
       <FitsTogether />
       <LifePlan />
       <HeritageGrove />
-      <Walking />
-      <Village />
       <CareCloseBy />
+      <Village />
+      <Walking />
       <Outdoors />
       <GuidingIdeas />
       <WhyChelan />
