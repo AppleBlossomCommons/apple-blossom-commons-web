@@ -1,8 +1,9 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 import { CONCEPT_NOTE, splitConcept, type Place } from "@/lib/districts";
-import type { PlaceImage } from "@/lib/place-images";
+import { PLAN_IMAGE_DIR, type PlaceImage } from "@/lib/place-images";
 
 /** A place's text. A trailing "(concept)" is shown as a muted word instead of in brackets (docs/11, 2.1). */
 export function ConceptText({ text }: { text: string }) {
@@ -26,7 +27,8 @@ export function ConceptNote({ className = "" }: { className?: string }) {
 }
 
 /**
- * One named place: an optional image area, then the name and a line or two of text, then any
+ * One named place: an optional image (the photo once its slot is `ready`, otherwise the labeled
+ * placeholder; see lib/place-images.ts), then the name and a line or two of text, then any
  * children (such as a link). Rendered as a list item, so wrap a group of them in a <ul>.
  */
 export function PlaceCard({
@@ -34,20 +36,33 @@ export function PlaceCard({
   image,
   index = 0,
   className = "",
+  sizes = "(min-width: 760px) 50vw, 100vw",
   children,
 }: {
   place: Place;
   image?: PlaceImage;
   index?: number;
   className?: string;
+  /** The image's display width, for next/image. */
+  sizes?: string;
   children?: ReactNode;
 }) {
   return (
     <Reveal as="li" kind="card" index={index} className={`flex flex-col gap-2 ${image ? "" : "border-t border-line pt-5"} ${className}`}>
       {image && (
-        <div className="relative mb-3 aspect-[3/2] overflow-hidden rounded-card">
-          <PlaceholderImage fill={image.fill} className="absolute inset-0" />
-          <PlaceholderLabel inset={14}>{image.label}</PlaceholderLabel>
+        <div className="relative mb-3 aspect-[3/2] overflow-hidden rounded-card" style={{ background: image.fill }}>
+          {image.ready && image.file ? (
+            <>
+              <Image src={`${PLAN_IMAGE_DIR}/${image.file}`} alt={image.alt ?? ""} fill sizes={sizes} className="object-cover" />
+              {/* AI images carry this small label (docs/14, section 8). The alt text already says it. */}
+              {image.source === "ai" && <PlaceholderLabel inset={14}>Illustrative concept</PlaceholderLabel>}
+            </>
+          ) : (
+            <>
+              <PlaceholderImage fill={image.fill} className="absolute inset-0" />
+              <PlaceholderLabel inset={14}>{image.label}</PlaceholderLabel>
+            </>
+          )}
         </div>
       )}
       <h3 className="text-[23px] leading-[1.1] tracking-[-0.015em] sm:text-[26px]">{place.name}</h3>

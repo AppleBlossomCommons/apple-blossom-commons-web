@@ -49,3 +49,28 @@ From `11-plan-and-districts-content.md`, section 5.
 - **"Affordable senior housing"** in Orchard Grove: is it meant as income-restricted housing? Until answered, it's "a range of senior townhomes".
 - **Masterplan renderings:** ask the architect for full-size originals, whether each is AI-generated or a licensed photo, and permission for web use. Until then the site uses labeled placeholders.
 - **Self-driving carts:** "Lanes without cars" on The Plan describes "low-speed shuttles or carts" as a concept. It's built; owner to confirm it should be public before launch.
+
+## No orchards in the plan (Nov 13, 2026)
+
+Per Andy: Apple Blossom Commons will not include orchards. All public copy, image notes, alt text and tour labels that mentioned orchards were rewritten (hero subline, About, Plan, Participate FAQ, home collage and doorway cards, tour 12). The About "Our story" section now opens "It started with a view" instead of describing the land's past orchard use.
+
+## Added by the Plan vision content pack (Nov 13, 2026)
+
+From `14-plan-vision-content.md`, section 11.
+
+- **Life Plan Community:** confirm with Andy that Orchard Grove and Heritage Grove together are "the Life Plan Community", and whether the Wellness District's medical-assisted living is part of it.
+- **Contract model** (entrance fee, rental, other): not decided. The FAQ stays "too early to say".
+- **"Affordable senior housing"** on the masterplan: what it means (carried from `docs/11`). The Plan says "Homes at more than one price" until answered.
+- **Self-driving shuttles, robots and an AI assistant:** shown on The Plan as concepts. Revisit once the Connected Community work has an operating partner.
+
+Raised while building it:
+
+- **"Meals worth sharing"** drops "and orchards" from the pack's "food from the valley's own farms and orchards", to follow the no-orchards decision above. Owner to confirm, or restore it if the valley's orchards are fine to mention.
+- **Two FAQ wordings:** The Plan asks "Is it only for people 55 and older? Will there be entrance fees?" and its care answer includes nursing care, as in `docs/14`. The Participate FAQ still says "Is senior living 55+?" and leaves out nursing care. Pick one wording for both pages.
+- **Image alt text:** `docs/14` gives alt text only for the five village images. The pillar and Heritage Grove alt texts in `lib/place-images.ts` are drafts; rewrite each one to match the chosen picture, especially the stock photos.
+- **Image credits:** licensed stock needs its source and license recorded (`docs/14`, 8.3). There is no image-credits list yet.
+- **Village images show people (Nov 13, 2026):** the five village pictures in `public/images/plan/` are AI renderings with a few people in them, against the `docs/14` §8 no-people rule for AI images. The owner chose to publish them for now; Andy still needs to approve, or they get regenerated without people. They were also 1264 × 848 and were upscaled to 1600 × 1067, so a larger export would look sharper. Vintner's Walk has faint lettering on a shop window.
+- **Pet-friendly homes photo:** `heritage-pets.webp` is a stock photo (older couple with two dogs), not the AI image `docs/14` planned. Its source and license are not recorded yet. Originals of all six pictures are in `reference/plan-image-originals/`.
+- **More Plan images with people (Nov 13, 2026):** `vision-home` and `vision-care` are AI images with people, published under the same owner decision as the village images. `vision-care` was planned as licensed stock; it is AI, so it carries the "Illustrative concept" label. Both were upscaled from 1264 × 848 to 2400 × 1600.
+- **Fitness photo:** `heritage-fitness.webp` is a stock photo (older couple boxing), not the AI studio image `docs/14` planned. Its source and license are not recorded yet.
+- **Technology pillar image held:** `vision-technology.webp` shows a robot with a face keeping a resident company and a self-driving shuttle outside. `docs/14` §10 leaves out "robots with faces", and CLAUDE.md says technology never replaces human care. The owner chose to publish it (Nov 13, 2026); Andy still to approve.

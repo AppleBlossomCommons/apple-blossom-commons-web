@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/motion/Reveal";
+import { FaqItem } from "@/components/site/FaqItem";
 
 // FAQs from docs/10-content-v2.md ("FAQs"), with two changes, both flagged to the owner:
 // - "Is the City a partner?" is left out: CLAUDE.md says never to name or address the City on
@@ -42,8 +43,8 @@ const groups: { title: string; items: { q: string; a: string }[] }[] = [
       },
       { q: "Will the parks and trails be open to the public?", a: "It's too early to say. We'll share plans as the parks are designed." },
       {
-        q: "What happens to the orchards and the views?",
-        a: "Protecting open space and scenic views is a core part of the plan, including a large orchard preserve.",
+        q: "What happens to the open space and the views?",
+        a: "Protecting open space and scenic views is a core part of the plan. A large share of the land is planned to stay open, with trails and a scenic overlook.",
       },
       {
         q: "How will wildfire and evacuation be handled?",
@@ -82,8 +83,7 @@ const groups: { title: string; items: { q: string; a: string }[] }[] = [
 ];
 
 /**
- * FAQs (#faqs): native <details> disclosures, so they work with the keyboard and without
- * JavaScript. The + turns into × when open (200ms; instant with reduced motion). The first is open.
+ * FAQs (#faqs): FaqItem disclosures in four groups. The first is open.
  */
 export function Faqs() {
   return (
@@ -100,18 +100,9 @@ export function Faqs() {
           <div key={group.title}>
             <h3 className="mb-1 text-[23px] tracking-[-0.015em] sm:mb-2 sm:text-[28px]">{group.title}</h3>
             {group.items.map((item, i) => (
-              <details key={item.q} open={g === 0 && i === 0} className="group border-b border-line">
-                <summary className="flex min-h-[60px] cursor-pointer list-none items-center gap-3.5 py-3 text-lg font-bold leading-[1.35] sm:min-h-[68px] sm:gap-5 sm:text-xl [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <span
-                    aria-hidden="true"
-                    className="ml-auto flex size-9 shrink-0 items-center justify-center rounded-full bg-linen text-2xl font-normal transition-transform duration-200 ease-out group-open:rotate-45 motion-reduce:transition-none"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="max-w-[820px] pb-5 sm:pb-6 sm:pr-16">{item.a}</p>
-              </details>
+              <FaqItem key={item.q} question={item.q} open={g === 0 && i === 0}>
+                {item.a}
+              </FaqItem>
             ))}
           </div>
         ))}

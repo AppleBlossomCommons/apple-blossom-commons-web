@@ -17,7 +17,7 @@ const linkClass =
   "inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
 
 /** A link to a district page that opens it with the circle transition. */
-function DistrictPageLink({ districtKey, children }: { districtKey: DistrictKey; children: ReactNode }) {
+export function DistrictPageLink({ districtKey, children }: { districtKey: DistrictKey; children: ReactNode }) {
   const d = getDistrictByKey(districtKey);
   return (
     <DistrictLink district={{ slug: d.slug, color: d.color }} className={linkClass}>
@@ -92,6 +92,7 @@ export function Village() {
             image={getPlaceImage("wine", place.name)}
             index={i < 2 ? i : i - 2}
             className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}
+            sizes={i < 2 ? "(min-width: 640px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
           />
         ))}
       </ul>
@@ -123,7 +124,7 @@ export function Outdoors() {
           Parks, trails and open space
         </Reveal>
         <Reveal as="p" kind="fade" className={introClass}>
-          A large share of the land is planned to stay open: orchards, trails, play areas and a lookout at the top of the site.
+          A large share of the land is planned to stay open: open hillside, trails, play areas and a lookout at the top of the site.
         </Reveal>
       </div>
       <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">

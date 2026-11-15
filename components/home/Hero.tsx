@@ -9,7 +9,7 @@ import heroStill from "@/public/images/home/hero-still.jpg";
 
 // Copy from docs/10-content-v2.md, Home section 1.
 const HEADLINE = "A community planned to grow with Chelan, over decades.";
-const SUBLINE = "Homes for every stage of life, a short walk from the hospital campus, orchards and a small wine village.";
+const SUBLINE = "Homes for every stage of life, a short walk from the hospital campus, open space and a small wine village.";
 
 /**
  * Home hero: an inset card with Andy's drone clip of the site (scripts/home-video), white text on
