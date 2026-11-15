@@ -21,6 +21,8 @@ Each needs a data-currency check before publishing: flag data more than three ye
 4. **Connected Community vision:** the healthcare and technology story (guardrails below).
 5. **Comparable communities:** precedent case studies, presented as precedent, not promise. An honest finding to keep: no precedent combines Orchard Grove's full mix on one campus.
 
+*Nov 15, 2026 (`docs/15-research-library-content.md`):* the Research Library is built and reads every report from one file, `data/research.json` (one entry per report, so a report is still added without code changes). Each report's sources live in that entry and show on its page, rather than in `data/sources.json`. Reports 3–6 are drafts, shown on preview deployments only. **Before any is published**, the owner and Andy should update this section: the four reports don't map one-to-one onto the five summaries above, and Report 6 shares figures from the Consumption & Spend study (Hold) and the Tenant Feasibility Study (Gated); see `docs/15`, section 10, item 1.
+
 Also public, for `/chelan`: BERK Chelan County Tourism Impact Study (Feb 2026), $675.5M visitor spending and 2.6M overnight visitors in 2024. Cite the study.
 
 ## District facts

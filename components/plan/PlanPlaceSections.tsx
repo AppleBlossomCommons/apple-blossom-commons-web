@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
+import { ResearchLink } from "@/components/research/ResearchLink";
 import { WalkRings } from "@/components/plan/WalkRings";
 import { ConceptNote, PlaceCard } from "@/components/site/Places";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
@@ -97,7 +98,10 @@ export function Village() {
         ))}
       </ul>
       <div className="mt-10 flex flex-col gap-6 sm:mt-14">
-        <DistrictPageLink districtKey="wine">Explore Chelan Wine Village</DistrictPageLink>
+        <div className="flex flex-col gap-x-10 gap-y-2 sm:flex-row sm:flex-wrap">
+          <DistrictPageLink districtKey="wine">Explore Chelan Wine Village</DistrictPageLink>
+          <ResearchLink slug="village-economy">Read the research: The Village Economy</ResearchLink>
+        </div>
         <ConceptNote />
       </div>
     </section>
