@@ -35,42 +35,49 @@ export type PlaceImage = {
 export const PLAN_IMAGE_DIR = "/images/plan";
 
 const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
-  // The village at the center (docs/14, 8.1). Alt texts from the pack.
+  // The village at the center (docs/14, 8.1). Alt texts from the pack, rewritten to match the pictures.
+  // These five AI images show a few people, against the docs/14 no-people rule. The owner chose to
+  // publish them for now (Nov 13, 2026); see docs/09-open-items.md. Upscaled from 1264 × 848.
   wine: {
     "Harvest Square": {
-      label: "AI image, no people: small plaza at golden hour, low round fountain, fire pits with empty chairs, timber-and-stone pavilions",
+      label: "AI image: small plaza at golden hour, low round fountain, fire pits, timber-and-stone pavilions",
       fill: "#FFF2B3",
       file: "village-harvest-square.webp",
       source: "ai",
-      alt: "Illustrative concept of Harvest Square: a quiet stone plaza with a round fountain and fire pits, framed by low timber pavilions and golden hills.",
+      alt: "Illustrative concept of Harvest Square: a stone plaza with a round fountain and fire pits, where a couple sits by the fire and a woman walks past, framed by low timber pavilions and golden hills.",
+      ready: true,
     },
     "Vintner's Walk": {
-      label: "AI image, no people: quiet lane between low timber-and-stone storefronts, string lights, empty café chairs, early morning",
+      label: "AI image: quiet lane between low timber-and-stone storefronts, string lights, café tables, early morning",
       fill: "#FFE1ED",
       file: "village-vintners-walk.webp",
       source: "ai",
-      alt: "Illustrative concept of Vintner's Walk: a quiet lane of timber and stone shopfronts with café tables, planters and string lights.",
+      alt: "Illustrative concept of Vintner's Walk: an older couple with coffee cups strolls a quiet lane of timber and stone shopfronts with café tables, planters and string lights.",
+      ready: true,
     },
     "The Tasting Courtyard": {
-      label: "AI image, no people: small courtyard of tasting-room doors, long table with empty wine glasses, vines overhead",
+      label: "AI image: small courtyard of tasting rooms, long table, vines overhead",
       fill: "#ECE7FC",
       file: "village-tasting-courtyard.webp",
       source: "ai",
-      alt: "Illustrative concept of the Tasting Courtyard: a ring of small tasting rooms around a long table under a vine-covered pergola.",
+      alt: "Illustrative concept of the Tasting Courtyard: small tasting rooms around a long table under a vine-covered pergola, where a host pours wine for two guests, with the lake in the distance.",
+      ready: true,
     },
     "Market Hall": {
-      label: "AI image, no people: open-sided timber market hall, doors rolled up, produce crates and flowers, late-afternoon light",
+      label: "AI image: open-sided timber market hall, doors rolled up, produce crates and flowers, late-afternoon light",
       fill: "#EAF6CF",
       file: "village-market-hall.webp",
       source: "ai",
-      alt: "Illustrative concept of Market Hall: an open timber hall with tables of fruit, vegetables and flowers, doors rolled up to a terrace.",
+      alt: "Illustrative concept of Market Hall: an open timber hall with tables of fruit, vegetables, bread and flowers, where a vendor helps a shopper, doors rolled up to a terrace.",
+      ready: true,
     },
     "The Barrel House": {
-      label: "AI image, no people: warm timber hall with stacked oak barrels, glass doors open to a terrace with fire pits",
+      label: "AI image: warm timber hall with stacked oak barrels, glass doors open to a terrace with fire pits",
       fill: "#FFE6CC",
       file: "village-barrel-house.webp",
       source: "ai",
-      alt: "Illustrative concept of the Barrel House: a tall timber winery hall with oak barrels inside and a terrace with fire pits.",
+      alt: "Illustrative concept of the Barrel House: a tall timber winery hall at dusk with oak barrels and steel tanks inside, and a couple seated by a fire pit on the terrace.",
+      ready: true,
     },
   },
   // Heritage Grove (docs/14, 8.3, slots H1–H10). The pack gives no alt text here, so these are drafts:
@@ -119,11 +126,13 @@ const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
       alt: "Illustrative concept of a clubhouse lounge: bookshelves, a stone fireplace, armchairs and a card table by a window to the hills.",
     },
     "Fitness for every age": {
-      label: "AI image, no people: bright senior fitness studio, light weights, balance bars, mats, big windows",
+      // Stock photo. Source and license still to record (docs/14, 8.3).
+      label: "Licensed stock with people: older couple boxing with gloves and pads in a gym",
       fill: "#EAF6FD",
       file: "heritage-fitness.webp",
-      source: "ai",
-      alt: "Illustrative concept of a fitness studio with light weights, balance bars, mats and large windows to green trees.",
+      source: "stock",
+      alt: "An older woman in boxing gloves smiles as she spars with an older man holding training pads in a brick-walled gym.",
+      ready: true,
     },
     Dining: {
       label: "AI image, no people: warm bistro dining room set for lunch, linen napkins, bowl of local apples",
@@ -140,11 +149,13 @@ const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
       alt: "Illustrative concept of an art studio with easels holding watercolor landscapes, lit by tall windows.",
     },
     "Pet-friendly homes": {
-      label: "AI image, no people or animals: small fenced dog run in a courtyard, bench with a leash and a ball",
+      // Stock photo, cropped from a 4000 × 6000 portrait. Source and license still to record (docs/14, 8.3).
+      label: "Licensed stock with people: older couple on a porch with two dogs",
       fill: "#ECE7FC",
       file: "heritage-pets.webp",
-      source: "ai",
-      alt: "Illustrative concept of a small fenced dog run in a garden courtyard, with a leash and a ball resting on a bench.",
+      source: "stock",
+      alt: "An older couple sitting on a porch with their two black dogs.",
+      ready: true,
     },
   },
 };
@@ -153,27 +164,35 @@ export function getPlaceImage(district: DistrictKey, placeName: string): PlaceIm
   return placeImages[district]?.[placeName];
 }
 
-/** The Plan's "A different kind of retirement" pillars (docs/14, 8.2, slots V1–V3). Alt texts are drafts. */
+/**
+ * The Plan's "A different kind of retirement" pillars (docs/14, 8.2, slots V1–V3). All three arrived
+ * as AI images with people (owner decision to publish, Nov 13, 2026; see docs/09-open-items.md),
+ * upscaled from 1264 × 848.
+ */
 export const visionImages = {
   home: {
-    label: "AI image, no people: single-storey cottage with a deep porch, two rocking chairs, a level path to the door, morning light",
+    label: "AI image: single-storey cottage with a covered porch, an older couple at a small table, golden hills",
     fill: "#FFE6CC",
     file: "vision-home.webp",
     source: "ai",
-    alt: "Illustrative concept of a single-storey cottage with a deep porch, two rocking chairs and a level path to the door.",
+    alt: "Illustrative concept of a single-storey cottage: an older couple laughs over coffee at a small table on the covered porch, with lavender and golden hills beyond.",
+    ready: true,
   },
   care: {
-    label: "Licensed stock with people: senior couple walking a sunny garden path; no hospital or clinical scenes",
+    label: "AI image: older couple walking a level path toward a timber-and-stone building, benches, pines",
     fill: "#EAF6CF",
     file: "vision-care.webp",
-    source: "stock",
-    alt: "An older couple walking together on a sunny garden path.",
+    source: "ai",
+    alt: "Illustrative concept of an older couple walking hand in hand along a level gravel path past benches toward a low timber-and-stone building, with pines and golden hills.",
+    ready: true,
   },
   technology: {
-    label: "AI image, no people: bright cottage living room, small tablet on a side table, soft hallway night lighting, view to golden hills",
+    // Shows a robot with a face, which docs/14 §10 left out; the owner chose to publish it (Nov 13, 2026).
+    label: "AI image: bright cottage living room, a resident with tea beside a care robot, a small shuttle outside",
     fill: "#EAF6FD",
     file: "vision-technology.webp",
     source: "ai",
-    alt: "Illustrative concept of a bright cottage living room with a small tablet on a side table and an armchair by a window to golden hills.",
+    alt: "Illustrative concept of a bright cottage living room: an older woman with a cup of tea smiles at a helper robot, while a small shuttle waits outside the window.",
+    ready: true,
   },
 } satisfies Record<string, PlaceImage>;
