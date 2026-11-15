@@ -9,7 +9,9 @@
 //   3. makes two cover images from page 1: the whole page (cover.thumb, 600 px wide) and
 //      the photo band below the linen text block (cover.photo, 1600 px wide), both sRGB JPEG;
 //   4. reports file sizes, flagging anything over 10 MB (never compresses);
-//   5. checks whether page 1 still says "Draft for review"; if it does, the report stays a draft.
+//   5. checks whether page 1 still says "Draft for review" and warns if a published report's cover
+//      does. It never changes `status`: the owner published Reports 3–6 with their v1 PDFs on
+//      Nov 15, 2026, so publishing is the owner's call in data/research.json, not the script's.
 //
 // Files are matched to reports by the number after "Report" in the file name ("Report3",
 // "Report_4", "report 5"), so later versions (v2, final) still match.
@@ -73,9 +75,8 @@ for (const file of files.sort()) {
   // 5. Draft label on the cover.
   const text = (await page.getTextContent()).items.map((i) => i.str).join(" ");
   const saysDraft = /draft\s+for\s+review/i.test(text);
-  if (saysDraft && report.status !== "draft") {
-    notes.push(`status ${report.status} → draft (the cover still says "Draft for review")`);
-    report.status = "draft";
+  if (saysDraft && report.status === "published") {
+    notes.push(`published, but the cover still says "Draft for review"`);
   }
 
   // 3. Cover images.
@@ -112,8 +113,8 @@ for (const file of files.sort()) {
       `    → ${report.pdf.href} (${mb(size)}, ${doc.numPages} pages)${big}\n` +
       `    → ${report.cover.thumb}\n` +
       (bandTop === null ? "" : `    → ${report.cover.photo} (photo band from ${Math.round((bandTop / info.height) * 100)}% down the cover)\n`) +
-      `    cover says "Draft for review": ${saysDraft ? "yes, stays a draft" : "no"}` +
-      (notes.length ? `\n    updated: ${notes.join("; ")}` : ""),
+      `    cover says "Draft for review": ${saysDraft ? "yes" : "no"} · status: ${report.status}` +
+      (notes.length ? `\n    notes: ${notes.join("; ")}` : ""),
   );
   await doc.cleanup?.();
   await doc.loadingTask?.destroy?.();
