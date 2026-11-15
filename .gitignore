@@ -61,3 +61,6 @@ next-env.d.ts
 
 # prepared Home hero clip (scripts/home-video; served locally in development, uploaded to Vercel Blob, never committed)
 /public/local-video/
+
+# owner-supplied originals (Research Library PDFs etc.); copied into public/ by scripts, never committed
+/incoming/
