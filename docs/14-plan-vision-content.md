@@ -67,7 +67,7 @@ Keep the text from `docs/10-content-v2.md` and add this sentence at the start:
   4. **Nursing care.** Around-the-clock care for people who need it.
 - **Caption under the steps:** Most people move in at the first step. The others are there if they're ever needed.
 
-### 4.3 Why people choose it [benefit grid of ten: 5 × 2 on wide screens, 2 columns on tablets, 1 on phones. Title + one or two lines. No images; small line icons are fine if they already exist in the icon set.]
+### 4.3 Why people choose it [cluster of ten (owner decision, Nov 13, 2026; replaces the 5 × 2 grid): the subheading sits in a center panel, the ten titles sit around it as same-size chips, and choosing one shows its text in the panel, with Previous / Next and a "See all ten as a list" toggle. On the ring the items run clockwise in related groups: aging in place and care at the top; maintenance, price and costs on the right; family and pets at the bottom; neighbors, meals and an engaged life on the left. Below 1100px the panel comes first and the chips wrap underneath. Built in `components/plan/BenefitCluster.tsx`.]
 
 - **Subheading:** Why people choose a Life Plan Community
 - **Items:**
