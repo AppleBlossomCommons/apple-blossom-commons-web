@@ -34,6 +34,13 @@
   /* Large text accents and form errors only, never body text. */
   --rose: #b85c66;
   /*
+   * Research Library charts (docs/15, section 6): lake-deep marks what a chart highlights, this warm
+   * neutral marks the rest, matching the report PDFs. It is only 1.5:1 on linen, so every chart writes
+   * its values beside the marks and has a "Show the numbers" table; small marks get chart-neutral-edge.
+   */
+  --chart-neutral: #dccfbe;
+  --chart-neutral-edge: #a8957f;
+  /*
    * Soft tints: the pale sky, pink, lime and butter of the home page cards, for large surfaces
    * (cards, chips). Hearth and muted text both pass 4.5:1 on all four.
    */
@@ -63,6 +70,8 @@
   --color-lake-deep: var(--lake-deep);
   --color-sage-deep: var(--sage-deep);
   --color-rose: var(--rose);
+  --color-chart-neutral: var(--chart-neutral);
+  --color-chart-neutral-edge: var(--chart-neutral-edge);
   --color-map-frame: var(--map-frame);
   --color-tint-sky: var(--tint-sky);
   --color-tint-pink: var(--tint-pink);

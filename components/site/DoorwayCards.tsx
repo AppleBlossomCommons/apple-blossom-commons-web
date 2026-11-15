@@ -76,7 +76,7 @@ type Props = {
   id?: string;
   doorways?: Doorway[];
   /** A visible heading and intro above the cards (About Us, "Come say hello"). Without one, the heading is for screen readers only. */
-  heading?: { id: string; title: string; text: string };
+  heading?: { id: string; title: string; text?: string };
 };
 
 /**
@@ -94,9 +94,11 @@ export function DoorwayCards({ id, doorways = homeDoorways, heading }: Props) {
           <Reveal as="h2" kind="head" id={titleId} className="text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]">
             {heading.title}
           </Reveal>
-          <Reveal as="p" kind="fade" className="sm:text-xl">
-            {heading.text}
-          </Reveal>
+          {heading.text && (
+            <Reveal as="p" kind="fade" className="sm:text-xl">
+              {heading.text}
+            </Reveal>
+          )}
         </div>
       ) : (
         <h2 id={titleId} className="sr-only">
