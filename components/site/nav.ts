@@ -8,6 +8,9 @@ export const mainNav = [
   { href: "/tour", label: "Site Tour" },
   { href: "/participate", label: "How Can I Participate?" },
   { href: "/about", label: "About Us" },
+  // Research Library: footer only for now (docs/15, section 2). Revisit when the library has six or
+  // more reports and the Key Findings overview; then uncomment (or swap with Site Tour on smaller screens).
+  // { href: "/research", label: "Research" },
 ] as const;
 
 export const partnerLink = { href: "/partners", label: "Partner with Us" } as const;

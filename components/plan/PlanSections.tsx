@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
+import { ResearchLink } from "@/components/research/ResearchLink";
 import { PlaceholderImage, PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 import { JumpLink } from "@/components/site/JumpLink";
 import { ConceptText } from "@/components/site/Places";
@@ -154,12 +154,7 @@ export function CareCloseBy() {
         </p>
         <RuleList items={technology} layout="three" titleAs="h4" />
         <p className="mt-6 max-w-[760px] sm:mt-10 sm:text-xl">Residents will decide how their own information is used.</p>
-        <Link
-          href="/research"
-          className="inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth"
-        >
-          Read the full vision&nbsp;<span aria-hidden="true">→</span>
-        </Link>
+        <ResearchLink slug="care-close-by">Read the research: Care Close By</ResearchLink>
       </div>
     </section>
   );

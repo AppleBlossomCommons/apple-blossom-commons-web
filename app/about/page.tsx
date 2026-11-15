@@ -205,6 +205,14 @@ export default function AboutPage() {
               businesses who share our long view.
             </p>
             <p>Like any proposal, each neighborhood goes through Chelan&apos;s public review process before it is built.</p>
+            {/* Added from docs/15-research-library-content.md, section 7. */}
+            <p>
+              You can read what we&apos;ve learned so far in our{" "}
+              <Link href="/research" className={inlineLink}>
+                Research Library
+              </Link>
+              .
+            </p>
           </Reveal>
         </div>
         <Reveal kind="card" className="flex flex-col gap-3 rounded-[20px] bg-sand px-6 py-7 sm:rounded-[24px] sm:p-10 min-[1000px]:mt-2">

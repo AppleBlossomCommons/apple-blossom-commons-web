@@ -5,8 +5,10 @@ import { AtAGlance } from "@/components/district/AtAGlance";
 import { DistrictHero } from "@/components/district/DistrictHero";
 import { NextDistrict } from "@/components/district/NextDistrict";
 import { WhatsPlannedHere } from "@/components/district/WhatsPlannedHere";
+import { ResearchLink } from "@/components/research/ResearchLink";
 import { DoorwayCards } from "@/components/site/DoorwayCards";
 import { districts, getDistrict, PLAN_VIEWBOX, polyToPath } from "@/lib/districts";
+import { districtResearch, getReport } from "@/lib/research";
 
 export function generateStaticParams() {
   return districts.map((d) => ({ slug: d.slug }));
@@ -47,6 +49,8 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
   if (!district) notFound();
   // Next by number, wrapping 10 → 1.
   const next = districts.find((d) => d.n === (district.n % districts.length) + 1) ?? districts[0];
+  // "Related research" (docs/15, section 7): hidden when the report can't be shown on this deployment.
+  const research = districtResearch[district.slug] ? getReport(districtResearch[district.slug]) : undefined;
 
   return (
     <>
@@ -69,6 +73,11 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
         viewBox={PLAN_VIEWBOX}
       />
       <WhatsPlannedHere districtKey={district.key} places={district.places} aspirational={district.status === "aspirational"} />
+      {research && (
+        <div className="-mt-[clamp(40px,5vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)]">
+          <ResearchLink slug={research.slug}>Related research: {research.title}</ResearchLink>
+        </div>
+      )}
       <NextDistrict slug={next.slug} n={next.n} name={next.name} color={next.color} />
       <DoorwayCards />
     </>

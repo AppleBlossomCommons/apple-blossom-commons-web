@@ -1,3 +1,5 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqItem } from "@/components/site/FaqItem";
 
@@ -6,7 +8,9 @@ import { FaqItem } from "@/components/site/FaqItem";
 //   the site. Restore it here once the owner and Andy decide on wording.
 // - "Is the plan approved?" shows the pack's answer without its "[Andy to confirm wording.]" note;
 //   the wording still needs Andy's confirmation.
-const groups: { title: string; items: { q: string; a: string }[] }[] = [
+const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
+
+const groups: { title: string; items: { q: string; a: ReactNode }[] }[] = [
   {
     title: "About the plan",
     items: [
@@ -20,6 +24,20 @@ const groups: { title: string; items: { q: string; a: string }[] }[] = [
       },
       { q: "How fast will it be built?", a: "Slowly. The plan is designed to grow in phases over many years, one neighborhood at a time, as demand is real." },
       { q: "When might the first homes or businesses open?", a: "It's too early to say. We'll share timing as plans firm up." },
+      // Added from docs/15-research-library-content.md, section 7.
+      {
+        q: "Where can I read your research?",
+        a: (
+          <>
+            Our{" "}
+            <Link href="/research" className={inlineLink}>
+              Research Library
+            </Link>{" "}
+            has short, plain-language reports on growing older in the valley, care close by, lessons from other communities and the village
+            economy, each with its sources. More reports are on the way.
+          </>
+        ),
+      },
     ],
   },
   {

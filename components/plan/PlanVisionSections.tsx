@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
+import { ResearchLink } from "@/components/research/ResearchLink";
 import { BenefitCluster } from "@/components/plan/BenefitCluster";
 import { DistrictPageLink } from "@/components/plan/PlanPlaceSections";
 import { FaqItem } from "@/components/site/FaqItem";
@@ -62,6 +63,9 @@ export function Vision() {
       <Reveal as="p" kind="fade" className="mt-12 max-w-[860px] text-xl leading-normal sm:mt-16 sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
         Planned as one connected community, for the people who live here and the families who visit them.
       </Reveal>
+      <ResearchLink slug="growing-older-by-the-lake" className="mt-8 sm:mt-10">
+        Read the research: Growing Older by the Lake
+      </ResearchLink>
     </section>
   );
 }
@@ -220,6 +224,7 @@ export function LifePlan() {
       <div className="mt-10 flex flex-col gap-x-10 gap-y-2 sm:mt-14 sm:flex-row sm:flex-wrap">
         <DistrictPageLink districtKey="orchardgrove">Explore Orchard Grove</DistrictPageLink>
         <DistrictPageLink districtKey="heritage">Explore Heritage Grove</DistrictPageLink>
+        <ResearchLink slug="learning-from-others">What other communities teach us</ResearchLink>
       </div>
     </section>
   );
