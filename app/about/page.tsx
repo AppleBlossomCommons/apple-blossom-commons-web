@@ -139,9 +139,9 @@ export default function AboutPage() {
         <Reveal kind="card" className="w-full max-w-[520px]">
           <Image
             src={andyPortrait}
-            alt="Andy Yeung, founder of Apple Blossom Commons, standing on a hillside above Lake Chelan with mountains in the background."
+            alt="Andy Yeung, founder of Apple Blossom Commons, walking across an open hillside in Chelan, with the foothills beyond."
             sizes="(min-width: 900px) 40vw, (min-width: 560px) 520px, 100vw"
-            className="aspect-[4/5] h-auto w-full rounded-card object-cover object-[70%_30%]"
+            className="aspect-[4/5] h-auto w-full rounded-card object-cover"
           />
         </Reveal>
         <div className="flex flex-col gap-5 sm:gap-6">
