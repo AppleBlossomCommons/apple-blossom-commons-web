@@ -17,4 +17,9 @@ export type PlanDistrict = {
   /** The same polygons as stored (y up), for the 3D model. */
   shapes: [number, number][][];
   labels: [number, number][];
+  /**
+   * Painted areas in other colors, drawn over `color` in this order with no outline of their own
+   * (lib/districts.ts, Zone). `polys` are SVG paths; `shapes` the stored polygons for 3D.
+   */
+  zones: { key: string; color: string; polys: string[]; shapes: [number, number][][] }[];
 };

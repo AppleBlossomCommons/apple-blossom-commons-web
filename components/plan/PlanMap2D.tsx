@@ -1,10 +1,13 @@
 "use client";
 
+import { useId } from "react";
+import { PLAN_FEATURES } from "@/lib/district-image";
 import type { PlanDistrict } from "./types";
 
 /**
  * The 2D district plan: the cream masterplan sheet with the ten districts drawn over it
- * (fix brief, Fixes 1 and 2) and numbered roundels. Used inside the district explorer until
+ * (fix brief, Fixes 1 and 2) and numbered roundels. Each district is solid color with the sheet's
+ * features layer multiplied over it, so buildings and paths show without fading the color. Used inside the district explorer until
  * the 3D model is ready, and afterwards as its loading and no-WebGL fallback.
  *
  * Decorative for assistive tech: the district list beside it is the keyboard and
@@ -34,6 +37,9 @@ export function PlanMap2D({
   fit?: { width: number; offsetY: number };
 }) {
   const [minX, minY, w, h] = viewBox.split(" ").map(Number);
+  // Clip-path ids must be unique on the page, so they are scoped to this instance. React's ids contain
+  // punctuation that url(#…) references don't accept everywhere, so keep only letters and digits.
+  const clipBase = `plan-clip-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
 
   return (
     // Fit a box of the plan's aspect ratio inside whatever frame holds it (like object-fit: contain).
@@ -59,17 +65,58 @@ export function PlanMap2D({
                 onClick={() => onSelect(d.key)}
                 onPointerEnter={(e) => e.pointerType === "mouse" && onHover(d.key)}
               >
+                <clipPath id={`${clipBase}-${d.key}`}>
+                  {d.polys.map((p, i) => (
+                    <path key={i} d={p} />
+                  ))}
+                </clipPath>
                 {d.polys.map((p, i) => (
                   <path
                     key={i}
                     d={p}
                     fill={d.color}
-                    fillOpacity={on || hv ? 0.9 : dim ? 0.32 : 0.75}
+                    // Solid color: the features layer below supplies the detail, so nothing needs to show through.
+                    fillOpacity={dim ? 0.32 : 1}
+                    className="transition-[fill-opacity] duration-150 ease-out"
+                  />
+                ))}
+                {/* Painted areas in other colors (Residence's green edge, Summit's park and pond), no outline. */}
+                {d.zones.map((z) =>
+                  z.polys.map((p, i) => (
+                    <path
+                      key={`${z.key}-${i}`}
+                      d={p}
+                      fill={z.color}
+                      fillOpacity={dim ? 0.32 : 1}
+                      className="transition-[fill-opacity] duration-150 ease-out"
+                    />
+                  )),
+                )}
+                {/* The sheet's features, multiplied over the color and cut to this district. Faded with the
+                    fill when dimmed, so a dimmed district doesn't show its features twice as dark. */}
+                <image
+                  href={PLAN_FEATURES}
+                  x={minX}
+                  y={minY}
+                  width={w}
+                  height={h}
+                  preserveAspectRatio="none"
+                  clipPath={`url(#${clipBase}-${d.key})`}
+                  opacity={dim ? 0.32 : 1}
+                  pointerEvents="none"
+                  className="mix-blend-multiply transition-opacity duration-150 ease-out"
+                />
+                {/* The outline goes on top, so painted areas along the edge don't cover half of it. */}
+                {d.polys.map((p, i) => (
+                  <path
+                    key={`line-${i}`}
+                    d={p}
+                    fill="none"
                     stroke="var(--hearth)"
                     strokeOpacity={dim ? 0.25 : 0.55}
                     strokeWidth={1}
                     vectorEffect="non-scaling-stroke"
-                    className="transition-[fill-opacity,stroke-opacity] duration-150 ease-out"
+                    className="transition-[stroke-opacity] duration-150 ease-out"
                   />
                 ))}
               </g>

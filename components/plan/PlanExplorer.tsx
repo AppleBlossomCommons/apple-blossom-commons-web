@@ -42,8 +42,8 @@ const toolBtn = "h-11 rounded-full px-[18px] text-base text-hearth transition-co
 /**
  * The Plan's 3D model section (handoff, "The Plan" and "The Plan map: fly-in + side card").
  * Here the map is a tool: choosing a district on the model or in the list flies the camera to it
- * (1200ms), dims the others, pulses the ring twice and swaps the side card in place. "3D model" /
- * "Top-down plan" switch the camera between oblique and flat; "Reset view" zooms out and keeps
+ * (1200ms), dims the others, pulses the ring twice and swaps the side card in place. It opens on
+ * "Top-down plan" (flat, straight overhead); "3D model" tilts the camera to the oblique view and back; "Reset view" zooms out and keeps
  * the card. Below 1000px the list becomes rows that open to show the card.
  *
  * The 2D plan shows while the model loads, and stays without WebGL. The list is the keyboard and
@@ -64,7 +64,8 @@ export function PlanExplorer({
   const frame = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState(districts[0].key);
   const [zoomed, setZoomed] = useState(false);
-  const [topDown, setTopDown] = useState(false);
+  // Opens on the top-down plan (owner decision, Nov 18, 2026); "3D model" tilts it into the oblique view.
+  const [topDown, setTopDown] = useState(true);
   const [hovered, setHovered] = useState<string | null>(null);
   const [pulse, setPulse] = useState<number | undefined>();
   const [command, setCommand] = useState<CameraCommand>({ kind: "none", seq: 0 });
@@ -184,7 +185,8 @@ export function PlanExplorer({
               </div>
             )}
             <p aria-hidden="true" className="pointer-events-none absolute bottom-4 left-4 z-[3] hidden rounded-full bg-label px-3.5 py-1.5 text-[15px] sm:block">
-              {show3D ? "Drag to rotate · Scroll to zoom · Select a district" : "Select a district"}
+              {/* Rotation is off in top-down mode, so the hint only offers dragging in the 3D view. */}
+              {show3D ? (topDown ? "Scroll to zoom · Select a district" : "Drag to rotate · Scroll to zoom · Select a district") : "Select a district"}
             </p>
           </div>
           <p className="mx-2 text-[15px] leading-[1.45] text-muted sm:mx-0 sm:text-base">{disclaimer}</p>

@@ -3,15 +3,24 @@
  * between them is invisible. TEMPORARY: one flat pale version of the district's color until the
  * "Illustrative concept" renders exist (docs/10-content-v2.md, Imagery plan).
  *
- * It is half the district color and half white, mixed in oklch so the hue stays clean. Text on it is
- * hearth, so it needs no dark fade.
+ * It is half the district color and half white, mixed in oklab so the hue stays clean (mixing toward
+ * white in oklab keeps the hue exactly). Not oklch: white has no hue there, and Chrome then loses the
+ * hue of a nearly gray color like the Residence's taupe and draws it a cool pinkish gray. Text on it
+ * is hearth, so it needs no dark fade.
  */
 export function districtImage(color: string) {
-  return `color-mix(in oklch, ${color} 50%, white)`;
+  return `color-mix(in oklab, ${color} 50%, white)`;
 }
 
 /** The masterplan sheet under the 2D plan and on the 3D board, lightened to warm cream (paper ≈ #EBE5D8). Draw it as is, untinted. */
 export const PLAN_SHEET = "/plan/districts-sheet-cream.webp";
+
+/**
+ * The sheet's buildings, parking, paths and tracks on pure white, printed over the district colors
+ * with a multiply blend on both maps, so the features show while the colors stay full strength.
+ * Made from reference/districts-sheet-greyscale.jpg by `npm run prepare:plan-features`.
+ */
+export const PLAN_FEATURES = "/plan/districts-sheet-features.webp";
 
 /** The color masterplan (the /plan header image and the walk-ring diagram). It has no printed walk rings. */
 export const PLAN_COLOR = "/plan/masterplan-color.webp";

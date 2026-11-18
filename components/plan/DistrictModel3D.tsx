@@ -4,8 +4,8 @@ import { Html, OrbitControls, useTexture } from "@react-three/drei";
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { cubicBezier } from "motion";
 import { motion } from "motion/react";
-import { memo, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Group, LineBasicMaterial, MathUtils, MeshStandardMaterial, OrthographicCamera, Spherical, SRGBColorSpace, Vector3 } from "three";
+import { memo, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Group, LineBasicMaterial, MathUtils, MeshStandardMaterial, OrthographicCamera, Spherical, SRGBColorSpace, type Texture, Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
   buildDistrictGeometry,
@@ -26,6 +26,7 @@ import {
   TOP_DIR,
   type DistrictGeometry,
 } from "./model3d/geometry";
+import { PLAN_FEATURES } from "@/lib/district-image";
 import type { PlanDistrict } from "./types";
 
 /**
@@ -104,9 +105,11 @@ export default function DistrictModel3D(props: Props) {
         return { position: pose.position.toArray(), zoom: pose.zoom, target: pose.target.toArray() };
       }
     }
-    return props.startFlat
-      ? { position: CAMERA_FLAT, zoom: FLAT_ZOOM, target: CONTROLS_TARGET }
-      : { position: CAMERA_START, zoom: 1, target: CONTROLS_TARGET };
+    if (props.startFlat) return { position: CAMERA_FLAT, zoom: FLAT_ZOOM, target: CONTROLS_TARGET };
+    // Starting in top-down mode (The Plan's default) starts straight overhead, zoomed out a little
+    // (FLAT_ZOOM) so the plan's top edge clears the view controls drawn over the map.
+    if (props.topDown) return { position: CAMERA_FLAT, zoom: FLAT_ZOOM, target: CONTROLS_TARGET };
+    return { position: CAMERA_START, zoom: 1, target: CONTROLS_TARGET };
   });
   return (
     // isolate: keeps the roundels' z-indexes inside the model, under anything drawn over it.
@@ -152,10 +155,11 @@ function Scene({
   controlsTarget,
 }: Props & { controlsTarget: [number, number, number] }) {
   const geometries = useMemo(
-    () => Object.fromEntries(districts.map((d) => [d.key, buildDistrictGeometry(d.shapes)])) as Record<string, DistrictGeometry>,
+    () => Object.fromEntries(districts.map((d) => [d.key, buildDistrictGeometry(d.shapes, d.zones)])) as Record<string, DistrictGeometry>,
     [districts],
   );
   const anchors = useMemo(() => anchorsOf(districts), [districts]);
+  const features = useFeatures();
   // Free GPU buffers when the model unmounts (geometries made outside JSX are not auto-disposed).
   useEffect(
     () => () => {
@@ -164,6 +168,7 @@ function Scene({
           p.geometry.dispose();
           p.edges.dispose();
         }
+        for (const z of g.zones) z.geometry.dispose();
       }
     },
     [geometries],
@@ -181,9 +186,10 @@ function Scene({
   return (
     <>
       <color attach="background" args={["#FBF6EE"]} />
-      <hemisphereLight args={["#FBF6EE", "#73635A", 1.25]} />
+      {/* Neutral white light: a warm tint pulled blue out of the district colors and made them read yellow. */}
+      <hemisphereLight args={["#FFFFFF", "#686868", 1.25]} />
       <directionalLight
-        color="#fff4e0"
+        color="#FFFFFF"
         intensity={1.6}
         position={[-500, 900, -350]}
         castShadow
@@ -210,6 +216,7 @@ function Scene({
             hv={hv}
             dim={dim}
             pulse={on ? pulse : undefined}
+            features={features}
             reducedMotion={reducedMotion}
             onSelect={onSelect}
             onHover={onHover}
@@ -269,8 +276,25 @@ function Board({ href }: { href: string }) {
   );
 }
 
+/**
+ * The features layer (lib/district-image.ts) as a texture for the plate tops. A plate's top-face UVs
+ * are its shape coordinates (sheet units, origin at the center, y up), so repeat and offset map them
+ * onto the whole image: u = x / W + 0.5, v = y / H + 0.5 (v = 1 is the top of the image).
+ */
+function useFeatures() {
+  const get = useThree((s) => s.get);
+  return useTexture(PLAN_FEATURES, (t) => {
+    t.colorSpace = SRGBColorSpace;
+    t.anisotropy = get().gl.capabilities.getMaxAnisotropy();
+    t.repeat.set(1 / PLAN_W, 1 / PLAN_H);
+    t.offset.set(0.5, 0.5);
+    t.needsUpdate = true;
+  });
+}
+
 type PlateProps = {
   district: PlanDistrict;
+  features: Texture;
   geo: DistrictGeometry;
   on: boolean;
   hv: boolean;
@@ -281,17 +305,66 @@ type PlateProps = {
   onHover: (key: string | null) => void;
 };
 
-/** Plate and outline opacity: normal, and dimmed (about 30%) while another district is in focus. */
-const FILL = { normal: 0.94, dim: 0.32 };
+/**
+ * Plate and outline opacity: normal, and dimmed (about 30%) while another district is in focus.
+ * Plates are solid: the features printed on their tops supply the detail the board used to show through.
+ */
+const FILL = { normal: 1, dim: 0.32 };
 const EDGE = { normal: 0.55, dim: 0.25 };
+
+/**
+ * The two materials of an extruded plate (ExtrudeGeometry's groups: 0 is the top and bottom faces,
+ * 1 the sides), registered in `fills` so the plate can ease their opacity. Opacity is set once when
+ * each material is created, then eased in useFrame.
+ */
+function FaceMaterials({
+  slot,
+  color,
+  features,
+  fillTo,
+  register,
+}: {
+  slot: string;
+  color: string;
+  features: Texture;
+  fillTo: number;
+  register: (key: string, material: MeshStandardMaterial, opacity: number) => void;
+}) {
+  return [0, 1].map((face) => (
+    <meshStandardMaterial
+      key={face}
+      attach={`material-${face}`}
+      ref={(m: MeshStandardMaterial | null) => {
+        if (m) register(`${slot}-${face}`, m, fillTo);
+      }}
+      color={color}
+      // The top face carries the sheet's features: map multiplies them into the color, and
+      // emissiveMap does the same for the glow, so the glow doesn't wash them out.
+      map={face === 0 ? features : null}
+      // A soft glow in the plate's own color, so the light vibrant fills read close to
+      // their true color instead of being darkened by the lighting and the board.
+      emissive={color}
+      emissiveMap={face === 0 ? features : null}
+      emissiveIntensity={0.2}
+      roughness={0.7}
+      transparent
+    />
+  ));
+}
 
 /**
  * One district: extruded plates, outlines and numbered roundels, lifted on hover (+9) and select
  * (+16). Dimming fades over about 600ms (handoff: "dim to 30%, 600 ease"); reduced motion jumps.
  */
-const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reducedMotion, onSelect, onHover }: PlateProps) {
+const Plate = memo(function Plate({ district: d, geo, features, on, hv, dim, pulse, reducedMotion, onSelect, onHover }: PlateProps) {
   const group = useRef<Group>(null);
-  const fills = useRef<MeshStandardMaterial[]>([]);
+  // Every fill material of this district (plate tops and sides, painted layers), by slot, so useFrame can ease their opacity.
+  const fills = useRef(new Map<string, MeshStandardMaterial>());
+  const register = useCallback((key: string, m: MeshStandardMaterial, opacity: number) => {
+    if (fills.current.get(key) === m) return;
+    m.opacity = opacity;
+    fills.current.set(key, m);
+  }, []);
   const edges = useRef<LineBasicMaterial[]>([]);
   const invalidate = useThree((s) => s.invalidate);
   const lift = on ? SEL : hv ? LIFT : 0;
@@ -311,7 +384,7 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
     };
     const g = group.current;
     if (g) g.position.y = ease(g.position.y, lift, 12, 0.05);
-    for (const m of fills.current) m.opacity = ease(m.opacity, fillTo, 7, 0.003);
+    for (const m of fills.current.values()) m.opacity = ease(m.opacity, fillTo, 7, 0.003);
     for (const m of edges.current) m.opacity = ease(m.opacity, edgeTo, 7, 0.003);
     if (moving) state.invalidate();
   });
@@ -332,24 +405,10 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
       {geo.parts.map((p, i) => (
         <group key={i}>
           <mesh geometry={p.geometry} castShadow receiveShadow onPointerOver={over} onPointerOut={() => onHover(null)} onClick={click}>
-            {/* Opacity is eased in useFrame, so it is set once when the material is created. */}
-            <meshStandardMaterial
-              ref={(m: MeshStandardMaterial | null) => {
-                if (m && fills.current[i] !== m) {
-                  m.opacity = fillTo;
-                  fills.current[i] = m;
-                }
-              }}
-              color={d.color}
-              // A soft glow in the district's own color, so the light vibrant fills read close to
-              // their true color instead of being darkened by the lighting and the board.
-              emissive={d.color}
-              emissiveIntensity={0.3}
-              roughness={0.7}
-              transparent
-            />
+            <FaceMaterials slot={`plate-${i}`} color={d.color} features={features} fillTo={fillTo} register={register} />
           </mesh>
-          <lineSegments geometry={p.edges}>
+          {/* Lifted above any painted layers, so those don't hide the outline along the district's edge. */}
+          <lineSegments geometry={p.edges} position-y={geo.zoneHeight}>
             <lineBasicMaterial
               ref={(m: LineBasicMaterial | null) => {
                 if (m && edges.current[i] !== m) {
@@ -362,6 +421,11 @@ const Plate = memo(function Plate({ district: d, geo, on, hv, dim, pulse, reduce
             />
           </lineSegments>
         </group>
+      ))}
+      {geo.zones.map((z, i) => (
+        <mesh key={`zone-${i}`} geometry={z.geometry} receiveShadow onPointerOver={over} onPointerOut={() => onHover(null)} onClick={click}>
+          <FaceMaterials slot={`zone-${i}`} color={z.color} features={features} fillTo={fillTo} register={register} />
+        </mesh>
       ))}
       {d.labels.map(([x, z], i) => (
         <Html key={i} position={[x, PLATE, z]} center zIndexRange={[20, 0]}>
@@ -493,7 +557,8 @@ function CameraRig({
     } else {
       target = HOME_TARGET.clone();
       dir = topDown ? TOP_DIR.clone() : HOME_DIR.clone();
-      zoom = 1;
+      // Reset view: the same framing the top-down plan opens with.
+      zoom = topDown ? FLAT_ZOOM : 1;
     }
 
     const to = { t: target, p: target.clone().addScaledVector(dir, CAMERA_DISTANCE), z: zoom };
