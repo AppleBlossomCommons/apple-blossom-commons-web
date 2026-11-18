@@ -27,6 +27,7 @@ const locatorDistricts = districts.map((d) => ({
   color: d.color,
   polys: d.polys.map(polyToPath),
   labels: d.labels,
+  zones: d.zones.map((z) => ({ color: z.color, polys: z.polys.map(polyToPath) })),
 }));
 
 /**

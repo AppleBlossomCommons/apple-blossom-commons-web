@@ -3,7 +3,15 @@ import { BackToMapLink } from "@/components/transitions/TransitionLinks";
 import { PLAN_SHEET } from "@/lib/district-image";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
 
-type LocatorDistrict = { key: string; n: number; color: string; polys: string[]; labels: [number, number][] };
+/** `zones`: painted areas in other colors, drawn over `color` (lib/districts.ts, Zone). */
+type LocatorDistrict = {
+  key: string;
+  n: number;
+  color: string;
+  polys: string[];
+  labels: [number, number][];
+  zones: { color: string; polys: string[] }[];
+};
 
 /** The cream sheet's paper color (matches the 3D model's board edges), shown while the sheet loads. */
 const BOARD = "#EBE5D8";
@@ -38,7 +46,8 @@ export function AtAGlance({
       <Reveal kind="card" className="grid overflow-hidden rounded-card min-[900px]:grid-cols-[5fr_7fr]">
         <div
           className="flex flex-col gap-8 p-[clamp(24px,4vw,56px)] text-hearth"
-          style={{ background: `color-mix(in oklch, ${color} 45%, var(--linen))` }}
+          // oklab, not oklch: oklch loses the hue of a nearly gray color (the Residence's taupe) in Chrome.
+          style={{ background: `color-mix(in oklab, ${color} 45%, var(--linen))` }}
         >
           <h2 id="glance-title" className="text-[clamp(36px,4vw,52px)] leading-none">
             At a glance
@@ -68,23 +77,27 @@ export function AtAGlance({
           <svg viewBox={viewBox} preserveAspectRatio="xMidYMid meet" className="absolute inset-0 size-full">
             <image href={PLAN_SHEET} x={minX} y={minY} width={w} height={h} preserveAspectRatio="none" />            {districts
               .filter((d) => d.key !== current)
-              .map((d) =>
-                d.polys.map((p, i) => (
-                  <path
-                    key={`${d.key}-${i}`}
-                    d={p}
-                    fill={d.color}
-                    fillOpacity={0.35}
-                    stroke="var(--hearth)"
-                    strokeOpacity={0.2}
-                    strokeWidth={1}
-                    vectorEffect="non-scaling-stroke"
-                  />
-                )),
-              )}
+              .map((d) => (
+                <g key={d.key}>
+                  {d.polys.map((p, i) => (
+                    <path
+                      key={i}
+                      d={p}
+                      fill={d.color}
+                      fillOpacity={0.35}
+                      stroke="var(--hearth)"
+                      strokeOpacity={0.2}
+                      strokeWidth={1}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  ))}
+                  {d.zones.map((z, zi) => z.polys.map((p, i) => <path key={`z${zi}-${i}`} d={p} fill={z.color} fillOpacity={0.35} />))}
+                </g>
+              ))}
+            {here?.polys.map((p, i) => <path key={`here-${i}`} d={p} fill={here.color} fillOpacity={0.95} />)}
+            {here?.zones.map((z, zi) => z.polys.map((p, i) => <path key={`here-z${zi}-${i}`} d={p} fill={z.color} fillOpacity={0.95} />))}
             {here?.polys.map((p, i) => (
-              <g key={`here-${i}`}>
-                <path d={p} fill={here.color} fillOpacity={0.95} />
+              <g key={`here-line-${i}`}>
                 {/* Hearth keyline under the gold outline, as on the Plan map, so it reads on yellow too. */}
                 <path d={p} fill="none" stroke="var(--hearth)" strokeWidth={4.5} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
                 <path d={p} fill="none" stroke="var(--gold)" strokeWidth={2.5} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />

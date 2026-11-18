@@ -24,6 +24,7 @@ Features to carry over:
   - In 3D, shape y becomes −z: the prototype builds a `THREE.Shape` in x/y, extrudes it 3 units, then rotates it −90° around X.
 - `data/districts.json` holds names, numbers, families, colors, descriptions and facts. The keys match the geometry keys (`wine`, `wellness`, `orchardgrove`, `heritage`, `abr`, `harvest`, `summit`, `discovery`, `preserve`, `hotel`).
 - `reference/districts-sheet-greyscale.jpg` (2046×1388) is the ground texture, the same image embedded in the prototype.
+- The site also prints that sheet's features on each plate's top face (`public/plan/districts-sheet-features.webp`, made by `npm run prepare:plan-features`). A plate's top-face UVs are its shape coordinates, so the texture uses repeat (1/1023, 1/694) and offset (0.5, 0.5) to line up with the board. See `docs/04-design-direction.md`, "District colors". Painted areas (`zones`) are thin plates stacked on a district's plate (`ZONE_STEP` in `components/plan/model3d/geometry.ts`), with the same two materials, and the plate's outline is raised above them.
 
 ## How to port it to React Three Fiber
 

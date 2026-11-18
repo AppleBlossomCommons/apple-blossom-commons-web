@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "check:tour-core": "node scripts/tour-core-check.mjs",
-    "prepare:research": "node scripts/research/prepare-reports.mjs"
+    "prepare:research": "node scripts/research/prepare-reports.mjs",
+    "prepare:plan-features": "node scripts/plan/prepare-features.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

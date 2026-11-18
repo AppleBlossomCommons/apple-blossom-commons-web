@@ -21,16 +21,16 @@ colors:
   tint-pink: "#ffe1ed"
   tint-lime: "#eaf6cf"
   tint-butter: "#fff2b3"
-  plan-residential: "#ffd9b0"
-  plan-residential-2: "#ffc88f"
-  plan-senior: "#d6cbf7"
-  plan-senior-2: "#e4dcfa"
-  plan-commercial: "#ffc4dc"
-  plan-commercial-2: "#ffaed0"
-  plan-civic: "#9ed8f5"
-  plan-civic-2: "#bde5f8"
-  plan-parks: "#ddf2ae"
-  plan-parks-2: "#cdeb8b"
+  plan-wine-village: "#f1acd6"
+  plan-wellness: "#f5baba"
+  plan-orchard-grove: "#f4cb89"
+  plan-heritage-grove: "#f1eca7"
+  plan-residence: "#cabfb5"
+  plan-harvest-crossing: "#f2dbbb"
+  plan-summit: "#aee1ef"
+  plan-discovery: "#bcbcd7"
+  plan-preserve: "#7acfa5"
+  plan-hotel: "#b4e19b"
 typography:
   display:
     fontFamily: "Arial, Helvetica, sans-serif"
@@ -226,7 +226,7 @@ Motion explains space and never decorates. One ease-out curve, short interface t
 - **Rose** (`rose`): form errors and large text accents only. The light lake, sage and blossom tokens were removed on Oct 25, 2026.
 
 ### Plan family fills
-Districts are colored by land-use family, two shades per family, from `data/districts.json`: residential warm orange (`plan-residential`, `plan-residential-2`), senior-living lavender (`plan-senior`, `plan-senior-2`), commercial and hospitality soft pink (`plan-commercial`, `plan-commercial-2`), health and civic sky blue (`plan-civic`, `plan-civic-2`), parks and open space lime green (`plan-parks`, `plan-parks-2`). Vibrant family colors since Oct 25, 2026. Fills sit at `--plan-fill-opacity` 0.86. When one district is focused the rest dim to 0.32; the selected one gets a gold outline over a hearth keyline on the 2D plan.
+Each district has its own color from the July 2026 masterplan (Andy's request, Nov 16, 2026), made 15% more saturated, read from `data/districts.json` (`plan-wine-village` through `plan-hotel` above). The masterplan gives Grand Orchard Hotel no color, so it uses a chosen leaf green. Some districts also have painted areas in other colors, as on the masterplan (`zones`: the Residence's green edge and lawns, Summit's green southern park and its pond, Heritage Grove's lawns, the Preserve's meadow and wooded patch); see `docs/04-design-direction.md`. Districts are solid color with the masterplan's features (buildings, parking, paths) multiplied over them from `public/plan/districts-sheet-features.webp`, on the 2D plan and on the 3D plate tops; the 3D plates are lit with neutral white light so the colors stay true. When one district is focused the rest dim to 0.32; the selected one gets a gold outline over a hearth keyline on the 2D plan.
 
 ### Named Rules
 **The Fills-Not-Text Rule.** The vibrant colors are fills with hearth text on top, never text themselves. Gold marks the one selected thing on a screen.

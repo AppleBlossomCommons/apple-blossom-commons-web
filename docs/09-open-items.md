@@ -7,6 +7,8 @@
 - **Heritage Grove:** ~419 is either units or beds. Unresolved.
 - **Grand Orchard Hotel:** the masterplan text says 65 cottages; the stats workbook says 115 keys. Both may be right if 115 is 65 cottages plus about 50 hotel apartments. Confirm with the architect before publishing any count. ("65 hotel cottages" was removed from the public facts on Oct 28, 2026.)
 - **Apple Blossom Residence:** a 75,000 sf building appears on the PDF but not in the workbook. The unit count ranges from 126 to 332 depending on the tab.
+- **Apple Blossom Residence outline:** retraced from the masterplan on Nov 18, 2026 to include its green edge along the roads and creek (`docs/04-design-direction.md`, "Painted areas"). It is a traced interpretation; confirm the district boundary with the architect before stating any acreage for it.
+- **Heritage Grove and Orchard Preserve outlines:** Heritage Grove's outline and the Preserve's piece between Discovery Commons and Heritage Grove were retraced from the masterplan on Nov 18, 2026 to fill their whole areas. Same caveat: traced interpretations, not survey boundaries.
 - **Site-wide unit total:** ~986 to ~1,121 depending on the source. Don't publish one.
 - **Density** for Apple Blossom East "remains under staff and consultant review" (from the masterplan's Comprehensive Plan page).
 
@@ -34,7 +36,7 @@
 
 ## Found while building the Home page (Oct 16, 2026)
 
-- **Roundel positions:** `labels` in `data/district-geometry-v1.json` are stored as `[x, z]` for the 3D prototype (z = −y). The site flips them once in `lib/districts.ts`. After flipping, the Heritage Grove roundel and Summit's second (north) roundel still fall just outside their traced outlines. Check them against the masterplan.
+- **Roundel positions:** `labels` in `data/district-geometry-v1.json` are stored as `[x, z]` for the 3D prototype (z = −y). The site flips them once in `lib/districts.ts`. After flipping, Summit's second (north) roundel still falls just outside its traced outline. Check it against the masterplan. (Heritage Grove's roundel is inside its outline since the outline was retraced on Nov 18, 2026.)
 - **Site perimeter:** no site boundary exists in `data/`, so the Today view draws the convex hull of all traced parcels as a stand-in (`sitePerimeterPath()` in `lib/districts.ts`). Replace with the georeferenced boundary when it arrives.
 - **Plan map scale bar:** no documented scale for the traced Districts sheet, so the plan shows a north arrow but no scale bar.
 - **Roads:** SR 97A and Apple Blossom Drive have no geometry in `data/`, so the plan can't draw them yet.

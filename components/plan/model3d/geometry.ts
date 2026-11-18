@@ -5,6 +5,11 @@ export const PLAN_W = 1023;
 export const PLAN_H = 694;
 /** Plate thickness, hover lift and selected lift, in scene units. */
 export const PLATE = 3;
+/**
+ * Thickness of each painted-area layer (lib/districts.ts, Zone), stacked on a plate's top in list
+ * order. Thin enough to read as paint, thick enough that the depth buffer always draws it on top.
+ */
+export const ZONE_STEP = 0.4;
 export const LIFT = 9;
 export const SEL = 16;
 
@@ -64,6 +69,10 @@ export function pxPerUnit(width: number, height: number, zoom: number) {
 
 export type DistrictGeometry = {
   parts: { geometry: ExtrudeGeometry; edges: EdgesGeometry }[];
+  /** Painted areas as thin plates on top, each with its own color; empty for most districts. */
+  zones: { key: string; color: string; geometry: ExtrudeGeometry }[];
+  /** Height of the painted layers above the plate top, so the outlines can sit above them. */
+  zoneHeight: number;
   /** Area-weighted center on the ground plane (x, 0, z). */
   center: Vector3;
   /** Footprint size [x extent, z extent]. */
@@ -74,7 +83,10 @@ export type DistrictGeometry = {
  * Builds one district's plates from its stored polygons (y up, used as stored: no flip in 3D).
  * The −90° X rotation turns shape y into −z, which is what orients the model correctly.
  */
-export function buildDistrictGeometry(shapes: [number, number][][]): DistrictGeometry {
+export function buildDistrictGeometry(
+  shapes: [number, number][][],
+  zoneShapes: { key: string; color: string; shapes: [number, number][][] }[] = [],
+): DistrictGeometry {
   let cx = 0;
   let cz = 0;
   let area = 0;
@@ -103,7 +115,23 @@ export function buildDistrictGeometry(shapes: [number, number][][]): DistrictGeo
     return { geometry, edges };
   });
 
-  return { parts, center: new Vector3(cx / area, 0, cz / area), size: [maxX - minX, maxZ - minZ] };
+  // Each painted layer sits on the one before it: layer n spans PLATE + n·ZONE_STEP to PLATE + (n+1)·ZONE_STEP.
+  const zones = zoneShapes.flatMap((z, level) =>
+    z.shapes.map((poly) => {
+      const geometry = new ExtrudeGeometry(new Shape(poly.map(([x, y]) => new Vector2(x, y))), { depth: ZONE_STEP, bevelEnabled: false });
+      geometry.rotateX(-Math.PI / 2);
+      geometry.translate(0, PLATE + level * ZONE_STEP, 0);
+      return { key: z.key, color: z.color, geometry };
+    }),
+  );
+
+  return {
+    parts,
+    zones,
+    zoneHeight: zoneShapes.length * ZONE_STEP,
+    center: new Vector3(cx / area, 0, cz / area),
+    size: [maxX - minX, maxZ - minZ],
+  };
 }
 
 /** Prototype easing for camera flights: ease-out quartic. */

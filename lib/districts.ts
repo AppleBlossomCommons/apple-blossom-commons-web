@@ -23,6 +23,14 @@ type Point = [number, number];
  */
 export type Place = { name: string; text: string };
 
+/**
+ * A painted area inside a district, in another color, as on the July 2026 masterplan: Apple Blossom
+ * Residence's green edge and lawns, Summit Recreation Park's green southern park and its pond. Drawn
+ * over the district's own color, in list order, with no outline of its own. The color comes from
+ * districts.json and the shapes from the geometry file's `zones`, matched by `key`.
+ */
+export type Zone = { key: string; label: string; color: string; polys: Point[][] };
+
 /** Public fields only. `internalNotes` in districts.json must never reach a page. */
 export type District = {
   key: DistrictKey;
@@ -48,6 +56,8 @@ export type District = {
    * the sheet, so these are already SVG coordinates and are used as stored in both views.
    */
   labels: Point[];
+  /** Painted areas, drawn over `color` in this order. Empty for most districts. */
+  zones: Zone[];
 };
 
 const families = districtData._meta.families as Record<DistrictFamily, { label: string }>;
@@ -55,7 +65,24 @@ const geometry = geometryData as unknown as {
   size: [number, number];
   polys: Record<DistrictKey, Point[][]>;
   labels: Record<DistrictKey, Point[]>;
+  zones?: Partial<Record<DistrictKey, { key: string; polys: Point[][] }[]>>;
 };
+
+type ZoneColor = { key: string; label: string; color: string };
+
+/** Pairs each zone's color (districts.json) with its shapes (geometry file), and fails loudly on a mismatch. */
+function zonesFor(key: DistrictKey, colors: ZoneColor[] | undefined): Zone[] {
+  const shapes = geometry.zones?.[key] ?? [];
+  const list = colors ?? [];
+  if (shapes.length !== list.length) {
+    throw new Error(`District "${key}": ${list.length} zone colors in districts.json but ${shapes.length} zone shapes in the geometry file`);
+  }
+  return list.map((z) => {
+    const shape = shapes.find((s) => s.key === z.key);
+    if (!shape) throw new Error(`District "${key}": zone "${z.key}" has no shapes in the geometry file`);
+    return { ...z, polys: shape.polys };
+  });
+}
 
 export const PLAN_SIZE = geometry.size;
 export const PLAN_VIEWBOX = `${-PLAN_SIZE[0] / 2} ${-PLAN_SIZE[1] / 2} ${PLAN_SIZE[0]} ${PLAN_SIZE[1]}`;
@@ -78,6 +105,7 @@ export const districts: District[] = districtData.districts.map((d) => {
     status: d.status,
     polys: geometry.polys[key],
     labels: geometry.labels[key],
+    zones: zonesFor(key, (d as { zones?: ZoneColor[] }).zones),
   };
 });
 
