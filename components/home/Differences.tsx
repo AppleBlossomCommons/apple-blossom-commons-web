@@ -17,27 +17,45 @@ const items = [
   },
 ];
 
-/** "What makes it different": three short items under a 3px Deep Sage rule. */
+/**
+ * "What makes it different" (Nov 20, 2026 layout, after villiers.ai's "Why" list): the heading and
+ * link on the left, a numbered list on the right, each item under a 3px Deep Sage rule.
+ * One column below 1024px.
+ */
 export function Differences() {
   return (
-    <section aria-labelledby="different-title" className="px-[clamp(16px,4vw,56px)] py-[clamp(80px,9vw,120px)]">
-      <Reveal as="h2" kind="head" id="different-title" className="mb-14 max-w-[640px] text-[clamp(40px,4.5vw,60px)] leading-none">
-        What makes it different
-      </Reveal>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-x-12 gap-y-10">
+    <section
+      aria-labelledby="different-title"
+      className="grid grid-cols-1 gap-x-[clamp(24px,4vw,64px)] gap-y-12 bg-linen px-[clamp(16px,4vw,56px)] py-[clamp(80px,9vw,120px)] lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]"
+    >
+      <div className="flex flex-col items-start gap-8">
+        <Reveal as="h2" kind="head" id="different-title" className="max-w-[440px] text-[clamp(40px,4.5vw,60px)] leading-none">
+          What makes it different
+        </Reveal>
+        <Link
+          href="/plan"
+          className="inline-flex min-h-11 items-center text-lg font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-[0.2em] hover:text-hearth"
+        >
+          See the whole plan&nbsp;<span aria-hidden="true">→</span>
+        </Link>
+      </div>
+      <ol className="flex flex-col gap-10">
         {items.map((item, i) => (
-          <Reveal key={item.title} as="li" kind="card" index={i} className="flex flex-col gap-3 border-t-[3px] border-sage-deep pt-6">
+          <Reveal
+            key={item.title}
+            as="li"
+            kind="card"
+            index={i}
+            className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-3 border-t-[3px] border-sage-deep pt-6 md:grid-cols-[auto_minmax(0,5fr)_minmax(0,7fr)] md:gap-x-10"
+          >
+            <span aria-hidden="true" className="font-display text-[28px] font-semibold leading-[1.1] text-muted">
+              {i + 1}.
+            </span>
             <h3 className="text-[28px] leading-[1.1] tracking-[-0.015em]">{item.title}</h3>
-            <p>{item.text}</p>
+            <p className="col-start-2 md:col-start-3">{item.text}</p>
           </Reveal>
         ))}
-      </ul>
-      <Link
-        href="/plan"
-        className="mt-10 inline-flex min-h-11 items-center text-lg font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-[0.2em] hover:text-hearth"
-      >
-        See the whole plan&nbsp;<span aria-hidden="true">→</span>
-      </Link>
+      </ol>
     </section>
   );
 }

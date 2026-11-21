@@ -1,6 +1,5 @@
 "use client";
 
-import { type MotionValue, motion } from "motion/react";
 import { type ReactNode, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { homeVideoSrc } from "@/lib/home-video";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
@@ -16,10 +15,10 @@ const noop = () => () => {};
  * With reduced motion it never starts on its own; the still stays until someone presses Play.
  * The clip is longer than 5 seconds, so it always has a pause control (WCAG 2.2.2).
  *
- * Renders the hero's whole media layer: `still` and the video drift with the scroll (`y`, from
- * useParallax) and take the intro's blur-in (data-intro-el="media"); the button stays put.
+ * Renders the hero's whole media layer: `still` and the video take the intro's blur-in
+ * (data-intro-el="media"); the button stays put.
  */
-export function HeroVideo({ still, y }: { still: ReactNode; y: MotionValue<number> }) {
+export function HeroVideo({ still }: { still: ReactNode }) {
   const video = useRef<HTMLVideoElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [ready, setReady] = useState(false);
@@ -62,7 +61,7 @@ export function HeroVideo({ still, y }: { still: ReactNode; y: MotionValue<numbe
 
   return (
     <>
-      <motion.div style={{ y }} className="absolute inset-x-0 -bottom-[10%] -top-[10%] -z-10">
+      <div className="absolute inset-0 -z-10">
         <div data-intro-el="media" className="absolute inset-0 bg-[#DDF1FC]">
           {still}
           {showVideo && (
@@ -86,7 +85,7 @@ export function HeroVideo({ still, y }: { still: ReactNode; y: MotionValue<numbe
             />
           )}
         </div>
-      </motion.div>
+      </div>
       {showVideo && (
         <button
           type="button"
