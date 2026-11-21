@@ -1,5 +1,4 @@
 import { preload } from "react-dom";
-import { Differences } from "@/components/home/Differences";
 import { Hero } from "@/components/home/Hero";
 import { HomeIntro } from "@/components/home/HomeIntro";
 import { HomeMap } from "@/components/home/HomeMap";
@@ -19,6 +18,9 @@ import { planDistricts } from "@/lib/plan-props";
  * Stacked sheets (owner request, Nov 20, 2026, after villiers.ai): pinned sections hold still once
  * fully in view, and the next one slides up over them. The map isn't pinned, because the district
  * dive measures it on screen and the 3D model shouldn't keep drawing under other sections.
+ * From the map on, sections scroll normally (owner request, Nov 21, 2026, to avoid visual fatigue).
+ * The tour and doorways still go through StackSection, unpinned, so they paint over the pinned
+ * photo steps. "What makes it different" was removed the same day: it repeated the hero and photos.
  */
 export default function Home() {
   // The plan sheet sits inside an SVG <image>, which the browser can't discover early.
@@ -36,13 +38,11 @@ export default function Home() {
       <StackSection sheet>
         <HomeMap districts={planDistricts()} viewBox={PLAN_VIEWBOX} imageHref={PLAN_SHEET} disclaimer={PLAN_DISCLAIMER} />
       </StackSection>
-      <StackSection pin>
-        <Differences />
-      </StackSection>
-      <StackSection pin sheet>
+      {/* A background, so the pinned photo steps don't show through before the tour photo loads. */}
+      <StackSection className="bg-linen">
         <TourTeaser />
       </StackSection>
-      <StackSection sheet className="bg-linen">
+      <StackSection className="bg-linen">
         <DoorwayCards />
       </StackSection>
     </>
