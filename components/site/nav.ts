@@ -18,7 +18,7 @@ export const mainNav = [
 /** The three pages of The Plan, in reading order. Used by the header menu and the Plan page nav. */
 export const planPages = [
   { href: "/plan", label: "Overview", text: "The idea, the map and how it fits together" },
-  { href: "/plan/living-and-care", label: "Living and care", text: "Life Plan Community, Heritage Grove, care and technology" },
+  { href: "/plan/living-and-care", label: "Living and care", text: "Homes for every stage of life, Heritage Grove, care and technology" },
   { href: "/plan/village-and-outdoors", label: "Village and outdoors", text: "The village, walking, parks and trails, and why Chelan" },
 ] as const;
 
