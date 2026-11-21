@@ -39,6 +39,29 @@ export function PlanHero() {
   );
 }
 
+/**
+ * Hero for the two story pages of The Plan (Living and care, Village and outdoors): text on a sand
+ * panel, with "The Plan" as a small label above the title. No image, so no placeholder.
+ */
+export function PlanSubHero({ id, title, lede }: { id: string; title: string; lede: string }) {
+  return (
+    <section aria-labelledby={id} className="px-2 sm:px-4">
+      <div className="flex flex-col gap-4 rounded-hero-sm bg-sand px-5 pb-10 pt-14 sm:gap-6 sm:rounded-hero sm:px-16 sm:pb-16 sm:pt-28">
+        <Reveal as="p" kind="fade" className={eyebrow}>
+          The Plan
+        </Reveal>
+        <Reveal as="h1" kind="head" id={id} className="text-[46px] leading-[0.98] tracking-[-0.03em] sm:text-[clamp(64px,6.6vw,96px)] sm:leading-[0.95]">
+          {title}
+        </Reveal>
+        <Reveal as="p" kind="fade" className="max-w-[760px] text-xl leading-normal sm:text-[23px]">
+          {lede}
+        </Reveal>
+        <p className="text-[0.9375rem] text-muted">{PLAN_DISCLAIMER}</p>
+      </div>
+    </section>
+  );
+}
+
 /** Intro: a small "Overview" label under a 3px Deep Sage rule on the left, the paragraph on the right (stacked on phones). */
 export function PlanIntro() {
   return (
@@ -87,7 +110,7 @@ const fits: RuleItem[] = [
 /** "How it fits together": four short items under a 3px Deep Sage rule. */
 export function FitsTogether() {
   return (
-    <section aria-labelledby="fits-title" className="px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]">
+    <section id="fits" aria-labelledby="fits-title" className="px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]">
       <Reveal as="h2" kind="head" id="fits-title" className="mb-7 text-[34px] leading-none sm:mb-14 sm:text-[clamp(40px,4.2vw,60px)]">
         How it fits together
       </Reveal>
@@ -147,7 +170,9 @@ export function CareCloseBy() {
         </div>
       </div>
       <div className="flex flex-col gap-4 px-3 pb-12 pt-10 sm:gap-5 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-20">
-        <h3 className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">Technology that supports people</h3>
+        <h3 id="technology" className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">
+          Technology that supports people
+        </h3>
         <p className="mb-4 max-w-[760px] text-xl leading-normal sm:mb-8 sm:text-[23px]">
           Technology is planned to take on the routine work, so the people who give care have more time for the people they care for. It will
           never replace them.

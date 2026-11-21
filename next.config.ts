@@ -8,9 +8,10 @@ const nextConfig: NextConfig = {
     return [
       // The Planning Framework page was removed (owner decision, Oct 22, 2026).
       { source: "/planning", destination: "/", permanent: true },
-      // Folded into The Plan (docs/10-content-v2.md, "Redirects").
-      { source: "/connected-community", destination: "/plan#care-close-by", permanent: true },
-      { source: "/chelan", destination: "/plan#why-chelan", permanent: true },
+      // Folded into The Plan (docs/10-content-v2.md, "Redirects"), then onto its story pages when
+      // The Plan was split (Nov 19, 2026). Old /plan#… links are forwarded in components/plan/MovedSections.tsx.
+      { source: "/connected-community", destination: "/plan/living-and-care#care-close-by", permanent: true },
+      { source: "/chelan", destination: "/plan/village-and-outdoors#why-chelan", permanent: true },
       // No districts index page: the header's Districts menu lists the ten pages (owner decision, Oct 28, 2026).
       { source: "/districts", destination: "/plan#explore", permanent: true },
     ];
