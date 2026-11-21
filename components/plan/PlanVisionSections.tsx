@@ -78,9 +78,9 @@ export function Vision() {
 }
 
 const steps: { title: string; text: string }[] = [
-  { title: "Live on your own terms.", text: "Your own cottage, townhome or apartment, with the upkeep handled for you." },
+  { title: "Independent living.", text: "Your own cottage, townhome or apartment, with the upkeep planned as a shared service." },
   { title: "A little help each day.", text: "Assisted living, for when everyday routines take more effort." },
-  { title: "Memory care.", text: "Homes designed for people living with Alzheimer's or dementia, with staff trained in their care." },
+  { title: "Memory care.", text: "Homes designed for people living with Alzheimer's or dementia, planned with staff trained in their care." },
   { title: "Nursing care.", text: "Around-the-clock care for people who need it." },
 ];
 
@@ -124,8 +124,9 @@ function CarePath() {
   );
 }
 
-// "Meals worth sharing" drops "and orchards" from docs/14 (Nov 13: no orchards in public copy).
+// "Shared meals" (was "Meals worth sharing") drops "and orchards" from docs/14 (Nov 13: no orchards in public copy).
 // "Costs you can plan for" is the generic form only: no promise on fees (docs/14, DECISION 2).
+// Sales-style titles toned down on Nov 20, 2026 (owner: "keep it warm, cut sales lines"; docs/14 still has the old ones).
 // Listed clockwise around the BenefitCluster ring, so related reasons sit side by side: health at the
 // top, the home and its costs on the right, family and pets at the bottom, everyday life on the left.
 const benefits: RuleItem[] = [
@@ -134,7 +135,7 @@ const benefits: RuleItem[] = [
     text: "Level paths, single-level homes, wider doorways and good lighting, so your home keeps working for you as your needs change.",
   },
   { title: "Care, close by.", text: "The hospital campus and nearby clinics are planned within a short walk." },
-  { title: "Maintenance-free living.", text: "Home repairs, yard work and snow are taken care of, so your time is your own." },
+  { title: "Less upkeep.", text: "Home repairs, yard work and snow clearing are planned as shared services, so more of your time is your own." },
   { title: "Homes at more than one price.", text: "A range of home types and sizes is planned, so more people can find one that fits." },
   {
     title: "Costs you can plan for.",
@@ -144,14 +145,14 @@ const benefits: RuleItem[] = [
     title: "Room for family.",
     text: "Guest suites in the clubhouses, so children and grandchildren can stay close when they visit. (concept)",
   },
-  { title: "Pets welcome.", text: "Pet-friendly homes, with places to walk a dog close by. (concept)" },
+  { title: "Room for pets.", text: "Pet-friendly homes are planned, with places to walk a dog close by. (concept)" },
   {
-    title: "Neighbors who become friends.",
+    title: "Neighbors close by.",
     text: "People at a similar stage of life, with clubhouses, courtyards and the village to meet in.",
   },
   {
-    title: "Meals worth sharing.",
-    text: "Dining rooms and cafés serving food from the valley's own farms, with choices for different diets. (concept)",
+    title: "Shared meals.",
+    text: "Dining rooms and cafés are planned, with food from the valley's own farms and choices for different diets. (concept)",
   },
   {
     title: "An engaged life.",

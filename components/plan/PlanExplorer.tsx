@@ -54,11 +54,14 @@ export function PlanExplorer({
   viewBox,
   imageHref,
   disclaimer,
+  hero,
 }: {
   districts: PlanDistrict[];
   viewBox: string;
   imageHref: string;
   disclaimer: string;
+  /** The page title and a short lede above the map, when the explorer opens the page (The Plan overview). */
+  hero?: { id: string; title: string; lede: string };
 }) {
   const reduce = usePrefersReducedMotion();
   const frame = useRef<HTMLDivElement>(null);
@@ -126,7 +129,27 @@ export function PlanExplorer({
   const current = districts.find((d) => d.key === selected) ?? districts[0];
 
   return (
-    <section id="explore" aria-label="3D district model" className="bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]">
+    <section
+      id="explore"
+      aria-labelledby={hero?.id}
+      aria-label={hero ? undefined : "District map"}
+      className={hero ? "px-2 sm:px-4" : "bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]"}
+    >
+      <div
+        className={
+          hero
+            ? "rounded-hero-sm bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(32px,5vw,64px)] pt-24 sm:rounded-hero sm:pt-28"
+            : undefined
+        }
+      >
+      {hero && (
+        <div className="mb-6 flex flex-col gap-3 px-2 sm:mb-10 sm:gap-5 sm:px-0 min-[1000px]:flex-row min-[1000px]:items-end min-[1000px]:justify-between min-[1000px]:gap-16">
+          <h1 id={hero.id} className="text-[56px] leading-[0.95] tracking-[-0.03em] sm:text-[clamp(72px,7vw,104px)]">
+            {hero.title}
+          </h1>
+          <p className="max-w-[520px] text-xl leading-normal sm:text-[23px] min-[1000px]:pb-2">{hero.lede}</p>
+        </div>
+      )}
       <div className="grid items-start gap-6 min-[1000px]:grid-cols-[minmax(0,1fr)_400px]">
         <div className="flex min-w-0 flex-col gap-3.5">
           <div
@@ -166,10 +189,11 @@ export function PlanExplorer({
             )}
 
             {show3D && (
+              // Phones: at the bottom of the frame, so it doesn't cover the roundels at the top-left of the plan.
               <div
                 role="toolbar"
                 aria-label="View controls"
-                className="absolute left-2.5 top-2.5 z-[3] flex flex-wrap gap-1 rounded-full bg-linen p-1 sm:left-4 sm:top-4"
+                className="absolute bottom-2.5 left-2.5 z-[3] flex flex-wrap gap-1 rounded-full bg-linen p-1 sm:bottom-auto sm:left-4 sm:top-4"
               >
                 <button type="button" aria-pressed={!topDown} onClick={() => setView(false)} className={`${toolBtn} ${!topDown ? "bg-gold font-bold" : "font-medium hover:bg-sand"}`}>
                   <span className="sm:hidden">3D</span>
@@ -219,7 +243,7 @@ export function PlanExplorer({
                       on ? "bg-linen font-bold shadow-[inset_0_0_0_2px_var(--gold)]" : "hover:bg-linen/60"
                     }`}
                   >
-                    <span aria-hidden="true" className="size-2.5 shrink-0 rounded-[3px]" style={{ background: d.color }} />
+                    <Roundel district={d} />
                     {d.name}
                   </button>
                 </li>
@@ -248,7 +272,7 @@ export function PlanExplorer({
                   }}
                   className={`flex min-h-[52px] w-full items-center gap-3 px-3.5 text-left ${open ? "font-bold" : ""}`}
                 >
-                  <span aria-hidden="true" className="size-2.5 shrink-0 rounded-[3px]" style={{ background: d.color }} />
+                  <Roundel district={d} />
                   {d.name}
                   <span aria-hidden="true" className={`ml-auto text-muted transition-transform duration-200 ${open ? "rotate-90" : ""}`}>
                     ›
@@ -272,7 +296,24 @@ export function PlanExplorer({
           })}
         </ul>
       </div>
+      </div>
     </section>
+  );
+}
+
+/**
+ * A district's number on its color, matching the roundels on the plan, so a row is never told apart
+ * by color alone (DESIGN.md, the Number-and-Name Rule). The name beside it is the accessible label.
+ */
+function Roundel({ district: d }: { district: PlanDistrict }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="tabular inline-flex size-7 shrink-0 items-center justify-center rounded-full border-[1.5px] border-hearth text-[0.8125rem] font-bold text-hearth"
+      style={{ background: d.color }}
+    >
+      {d.n}
+    </span>
   );
 }
 

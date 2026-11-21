@@ -3,6 +3,7 @@ import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { CareCloseBy, PlanSubHero } from "@/components/plan/PlanSections";
 import { HeritageGroveSummary, LifePlan } from "@/components/plan/PlanVisionSections";
 import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
+import { talkDoorways } from "@/lib/doorways";
 
 export const metadata: Metadata = {
   title: "Living and care",
@@ -23,7 +24,7 @@ const keepExploring: Doorway[] = [
     title: "See the whole plan.",
     text: "Explore all ten districts on the map and the 3D model.",
     cta: "Back to the map",
-    fill: "#DDF1FC",
+    fill: "#FFF2B3",
   },
 ];
 
@@ -53,7 +54,7 @@ export default function LivingAndCarePage() {
       <HeritageGroveSummary />
       <div className="h-16 sm:h-[120px]" aria-hidden="true" />
       <CareCloseBy />
-      <DoorwayCards doorways={keepExploring} heading={{ id: "more-title", title: "Keep exploring the plan" }} />
+      <DoorwayCards doorways={[...keepExploring, ...talkDoorways]} heading={{ id: "more-title", title: "Where to go next" }} />
     </>
   );
 }

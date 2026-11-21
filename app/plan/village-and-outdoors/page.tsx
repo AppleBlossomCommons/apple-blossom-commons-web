@@ -3,6 +3,7 @@ import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { Outdoors, Village, Walking } from "@/components/plan/PlanPlaceSections";
 import { PlanSubHero, WhyChelan } from "@/components/plan/PlanSections";
 import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
+import { talkDoorways } from "@/lib/doorways";
 
 export const metadata: Metadata = {
   title: "Village and outdoors",
@@ -23,7 +24,7 @@ const keepExploring: Doorway[] = [
     title: "See the whole plan.",
     text: "Explore all ten districts on the map and the 3D model.",
     cta: "Back to the map",
-    fill: "#DDF1FC",
+    fill: "#FFF2B3",
   },
 ];
 
@@ -49,7 +50,7 @@ export default function VillageAndOutdoorsPage() {
       <Walking />
       <Outdoors />
       <WhyChelan />
-      <DoorwayCards doorways={keepExploring} heading={{ id: "more-title", title: "Keep exploring the plan" }} />
+      <DoorwayCards doorways={[...keepExploring, ...talkDoorways]} heading={{ id: "more-title", title: "Where to go next" }} />
     </>
   );
 }

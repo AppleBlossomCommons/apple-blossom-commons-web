@@ -4,8 +4,9 @@ import { PlanExplorer } from "@/components/plan/PlanExplorer";
 import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { GuidingIdeas } from "@/components/plan/PlanPlaceSections";
 import { Vision } from "@/components/plan/PlanVisionSections";
-import { FitsTogether, PlanHero, PlanIntro } from "@/components/plan/PlanSections";
+import { FitsTogether, PlanIntro } from "@/components/plan/PlanSections";
 import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
+import { talkDoorways } from "@/lib/doorways";
 import { PLAN_SHEET } from "@/lib/district-image";
 import { PLAN_DISCLAIMER_3D, PLAN_VIEWBOX } from "@/lib/districts";
 import { planDistricts } from "@/lib/plan-props";
@@ -43,22 +44,31 @@ export default function PlanPage() {
   return (
     <>
       <MovedSections />
-      <PlanHero />
+      {/* The explorer opens the page (owner decision, Nov 20, 2026: option B of the critique mockups). */}
+      <PlanExplorer
+        districts={planDistricts()}
+        viewBox={PLAN_VIEWBOX}
+        imageHref={PLAN_SHEET}
+        disclaimer={PLAN_DISCLAIMER_3D}
+        hero={{
+          id: "plan-title",
+          title: "The plan",
+          lede: "A long-range plan near Lake Chelan, meant to grow slowly, one neighborhood at a time. Choose a district to see what is planned there.",
+        }}
+      />
       <PlanPageNav
         current="/plan"
         sections={[
           { id: "vision", label: "The idea" },
-          { id: "explore", label: "The map" },
           { id: "fits", label: "How it fits together" },
           { id: "guiding-ideas", label: "What guides the plan" },
         ]}
       />
       <PlanIntro />
       <Vision />
-      <PlanExplorer districts={planDistricts()} viewBox={PLAN_VIEWBOX} imageHref={PLAN_SHEET} disclaimer={PLAN_DISCLAIMER_3D} />
       <FitsTogether />
       <GuidingIdeas />
-      <DoorwayCards doorways={morePlan} heading={{ id: "more-title", title: "More of the plan" }} />
+      <DoorwayCards doorways={[...morePlan, ...talkDoorways]} heading={{ id: "more-title", title: "Where to go next" }} />
     </>
   );
 }
