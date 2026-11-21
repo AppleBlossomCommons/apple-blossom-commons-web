@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drone Label Marker</title>
+<style>
+  :root {
+    --bg: #f4efe6; --panel: #fffdf8; --ink: #1f2420; --muted: #5d625c; --line: #d9d1c3;
+    --accent: #2f5d50; --accent-ink: #fff; --warn: #8a3b12; --card: rgba(20, 24, 22, 0.82);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 Arial, Helvetica, sans-serif; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 16px; margin: 0 8px 0 0; }
+  .grow { flex: 1; }
+  select, button, input[type=text] { font: inherit; color: inherit; }
+  select, input[type=text] { padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+  button { padding: 6px 11px; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  button:disabled { opacity: 0.45; cursor: default; }
+  :focus-visible { outline: 3px solid #e0a43a; outline-offset: 2px; }
+  #status { color: var(--muted); font-size: 13px; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; padding: 16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .stage { position: relative; background: #000; border-radius: 8px; overflow: hidden; user-select: none; }
+  .stage video { display: block; width: 100%; height: 100%; }
+  .overlay { position: absolute; inset: 0; cursor: crosshair; }
+  .pin { position: absolute; width: 0; height: 0; }
+  .pin .dot { position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.5); cursor: grab; }
+  .pin .stem { position: absolute; left: -1px; bottom: 8px; width: 2px; height: 34px; background: #fff; pointer-events: none; }
+  .pin .cap { position: absolute; bottom: 42px; transform: translateX(-50%); white-space: nowrap; background: var(--card); color: #fff; font-weight: bold; font-size: 15px; padding: 5px 10px 5px 14px; border-radius: 4px; pointer-events: none; }
+  .pin .cap::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); border-radius: 4px 0 0 4px; }
+  .pin.below .stem { bottom: auto; top: 8px; }
+  .pin.below .cap { bottom: auto; top: 42px; }
+  .pin.selected .dot { box-shadow: 0 0 0 3px #e0a43a, 0 0 0 4px rgba(0,0,0,.6); }
+  .pin.ghost { opacity: 0.55; }
+  .pin.ghost .dot { cursor: default; border-style: dashed; }
+  .pin.fading { opacity: 0.25; }
+  .banner { position: absolute; left: 10px; top: 10px; background: var(--card); color: #fff; padding: 4px 9px; border-radius: 4px; font-size: 12px; pointer-events: none; }
+  .transport { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; }
+  .transport .time { font-variant-numeric: tabular-nums; min-width: 150px; color: var(--muted); }
+  .timeline { position: relative; margin-top: 10px; height: 34px; }
+  .timeline input { position: absolute; inset: 8px 0 auto 0; width: 100%; margin: 0; }
+  .ticks { position: absolute; left: 0; right: 0; top: 0; height: 8px; }
+  .tick { position: absolute; top: 0; width: 10px; height: 10px; margin-left: -5px; transform: rotate(45deg); background: var(--accent); border: 0; padding: 0; border-radius: 1px; }
+  .tick.current { background: #e0a43a; }
+  aside { display: flex; flex-direction: column; gap: 14px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .panel h2 { font-size: 13px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .labels { display: flex; flex-direction: column; gap: 4px; }
+  .label-btn { display: flex; align-items: center; gap: 8px; text-align: left; width: 100%; }
+  .label-btn[aria-pressed=true] { border-color: var(--accent); background: #e7efe9; }
+  .swatch { width: 12px; height: 12px; border-radius: 50%; flex: none; border: 1px solid rgba(0,0,0,.25); }
+  .key { margin-left: auto; color: var(--muted); font-size: 12px; }
+  .placed { color: var(--accent); font-weight: bold; }
+  .row { display: flex; gap: 6px; margin-top: 8px; }
+  .row input { flex: 1; min-width: 0; }
+  .kf-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .help { color: var(--muted); font-size: 12.5px; margin: 0; padding-left: 16px; }
+  .progress { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .msg { font-size: 12.5px; margin-top: 6px; color: var(--muted); white-space: pre-wrap; }
+  .msg.err { color: var(--warn); }
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .progress div { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Drone label marker</h1>
+  <label for="videoSel">Video</label>
+  <select id="videoSel"><option value="">Choose a video…</option></select>
+  <span class="grow"></span>
+  <span id="status" role="status" aria-live="polite"></span>
+  <button id="saveBtn" type="button" disabled>Save</button>
+</header>
+
+<main>
+  <section>
+    <div id="stage" class="stage" hidden>
+      <video id="video" preload="auto" muted playsinline></video>
+      <div id="overlay" class="overlay" aria-label="Video frame. Click to place the selected label."></div>
+      <div id="banner" class="banner"></div>
+    </div>
+    <div id="emptyMsg" class="empty">Put drone videos in the <code>drone-videos/</code> folder, then choose one above.</div>
+
+    <div id="controls" hidden>
+      <div class="timeline">
+        <div id="ticks" class="ticks"></div>
+        <input id="scrub" type="range" min="0" max="0" step="1" value="0" aria-label="Frame">
+      </div>
+      <div class="transport">
+        <button id="playBtn" type="button">Play</button>
+        <button id="prevKf" type="button" title="Previous keyframe ( [ )">◀◀ Keyframe</button>
+        <button id="prevFr" type="button" title="Back one frame (←). Shift+← for 1 second">◀ Frame</button>
+        <button id="nextFr" type="button" title="Forward one frame (→). Shift+→ for 1 second">Frame ▶</button>
+        <button id="nextKf" type="button" title="Next keyframe ( ] )">Keyframe ▶▶</button>
+        <span class="time" id="timeLbl"></span>
+        <span class="grow"></span>
+        <button id="makeKf" type="button" class="primary" title="Make a keyframe here, starting from the labels you see (K)">Make keyframe here</button>
+        <button id="delKf" type="button" title="Delete this keyframe">Delete keyframe</button>
+      </div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="panel">
+      <h2>Labels</h2>
+      <div id="labels" class="labels"></div>
+      <div class="row">
+        <input id="customName" type="text" placeholder="Add a label (e.g. Isenhart Road)" aria-label="New label name">
+        <button id="addCustom" type="button">Add</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Keyframes</h2>
+      <div id="kfList" class="kf-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Render</h2>
+      <label><input id="disclaimer" type="checkbox" checked> Show the "Illustrative interpretation…" line</label>
+      <div class="row"><button id="renderBtn" type="button" class="primary" disabled>Render labeled video</button></div>
+      <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+      <div id="renderMsg" class="msg" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="panel">
+      <h2>How to use</h2>
+      <ol class="help">
+        <li>Pause where a district is clearly in view.</li>
+        <li>Pick a label (or press 1–9, 0), then click where it sits in the frame.</li>
+        <li>Drag a pin to move it. Select it and press Delete to remove it.</li>
+        <li>Move ahead a few seconds and press <b>Make keyframe here</b>. Your labels carry over; drag them onto the right places.</li>
+        <li>Leave a label out of a keyframe to fade it out.</li>
+        <li>Faint pins between keyframes are a rough preview. The render follows the ground with motion tracking.</li>
+      </ol>
+      <p class="help" style="padding:0;margin-top:8px">Keys: Space play/pause · ← → frame · Shift ← → second · [ ] keyframe · K make keyframe</p>
+    </div>
+  </aside>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const video = $("video"), overlay = $("overlay");
+let labels = [];            // {id, label, color}
+let state = null;           // {video, meta, keyframes:[{f, pins:{id:{x,y}}}], custom:[], options:{}}
+let current = "wine";       // selected label id
+let selectedPin = null;     // id of selected pin on the current keyframe
+let dirty = false, saveTimer = null;
+
+// ---------- data ----------
+async function loadLabels() {
+  const d = await (await fetch("/districts.json")).json();
+  return d.districts.map((x) => ({ id: x.key, label: x.name, color: x.color }));
+}
+function allLabels() { return labels.concat(state ? state.custom : []); }
+function labelById(id) { return allLabels().find((l) => l.id === id); }
+function fps() { return state.meta.fps; }
+function frameCount() { return Math.max(1, Math.round(state.meta.duration * fps())); }
+function frameNow() { return Math.min(frameCount() - 1, Math.max(0, Math.floor(video.currentTime * fps() + 1e-3))); }
+function seekFrame(f) {
+  f = Math.min(frameCount() - 1, Math.max(0, Math.round(f)));
+  video.pause();
+  video.currentTime = (f + 0.5) / fps();
+}
+function kfAt(f) { return state.keyframes.find((k) => k.f === f); }
+function sortKf() { state.keyframes.sort((a, b) => a.f - b.f); }
+
+// Rough in-browser preview between keyframes (the render uses motion tracking instead).
+function previewPins(f) {
+  const ks = state.keyframes;
+  const exact = kfAt(f);
+  if (exact) return Object.entries(exact.pins).map(([id, p]) => ({ id, ...p, mode: "key" }));
+  let a = null, b = null;
+  for (const k of ks) { if (k.f < f) a = k; else if (k.f > f && !b) b = k; }
+  const out = [];
+  if (a && b) {
+    const w = (f - a.f) / (b.f - a.f);
+    for (const [id, p] of Object.entries(a.pins)) {
+      const q = b.pins[id];
+      if (q) out.push({ id, x: p.x + (q.x - p.x) * w, y: p.y + (q.y - p.y) * w, mode: "ghost" });
+      else out.push({ id, ...p, mode: "fading" });
+    }
+    for (const [id, q] of Object.entries(b.pins)) if (!a.pins[id]) out.push({ id, ...q, mode: "fading" });
+  } else if (a || b) {
+    for (const [id, p] of Object.entries((a || b).pins)) out.push({ id, ...p, mode: "ghost" });
+  }
+  return out;
+}
+
+// ---------- rendering the page ----------
+function renderLabels() {
+  const box = $("labels"); box.innerHTML = "";
+  const kf = state ? kfAt(frameNow()) : null;
+  allLabels().forEach((l, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "label-btn";
+    b.setAttribute("aria-pressed", String(l.id === current));
+    const placed = kf && kf.pins[l.id];
+    b.innerHTML = `<span class="swatch" style="background:${l.color}"></span><span></span>` +
+      `<span class="key">${placed ? '<span class="placed">placed</span> ' : ""}${i < 10 ? (i + 1) % 10 : ""}</span>`;
+    b.children[1].textContent = l.label;
+    b.onclick = () => { current = l.id; renderLabels(); };
+    box.appendChild(b);
+  });
+}
+
+function renderPins() {
+  overlay.innerHTML = "";
+  if (!state) return;
+  const f = frameNow();
+  const kf = kfAt(f);
+  for (const p of previewPins(f)) {
+    const l = labelById(p.id); if (!l) continue;
+    const el = document.createElement("div");
+    el.className = "pin" + (p.mode !== "key" ? " " + p.mode : "") + (p.y < 0.18 ? " below" : "") + (kf && p.id === selectedPin ? " selected" : "");
+    el.style.left = p.x * 100 + "%"; el.style.top = p.y * 100 + "%";
+    el.style.setProperty("--c", l.color);
+    el.innerHTML = `<div class="stem"></div><div class="cap"></div><div class="dot" style="background:${l.color}"></div>`;
+    el.querySelector(".cap").textContent = l.label;
+    if (p.mode === "key") el.querySelector(".dot").addEventListener("pointerdown", (e) => startDrag(e, p.id));
+    overlay.appendChild(el);
+  }
+  const t = video.currentTime;
+  $("banner").textContent = kf ? `Keyframe · frame ${f}` : "Between keyframes · preview";
+  $("timeLbl").textContent = `${fmt(t)} / ${fmt(state.meta.duration)} · frame ${f}`;
+  $("scrub").value = f;
+  $("delKf").disabled = !kf;
+  $("ticks").querySelectorAll(".tick").forEach((tk) => tk.classList.toggle("current", +tk.dataset.f === f));
+  renderLabels();
+}
+
+function renderKeyframes() {
+  const ticks = $("ticks"), list = $("kfList");
+  ticks.innerHTML = ""; list.innerHTML = "";
+  sortKf();
+  state.keyframes.forEach((k, i) => {
+    const t = document.createElement("button");
+    t.type = "button"; t.className = "tick"; t.dataset.f = k.f;
+    t.style.left = (k.f / (frameCount() - 1)) * 100 + "%";
+    t.title = `Keyframe at ${fmt(k.f / fps())}`; t.setAttribute("aria-label", t.title);
+    t.onclick = () => seekFrame(k.f);
+    ticks.appendChild(t);
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = `${i + 1} · ${fmt(k.f / fps())} · ${Object.keys(k.pins).length}`;
+    b.title = "Jump to this keyframe (time · number of labels)";
+    b.onclick = () => seekFrame(k.f);
+    list.appendChild(b);
+  });
+  if (!state.keyframes.length) list.textContent = "None yet.";
+  $("renderBtn").disabled = !state.keyframes.length;
+}
+
+function fmt(t) { const m = Math.floor(t / 60), s = (t % 60).toFixed(2).padStart(5, "0"); return `${m}:${s}`; }
+
+// ---------- editing ----------
+function changed() {
+  dirty = true; $("saveBtn").disabled = false; $("status").textContent = "Unsaved changes";
+  clearTimeout(saveTimer); saveTimer = setTimeout(save, 800);
+  renderKeyframes(); renderPins();
+}
+function ensureKf(f) {
+  let k = kfAt(f);
+  if (!k) { k = { f, pins: {} }; state.keyframes.push(k); sortKf(); }
+  return k;
+}
+function posFromEvent(e) {
+  const r = overlay.getBoundingClientRect();
+  return { x: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)) };
+}
+overlay.addEventListener("pointerdown", (e) => {
+  if (!state || e.target.classList.contains("dot")) return;
+  video.pause();
+  const f = frameNow(), k = ensureKf(f), p = posFromEvent(e);
+  k.pins[current] = { x: +p.x.toFixed(4), y: +p.y.toFixed(4) };
+  selectedPin = current;
+  changed();
+});
+function startDrag(e, id) {
+  e.preventDefault(); e.stopPropagation();
+  const k = kfAt(frameNow()); if (!k) return;
+  selectedPin = id; current = id; renderPins();
+  const move = (ev) => { const p = posFromEvent(ev); k.pins[id] = { x: +p.x.toFixed(4), y: +p.y.toFixed(4) }; renderPins(); };
+  const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); changed(); };
+  window.addEventListener("pointermove", move); window.addEventListener("pointerup", up);
+}
+function makeKfHere() {
+  const f = frameNow();
+  if (kfAt(f)) return;
+  const pins = {};
+  for (const p of previewPins(f)) pins[p.id] = { x: +p.x.toFixed(4), y: +p.y.toFixed(4) };
+  state.keyframes.push({ f, pins });
+  changed();
+}
+function deleteKf() {
+  const f = frameNow();
+  if (!kfAt(f) || !confirm("Delete this keyframe and its labels?")) return;
+  state.keyframes = state.keyframes.filter((k) => k.f !== f);
+  changed();
+}
+function jumpKf(dir) {
+  const f = frameNow();
+  const ks = state.keyframes.map((k) => k.f);
+  const target = dir > 0 ? ks.find((x) => x > f) : ks.filter((x) => x < f).pop();
+  if (target !== undefined) seekFrame(target);
+}
+
+// ---------- save / load ----------
+async function save() {
+  if (!state || !dirty) return;
+  clearTimeout(saveTimer);
+  state.options.disclaimer = $("disclaimer").checked;
+  state.savedAt = new Date().toISOString();
+  const r = await fetch(`/api/marks?video=${encodeURIComponent(state.video)}`, { method: "POST", body: JSON.stringify(state) });
+  const j = await r.json();
+  if (r.ok) { dirty = false; $("saveBtn").disabled = true; $("status").textContent = `Saved to ${j.saved}`; }
+  else $("status").textContent = "Save failed: " + j.error;
+}
+
+async function openVideo(name) {
+  if (dirty) await save();
+  if (!name) return;
+  $("status").textContent = "Loading…";
+  const meta = await (await fetch(`/api/probe?video=${encodeURIComponent(name)}`)).json();
+  if (meta.error) { $("status").textContent = meta.error; return; }
+  const saved = await (await fetch(`/api/marks?video=${encodeURIComponent(name)}`)).json();
+  state = saved || { video: name, keyframes: [], custom: [], options: { disclaimer: true } };
+  state.video = name; state.meta = meta; state.custom ||= []; state.options ||= { disclaimer: true };
+  $("disclaimer").checked = state.options.disclaimer !== false;
+  $("stage").hidden = false; $("controls").hidden = false; $("emptyMsg").hidden = true;
+  $("stage").style.aspectRatio = `${meta.width} / ${meta.height}`;
+  $("scrub").max = frameCount() - 1;
+  video.src = `/video/${encodeURIComponent(name)}`;
+  dirty = false; $("saveBtn").disabled = true;
+  $("status").textContent = saved ? `Loaded marks (${state.keyframes.length} keyframes)` : "New marks";
+  renderKeyframes(); renderPins();
+}
+
+video.addEventListener("error", () => {
+  $("status").textContent = "This browser can't play the video. See the README for making a preview copy.";
+});
+video.addEventListener("seeked", renderPins);
+video.addEventListener("timeupdate", renderPins);
+video.addEventListener("play", () => { $("playBtn").textContent = "Pause"; });
+video.addEventListener("pause", () => { $("playBtn").textContent = "Play"; renderPins(); });
+video.addEventListener("loadeddata", () => seekFrame(state.keyframes[0] ? state.keyframes[0].f : 0));
+
+// ---------- render ----------
+async function startRender() {
+  await save();
+  const r = await fetch(`/api/render?video=${encodeURIComponent(state.video)}`, { method: "POST" });
+  const j = await r.json();
+  if (!r.ok) { $("renderMsg").textContent = j.error; $("renderMsg").className = "msg err"; return; }
+  $("renderBtn").disabled = true; pollRender();
+}
+async function pollRender() {
+  const s = await (await fetch("/api/render-status")).json();
+  $("bar").style.width = (s.progress * 100).toFixed(1) + "%";
+  const m = $("renderMsg");
+  m.className = "msg" + (s.error ? " err" : "");
+  if (s.running) { m.textContent = s.message || "Rendering…"; setTimeout(pollRender, 1000); return; }
+  $("renderBtn").disabled = false;
+  if (s.error) m.textContent = s.error;
+  else if (s.output) {
+    const name = s.output.split("/").pop();
+    m.innerHTML = `Done: <a href="/output/${encodeURIComponent(name)}" target="_blank" rel="noopener"></a><br><span></span>`;
+    m.querySelector("a").textContent = name; m.querySelector("span").textContent = s.output;
+  }
+}
+
+// ---------- wiring ----------
+$("videoSel").onchange = (e) => openVideo(e.target.value);
+$("saveBtn").onclick = save;
+$("playBtn").onclick = () => (video.paused ? video.play() : video.pause());
+$("prevFr").onclick = () => seekFrame(frameNow() - 1);
+$("nextFr").onclick = () => seekFrame(frameNow() + 1);
+$("prevKf").onclick = () => jumpKf(-1);
+$("nextKf").onclick = () => jumpKf(1);
+$("makeKf").onclick = makeKfHere;
+$("delKf").onclick = deleteKf;
+$("scrub").oninput = (e) => seekFrame(+e.target.value);
+$("renderBtn").onclick = startRender;
+$("disclaimer").onchange = () => { if (state) { state.options.disclaimer = $("disclaimer").checked; changed(); } };
+$("addCustom").onclick = () => {
+  const name = $("customName").value.trim();
+  if (!name || !state) return;
+  const id = "c-" + name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (!labelById(id)) state.custom.push({ id, label: name, color: "#FFFFFF" });
+  current = id; $("customName").value = ""; changed();
+};
+window.addEventListener("beforeunload", (e) => { if (dirty) { save(); e.preventDefault(); } });
+window.addEventListener("keydown", (e) => {
+  if (!state || e.target.matches("input[type=text], select")) return;
+  const k = e.key;
+  if (k === " " && e.target.tagName !== "BUTTON") { e.preventDefault(); video.paused ? video.play() : video.pause(); }
+  else if (k === "ArrowLeft" || k === "ArrowRight") {
+    if (e.target.type === "range") return;
+    e.preventDefault();
+    const step = e.shiftKey ? Math.round(fps()) : 1;
+    seekFrame(frameNow() + (k === "ArrowRight" ? step : -step));
+  }
+  else if (k === "[") jumpKf(-1);
+  else if (k === "]") jumpKf(1);
+  else if (k === "k" || k === "K") makeKfHere();
+  else if ((k === "Delete" || k === "Backspace") && selectedPin) {
+    const kf = kfAt(frameNow());
+    if (kf && kf.pins[selectedPin]) { delete kf.pins[selectedPin]; selectedPin = null; changed(); }
+  }
+  else if (/^[0-9]$/.test(k)) {
+    const i = k === "0" ? 9 : +k - 1;
+    const l = allLabels()[i]; if (l) { current = l.id; renderLabels(); }
+  }
+});
+
+(async function init() {
+  labels = await loadLabels();
+  const vids = await (await fetch("/api/videos")).json();
+  for (const v of vids) { const o = document.createElement("option"); o.value = o.textContent = v; $("videoSel").appendChild(o); }
+  renderLabels();
+})();
+</script>
+</body>
+</html>

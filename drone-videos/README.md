@@ -21,3 +21,8 @@ rule is "never commit video to this repo". Keep a backup of the originals elsewh
 2. `node --env-file=.env.vercel.local scripts/home-video/upload.mjs` puts the clip on Vercel
    Blob and prints `NEXT_PUBLIC_HOME_VIDEO_URL`. Add that in Vercel's environment variables.
    Until then the live site shows the still image only.
+
+## Labeled versions
+
+`scripts/drone-labels/` is a small local tool for adding district labels to these videos
+(see its README). Labeled renders are written to `drone-videos/labeled/`.
