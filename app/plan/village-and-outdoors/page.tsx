@@ -15,7 +15,7 @@ const keepExploring: Doorway[] = [
   {
     href: "/plan/living-and-care",
     title: "Living and care.",
-    text: "What a Life Plan Community is, Heritage Grove, and how care and technology are planned close to home.",
+    text: "Homes for every stage of life, Heritage Grove, and how care and technology are planned close to home.",
     cta: "Living and care",
     fill: "#ECE7FC",
   },

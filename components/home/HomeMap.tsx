@@ -259,9 +259,12 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
         </Reveal>
       </div>
 
-      {/* w-full: with aspect-ratio and an auto width, min-height would widen the frame to 682px on phones. */}
+      {/* w-full: with aspect-ratio and an auto width, min-height would widen the frame on phones. */}
+      {/* max-h: the whole frame fits on screen under the header (at 1440×900 it was 857px tall). */}
+      {/* min-h 330px, not taller: on phones the plan's width limits its size, so a taller frame only added */}
+      {/* empty space. 330px leaves the "Select a district" label clear of the board's corner. */}
       {/* bg-linen matches the model's own background, so nothing changes color as the 2D plan fades. */}
-      <div ref={frame} className="relative isolate aspect-[1.55] min-h-[440px] w-full overflow-hidden rounded-card bg-linen">
+      <div ref={frame} className="relative isolate aspect-[1.55] max-h-[calc(100svh-7rem)] min-h-[330px] w-full overflow-hidden rounded-card bg-linen">
         {want3D && !failed3D && (
           <ModelBoundary onError={() => setFailed3D(true)}>
             <DistrictModel3D

@@ -64,3 +64,6 @@ next-env.d.ts
 
 # owner-supplied originals (Research Library PDFs etc.); copied into public/ by scripts, never committed
 /incoming/
+
+# local Python environments for scripts
+scripts/drone-labels/.venv/

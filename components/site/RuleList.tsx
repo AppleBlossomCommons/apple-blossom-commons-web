@@ -9,7 +9,7 @@ const layouts = {
   auto: "grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-7 sm:gap-10",
   /** 3 × 2 on desktop, 2 on tablets, 1 on phones (What guides the plan). */
   three: "grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3",
-  /** 5 × 2 on wide screens, 2 on tablets, 1 on phones (Why people choose a Life Plan Community). */
+  /** 5 × 2 on wide screens, 2 on tablets, 1 on phones. */
   five: "grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-10 xl:grid-cols-5 xl:gap-x-8",
   /** One column, items stacked (beside a diagram). */
   stack: "grid-cols-1 gap-7 sm:gap-8",

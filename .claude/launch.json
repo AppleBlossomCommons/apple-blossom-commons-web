@@ -29,6 +29,14 @@
         "3100"
       ],
       "port": 3100
+    },
+    {
+      "name": "drone-labels",
+      "runtimeExecutable": "scripts/drone-labels/.venv/bin/python",
+      "runtimeArgs": [
+        "scripts/drone-labels/server.py"
+      ],
+      "port": 4410
     }
   ]
 }

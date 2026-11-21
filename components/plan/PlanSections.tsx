@@ -5,6 +5,7 @@ import { ConceptText } from "@/components/site/Places";
 import { eyebrow } from "@/components/site/layout";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
 import { PLAN_DISCLAIMER } from "@/lib/districts";
+import { PhotoFrame, visionPhoto, type Photo } from "@/components/plan/LivingSections";
 
 // Copy from docs/10-content-v2.md, "The Plan (/plan)", with the changes in
 // docs/11-plan-and-districts-content.md, section 1, and docs/14-plan-vision-content.md (which wins
@@ -12,22 +13,32 @@ import { PLAN_DISCLAIMER } from "@/lib/districts";
 
 /**
  * Hero for the two story pages of The Plan (Living and care, Village and outdoors): text on a sand
- * panel, with "The Plan" as a small label above the title. No image, so no placeholder.
+ * panel, with "The Plan" as a small label above the title. An optional photo sits beside the text on
+ * wide screens and under it on phones.
  */
-export function PlanSubHero({ id, title, lede }: { id: string; title: string; lede: string }) {
+export function PlanSubHero({ id, title, lede, photo }: { id: string; title: string; lede: string; photo?: Photo }) {
   return (
     <section aria-labelledby={id} className="px-2 sm:px-4">
-      <div className="flex flex-col gap-4 rounded-hero-sm bg-sand px-5 pb-10 pt-14 sm:gap-6 sm:rounded-hero sm:px-16 sm:pb-16 sm:pt-28">
-        <Reveal as="p" kind="fade" className={eyebrow}>
-          The Plan
-        </Reveal>
-        <Reveal as="h1" kind="head" id={id} className="text-[46px] leading-[0.98] tracking-[-0.03em] sm:text-[clamp(64px,6.6vw,96px)] sm:leading-[0.95]">
-          {title}
-        </Reveal>
-        <Reveal as="p" kind="fade" className="max-w-[760px] text-xl leading-normal sm:text-[23px]">
-          {lede}
-        </Reveal>
-        <p className="text-[0.9375rem] text-muted">{PLAN_DISCLAIMER}</p>
+      <div
+        className={`grid items-center gap-8 rounded-hero-sm bg-sand px-5 pb-10 pt-14 sm:rounded-hero sm:px-16 sm:pb-16 ${
+          photo ? "sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:gap-16 lg:py-16" : "sm:pt-28"
+        }`}
+      >
+        <div className="flex flex-col gap-4 sm:gap-6">
+          <Reveal as="p" kind="fade" className={eyebrow}>
+            The Plan
+          </Reveal>
+          <Reveal as="h1" kind="head" id={id} className="text-[46px] leading-[0.98] tracking-[-0.03em] sm:text-[clamp(64px,6.6vw,96px)] sm:leading-[0.95]">
+            {title}
+          </Reveal>
+          <Reveal as="p" kind="fade" className="max-w-[760px] text-xl leading-normal sm:text-[23px]">
+            {lede}
+          </Reveal>
+          <p className="text-[0.9375rem] text-muted">{PLAN_DISCLAIMER}</p>
+        </div>
+        {photo && (
+          <PhotoFrame photo={photo} priority sizes="(min-width: 1024px) 440px, 100vw" className="aspect-[3/2] lg:aspect-[4/5]" />
+        )}
       </div>
     </section>
   );
@@ -113,41 +124,48 @@ const technology: RuleItem[] = [
 ];
 
 /**
- * "Care, close by" (#care-close-by; was Connected Community): the care text, then "Technology that
- * supports people" across the full width. Names the hospital campus only.
- *
- * Text only until the courtyard image exists (planned: AI image, no people, a sheltered garden
- * courtyard between single-storey homes). Critique of Nov 20, 2026: no placeholder tiles on public pages.
+ * "Care, close by" (#care-close-by; was Connected Community): the care text beside the walk-to-campus
+ * picture, then "Technology that supports people" beside the helper-robot picture, with the six
+ * ideas underneath. Names the hospital campus only. Photos added Nov 20, 2026 (owner: more imagery).
  */
 export function CareCloseBy() {
   return (
-    <section id="care-close-by" aria-labelledby="care-title" className="bg-sand p-2 sm:p-4">
-      <div>
-        <div className="flex flex-col gap-3.5 px-3 pb-4 pt-12 sm:gap-5 sm:px-[clamp(16px,4vw,56px)] sm:pt-[104px]">
+    <section id="care-close-by" aria-labelledby="care-title" className="bg-sand px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]">
+      <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+        <div className="flex flex-col gap-3.5 sm:gap-5">
           <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
             Care, close by
           </Reveal>
-          <Reveal as="p" kind="fade" className="max-w-[560px] sm:text-xl">
+          <Reveal as="p" kind="fade" className="max-w-[560px] text-xl leading-normal sm:text-[23px]">
             The senior neighborhoods, Orchard Grove and Heritage Grove, are planned within a short walk of the hospital campus. The Wellness
             District nearby is planned for clinics, therapy and medical-assisted living.
           </Reveal>
           <p className="max-w-[560px]">
-            <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. Shared clubhouses are planned for the things that make a day good: a fitness room, a library, a place to have a meal or host family overnight. (concept)" />
+            <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. (concept)" />
           </p>
         </div>
+        <PhotoFrame photo={visionPhoto("care")} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[3/2]" />
       </div>
-      <div className="flex flex-col gap-4 px-3 pb-12 pt-10 sm:gap-5 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-20">
-        <h3 id="technology" className="text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]">
-          Technology that supports people
-        </h3>
-        <p className="mb-4 max-w-[760px] text-xl leading-normal sm:mb-8 sm:text-[23px]">
-          Technology is planned to take on the routine work, so the people who give care have more time for the people they care for. It will
-          never replace them.
-        </p>
+
+      <div className="mt-16 grid items-center gap-8 sm:mt-[120px] lg:grid-cols-2 lg:gap-16">
+        <PhotoFrame photo={visionPhoto("technology")} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[3/2] lg:order-first" />
+        <div className="flex flex-col gap-4 sm:gap-5">
+          <h3 id="technology" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+            Technology that supports people
+          </h3>
+          <p className="max-w-[560px] text-xl leading-normal sm:text-[23px]">
+            Technology is planned to take on the routine work, so the people who give care have more time for the people they care for. It will
+            never replace them.
+          </p>
+          <p className="max-w-[560px]">The plan is for residents to decide how their own information is used.</p>
+        </div>
+      </div>
+      <div className="mt-12 sm:mt-16">
         <RuleList items={technology} layout="three" titleAs="h4" />
-        <p className="mt-6 max-w-[760px] sm:mt-10 sm:text-xl">The plan is for residents to decide how their own information is used.</p>
-        <ResearchLink slug="care-close-by">Read the research: Care Close By</ResearchLink>
       </div>
+      <ResearchLink slug="care-close-by" className="mt-10 sm:mt-14">
+        Read the research: Care Close By
+      </ResearchLink>
     </section>
   );
 }

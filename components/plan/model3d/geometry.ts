@@ -53,11 +53,13 @@ export const FLAT_ZOOM = 0.9;
 /**
  * The orthographic frustum's half extents, in scene units at zoom 1, for a canvas of
  * width × height px: half-height = 694 × 0.62, half-width from the aspect, widened on narrow frames.
+ * Tilted into the home view, the board reaches about 581 units either side of center, so narrow
+ * frames (phones) get 614 (0.6 × 1023) to keep its left edge, the lake, in view with a small margin.
  */
 export function frustum(width: number, height: number) {
   const halfH = PLAN_H * 0.62;
   const halfW = halfH * (width / height);
-  const fitW = PLAN_W * (width < 600 ? 0.5 : 0.56);
+  const fitW = PLAN_W * (width < 600 ? 0.6 : 0.56);
   const k = Math.max(1, fitW / halfW);
   return { halfW: halfW * k, halfH: halfH * k };
 }

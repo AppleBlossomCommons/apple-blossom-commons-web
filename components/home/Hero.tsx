@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroVideo } from "@/components/home/HeroVideo";
-import { useParallax } from "@/components/motion/useParallax";
 import { buttonClass } from "@/components/site/buttons";
 import heroStill from "@/public/images/home/hero-still.jpg";
 
@@ -14,23 +13,20 @@ const SUBLINE = "Homes for every stage of life, a short walk from the hospital c
 /**
  * Home hero: an inset card with Andy's drone clip of the site (scripts/home-video), white text on
  * a soft dark-brown fade (docs/04-design-direction.md, rule 3). HomeIntro animates the parts
- * marked data-intro-el (image, headline words, subline, buttons, video button); the image layer
- * also drifts with the scroll (useParallax). HeroVideo plays the clip once and holds.
+ * marked data-intro-el (image, headline words, subline, buttons, video button). HeroVideo plays
+ * the clip once and holds. On Home the hero is pinned (StackSection), so the photo steps slide up
+ * over it; it no longer drifts with the scroll.
  */
 export function Hero() {
-  const { ref, y } = useParallax("top");
-
   return (
     // The card fills the screen below the sticky 64px header, leaving the same small gap at the
     // bottom as on the sides, so the next section starts below the fold. The 540px floor keeps
     // the text from crowding on short screens (landscape phones), where the card simply scrolls.
     <section aria-labelledby="home-title" className="px-[clamp(8px,1.2vw,16px)] pb-[clamp(8px,1.2vw,16px)]">
       <div
-        ref={ref}
         className="relative isolate flex h-[max(540px,calc(100svh-64px-clamp(8px,1.2vw,16px)))] flex-col justify-end overflow-hidden rounded-[clamp(24px,2.4vw,32px)] px-[clamp(20px,4.5vw,64px)] pb-[clamp(28px,4.5vw,64px)]"
       >
         <HeroVideo
-          y={y}
           // Decorative: the headline carries the message, so the image has empty alt text.
           still={
             <Image src={heroStill} alt="" fill preload sizes="100vw" placeholder="blur" className="object-cover" />
