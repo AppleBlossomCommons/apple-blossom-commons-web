@@ -23,7 +23,7 @@ The Wellness District, anchored by the existing hospital campus, is presented as
 | Audience | What they need from the site | Where they land |
 |---|---|---|
 | Neighbors and the Chelan community | Confidence in phased growth that evolves over decades and supports Downtown | Home doorway "For neighbors" (comes with the participate page) → Contact |
-| Investors | The demand thesis, the evidence behind it, and a path to the gated reports | Home doorway "Investment perspective" → `/plan`, `/connected-community`, `/research` → Become a Partner |
+| Investors | The demand thesis, the evidence behind it, and a path to the gated reports | Home doorway "Investment perspective" → `/plan`, `/plan/living-and-care`, `/research` → Become a Partner |
 | Strategic land buyers and developers | Which districts and parcels fit their product, frontage, adjacencies | Home doorway "Development opportunities" → `/districts`, `/tour` → Become a Partner |
 | Operators and brand partners (senior living, healthcare, hospitality, retail) | Fit with their model | `/partners` → Become a Partner |
 

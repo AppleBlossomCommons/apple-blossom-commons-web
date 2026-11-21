@@ -16,10 +16,10 @@ import type { DistrictNavItem } from "@/lib/districts";
 import { ease } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { buttonClass } from "./buttons";
-import { DISTRICTS_OVERVIEW, DistrictRoundel, DistrictsMenu } from "./DistrictsMenu";
+import { DISTRICTS_OVERVIEW, DistrictRoundel, DistrictsMenu, isPlanPath, PlanMenu } from "./DistrictsMenu";
 import { ArrowRight, ChevronDown } from "./icons";
 import { Logo } from "./Logo";
-import { mainNav, partnerLink } from "./nav";
+import { mainNav, partnerLink, planPages } from "./nav";
 
 /** Header height. The phone menu sheet and the district overlay sit just below it. */
 export const HEADER_HEIGHT = 64;
@@ -120,7 +120,9 @@ export function SiteHeader({ districts }: { districts: DistrictNavItem[] }) {
             <ul className="flex items-center gap-0.5 whitespace-nowrap">
               {mainNav.map((item) => (
                 <li key={item.href}>
-                  {"menu" in item ? (
+                  {"menu" in item && item.menu === "plan" ? (
+                    <PlanMenu pathname={pathname} reduce={reduce} />
+                  ) : "menu" in item ? (
                     <DistrictsMenu items={districts} pathname={pathname} reduce={reduce} />
                   ) : (
                     <Link
@@ -265,7 +267,9 @@ function PhoneMenu({
         >
           {mainNav.map((item, i) => (
             <motion.div key={item.href} custom={i} variants={link}>
-              {"menu" in item ? (
+              {"menu" in item && item.menu === "plan" ? (
+                <PhonePlan pathname={pathname} reduce={reduce} rowClass={row} onNavigate={() => onClose(false)} />
+              ) : "menu" in item ? (
                 <PhoneDistricts
                   items={districts}
                   pathname={pathname}
@@ -297,27 +301,24 @@ function PhoneMenu({
 }
 
 /**
- * "Districts" in the phone menu: a row that expands in place to list the ten district pages
- * and a link to the map. It starts open on a district page, so the current one is in view.
+ * A row in the phone menu that expands in place to list a menu's pages. It starts open when the
+ * visitor is on one of them, so the current page is in view.
  */
-function PhoneDistricts({
-  items,
-  pathname,
+function PhoneSubmenu({
+  label,
+  current,
   reduce,
   rowClass,
-  onNavigate,
+  children,
 }: {
-  items: DistrictNavItem[];
-  pathname: string;
+  label: string;
+  current: boolean;
   reduce: boolean;
   rowClass: string;
-  onNavigate: () => void;
+  children: React.ReactNode;
 }) {
-  const onDistrictPage = pathname.startsWith("/districts/");
-  const [expanded, setExpanded] = useState(onDistrictPage);
+  const [expanded, setExpanded] = useState(current);
   const listId = useId();
-  const item =
-    "flex min-h-12 items-center gap-3 rounded-chip px-3 text-[1.1875rem] text-hearth no-underline hover:bg-linen hover:text-hearth aria-[current=page]:bg-linen aria-[current=page]:font-bold";
 
   return (
     <div className="rounded-card bg-sand">
@@ -326,9 +327,9 @@ function PhoneDistricts({
         aria-expanded={expanded}
         aria-controls={listId}
         onClick={() => setExpanded((v) => !v)}
-        className={`${rowClass} w-full justify-between text-left ${onDistrictPage ? "shadow-[inset_0_0_0_2px_var(--gold)]" : ""}`}
+        className={`${rowClass} w-full justify-between text-left ${current ? "shadow-[inset_0_0_0_2px_var(--gold)]" : ""}`}
       >
-        Districts
+        {label}
         <ChevronDown
           className={`size-5 transition-transform duration-300 ease-out motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`}
         />
@@ -336,7 +337,7 @@ function PhoneDistricts({
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            key="phone-districts"
+            key="submenu"
             id={listId}
             initial={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
             animate={reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }}
@@ -344,33 +345,59 @@ function PhoneDistricts({
             transition={{ duration: reduce ? 0.15 : 0.32, ease: ease.inOut }}
             className="overflow-hidden"
           >
-            <ul className="flex flex-col gap-0.5 px-2 pb-2">
-              {items.map((d) => {
-                const href = `/districts/${d.slug}`;
-                return (
-                  <li key={d.slug}>
-                    <Link
-                      href={href}
-                      onClick={onNavigate}
-                      aria-current={pathname === href ? "page" : undefined}
-                      className={item}
-                    >
-                      <DistrictRoundel item={d} className="size-8 text-sm" />
-                      {d.name}
-                    </Link>
-                  </li>
-                );
-              })}
-              <li className="mt-1 border-t border-line pt-1">
-                <Link href={DISTRICTS_OVERVIEW} onClick={onNavigate} className={`${item} font-bold`}>
-                  See all districts on the map
-                  <ArrowRight />
-                </Link>
-              </li>
-            </ul>
+            {children}
           </motion.div>
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+const phoneItem =
+  "flex min-h-12 items-center gap-3 rounded-chip px-3 text-[1.1875rem] text-hearth no-underline hover:bg-linen hover:text-hearth aria-[current=page]:bg-linen aria-[current=page]:font-bold";
+
+type PhoneMenuProps = { pathname: string; reduce: boolean; rowClass: string; onNavigate: () => void };
+
+/** "The Plan" in the phone menu: its three pages. */
+function PhonePlan({ pathname, reduce, rowClass, onNavigate }: PhoneMenuProps) {
+  return (
+    <PhoneSubmenu label="The Plan" current={isPlanPath(pathname)} reduce={reduce} rowClass={rowClass}>
+      <ul className="flex flex-col gap-0.5 px-2 pb-2">
+        {planPages.map((page) => (
+          <li key={page.href}>
+            <Link href={page.href} onClick={onNavigate} aria-current={pathname === page.href ? "page" : undefined} className={phoneItem}>
+              {page.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </PhoneSubmenu>
+  );
+}
+
+/** "Districts" in the phone menu: the ten district pages and a link to the map. */
+function PhoneDistricts({ items, pathname, reduce, rowClass, onNavigate }: PhoneMenuProps & { items: DistrictNavItem[] }) {
+  return (
+    <PhoneSubmenu label="Districts" current={pathname.startsWith("/districts/")} reduce={reduce} rowClass={rowClass}>
+      <ul className="flex flex-col gap-0.5 px-2 pb-2">
+        {items.map((d) => {
+          const href = `/districts/${d.slug}`;
+          return (
+            <li key={d.slug}>
+              <Link href={href} onClick={onNavigate} aria-current={pathname === href ? "page" : undefined} className={phoneItem}>
+                <DistrictRoundel item={d} className="size-8 text-sm" />
+                {d.name}
+              </Link>
+            </li>
+          );
+        })}
+        <li className="mt-1 border-t border-line pt-1">
+          <Link href={DISTRICTS_OVERVIEW} onClick={onNavigate} className={`${phoneItem} font-bold`}>
+            See all districts on the map
+            <ArrowRight />
+          </Link>
+        </li>
+      </ul>
+    </PhoneSubmenu>
   );
 }

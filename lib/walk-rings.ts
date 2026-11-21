@@ -1,4 +1,4 @@
-import { getDistrictByKey } from "./districts";
+import { getDistrictByKey, PLAN_DISCLAIMER } from "./districts";
 
 type Point = [number, number];
 
@@ -29,4 +29,4 @@ export const WALK_RINGS = {
   ],
 } as const;
 
-export const WALK_RINGS_CAPTION = "Walking times are approximate. Illustrative interpretation of the July 2026 masterplan.";
+export const WALK_RINGS_CAPTION = `Walking times are approximate. ${PLAN_DISCLAIMER}`;

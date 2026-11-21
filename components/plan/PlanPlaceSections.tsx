@@ -119,6 +119,9 @@ const outdoorImages: Record<"summit" | "preserve", PlaceImage> = {
   },
 };
 
+/** Only a finished image is shown; a slot still waiting for its photo leaves the card text only (critique, Nov 20, 2026). */
+const shown = (image: PlaceImage) => (image.ready ? image : undefined);
+
 /** "Parks, trails and open space" (#outdoors): two parks with images and links, then Green edges. */
 export function Outdoors() {
   return (
@@ -134,7 +137,7 @@ export function Outdoors() {
       <ul className="grid grid-cols-1 gap-x-8 gap-y-12 min-[760px]:grid-cols-2">
         <PlaceCard
           index={0}
-          image={outdoorImages.summit}
+          image={shown(outdoorImages.summit)}
           place={{
             name: "Summit Recreation Park",
             text: "Sports fields, a playground, a small pond and a rink that could be roller skating in summer and ice skating in winter. (concept)",
@@ -144,7 +147,7 @@ export function Outdoors() {
         </PlaceCard>
         <PlaceCard
           index={1}
-          image={outdoorImages.preserve}
+          image={shown(outdoorImages.preserve)}
           place={{
             name: "Orchard Preserve",
             text: "Open hillside with a nature trail and a scenic overlook at the highest point of the site, looking out over the town.",
@@ -172,7 +175,7 @@ const guiding: RuleItem[] = [
     text: "The plan is meant first for people who call Chelan home all year, including local workers and families.",
   },
   {
-    title: "Built for aging in place.",
+    title: "Designed for aging in place.",
     text: "Level paths, shorter blocks, single-level homes and daily needs close by, so you can stay in your neighborhood as your needs change.",
   },
   {

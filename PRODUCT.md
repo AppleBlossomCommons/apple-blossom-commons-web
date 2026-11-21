@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Decided before init (see `CLAUDE.md`): Next.js App Router, React, TypeScript, Tailwind CSS, deployed on Vercel. 3D through React Three Fiber and Drei. Fonts through `next/font`. Partner Access will use a managed sign-in service, never hand-written authentication. The app is not scaffolded yet (Phase 0 in `docs/08-build-plan.md`).
+Decided before init (see `CLAUDE.md`): Next.js App Router, React, TypeScript, Tailwind CSS, deployed on Vercel. 3D through React Three Fiber and Drei. Fonts through `next/font`. Partner Access will use a managed sign-in service, never hand-written authentication. The site is built and live in development (Home, The Plan, Districts, Tour, Research, About, Partners, Participate, Contact and legal pages).
 
 ## Users
 
@@ -30,7 +30,7 @@ The site explains a long-horizon plan honestly and turns serious interest into a
 
 Success means:
 
-- City reviewers find it credible and aligned with their plans.
+- Neighbors and the Chelan community find the plan credible, phased and honest.
 - Qualified investors, land buyers and operators submit a partner inquiry.
 - Approved partners can reach gated material (in a later phase).
 
@@ -43,7 +43,7 @@ The core story is a community where a strong medical system, technology and reti
 ## Operating Context
 
 - Research and content decisions are made outside this repo (Cowork) and arrive as files under `docs/` and `data/`. Content approvals come from the owner and Andy (Chelan Village).
-- City staff will read the site as part of a planning review. Investors and partners will read it alongside gated reports in the Partner Access data room.
+- Neighbors may read the site during the public review process. Investors and partners will read it alongside gated reports in the Partner Access data room.
 - Visitors make "site visits" remotely through the Virtual Site Tour (16 verified drive and walk clips synced to a map).
 
 ## Capabilities and Constraints
@@ -65,7 +65,7 @@ The core story is a community where a strong medical system, technology and reti
   - Write "designed to be walkable" (the Walk Score today is 23).
   - Never imply that utility capacity is solved.
   - Discovery Commons is an aspiration, not a commitment.
-  - Lake Chelan Health is not called a partner until they agree to be named.
+  - Lake Chelan Health is named only as a neighbor ("a short walk from the hospital campus"), never as a partner.
   - Technology supports residents and care staff and never replaces human care.
   - Comparable communities are precedent, not promise.
   - Migration data shows a pattern, not proof.
@@ -80,7 +80,8 @@ The core story is a community where a strong medical system, technology and reti
 - A working 3D prototype: `reference/3d-district-model-prototype.html`. The masterplan base image: `reference/districts-sheet-greyscale.jpg`.
 - The Virtual Site Tour app and footage are outside this repo (see `docs/06-virtual-site-tour.md`).
 - Public research: five summaries (text still to come from the owner) and the BERK Chelan County Tourism Impact Study (Feb 2026).
-- **Absent, not to be fabricated:** photography, drone imagery, renderings, logo, testimonials, named partners, phase dates, pricing, a site-wide unit total, vector or GIS boundaries, and utility capacity findings.
+- Imagery (owner, Nov 20, 2026): real site photography from Andy (e.g. the About page hillside photo) and drone footage (`public/images/home/DJI_0147.MP4`, `drone-videos/`). The Home lifestyle photos and the Plan district images (`public/images/plan/`) are illustrative (stock or generated), not the actual site, and must never be presented as the site or as built places.
+- **Absent, not to be fabricated:** renderings, logo, testimonials, named partners, phase dates, pricing, a site-wide unit total, vector or GIS boundaries, and utility capacity findings.
 - Never reproduce masterplan sheets directly. Some contain unrelated projects and listings.
 
 ## Product Principles

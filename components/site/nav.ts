@@ -2,8 +2,10 @@
 // changes from docs/12-about-us-content.md, section 1.
 // "Districts" opens a menu of the ten district pages instead of linking to an index page
 // (owner decision, Oct 28, 2026; /districts redirects to the map on The Plan).
+// "The Plan" opens a menu of its three pages (Nov 19, 2026: The Plan split into an overview and two
+// story pages; see docs/02-sitemap.md).
 export const mainNav = [
-  { href: "/plan", label: "The Plan" },
+  { href: "/plan", label: "The Plan", menu: "plan" },
   { href: "/districts", label: "Districts", menu: "districts" },
   { href: "/tour", label: "Site Tour" },
   { href: "/participate", label: "How Can I Participate?" },
@@ -13,6 +15,15 @@ export const mainNav = [
   // { href: "/research", label: "Research" },
 ] as const;
 
+/** The three pages of The Plan, in reading order. Used by the header menu and the Plan page nav. */
+export const planPages = [
+  { href: "/plan", label: "Overview", text: "The idea, the map and how it fits together" },
+  { href: "/plan/living-and-care", label: "Living and care", text: "Life Plan Community, Heritage Grove, care and technology" },
+  { href: "/plan/village-and-outdoors", label: "Village and outdoors", text: "The village, walking, parks and trails, and why Chelan" },
+] as const;
+
+export type PlanPageHref = (typeof planPages)[number]["href"];
+
 export const partnerLink = { href: "/partners", label: "Partner with Us" } as const;
 
 export const footerColumns = [
@@ -20,6 +31,8 @@ export const footerColumns = [
     title: "Explore",
     items: [
       { href: "/plan", label: "The Plan" },
+      { href: "/plan/living-and-care", label: "Living and care" },
+      { href: "/plan/village-and-outdoors", label: "Village and outdoors" },
       { href: "/plan#explore", label: "Districts" },
       { href: "/tour", label: "Site Tour" },
     ],

@@ -18,6 +18,8 @@ Words in [brackets] are notes for the builder, not copy. Lines marked **DECISION
 
 ## 1. New page order
 
+*Superseded Nov 19, 2026: The Plan is now three pages (see `docs/02-sitemap.md`). The sections below are unchanged, but they are spread across `/plan`, `/plan/living-and-care` and `/plan/village-and-outdoors`, and Heritage Grove on Living and care is a short summary that links to the district page. The optional jump list is built, on all three pages.*
+
 Hero · Intro *(one line changed)* · **A different kind of retirement** *(new)* · 3D explorer · How it fits together · **What is a Life Plan Community?** *(new)* · **Heritage Grove** *(new)* · Care, close by *(expanded: health and technology)* · The village at the center *(images added)* · A neighborhood designed for walking · Parks, trails and open space · What guides the plan · Why Chelan
 
 [The page is getting long. Optional, ask first: a slim "On this page" jump list under the intro with five links: The idea · Life Plan Community · Heritage Grove · Care and technology · The village.]
