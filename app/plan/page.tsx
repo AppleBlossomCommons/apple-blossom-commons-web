@@ -19,14 +19,14 @@ export const metadata: Metadata = {
 
 const morePlan: Doorway[] = [
   {
-    href: "/plan/living-and-care",
+    href: "/plan/neighborhoods",
     title: "Neighborhoods for a lifetime.",
     text: "Homes for every stage of life, Heritage Grove, and how care and technology are planned close to home.",
     cta: "Neighborhoods for a lifetime",
     fill: "#ECE7FC",
   },
   {
-    href: "/plan/village-and-outdoors",
+    href: "/plan/village-and-chelan",
     title: "The Village and Chelan.",
     text: "The village at the center, a neighborhood designed for walking, parks and trails, and why Chelan.",
     cta: "The Village and Chelan",
@@ -37,8 +37,8 @@ const morePlan: Doorway[] = [
 /**
  * The Plan: overview (split Nov 19, 2026; see docs/02-sitemap.md). It keeps the opening of the
  * docs/14 order (hero, intro, A different kind of retirement, the 3D model, How it fits together)
- * and What guides the plan. Life Plan, Heritage Grove and Care moved to /plan/living-and-care; the
- * village, walking, parks and Why Chelan moved to /plan/village-and-outdoors.
+ * and What guides the plan. Life Plan, Heritage Grove and Care moved to /plan/neighborhoods; the
+ * village, walking, parks and Why Chelan moved to /plan/village-and-chelan.
  */
 export default function PlanPage() {
   return (

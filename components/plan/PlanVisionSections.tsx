@@ -17,7 +17,7 @@ const inlineLink = "font-bold text-hearth underline decoration-sage-deep decorat
 const pillars: { place: Place; image: keyof typeof visionImages; more: { href: string; label: string } }[] = [
   {
     image: "home",
-    more: { href: "/plan/living-and-care#life-plan", label: "Homes for every stage of life" },
+    more: { href: "/plan/neighborhoods#life-plan", label: "Homes for every stage of life" },
     place: {
       name: "A home for every chapter.",
       text: "Cottages and townhomes for active years, and independent living, assisted living, memory care and nursing care for when more support helps. Moving between them doesn't mean leaving your neighbors.",
@@ -25,7 +25,7 @@ const pillars: { place: Place; image: keyof typeof visionImages; more: { href: s
   },
   {
     image: "care",
-    more: { href: "/plan/living-and-care#care-close-by", label: "Care, close by" },
+    more: { href: "/plan/neighborhoods#care-close-by", label: "Care, close by" },
     place: {
       name: "Care, a short walk away.",
       text: "The senior neighborhoods are planned beside the hospital campus, with clinics, therapy and rehabilitation planned nearby in the Wellness District.",
@@ -33,7 +33,7 @@ const pillars: { place: Place; image: keyof typeof visionImages; more: { href: s
   },
   {
     image: "technology",
-    more: { href: "/plan/living-and-care#technology", label: "Technology that supports people" },
+    more: { href: "/plan/neighborhoods#technology", label: "Technology that supports people" },
     place: {
       name: "Technology that supports people.",
       text: "Ideas like virtual visits, home sensors that can alert a caregiver, and robots that take on routine tasks, so the people who give care have more time to spend with residents. (concept)",

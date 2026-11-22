@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const keepExploring: Doorway[] = [
   {
-    href: "/plan/village-and-outdoors",
+    href: "/plan/village-and-chelan",
     title: "The Village and Chelan.",
     text: "The village at the center, a neighborhood designed for walking, parks and trails, and why Chelan.",
     cta: "The Village and Chelan",
@@ -35,7 +35,7 @@ const keepExploring: Doorway[] = [
  * sections are the docs/14 ones. Heritage Grove is a short summary here because the full version is
  * the Heritage Grove district page. Rebuilt image-first on Nov 20, 2026 (see LivingSections.tsx).
  */
-export default function LivingAndCarePage() {
+export default function NeighborhoodsPage() {
   return (
     <>
       <PlanSubHero
@@ -49,7 +49,7 @@ export default function LivingAndCarePage() {
         }}
       />
       <PlanPageNav
-        current="/plan/living-and-care"
+        current="/plan/neighborhoods"
         sections={[
           { id: "life-plan", label: "Every stage of life" },
           { id: "heritage-grove", label: "Heritage Grove" },

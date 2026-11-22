@@ -10,13 +10,13 @@ import { useEffect } from "react";
  * (/connected-community → /plan#care-close-by, /chelan → /plan#why-chelan).
  */
 const moved: Record<string, string> = {
-  "life-plan": "/plan/living-and-care",
-  "heritage-grove": "/plan/living-and-care",
-  "care-close-by": "/plan/living-and-care",
-  village: "/plan/village-and-outdoors",
-  walking: "/plan/village-and-outdoors",
-  outdoors: "/plan/village-and-outdoors",
-  "why-chelan": "/plan/village-and-outdoors",
+  "life-plan": "/plan/neighborhoods",
+  "heritage-grove": "/plan/neighborhoods",
+  "care-close-by": "/plan/neighborhoods",
+  village: "/plan/village-and-chelan",
+  walking: "/plan/village-and-chelan",
+  outdoors: "/plan/village-and-chelan",
+  "why-chelan": "/plan/village-and-chelan",
 };
 
 export function MovedSections() {

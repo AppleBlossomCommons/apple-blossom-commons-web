@@ -7,8 +7,8 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 ```
 /                          Home: vision in one screen + audience doorways
 ├── /plan                  The Plan: overview, with the Plan Table explorer (2D map + 3D model toggle)
-│   ├── /plan/living-and-care       Life Plan Community, Heritage Grove (summary), care and technology
-│   └── /plan/village-and-outdoors  The village, walking, parks and trails, Why Chelan
+│   ├── /plan/neighborhoods       Life Plan Community, Heritage Grove (summary), care and technology
+│   └── /plan/village-and-chelan  The village, walking, parks and trails, Why Chelan
 ├── /districts/[slug]      District page: one shared template, ten pages (no index page, see below)
 ├── /tour                  Virtual Site Tour (16 verified tours)
 ├── /about                 Stewardship: who Chelan Village, LP is and how it plans
@@ -34,15 +34,15 @@ The owner and Andy approved this as the starting structure. Page layouts and fin
 *Updated Nov 19, 2026 (owner decision; Andy's sign-off still to be recorded): The Plan was split into three pages.* It had grown to about 19 screens on desktop after `docs/10` folded Connected Community and Chelan & the Region into it and `docs/14` added three sections.
 
 - `/plan` is the overview: hero, intro, A different kind of retirement (each pillar links to its section on Neighborhoods for a lifetime), the 3D/2D explorer, How it fits together, What guides the plan, and two doorway cards to the story pages. About 7 screens.
-- `/plan/living-and-care`: What is a Life Plan Community?, Heritage Grove, Care close by (with Technology that supports people).
-- `/plan/village-and-outdoors`: The village at the center, A neighborhood designed for walking, Parks trails and open space, Why Chelan.
+- `/plan/neighborhoods`: What is a Life Plan Community?, Heritage Grove, Care close by (with Technology that supports people).
+- `/plan/village-and-chelan`: The village at the center, A neighborhood designed for walking, Parks trails and open space, Why Chelan.
 - Heritage Grove on Neighborhoods for a lifetime is a short summary (intro, the place names, a link). The full place cards are on `/districts/heritage-grove`, which reads the same `places` from `data/districts.json`.
 - All three pages share a bar under the hero: the three pages as tabs, then an "On this page" jump list (`components/plan/PlanPageNav.tsx`).
 - "The Plan" in the header is now a menu of the three pages, like Districts. The footer's Explore column lists all three.
-- Redirects: `/connected-community` → `/plan/living-and-care#care-close-by`, `/chelan` → `/plan/village-and-outdoors#why-chelan`. Old in-page links such as `/plan#village` are forwarded in the browser by `components/plan/MovedSections.tsx`, since the part after `#` never reaches the server.
+- Redirects: `/connected-community` → `/plan/neighborhoods#care-close-by`, `/chelan` → `/plan/village-and-chelan#why-chelan`. Old in-page links such as `/plan#village` are forwarded in the browser by `components/plan/MovedSections.tsx`, since the part after `#` never reaches the server.
 - The two new heroes, the doorway cards and the menu descriptions are new short copy written in the build, not from a content pack. They need a read by the owner and Andy.
 
-*Updated Nov 22, 2026 (owner decision):* the two story pages were renamed. "Living and care" is now **Neighborhoods for a lifetime** and "Village and outdoors" is now **The Village and Chelan**, in the header menu, footer, page titles, tabs and doorway cards. The web addresses are unchanged (`/plan/living-and-care`, `/plan/village-and-outdoors`).
+*Updated Nov 22, 2026 (owner decision):* the two story pages were renamed. "Living and care" is now **Neighborhoods for a lifetime** and "Village and outdoors" is now **The Village and Chelan**, in the header menu, footer, page titles, tabs and doorway cards. The web addresses changed with them: `/plan/living-and-care` is now `/plan/neighborhoods` and `/plan/village-and-outdoors` is now `/plan/village-and-chelan`. The old addresses forward to the new ones (`next.config.ts`).
 
 **Current header (supersedes the Oct 16 header line above):** The Plan (menu) · Districts (menu) · Site Tour · How Can I Participate? · About Us, with Partner with Us as the button. Source of truth: `components/site/nav.ts`.
 

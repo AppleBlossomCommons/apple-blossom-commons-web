@@ -18,8 +18,8 @@ export const mainNav = [
 /** The three pages of The Plan, in reading order. Used by the header menu and the Plan page nav. */
 export const planPages = [
   { href: "/plan", label: "Overview", text: "The idea, the map and how it fits together" },
-  { href: "/plan/living-and-care", label: "Neighborhoods for a lifetime", text: "Homes for every stage of life, Heritage Grove, care and technology" },
-  { href: "/plan/village-and-outdoors", label: "The Village and Chelan", text: "The village, walking, parks and trails, and why Chelan" },
+  { href: "/plan/neighborhoods", label: "Neighborhoods for a lifetime", text: "Homes for every stage of life, Heritage Grove, care and technology" },
+  { href: "/plan/village-and-chelan", label: "The Village and Chelan", text: "The village, walking, parks and trails, and why Chelan" },
 ] as const;
 
 export type PlanPageHref = (typeof planPages)[number]["href"];
@@ -31,8 +31,8 @@ export const footerColumns = [
     title: "Explore",
     items: [
       { href: "/plan", label: "The Plan" },
-      { href: "/plan/living-and-care", label: "Neighborhoods for a lifetime" },
-      { href: "/plan/village-and-outdoors", label: "The Village and Chelan" },
+      { href: "/plan/neighborhoods", label: "Neighborhoods for a lifetime" },
+      { href: "/plan/village-and-chelan", label: "The Village and Chelan" },
       { href: "/plan#explore", label: "Districts" },
       { href: "/tour", label: "Site Tour" },
     ],
