@@ -112,7 +112,9 @@ export function NavMenu({
             key="panel"
             id={panelId}
             {...panel}
-            className={`absolute left-0 top-[calc(100%+10px)] z-10 origin-top-left rounded-card bg-linen p-2 shadow-[0_18px_40px_-16px_rgb(59_47_42/0.35),0_0_0_1px_var(--line)] ${panelClassName}`}
+            // whitespace-normal: the header's link list is nowrap, and the panel would inherit it,
+            // so long descriptions ran past the panel's edge instead of wrapping.
+            className={`absolute left-0 top-[calc(100%+10px)] z-10 origin-top-left whitespace-normal rounded-card bg-linen p-2 shadow-[0_18px_40px_-16px_rgb(59_47_42/0.35),0_0_0_1px_var(--line)] ${panelClassName}`}
           >
             {children(() => setOpen(false))}
           </motion.div>
