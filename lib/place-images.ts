@@ -11,8 +11,9 @@ import type { DistrictKey } from "./districts";
  * TO SWAP IN A PICTURE:
  * 1. Save the file to public/images/plan/ with the name in `file` (3:2 landscape, WebP).
  * 2. Check the alt text still describes the picture (stock alt texts are drafts until the photo is chosen).
- * 3. Set `ready: true` on that slot. The card then shows the photo, and an AI image gets the
- *    small "Illustrative concept" label (docs/14, section 8).
+ * 3. Set `ready: true` on that slot. The card then shows the photo. AI images no longer get an
+ *    "Illustrative concept" label on the picture (owner decision, Nov 22, 2026); start their alt
+ *    text with "Illustrative concept of …" instead.
  * For licensed stock, note its source and license in data/sources.json or an image-credits list.
  *
  * Never use the masterplan's own pictures (reference/masterplan-images/) on the site (docs/14, section 9).
@@ -25,7 +26,7 @@ export type PlaceImage = {
   /** File name in public/images/plan/. */
   file?: string;
   alt?: string;
-  /** "ai" images show no people and carry the "Illustrative concept" label; "stock" is licensed, people OK. */
+  /** "ai" = AI image (alt text starts "Illustrative concept of …"); "stock" = licensed, people OK. */
   source?: "ai" | "stock";
   /** Set to true once the file is in public/images/plan/. */
   ready?: boolean;
@@ -90,26 +91,33 @@ const placeImages: Partial<Record<DistrictKey, Record<string, PlaceImage>>> = {
       source: "stock",
       alt: "An older couple relaxing together on the porch of a cottage.",
     },
+    // Assisted living, memory care and nursing care: AI images with people, generated in Gemini
+    // (owner decision, Nov 22, 2026), in place of the licensed stock docs/14 planned. Same rule as
+    // the village images; see docs/09-open-items.md. Upscaled from 1264 × 848; originals in
+    // reference/plan-image-originals/.
     "Assisted living": {
-      label: "Licensed stock with people: caregiver and senior woman smiling in a living room",
+      label: "AI image: caregiver and older woman sharing tea in a modern timber-beamed living room",
       fill: "#FFE1ED",
       file: "heritage-assisted.webp",
-      source: "stock",
-      alt: "A caregiver and an older woman smiling together in a sunny living room.",
+      source: "ai",
+      alt: "Illustrative concept of assisted living: a caregiver hands an older woman a cup of tea and they laugh together in a bright timber-beamed living room with a stone fireplace and tall windows to pines and golden hills.",
+      ready: true,
     },
     "Memory care": {
-      label: "Licensed stock with people: senior woman and caregiver reading together",
+      label: "AI image: older man and caregiver looking through a photo album on a sofa, garden door behind",
       fill: "#ECE7FC",
       file: "heritage-memory-care.webp",
-      source: "stock",
-      alt: "An older woman and a caregiver reading a book together.",
+      source: "ai",
+      alt: "Illustrative concept of memory care: an older man points to a photo in an album as a caregiver listens beside him on the sofa, with family photos on a shelf and a glass door open to a garden path.",
+      ready: true,
     },
     "Nursing care": {
-      label: "Licensed stock with people: nurse with a senior woman in a garden; nothing like a hospital ward",
+      label: "AI image: nurse kneeling beside an older woman in an armchair, residential bedroom, garden window",
       fill: "#EAF6CF",
       file: "heritage-nursing.webp",
-      source: "stock",
-      alt: "A nurse walking with an older woman in a garden.",
+      source: "ai",
+      alt: "Illustrative concept of nursing care: a nurse kneels beside an older woman in an armchair by a large window, holding her hand, in a bedroom with a quilted bed, wildflowers and a view of a garden and pines.",
+      ready: true,
     },
     "Garden courtyards": {
       label: "AI image, no people: sheltered garden courtyard, looping level path, benches in the sun, small fountain, herb beds",

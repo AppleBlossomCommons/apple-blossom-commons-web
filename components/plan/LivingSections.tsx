@@ -4,7 +4,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ResearchLink } from "@/components/research/ResearchLink";
 import { DistrictPageLink } from "@/components/plan/PlanPlaceSections";
 import { FaqItem } from "@/components/site/FaqItem";
-import { PlaceholderLabel } from "@/components/site/ImagePlaceholder";
 import { ConceptText } from "@/components/site/Places";
 import { getPlaceImage, PLAN_IMAGE_DIR, visionImages, type PlaceImage } from "@/lib/place-images";
 import coupleBiking from "@/public/images/home/couple-biking-orchard.jpg";
@@ -90,8 +89,7 @@ function PhotoFrame({
         placeholder={typeof photo.src === "string" ? "empty" : "blur"}
         className={`object-cover ${photo.focus ?? ""}`}
       />
-      {/* AI images of the plan carry this small label (docs/14, section 8). The alt text already says it. */}
-      {photo.ai && <PlaceholderLabel inset={14}>Illustrative concept</PlaceholderLabel>}
+      {/* No "Illustrative concept" label on the picture (owner decision, Nov 22, 2026); the alt text still says it. */}
     </div>
   );
 }
