@@ -54,8 +54,7 @@ export function PlaceCard({
           {image.ready && image.file ? (
             <>
               <Image src={`${PLAN_IMAGE_DIR}/${image.file}`} alt={image.alt ?? ""} fill sizes={sizes} className="object-cover" />
-              {/* AI images carry this small label (docs/14, section 8). The alt text already says it. */}
-              {image.source === "ai" && <PlaceholderLabel inset={14}>Illustrative concept</PlaceholderLabel>}
+              {/* No "Illustrative concept" label on the picture (owner decision, Nov 22, 2026); the alt text still says it. */}
             </>
           ) : (
             <>
