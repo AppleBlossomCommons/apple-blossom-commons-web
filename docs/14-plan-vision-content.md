@@ -18,7 +18,7 @@ Words in [brackets] are notes for the builder, not copy. Lines marked **DECISION
 
 ## 1. New page order
 
-*Superseded Nov 19, 2026: The Plan is now three pages (see `docs/02-sitemap.md`). The sections below are unchanged, but they are spread across `/plan`, `/plan/living-and-care` and `/plan/village-and-outdoors`, and Heritage Grove on Living and care is a short summary that links to the district page. The optional jump list is built, on all three pages.*
+*Superseded Nov 19, 2026: The Plan is now three pages (see `docs/02-sitemap.md`). The sections below are unchanged, but they are spread across `/plan`, `/plan/living-and-care` and `/plan/village-and-outdoors`, and Heritage Grove on Neighborhoods for a lifetime is a short summary that links to the district page. The optional jump list is built, on all three pages.*
 
 Hero · Intro *(one line changed)* · **A different kind of retirement** *(new)* · 3D explorer · How it fits together · **What is a Life Plan Community?** *(new)* · **Heritage Grove** *(new)* · Care, close by *(expanded: health and technology)* · The village at the center *(images added)* · A neighborhood designed for walking · Parks, trails and open space · What guides the plan · Why Chelan
 
@@ -33,6 +33,8 @@ Hero · Intro *(one line changed)* · **A different kind of retirement** *(new)*
 Keep the text from `docs/10-content-v2.md` and add this sentence at the start:
 
 - **New first sentence:** Apple Blossom Commons is planned around a simple idea: the years after work are better when a good home, good care and good neighbors are close together.
+
+> **Update (owner decision, Nov 22, 2026):** The intro is now this sentence only. The `docs/10` text after it was dropped because it repeated the hero lede ("long-range plan… one neighborhood at a time") and the sections below (homes, village, parks). It sits on a wide card with the Lake Chelan photo from the Home "Once in a Generation" step behind it.
 
 ---
 
