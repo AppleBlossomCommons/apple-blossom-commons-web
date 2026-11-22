@@ -6,7 +6,7 @@ import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
 import { talkDoorways } from "@/lib/doorways";
 
 export const metadata: Metadata = {
-  title: "Village and outdoors",
+  title: "The Village and Chelan",
   description:
     "The small village at the center of Apple Blossom Commons, a neighborhood designed for walking, parks, trails and open space, and why Chelan.",
 };
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 const keepExploring: Doorway[] = [
   {
     href: "/plan/living-and-care",
-    title: "Living and care.",
+    title: "Neighborhoods for a lifetime.",
     text: "Homes for every stage of life, Heritage Grove, and how care and technology are planned close to home.",
-    cta: "Living and care",
+    cta: "Neighborhoods for a lifetime",
     fill: "#ECE7FC",
   },
   {
@@ -28,13 +28,13 @@ const keepExploring: Doorway[] = [
   },
 ];
 
-/** The Plan: Village and outdoors (Nov 19, 2026; the split of The Plan, see docs/02-sitemap.md). Sections unchanged from docs/11 and docs/14. */
+/** The Plan: The Village and Chelan (Nov 19, 2026; the split of The Plan, see docs/02-sitemap.md). Sections unchanged from docs/11 and docs/14. */
 export default function VillageAndOutdoorsPage() {
   return (
     <>
       <PlanSubHero
         id="village-outdoors-title"
-        title="Village and outdoors"
+        title="The Village and Chelan"
         lede="A small village at the center, lanes and trails designed for walking, and a large share of the land kept open, in a valley people come to for its four seasons."
       />
       <PlanPageNav

@@ -75,7 +75,7 @@ export function Vision() {
 
 /**
  * "Heritage Grove: support, when it's needed" (#heritage-grove, docs/14 section 5), short form for
- * Living and care (Nov 19, 2026). The full place cards (levels of care and everyday life) live on
+ * Neighborhoods for a lifetime (Nov 19, 2026). The full place cards (levels of care and everyday life) live on
  * the Heritage Grove district page, which reads the same `places` from data/districts.json; here
  * the place names are listed so the reader sees what's there before following the link.
  */

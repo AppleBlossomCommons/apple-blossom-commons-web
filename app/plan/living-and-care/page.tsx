@@ -8,7 +8,7 @@ import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
 import { talkDoorways } from "@/lib/doorways";
 
 export const metadata: Metadata = {
-  title: "Living and care",
+  title: "Neighborhoods for a lifetime",
   description:
     "How Apple Blossom Commons plans homes for every stage of life: homes you can stay in as your needs change, more support in Heritage Grove, a hospital campus a short walk away, and technology that supports the people who give care.",
 };
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 const keepExploring: Doorway[] = [
   {
     href: "/plan/village-and-outdoors",
-    title: "Village and outdoors.",
+    title: "The Village and Chelan.",
     text: "The village at the center, a neighborhood designed for walking, parks and trails, and why Chelan.",
-    cta: "Village and outdoors",
+    cta: "The Village and Chelan",
     fill: "#EAF6CF",
   },
   {
@@ -31,7 +31,7 @@ const keepExploring: Doorway[] = [
 ];
 
 /**
- * The Plan: Living and care (Nov 19, 2026; the split of The Plan, see docs/02-sitemap.md). The
+ * The Plan: Neighborhoods for a lifetime (Nov 19, 2026; the split of The Plan, see docs/02-sitemap.md). The
  * sections are the docs/14 ones. Heritage Grove is a short summary here because the full version is
  * the Heritage Grove district page. Rebuilt image-first on Nov 20, 2026 (see LivingSections.tsx).
  */
@@ -40,7 +40,7 @@ export default function LivingAndCarePage() {
     <>
       <PlanSubHero
         id="living-title"
-        title="Living and care"
+        title="Neighborhoods for a lifetime"
         lede="Homes for every stage of life, with more support close by if it's ever needed, a hospital campus a short walk away, and technology that helps the people who give care."
         photo={{
           src: porch,

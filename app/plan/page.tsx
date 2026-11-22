@@ -20,16 +20,16 @@ export const metadata: Metadata = {
 const morePlan: Doorway[] = [
   {
     href: "/plan/living-and-care",
-    title: "Living and care.",
+    title: "Neighborhoods for a lifetime.",
     text: "Homes for every stage of life, Heritage Grove, and how care and technology are planned close to home.",
-    cta: "Living and care",
+    cta: "Neighborhoods for a lifetime",
     fill: "#ECE7FC",
   },
   {
     href: "/plan/village-and-outdoors",
-    title: "Village and outdoors.",
+    title: "The Village and Chelan.",
     text: "The village at the center, a neighborhood designed for walking, parks and trails, and why Chelan.",
-    cta: "Village and outdoors",
+    cta: "The Village and Chelan",
     fill: "#EAF6CF",
   },
 ];
