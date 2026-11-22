@@ -1,3 +1,5 @@
+import Image from "next/image";
+import lakeView from "@/public/images/home/lake-chelan-view.jpg";
 import { Reveal } from "@/components/motion/Reveal";
 import { ResearchLink } from "@/components/research/ResearchLink";
 import { JumpLink } from "@/components/site/JumpLink";
@@ -12,7 +14,7 @@ import { PhotoFrame, visionPhoto, type Photo } from "@/components/plan/LivingSec
 // where they differ). Image notes from the Phase 1 handoff and docs/11.
 
 /**
- * Hero for the two story pages of The Plan (Living and care, Village and outdoors): text on a sand
+ * Hero for the two story pages of The Plan (Neighborhoods for a lifetime, The Village and Chelan): text on a sand
  * panel, with "The Plan" as a small label above the title. An optional photo sits beside the text on
  * wide screens and under it on phones.
  */
@@ -44,22 +46,34 @@ export function PlanSubHero({ id, title, lede, photo }: { id: string; title: str
   );
 }
 
-/** Intro: a small "Overview" label under a 3px Deep Sage rule on the left, the paragraph on the right (stacked on phones). */
+/**
+ * Intro: one sentence on a wide card with the Lake Chelan photo from the Home "Once in a
+ * Generation" step behind it (owner request, Nov 22, 2026). The sentence is the docs/14 first
+ * sentence alone: the rest of the docs/10 text repeated the hero lede and the sections below.
+ * White text sits on a dark-brown fade over the bright sky, so it keeps 4.5:1 contrast.
+ */
 export function PlanIntro() {
   return (
-    <section
-      aria-labelledby="plan-overview"
-      className="grid gap-5 px-5 pb-14 pt-10 sm:px-[clamp(16px,4vw,56px)] sm:pb-[104px] sm:pt-[88px] lg:grid-cols-[minmax(180px,1fr)_3fr] lg:gap-10"
-    >
-      <h2 id="plan-overview" className={`${eyebrow} self-start border-t-[3px] border-sage-deep pt-3 lg:mt-3`}>
-        Overview
-      </h2>
-      <Reveal as="p" kind="fade" className="max-w-[860px] text-xl leading-normal sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
-        Apple Blossom Commons is planned around a simple idea: the years after work are better when a good home, good care and good neighbors
-        are close together. Apple Blossom Commons is a long-range plan for about 160 acres near Lake Chelan. It is meant to grow slowly, one neighborhood at a time,
-        over many years. Each part is planned to work with the others: homes near care, a small village within walking distance, and parks and
-        open space throughout.
-      </Reveal>
+    // No bottom padding: the next section's own top padding sets the gap, as between other sections.
+    <section aria-labelledby="plan-overview" className="px-2 pt-10 sm:px-4 sm:pt-16">
+      <div className="relative isolate flex min-h-[210px] flex-col justify-center gap-3 overflow-hidden rounded-hero-sm px-6 py-8 text-white sm:min-h-[240px] sm:gap-4 sm:rounded-hero sm:px-12 sm:py-10 lg:px-16">
+        {/* Decorative: the sentence carries the message. */}
+        <Image src={lakeView} alt="" fill placeholder="blur" sizes="100vw" className="-z-10 object-cover object-[50%_44%]" />
+        {/* Phones: an even dark-brown wash, since the text fills the band. Wider screens: a horizontal
+            fade, dark behind the text on the left and fully clear on the right, so the photo's own
+            color shows there. The text is kept narrow so it never reaches the clear part. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[rgb(59_47_42/0.62)] sm:bg-[linear-gradient(to_right,rgb(59_47_42/0.85)_0%,rgb(59_47_42/0.78)_50%,rgb(59_47_42/0)_85%)]"
+        />
+        <h2 id="plan-overview" className={`${eyebrow} self-start border-t-[3px] border-white pt-3 !text-white`}>
+          Overview
+        </h2>
+        <Reveal as="p" kind="fade" className="text-xl sm:max-w-[min(560px,50vw)] leading-normal sm:text-[28px] sm:leading-[1.35] sm:tracking-[-0.005em]">
+          Apple Blossom Commons is planned around a simple idea: the years after work are better when a good home, good care and good neighbors
+          are close together.
+        </Reveal>
+      </div>
     </section>
   );
 }

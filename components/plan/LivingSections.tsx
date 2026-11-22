@@ -15,7 +15,7 @@ import morningMug from "@/public/images/home/morning-mug-lake.jpg";
 import neighborsFence from "@/public/images/home/neighbors-garden-fence.jpg";
 
 /**
- * The Life Plan part of The Plan: Living and care, rebuilt image-first on Nov 20, 2026 (owner: "too
+ * The Life Plan part of The Plan: Neighborhoods for a lifetime, rebuilt image-first on Nov 20, 2026 (owner: "too
  * much text, not enough imagery; the word cloud looks ugly"). Copy is from docs/14 sections 4 and
  * 5, cut and regrouped, never reworded into new claims:
  * - The intro keeps one explanation instead of three.
