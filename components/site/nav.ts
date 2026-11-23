@@ -10,9 +10,8 @@ export const mainNav = [
   { href: "/tour", label: "Site Tour" },
   { href: "/participate", label: "How Can I Participate?" },
   { href: "/about", label: "About Us" },
-  // Research Library: footer only for now (docs/15, section 2). Revisit when the library has six or
-  // more reports and the Key Findings overview; then uncomment (or swap with Site Tour on smaller screens).
-  // { href: "/research", label: "Research" },
+  // Research Library joined the main nav (owner decision, Nov 22, 2026; supersedes docs/15, section 2).
+  { href: "/research", label: "Research" },
 ] as const;
 
 /** The three pages of The Plan, in reading order. Used by the header menu and the Plan page nav. */

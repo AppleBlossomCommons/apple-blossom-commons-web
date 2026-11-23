@@ -1,7 +1,7 @@
 import Image from "next/image";
 import lakeView from "@/public/images/home/lake-chelan-view.jpg";
 import { Reveal } from "@/components/motion/Reveal";
-import { ResearchLink } from "@/components/research/ResearchLink";
+import { ResearchCallout } from "@/components/research/ResearchCallout";
 import { JumpLink } from "@/components/site/JumpLink";
 import { ConceptText } from "@/components/site/Places";
 import { eyebrow } from "@/components/site/layout";
@@ -157,6 +157,7 @@ export function CareCloseBy() {
           <p className="max-w-[560px]">
             <ConceptText text="Senior homes are planned around quiet courtyards, so residents have a protected garden for a short walk or a seat in the sun, right outside their door. (concept)" />
           </p>
+          <ResearchCallout slug="care-close-by" surface="linen" className="mt-2 sm:mt-3" />
         </div>
         <PhotoFrame photo={visionPhoto("care")} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[3/2]" />
       </div>
@@ -177,9 +178,6 @@ export function CareCloseBy() {
       <div className="mt-12 sm:mt-16">
         <RuleList items={technology} layout="three" titleAs="h4" />
       </div>
-      <ResearchLink slug="care-close-by" className="mt-10 sm:mt-14">
-        Read the research: Care Close By
-      </ResearchLink>
     </section>
   );
 }

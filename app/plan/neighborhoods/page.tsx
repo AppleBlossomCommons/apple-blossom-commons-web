@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { CareCloseBy, PlanSubHero } from "@/components/plan/PlanSections";
-import { HeritageGroveSummary } from "@/components/plan/PlanVisionSections";
-import { DifferentBand, LifePlan, LifePlanQuestions, WhyLifePlan } from "@/components/plan/LivingSections";
+import { DifferentBand, LifePlan, WhyLifePlan } from "@/components/plan/LivingSections";
 import porch from "@/public/images/home/porch-every-chapter.jpg";
 import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
 import { talkDoorways } from "@/lib/doorways";
@@ -32,8 +30,9 @@ const keepExploring: Doorway[] = [
 
 /**
  * The Plan: Neighborhoods for a lifetime (Nov 19, 2026; the split of The Plan, see docs/02-sitemap.md). The
- * sections are the docs/14 ones. Heritage Grove is a short summary here because the full version is
- * the Heritage Grove district page. Rebuilt image-first on Nov 20, 2026 (see LivingSections.tsx).
+ * sections are the docs/14 ones. Rebuilt image-first on Nov 20, 2026 (see LivingSections.tsx). The
+ * Heritage Grove summary was removed on Nov 22, 2026 (owner): the grove cards link to the district
+ * page, which has the full version.
  */
 export default function NeighborhoodsPage() {
   return (
@@ -48,23 +47,11 @@ export default function NeighborhoodsPage() {
           focus: "object-[42%_50%]",
         }}
       />
-      <PlanPageNav
-        current="/plan/neighborhoods"
-        sections={[
-          { id: "life-plan", label: "Every stage of life" },
-          { id: "heritage-grove", label: "Heritage Grove" },
-          { id: "care-close-by", label: "Care, close by" },
-          { id: "technology", label: "Technology" },
-        ]}
-      />
       <LifePlan />
       <WhyLifePlan />
-      <DifferentBand />
-      <div className="h-16 sm:h-[120px]" aria-hidden="true" />
-      <HeritageGroveSummary />
-      <div className="h-16 sm:h-[120px]" aria-hidden="true" />
       <CareCloseBy />
-      <LifePlanQuestions />
+      <div className="h-16 sm:h-[120px]" aria-hidden="true" />
+      <DifferentBand />
       <DoorwayCards doorways={[...keepExploring, ...talkDoorways]} heading={{ id: "more-title", title: "Where to go next" }} />
     </>
   );
