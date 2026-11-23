@@ -20,17 +20,17 @@ import { PhotoFrame, visionPhoto, type Photo } from "@/components/plan/LivingSec
  */
 export function PlanSubHero({ id, title, lede, photo }: { id: string; title: string; lede: string; photo?: Photo }) {
   return (
-    <section aria-labelledby={id} className="px-2 sm:px-4">
+    <section aria-labelledby={id} className="px-2 sm:px-4 lg:px-(--frame-gutter)">
       <div
         className={`grid items-center gap-8 rounded-hero-sm bg-sand px-5 pb-10 pt-14 sm:rounded-hero sm:px-16 sm:pb-16 ${
-          photo ? "sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:gap-16 lg:py-16" : "sm:pt-28"
+          photo ? "sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] xl:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:gap-16 lg:py-16" : "sm:pt-28"
         }`}
       >
         <div className="flex flex-col gap-4 sm:gap-6">
           <Reveal as="p" kind="fade" className={eyebrow}>
             The Plan
           </Reveal>
-          <Reveal as="h1" kind="head" id={id} className="text-[46px] leading-[0.98] tracking-[-0.03em] sm:text-[clamp(64px,6.6vw,96px)] sm:leading-[0.95]">
+          <Reveal as="h1" kind="head" id={id} className="text-[46px] leading-[0.98] tracking-[-0.03em] sm:text-page sm:leading-[0.95]">
             {title}
           </Reveal>
           <Reveal as="p" kind="fade" className="max-w-[760px] text-xl leading-normal sm:text-[23px]">
@@ -55,7 +55,7 @@ export function PlanSubHero({ id, title, lede, photo }: { id: string; title: str
 export function PlanIntro() {
   return (
     // No bottom padding: the next section's own top padding sets the gap, as between other sections.
-    <section aria-labelledby="plan-overview" className="px-2 pt-10 sm:px-4 sm:pt-16">
+    <section aria-labelledby="plan-overview" className="px-2 pt-10 sm:px-4 lg:px-(--frame-gutter) sm:pt-16">
       <div className="relative isolate flex min-h-[210px] flex-col justify-center gap-3 overflow-hidden rounded-hero-sm px-6 py-8 text-white sm:min-h-[240px] sm:gap-4 sm:rounded-hero sm:px-12 sm:py-10 lg:px-16">
         {/* Decorative: the sentence carries the message. */}
         <Image src={lakeView} alt="" fill placeholder="blur" sizes="100vw" className="-z-10 object-cover object-[50%_44%]" />
@@ -106,8 +106,8 @@ const fits: RuleItem[] = [
 /** "How it fits together": four short items under a 3px Deep Sage rule. */
 export function FitsTogether() {
   return (
-    <section id="fits" aria-labelledby="fits-title" className="px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]">
-      <Reveal as="h2" kind="head" id="fits-title" className="mb-7 text-[34px] leading-none sm:mb-14 sm:text-[clamp(40px,4.2vw,60px)]">
+    <section id="fits" aria-labelledby="fits-title" className="px-5 py-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:pb-16 sm:pt-[72px]">
+      <Reveal as="h2" kind="head" id="fits-title" className="mb-7 text-[34px] leading-none sm:mb-10 sm:text-section">
         How it fits together
       </Reveal>
       <RuleList items={fits} />
@@ -144,10 +144,10 @@ const technology: RuleItem[] = [
  */
 export function CareCloseBy() {
   return (
-    <section id="care-close-by" aria-labelledby="care-title" className="bg-sand px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]">
+    <section id="care-close-by" aria-labelledby="care-title" className="bg-sand px-5 py-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px]">
       <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-3.5 sm:gap-5">
-          <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+          <Reveal as="h2" kind="head" id="care-title" className="text-[34px] leading-none sm:text-section">
             Care, close by
           </Reveal>
           <Reveal as="p" kind="fade" className="max-w-[560px] text-xl leading-normal sm:text-[23px]">
@@ -165,7 +165,7 @@ export function CareCloseBy() {
       <div className="mt-16 grid items-center gap-8 sm:mt-[120px] lg:grid-cols-2 lg:gap-16">
         <PhotoFrame photo={visionPhoto("technology")} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[3/2] lg:order-first" />
         <div className="flex flex-col gap-4 sm:gap-5">
-          <h3 id="technology" className="text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+          <h3 id="technology" className="text-[34px] leading-none sm:text-section">
             Technology that supports people
           </h3>
           <p className="max-w-[560px] text-xl leading-normal sm:text-[23px]">
@@ -188,9 +188,9 @@ export function CareCloseBy() {
  */
 export function WhyChelan() {
   return (
-    <section id="why-chelan" aria-labelledby="why-title" className="px-2 pt-14 sm:px-4 sm:pt-[120px]">
+    <section id="why-chelan" aria-labelledby="why-title" className="px-2 pt-14 sm:px-4 lg:px-(--frame-gutter) sm:pt-[96px]">
       <div className="flex flex-col gap-3.5 rounded-card bg-sand px-[22px] py-12 text-hearth sm:gap-5 sm:px-14 sm:py-20">
-        <Reveal as="h2" kind="head" id="why-title" className="text-[44px] leading-[0.98] sm:text-[clamp(56px,5.6vw,80px)]">
+        <Reveal as="h2" kind="head" id="why-title" className="text-[44px] leading-[0.98] sm:text-page">
           Why Chelan
         </Reveal>
         <p className="max-w-[640px] sm:text-[21px]">

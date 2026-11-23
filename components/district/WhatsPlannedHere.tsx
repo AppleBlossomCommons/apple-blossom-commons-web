@@ -20,9 +20,9 @@ export function WhatsPlannedHere({
   if (places.length === 0) return null;
 
   return (
-    <section aria-labelledby="planned-title" className="px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)]">
+    <section aria-labelledby="planned-title" className="px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) pb-[clamp(64px,7vw,88px)]">
       <div className="mb-8 flex flex-col gap-4 sm:mb-12">
-        <Reveal as="h2" kind="head" id="planned-title" className="text-[clamp(36px,4vw,52px)] leading-none">
+        <Reveal as="h2" kind="head" id="planned-title" className="text-section leading-none">
           What&apos;s planned here
         </Reveal>
         {aspirational && (

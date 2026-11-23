@@ -7,7 +7,7 @@ import { DistrictLink } from "@/components/transitions/TransitionLinks";
  */
 export function NextDistrict({ slug, n, name, color }: { slug: string; n: number; name: string; color: string }) {
   return (
-    <nav aria-label="Next district" className="px-2 pb-2 sm:px-4 sm:pb-4">
+    <nav aria-label="Next district" className="px-2 pb-2 sm:px-4 lg:px-(--frame-gutter) sm:pb-4">
       <DistrictLink
         district={{ slug, color }}
         style={{ background: color }}
@@ -15,7 +15,7 @@ export function NextDistrict({ slug, n, name, color }: { slug: string; n: number
       >
         <span className="flex flex-col gap-2">
           <span className="text-base font-bold">Next district · {n}</span>
-          <span className="font-display text-[clamp(36px,4.6vw,64px)] font-semibold leading-none tracking-[-0.025em]">{name}</span>
+          <span className="font-display text-section font-semibold leading-none tracking-[-0.025em]">{name}</span>
         </span>
         <span
           aria-hidden="true"

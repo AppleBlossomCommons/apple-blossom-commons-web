@@ -25,8 +25,8 @@ import orchardKitchen from "@/public/images/home/orchard-grove-kitchen.jpg";
  * - "What makes this one different" is a photo band.
  */
 
-const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
-const headingClass = "text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px]";
+const headingClass = "text-[34px] leading-none sm:text-section";
 const introClass = "max-w-[760px] text-xl leading-normal sm:text-[23px]";
 const subheadingClass = "text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]";
 
@@ -324,7 +324,7 @@ const groups: { title: string; photo: () => Photo; reasons: { title: string; tex
 /** "Why plan this way" (#why-life-plan): four photo groups, every reason in view. */
 export function WhyLifePlan() {
   return (
-    <section id="why-life-plan" aria-labelledby="why-title" className="px-5 pb-16 sm:px-[clamp(16px,4vw,56px)] sm:pb-[120px]">
+    <section id="why-life-plan" aria-labelledby="why-title" className="px-5 pb-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:pb-[96px]">
       <Reveal as="h2" kind="head" id="why-title" className={`${headingClass} mb-10 max-w-[900px] sm:mb-14`}>
         Why plan this way
       </Reveal>
@@ -354,7 +354,7 @@ export function WhyLifePlan() {
 /** A wide photo with the one idea beside it: the senior neighborhoods are part of a whole community. */
 export function DifferentBand() {
   return (
-    <section aria-labelledby="different-title" className="px-2 sm:px-4">
+    <section aria-labelledby="different-title" className="px-2 sm:px-4 lg:px-(--frame-gutter)">
       <Reveal
         kind="card"
         className="grid overflow-hidden rounded-hero-sm bg-sand sm:rounded-hero min-[1000px]:grid-cols-[7fr_5fr]"

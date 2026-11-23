@@ -84,7 +84,7 @@ export function DistrictHero({ slug, n, name, familyLabel, color, summary }: Dis
           <span aria-hidden="true" className="size-3 rounded-[3px] shadow-[0_0_0_1.5px_var(--hearth)]" style={{ background: color }} />
           District {n} · {familyLabel}
         </motion.p>
-        <motion.h1 {...part(0)} id="district-title" className="text-[clamp(48px,7vw,104px)] leading-[0.95] tracking-[-0.03em]">
+        <motion.h1 {...part(0)} id="district-title" className="text-hero leading-[0.95] tracking-[-0.03em]">
           {name}
         </motion.h1>
         <motion.p {...part(2)} className="max-w-[600px] text-[clamp(19px,1.6vw,22px)] leading-normal">

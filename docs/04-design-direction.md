@@ -96,11 +96,11 @@ Districts are told apart by **numbered roundels and names**, not by color alone.
 
 (Headlines changed to Arial on Oct 24, 2026. Before that they used Bricolage Grotesque from the design handoff, which had replaced Source Serif 4. Atkinson Hyperlegible Next replaced Inter in the same handoff.)
 
-Scale: body 18px at about a 64-character measure. Headlines step on a 1.25 ratio up to a fluid display size of about 88px. Load the web fonts (Atkinson Hyperlegible Next, IBM Plex Mono) through `next/font` with no layout shift. Arial is a system font and is not downloaded.
+Scale: body 18px at about a 64-character measure. Headings use four named sizes from `app/globals.css` instead of one-off values (owner decision, Nov 22, 2026: headings felt too big on desktop). At 1440px wide: `text-hero` 72px (home and district heroes), `text-page` 56px (each page's title; lowered from 68px the same day), `text-section` 44px (section titles), `text-card` 32px (titles inside cards). They take over from the `sm:` breakpoint; phone sizes stay on each heading's base class. Load the web font (Atkinson Hyperlegible Next) through `next/font` with no layout shift. Arial is a system font and is not downloaded.
 
 ## Layout
 
-- 12-column grid, 1,240px reading frame, full-bleed bands for the map, tour and photography.
+- 12-column grid, 1,240px reading frame. On desktop (1024px and up) every section's content sits inside this frame, with at least 56–96px of side margin (`--frame-gutter` in `app/globals.css`, applied as `lg:px-(--frame-gutter)`). Section background colors still run edge to edge; the map, photo steps and page-top cards sit inside the frame. The home hero, the district heroes and the home tour photo ("See the land for yourself", full screen on desktop, its text card aligned to the frame) are the only full-bleed views. Section top and bottom padding on desktop is 96px at most (thinned from 120px on Nov 22, 2026). Phones and tablets keep their tighter padding. (Owner decision, Nov 22, 2026: content felt "in your face" on desktop. This replaces the earlier full-bleed bands for the map, tour and photography.)
 - Editorial rhythm: a text column on the left and a margin column on the right for sources and notes. Sidenotes on desktop, tap-to-open chips on mobile.
 - 8px spacing base. Sections separated by large vertical space (96–160px on desktop), not by boxes.
 - Hairline rules and small-caps or mono eyebrows for structure. No drop shadows, and no card grids as the main device.

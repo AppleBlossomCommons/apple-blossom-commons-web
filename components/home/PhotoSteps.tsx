@@ -113,13 +113,13 @@ export function PhotoSteps() {
   return (
     <section
       aria-labelledby="steps-title"
-      className="grid grid-cols-1 gap-x-[clamp(24px,4vw,64px)] bg-linen px-[clamp(16px,2.4vw,32px)] pt-[clamp(48px,6vw,88px)] lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] xl:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]"
+      className="grid grid-cols-1 gap-x-[clamp(24px,4vw,64px)] bg-linen px-[clamp(16px,2.4vw,32px)] lg:px-(--frame-gutter) pt-[clamp(40px,5vw,72px)] lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] xl:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]"
     >
       <div>
         {/* New short heading written in the build; it needs a read by the owner and Andy. */}
         <h2
           id="steps-title"
-          className="mb-8 max-w-[420px] text-[clamp(36px,4.2vw,56px)] leading-none lg:sticky lg:top-[100px] lg:mb-0"
+          className="mb-8 max-w-[420px] text-section leading-none lg:sticky lg:top-[100px] lg:mb-0"
         >
           Life at Apple Blossom Commons
         </h2>

@@ -11,8 +11,8 @@ import { getPlaceImage, type PlaceImage } from "@/lib/place-images";
 // Copy from docs/11-plan-and-districts-content.md, section 1 (The Plan). Place names and text for
 // the village come from data/districts.json.
 
-const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
-const headingClass = "text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px]";
+const headingClass = "text-[34px] leading-none sm:text-section";
 const introClass = "max-w-[760px] text-xl leading-normal sm:text-[23px]";
 const linkClass =
   "inline-flex min-h-11 items-center self-start font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
@@ -99,7 +99,7 @@ export function Village() {
       </ul>
       <div className="mt-10 flex flex-col gap-6 sm:mt-14">
         <DistrictPageLink districtKey="wine">Explore Chelan Wine Village</DistrictPageLink>
-        <ResearchCallout slug="village-economy" size="large" />
+        <ResearchCallout slug="village-economy" size="large" fullWidth />
         <ConceptNote />
       </div>
     </section>
@@ -191,8 +191,8 @@ const guiding: RuleItem[] = [
  */
 export function GuidingIdeas() {
   return (
-    <section id="guiding-ideas" aria-labelledby="guiding-title" className={`bg-sand ${sectionPad}`}>
-      <div className="mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-5">
+    <section id="guiding-ideas" aria-labelledby="guiding-title" className="bg-sand px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[72px] lg:px-(--frame-gutter)">
+      <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:gap-4">
         <Reveal as="h2" kind="head" id="guiding-title" className={headingClass}>
           What guides the plan
         </Reveal>

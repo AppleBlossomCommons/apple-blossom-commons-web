@@ -108,9 +108,9 @@ export function Faqs() {
     <section
       id="faqs"
       aria-labelledby="faqs-title"
-      className="grid items-start gap-10 bg-sand px-5 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px] min-[1000px]:grid-cols-[minmax(0,380px)_1fr] min-[1000px]:gap-20"
+      className="grid items-start gap-10 bg-sand px-5 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px] min-[1000px]:grid-cols-[minmax(0,380px)_1fr] min-[1000px]:gap-20"
     >
-      <Reveal as="h2" kind="head" id="faqs-title" className="text-[44px] leading-none sm:text-[80px] sm:tracking-[-0.03em]">
+      <Reveal as="h2" kind="head" id="faqs-title" className="text-[44px] leading-none sm:text-section sm:tracking-[-0.03em]">
         FAQs
       </Reveal>
       <div className="flex flex-col gap-10 sm:gap-14">

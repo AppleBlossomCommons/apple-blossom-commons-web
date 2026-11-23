@@ -42,14 +42,14 @@ export function AtAGlance({
   const here = districts.find((d) => d.key === current);
 
   return (
-    <section aria-labelledby="glance-title" className="px-2 py-[clamp(56px,7vw,96px)] sm:px-4">
+    <section aria-labelledby="glance-title" className="px-2 py-[clamp(48px,6vw,76px)] sm:px-4 lg:px-(--frame-gutter)">
       <Reveal kind="card" className="grid overflow-hidden rounded-card min-[900px]:grid-cols-[5fr_7fr]">
         <div
           className="flex flex-col gap-8 p-[clamp(24px,4vw,56px)] text-hearth"
           // oklab, not oklch: oklch loses the hue of a nearly gray color (the Residence's taupe) in Chrome.
           style={{ background: `color-mix(in oklab, ${color} 45%, var(--linen))` }}
         >
-          <h2 id="glance-title" className="text-[clamp(36px,4vw,52px)] leading-none">
+          <h2 id="glance-title" className="text-section leading-none">
             At a glance
           </h2>
           <ul className="flex flex-col">
