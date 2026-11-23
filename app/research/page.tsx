@@ -41,8 +41,8 @@ const stayInTouch: Doorway[] = [
   },
 ];
 
-const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[112px]";
-const sectionTitle = "text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[88px]";
+const sectionTitle = "text-4xl leading-none sm:text-section";
 
 export default function ResearchPage() {
   const reports = visibleReports();
@@ -51,13 +51,13 @@ export default function ResearchPage() {
   return (
     <>
       {/* Intro: text on a linen panel beside the Lake Chelan photo (no fades over the photo) */}
-      <section aria-labelledby="research-title" className="px-2 sm:px-4">
+      <section aria-labelledby="research-title" className="px-2 sm:px-4 lg:px-(--frame-gutter)">
         <div className="grid items-stretch overflow-hidden rounded-hero-sm bg-sand sm:rounded-hero min-[1000px]:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
           <div className="flex flex-col justify-end gap-4 px-5 pb-8 pt-10 sm:gap-6 sm:px-12 sm:pb-14 sm:pt-16 min-[1000px]:px-16">
             <Reveal as="p" kind="fade" className={eyebrow}>
               Research Library
             </Reveal>
-            <Reveal as="h1" kind="head" id="research-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
+            <Reveal as="h1" kind="head" id="research-title" className="text-[46px] leading-[0.98] sm:text-page sm:leading-[0.96] sm:tracking-[-0.03em]">
               The research behind the plan
             </Reveal>
             <Reveal as="p" kind="fade" className="max-w-[640px] sm:text-[21px] sm:leading-normal">

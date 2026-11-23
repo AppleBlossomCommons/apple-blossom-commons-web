@@ -133,7 +133,7 @@ export function PlanExplorer({
       id="explore"
       aria-labelledby={hero?.id}
       aria-label={hero ? undefined : "District map"}
-      className={hero ? "px-2 sm:px-4" : "bg-sand px-[clamp(12px,4vw,56px)] pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]"}
+      className={hero ? "px-2 sm:px-4 lg:px-(--frame-gutter)" : "bg-sand px-[clamp(12px,4vw,56px)] lg:px-(--frame-gutter) pb-[clamp(40px,6vw,88px)] pt-[clamp(24px,5vw,72px)]"}
     >
       <div
         className={
@@ -144,7 +144,7 @@ export function PlanExplorer({
       >
       {hero && (
         <div className="mb-6 flex flex-col gap-3 px-2 sm:mb-10 sm:gap-5 sm:px-0 min-[1000px]:flex-row min-[1000px]:items-end min-[1000px]:justify-between min-[1000px]:gap-16">
-          <h1 id={hero.id} className="text-[56px] leading-[0.95] tracking-[-0.03em] sm:text-[clamp(72px,7vw,104px)]">
+          <h1 id={hero.id} className="text-[46px] leading-[0.95] tracking-[-0.03em] sm:text-page">
             {hero.title}
           </h1>
           <p className="max-w-[520px] text-xl leading-normal sm:text-[23px] min-[1000px]:pb-2">{hero.lede}</p>

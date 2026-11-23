@@ -8,8 +8,8 @@ import { visionImages } from "@/lib/place-images";
 // Copy from docs/14-plan-vision-content.md (The Plan: the whole vision). General explainer copy
 // lives here, like the other Plan sections; district places come from data/districts.json.
 
-const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
-const headingClass = "text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px]";
+const headingClass = "text-[34px] leading-none sm:text-section";
 const introClass = "max-w-[760px] text-xl leading-normal sm:text-[23px]";
 const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:decoration-hearth";
 
@@ -43,7 +43,7 @@ const pillars: { place: Place; image: keyof typeof visionImages; more: { href: s
 /** "A different kind of retirement" (#vision, docs/14 section 3): three pillars, then a closing line. */
 export function Vision() {
   return (
-    <section id="vision" aria-labelledby="vision-title" className={sectionPad}>
+    <section id="vision" aria-labelledby="vision-title" className={`${sectionPad} sm:pb-12`}>
       <div className="mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-5">
         <Reveal as="h2" kind="head" id="vision-title" className={headingClass}>
           A different kind of retirement
@@ -62,10 +62,7 @@ export function Vision() {
           </PlaceCard>
         ))}
       </ul>
-      <Reveal as="p" kind="fade" className="mt-12 max-w-[860px] text-xl leading-normal sm:mt-16 sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
-        Planned as one connected community, for the people who live here and the families who visit them.
-      </Reveal>
-      <ResearchCallout slug="growing-older-by-the-lake" size="large" className="mt-8 sm:mt-10" />
+      <ResearchCallout slug="growing-older-by-the-lake" size="large" fullWidth className="mt-12 sm:mt-16" />
     </section>
   );
 }

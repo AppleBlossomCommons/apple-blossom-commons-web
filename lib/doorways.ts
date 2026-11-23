@@ -10,7 +10,7 @@ export const talkDoorways: Doorway[] = [
     href: "/participate",
     title: "Have a say.",
     text: "Learn how the plan is reviewed and share your views.",
-    cta: "How Can I Participate?",
+    cta: "Get involved",
     fill: "#DDF1FC",
   },
   {

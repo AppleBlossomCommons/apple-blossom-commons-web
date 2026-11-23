@@ -15,7 +15,7 @@ const keepExploring: Doorway[] = [
     href: "/plan/neighborhoods",
     title: "Neighborhoods for a lifetime.",
     text: "Homes for every stage of life, Heritage Grove, and how care and technology are planned close to home.",
-    cta: "Neighborhoods for a lifetime",
+    cta: "See the homes",
     fill: "#ECE7FC",
   },
   {

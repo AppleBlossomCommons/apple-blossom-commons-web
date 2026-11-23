@@ -249,9 +249,9 @@ export function HomeMap({ districts, viewBox, imageHref, disclaimer }: { distric
   );
 
   return (
-    <section id="map" aria-labelledby="map-title" className="bg-sand px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)] pt-[clamp(64px,8vw,104px)]">
+    <section id="map" aria-labelledby="map-title" className="bg-sand px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) pb-[clamp(64px,7vw,88px)] pt-[clamp(56px,7vw,84px)]">
       <div className="mb-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] items-end gap-x-16 gap-y-4">
-        <Reveal as="h2" kind="head" id="map-title" className="text-[clamp(40px,4.5vw,60px)] leading-none">
+        <Reveal as="h2" kind="head" id="map-title" className="text-section leading-none">
           Ten neighborhoods, one plan
         </Reveal>
         <Reveal as="p" kind="fade" className="max-w-[520px] text-xl text-muted">

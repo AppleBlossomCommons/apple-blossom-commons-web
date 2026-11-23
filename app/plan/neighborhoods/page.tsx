@@ -16,7 +16,7 @@ const keepExploring: Doorway[] = [
     href: "/plan/village-and-chelan",
     title: "The Village and Chelan.",
     text: "The village at the center, a neighborhood designed for walking, parks and trails, and why Chelan.",
-    cta: "The Village and Chelan",
+    cta: "See the village",
     fill: "#EAF6CF",
   },
   {

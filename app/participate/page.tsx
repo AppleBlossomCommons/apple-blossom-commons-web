@@ -43,7 +43,7 @@ export default function ParticipatePage() {
   return (
     <>
       {/* Hero */}
-      <section aria-labelledby="participate-title" className="px-2 sm:px-4">
+      <section aria-labelledby="participate-title" className="px-2 sm:px-4 lg:px-(--frame-gutter)">
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage
             fill="#FFE1ED"
@@ -53,7 +53,7 @@ export default function ParticipatePage() {
             AI image, no people: quiet tree-lined path with a simple wooden bench, flowering trees in spring bloom, soft morning light
           </PlaceholderLabel>
           <div className="grid w-full items-end gap-3.5 text-hearth min-[900px]:grid-cols-[1.3fr_1fr] min-[900px]:gap-16">
-            <Reveal as="h1" kind="head" id="participate-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
+            <Reveal as="h1" kind="head" id="participate-title" className="text-[46px] leading-[0.98] sm:text-page sm:leading-[0.96] sm:tracking-[-0.03em]">
               How can I participate?
             </Reveal>
             <Reveal as="p" kind="fade" className="pb-2 sm:text-[21px] sm:leading-normal">
@@ -65,7 +65,7 @@ export default function ParticipatePage() {
       </section>
 
       {/* Doorways: jump links that glide to the sections below (components/site/JumpLink.tsx) */}
-      <nav aria-label="Choose what fits you" className="px-2 pt-2 sm:px-4">
+      <nav aria-label="Choose what fits you" className="px-2 pt-2 sm:px-4 lg:px-(--frame-gutter)">
         <ul className="grid overflow-hidden rounded-[14px] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:rounded-card">
           {doorways.map((d) => (
             <li key={d.href} className="flex">
@@ -88,10 +88,10 @@ export default function ParticipatePage() {
       <section
         id="neighbors"
         aria-labelledby="neighbors-title"
-        className="grid items-start gap-7 px-5 pb-14 pt-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px] min-[1000px]:grid-cols-2 min-[1000px]:gap-20"
+        className="grid items-start gap-7 px-5 pb-14 pt-16 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px] min-[1000px]:grid-cols-2 min-[1000px]:gap-20"
       >
         <div className="flex flex-col gap-7 sm:gap-9">
-          <Reveal as="h2" kind="head" id="neighbors-title" className="text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+          <Reveal as="h2" kind="head" id="neighbors-title" className="text-4xl leading-none sm:text-section">
             I&apos;m a Chelan neighbor
           </Reveal>
           {neighborItems.map((item, i) => (
@@ -126,10 +126,10 @@ export default function ParticipatePage() {
       <section
         id="update-list"
         aria-labelledby="update-title"
-        className="grid items-start gap-5 bg-sand px-3 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px] min-[1000px]:grid-cols-2 min-[1000px]:gap-20"
+        className="grid items-start gap-5 bg-sand px-3 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px] min-[1000px]:grid-cols-2 min-[1000px]:gap-20"
       >
         <div className="flex flex-col gap-3 px-2 sm:gap-6 sm:px-0">
-          <Reveal as="h2" kind="head" id="update-title" className="text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+          <Reveal as="h2" kind="head" id="update-title" className="text-4xl leading-none sm:text-section">
             I&apos;m thinking about living here
           </Reveal>
           <Reveal as="p" kind="fade" className="max-w-[540px] sm:text-xl">
@@ -143,7 +143,7 @@ export default function ParticipatePage() {
       </section>
 
       {/* Three short sections */}
-      <section className="grid gap-10 px-5 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px] min-[900px]:grid-cols-3 min-[900px]:gap-12">
+      <section className="grid gap-10 px-5 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px] min-[900px]:grid-cols-3 min-[900px]:gap-12">
         <Reveal kind="card" index={0} id="families" className={`${ruleItem} gap-3 pt-4 sm:gap-4 sm:pt-6`}>
           <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] sm:text-[34px]">I&apos;m helping a parent plan ahead</h2>
           <p>

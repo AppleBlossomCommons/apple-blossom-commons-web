@@ -202,7 +202,7 @@ export function TourExperience({
   const iconButton = "inline-flex size-11 shrink-0 items-center justify-center rounded-full transition-[background-color,scale] duration-150 ease-out active:scale-[0.97]";
 
   return (
-    <section aria-label="Tour player" className="bg-sand px-5 py-10 sm:px-[clamp(16px,4vw,56px)] sm:py-16">
+    <section aria-label="Tour player" className="bg-sand px-5 py-10 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-16">
       <div className="mx-auto max-w-[1600px]">
         {/* Current clip */}
         <div ref={stageTopRef} className="flex flex-col gap-5 min-[900px]:flex-row min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-10">

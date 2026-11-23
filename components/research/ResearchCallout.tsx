@@ -6,14 +6,16 @@ import { getReport } from "@/lib/research";
 const sizes = {
   /** For a card inside another card or a narrow column (Neighborhoods). */
   compact: {
-    card: "max-w-[640px] grid-cols-[72px_minmax(0,1fr)] gap-5 p-4 sm:grid-cols-[96px_minmax(0,1fr)] sm:gap-6 sm:p-5",
+    card: "grid-cols-[72px_minmax(0,1fr)] gap-5 p-4 sm:grid-cols-[96px_minmax(0,1fr)] sm:gap-6 sm:p-5",
+    maxWidth: "max-w-[640px]",
     imageSizes: "(min-width: 640px) 96px, 72px",
     title: "text-[21px] sm:text-[24px]",
     subtitle: "text-[0.9375rem] sm:text-base",
   },
   /** For a card that sits on its own in a full-width section (The Plan, The Village and Chelan). */
   large: {
-    card: "max-w-[880px] grid-cols-[104px_minmax(0,1fr)] gap-5 p-5 sm:grid-cols-[200px_minmax(0,1fr)] sm:gap-9 sm:p-7 lg:grid-cols-[220px_minmax(0,1fr)]",
+    card: "grid-cols-[104px_minmax(0,1fr)] gap-5 p-5 sm:grid-cols-[200px_minmax(0,1fr)] sm:gap-9 sm:p-7 lg:grid-cols-[220px_minmax(0,1fr)]",
+    maxWidth: "max-w-[880px]",
     imageSizes: "(min-width: 1024px) 220px, (min-width: 640px) 200px, 104px",
     title: "text-[24px] sm:text-[34px]",
     subtitle: "text-base sm:text-lg",
@@ -29,12 +31,15 @@ export function ResearchCallout({
   slug,
   size = "compact",
   surface = "sand",
+  fullWidth = false,
   className = "",
 }: {
   slug: string;
   size?: keyof typeof sizes;
   /** Card color: "linen" for cards that sit on a sand section, so the card still reads as a card. */
   surface?: "sand" | "linen";
+  /** Run to the section's right margin instead of stopping at the size's max width (The Plan). */
+  fullWidth?: boolean;
   className?: string;
 }) {
   const report = getReport(slug);
@@ -42,7 +47,7 @@ export function ResearchCallout({
   const s = sizes[size];
   return (
     <div
-      className={`group relative grid w-full items-center self-start rounded-card ${s.card} ${surface === "linen" ? "bg-linen" : "bg-sand"} transition-[background-color,box-shadow] duration-200 focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-hearth hover:shadow-[0_1px_2px_rgb(59_47_42/0.10),0_10px_28px_-16px_rgb(59_47_42/0.40)] ${className}`}
+      className={`group relative grid w-full items-center self-start rounded-card ${s.card} ${fullWidth ? "" : s.maxWidth} ${surface === "linen" ? "bg-linen" : "bg-sand"} transition-[background-color,box-shadow] duration-200 focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-hearth hover:shadow-[0_1px_2px_rgb(59_47_42/0.10),0_10px_28px_-16px_rgb(59_47_42/0.40)] ${className}`}
     >
       {/* Decorative: the title beside it names the report. */}
       <Image

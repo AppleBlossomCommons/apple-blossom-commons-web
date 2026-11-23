@@ -75,7 +75,7 @@ async function District({ params }: { params: PageProps<"/districts/[slug]">["pa
       />
       <WhatsPlannedHere districtKey={district.key} places={district.places} aspirational={district.status === "aspirational"} />
       {research && (
-        <div className="-mt-[clamp(40px,5vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(72px,8vw,112px)]">
+        <div className="-mt-[clamp(40px,5vw,72px)] px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) pb-[clamp(64px,7vw,88px)]">
           <ResearchLink slug={research.slug}>Related research: {research.title}</ResearchLink>
         </div>
       )}

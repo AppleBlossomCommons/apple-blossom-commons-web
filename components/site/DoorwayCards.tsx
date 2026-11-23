@@ -88,10 +88,10 @@ export function DoorwayCards({ id, doorways = homeDoorways, heading }: Props) {
   const titleId = heading?.id ?? "doorways-title";
 
   return (
-    <section id={id} aria-labelledby={titleId} className="px-[clamp(8px,1.2vw,16px)] pb-4 pt-[clamp(72px,8vw,112px)]">
+    <section id={id} aria-labelledby={titleId} className="px-[clamp(8px,1.2vw,16px)] lg:px-(--frame-gutter) pb-4 pt-[clamp(64px,7vw,88px)]">
       {heading ? (
-        <div className="mb-[clamp(32px,4vw,56px)] flex max-w-[760px] flex-col gap-4 px-[clamp(8px,2.8vw,40px)] sm:gap-6">
-          <Reveal as="h2" kind="head" id={titleId} className="text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]">
+        <div className="mb-[clamp(24px,2.4vw,32px)] flex max-w-[760px] flex-col gap-4 px-[clamp(8px,2.8vw,40px)] sm:gap-6 lg:px-0">
+          <Reveal as="h2" kind="head" id={titleId} className="text-4xl leading-none sm:text-section">
             {heading.title}
           </Reveal>
           {heading.text && (
@@ -150,9 +150,9 @@ export function DoorwayCards({ id, doorways = homeDoorways, heading }: Props) {
               )}
 
               {d.audience && <span className="text-[1.0625rem] font-bold">{d.audience}</span>}
-              <h3 className="text-[clamp(36px,3.1vw,44px)] leading-none tracking-[-0.02em]">{d.title}</h3>
+              <h3 className="text-card leading-none tracking-[-0.02em]">{d.title}</h3>
               <p className="text-lg">{d.text}</p>
-              <span className="mt-2 inline-flex h-12 items-center gap-2 self-start rounded-full bg-white px-[22px] font-bold text-hearth transition-colors duration-150 group-hover:bg-orange">
+              <span className="mt-2 inline-flex h-11 items-center gap-1.5 self-start whitespace-nowrap rounded-full bg-white px-5 text-base font-bold text-hearth transition-colors duration-150 group-hover:bg-orange">
                 {d.cta} <span aria-hidden="true">→</span>
               </span>
             </MotionLink>

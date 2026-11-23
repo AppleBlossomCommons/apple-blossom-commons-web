@@ -12,7 +12,7 @@ export function TourTeaser() {
   return (
     <section
       aria-labelledby="tour-title"
-      className="relative isolate flex min-h-[min(calc(100svh-64px),820px)] items-end px-[clamp(16px,4vw,56px)] py-[clamp(24px,4vw,56px)] max-sm:min-h-[640px]"
+      className="relative isolate flex min-h-[min(calc(100svh-64px),820px)] items-end px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) py-[clamp(24px,4vw,56px)] lg:min-h-[calc(100svh-64px)] max-sm:min-h-[640px]"
     >
       {/* The poster frame from tour 13 (Southern slopes and valley view), retouched with a clear sky
           and warmer light. The tour itself keeps the original poster so it matches its video. */}
@@ -25,7 +25,7 @@ export function TourTeaser() {
         className="-z-10 object-cover object-[50%_75%]"
       />
       <div className="flex max-w-[500px] flex-col gap-5 rounded-card bg-linen p-[clamp(24px,3vw,40px)]">
-        <Reveal as="h2" kind="head" id="tour-title" className="text-[clamp(36px,4vw,52px)] leading-none">
+        <Reveal as="h2" kind="head" id="tour-title" className="text-section leading-none">
           See the land for yourself
         </Reveal>
         <Reveal as="p" kind="fade" className="text-xl">

@@ -101,7 +101,7 @@ export function SiteHeader({ districts }: { districts: DistrictNavItem[] }) {
         style={{ "--k": k } as React.CSSProperties}
         className="sticky top-0 z-30 h-16 p-[calc(var(--k)*8px)_calc(var(--k)*12px)]"
       >
-        <div className="flex h-full items-center gap-6 max-[419px]:gap-3 rounded-[calc(var(--k)*16px)] bg-linen pl-[calc(16px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_16px))] pr-[calc(6px_+_(1_-_var(--k))_*_(clamp(16px,3vw,40px)_-_6px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
+        <div className="flex h-full items-center gap-6 max-[419px]:gap-3 rounded-[calc(var(--k)*16px)] bg-linen [--hx:clamp(16px,3vw,40px)] lg:[--hx:var(--frame-gutter)] pl-[calc(16px_+_(1_-_var(--k))_*_(var(--hx)_-_16px))] pr-[calc(6px_+_(1_-_var(--k))_*_(var(--hx)_-_6px))] shadow-[0_10px_30px_-14px_rgb(59_47_42/calc(var(--k)*0.35)),0_0_0_1px_rgb(230_218_202/var(--k))]">
           <Link
             href="/"
             onClick={goHome}

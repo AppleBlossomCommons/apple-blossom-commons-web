@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 /** A rounded tinted card inset from the page edges, as on the home and About heroes. */
 const card = {
-  wrap: "px-2 py-2 sm:px-4 sm:py-4",
+  wrap: "px-2 py-2 sm:px-4 lg:px-(--frame-gutter) sm:py-4",
   inner: "rounded-hero-sm px-5 py-12 sm:rounded-hero sm:px-[clamp(24px,5vw,64px)] sm:py-[88px]",
 };
 
@@ -31,7 +31,7 @@ export default function TourPage() {
       {/* Intro: a rounded sky card, like the home page hero. */}
       <section aria-labelledby="tour-page-title" className={card.wrap}>
         <div className={`${card.inner} bg-tint-sky`}>
-          <h1 id="tour-page-title" className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]">
+          <h1 id="tour-page-title" className="text-[46px] leading-[0.98] sm:text-page sm:leading-[0.96] sm:tracking-[-0.03em]">
             Site Tour
           </h1>
           <p className="mt-5 max-w-[760px] text-xl leading-normal sm:mt-7 sm:text-[24px] sm:leading-[1.45]">
@@ -48,7 +48,7 @@ export default function TourPage() {
       {/* Closing question: a rounded pink card, like the home page doorway cards. */}
       <section aria-labelledby="tour-questions-title" className={`${card.wrap} pb-10 sm:pb-16`}>
         <div className={`${card.inner} bg-tint-pink`}>
-          <h2 id="tour-questions-title" className="max-w-[18ch] text-4xl leading-none sm:text-[clamp(40px,4.2vw,56px)]">
+          <h2 id="tour-questions-title" className="max-w-[18ch] text-4xl leading-none sm:text-section">
             Questions about the land or the plan?
           </h2>
           <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">

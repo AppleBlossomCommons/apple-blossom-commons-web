@@ -14,8 +14,8 @@ import { getReport, type Report } from "@/lib/research";
 // The ten sections of a report page (docs/15, section 4). Section headings are fixed copy from the
 // content pack; everything else comes from data/research.json.
 
-const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[104px]";
-const sectionTitle = "text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[84px]";
+const sectionTitle = "text-4xl leading-none sm:text-section";
 const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
 
 function Section({ id, title, className = "", children }: { id: string; title: string; className?: string; children: ReactNode }) {
@@ -32,7 +32,7 @@ function Section({ id, title, className = "", children }: { id: string; title: s
 /** 1 · Header: soft photo band beside the title, no dark background or fades. */
 export function ReportHeader({ report }: { report: Report }) {
   return (
-    <section aria-labelledby="report-title" className="px-2 sm:px-4">
+    <section aria-labelledby="report-title" className="px-2 sm:px-4 lg:px-(--frame-gutter)">
       <div className="grid items-stretch overflow-hidden rounded-hero-sm bg-sand sm:rounded-hero min-[1000px]:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
         <div className="flex flex-col justify-end gap-4 px-5 pb-8 pt-10 sm:gap-5 sm:px-12 sm:pb-14 sm:pt-16 min-[1000px]:px-16">
           {report.status === "draft" && <DraftLabel />}
@@ -42,7 +42,7 @@ export function ReportHeader({ report }: { report: Report }) {
             </Link>{" "}
             · Report {report.number}
           </p>
-          <Reveal as="h1" kind="head" id="report-title" className="text-[44px] leading-[0.98] sm:text-[clamp(56px,5.6vw,80px)] sm:tracking-[-0.03em]">
+          <Reveal as="h1" kind="head" id="report-title" className="text-[44px] leading-[0.98] sm:text-page sm:tracking-[-0.03em]">
             {report.title}
           </Reveal>
           <Reveal as="p" kind="fade" className="text-xl text-muted sm:text-2xl">

@@ -40,7 +40,7 @@ export function Hero() {
         />
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] items-end gap-[clamp(20px,4vw,64px)] text-white">
-          <h1 id="home-title" className="min-w-0 text-[clamp(44px,5.8vw,84px)] leading-[0.98]">
+          <h1 id="home-title" className="min-w-0 text-hero leading-[0.98]">
             {/* Screen readers get the sentence whole; the per-word spans are only for the blur-in. */}
             <span className="sr-only">{HEADLINE}</span>
             {HEADLINE.split(" ").map((word, i) => (

@@ -63,15 +63,15 @@ const helloCards: Doorway[] = [
   },
 ];
 
-const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
-const sectionTitle = "text-4xl leading-none sm:text-[clamp(40px,4.2vw,60px)]";
+const sectionPad = "px-5 py-14 sm:px-[clamp(16px,4vw,56px)] lg:px-(--frame-gutter) sm:py-[96px]";
+const sectionTitle = "text-4xl leading-none sm:text-section";
 const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:text-hearth";
 
 export default function AboutPage() {
   return (
     <>
       {/* Intro: soft image header, no dark background */}
-      <section aria-labelledby="about-title" className="px-2 sm:px-4">
+      <section aria-labelledby="about-title" className="px-2 sm:px-4 lg:px-(--frame-gutter)">
         <div className="relative isolate flex h-[540px] items-end overflow-hidden rounded-hero-sm px-5 pb-[26px] sm:h-[580px] sm:rounded-hero sm:px-16 sm:pb-[60px]">
           <PlaceholderImage fill="#FFE6CC" className="absolute inset-0 -z-10" />
           <PlaceholderLabel inset={20}>
@@ -86,7 +86,7 @@ export default function AboutPage() {
                 as="h1"
                 kind="head"
                 id="about-title"
-                className="text-[46px] leading-[0.98] sm:text-[clamp(56px,6.1vw,88px)] sm:leading-[0.96] sm:tracking-[-0.03em]"
+                className="text-[46px] leading-[0.98] sm:text-page sm:leading-[0.96] sm:tracking-[-0.03em]"
               >
                 A place to call home, planned with patience
               </Reveal>
