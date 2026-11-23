@@ -11,7 +11,7 @@ import { useEffect } from "react";
  */
 const moved: Record<string, string> = {
   "life-plan": "/plan/neighborhoods",
-  "heritage-grove": "/plan/neighborhoods",
+  "heritage-grove": "/districts/heritage-grove",
   "care-close-by": "/plan/neighborhoods",
   village: "/plan/village-and-chelan",
   walking: "/plan/village-and-chelan",

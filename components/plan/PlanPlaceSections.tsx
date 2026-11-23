@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
-import { ResearchLink } from "@/components/research/ResearchLink";
+import { ResearchCallout } from "@/components/research/ResearchCallout";
 import { WalkRings } from "@/components/plan/WalkRings";
 import { ConceptNote, PlaceCard } from "@/components/site/Places";
 import { RuleList, type RuleItem } from "@/components/site/RuleList";
@@ -98,10 +98,8 @@ export function Village() {
         ))}
       </ul>
       <div className="mt-10 flex flex-col gap-6 sm:mt-14">
-        <div className="flex flex-col gap-x-10 gap-y-2 sm:flex-row sm:flex-wrap">
-          <DistrictPageLink districtKey="wine">Explore Chelan Wine Village</DistrictPageLink>
-          <ResearchLink slug="village-economy">Read the research: The Village Economy</ResearchLink>
-        </div>
+        <DistrictPageLink districtKey="wine">Explore Chelan Wine Village</DistrictPageLink>
+        <ResearchCallout slug="village-economy" size="large" />
         <ConceptNote />
       </div>
     </section>
@@ -122,7 +120,7 @@ const outdoorImages: Record<"summit" | "preserve", PlaceImage> = {
 /** Only a finished image is shown; a slot still waiting for its photo leaves the card text only (critique, Nov 20, 2026). */
 const shown = (image: PlaceImage) => (image.ready ? image : undefined);
 
-/** "Parks, trails and open space" (#outdoors): two parks with images and links, then Green edges. */
+/** "Parks, trails and open space" (#outdoors): two parks with images and links. */
 export function Outdoors() {
   return (
     <section id="outdoors" aria-labelledby="outdoors-title" className={sectionPad}>
@@ -155,16 +153,7 @@ export function Outdoors() {
         >
           <DistrictPageLink districtKey="preserve">Visit Orchard Preserve</DistrictPageLink>
         </PlaceCard>
-        <PlaceCard
-          index={2}
-          className="min-[760px]:col-span-2"
-          place={{
-            name: "Green edges",
-            text: "Planted buffers are planned along the busier roads, so homes look out on green rather than traffic.",
-          }}
-        />
       </ul>
-      <ConceptNote className="mt-10 sm:mt-14" />
     </section>
   );
 }

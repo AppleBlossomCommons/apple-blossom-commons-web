@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
-import { ResearchLink } from "@/components/research/ResearchLink";
-import { DistrictPageLink } from "@/components/plan/PlanPlaceSections";
+import { ResearchCallout } from "@/components/research/ResearchCallout";
 import { PlaceCard } from "@/components/site/Places";
-import { getDistrictByKey, type Place } from "@/lib/districts";
+import type { Place } from "@/lib/districts";
 import { visionImages } from "@/lib/place-images";
 
 // Copy from docs/14-plan-vision-content.md (The Plan: the whole vision). General explainer copy
@@ -66,45 +65,7 @@ export function Vision() {
       <Reveal as="p" kind="fade" className="mt-12 max-w-[860px] text-xl leading-normal sm:mt-16 sm:text-[28px] sm:leading-[1.45] sm:tracking-[-0.005em]">
         Planned as one connected community, for the people who live here and the families who visit them.
       </Reveal>
-      <ResearchLink slug="growing-older-by-the-lake" className="mt-8 sm:mt-10">
-        Read the research: Growing Older by the Lake
-      </ResearchLink>
-    </section>
-  );
-}
-
-/**
- * "Heritage Grove: support, when it's needed" (#heritage-grove, docs/14 section 5), short form for
- * Neighborhoods for a lifetime (Nov 19, 2026). The full place cards (levels of care and everyday life) live on
- * the Heritage Grove district page, which reads the same `places` from data/districts.json; here
- * the place names are listed so the reader sees what's there before following the link.
- */
-export function HeritageGroveSummary() {
-  const heritage = getDistrictByKey("heritage");
-  return (
-    <section id="heritage-grove" aria-labelledby="heritage-title" className="px-2 sm:px-4">
-      <Reveal kind="card" className="grid gap-x-16 gap-y-8 rounded-card bg-sand px-5 py-12 sm:px-14 sm:py-16 lg:grid-cols-[6fr_5fr]">
-        <div className="flex flex-col gap-4 sm:gap-5">
-          <h2 id="heritage-title" className={headingClass}>
-            Heritage Grove: support, when it&apos;s needed
-          </h2>
-          <p className={introClass}>
-            Heritage Grove is planned for people who prefer or need support. Each group of homes is planned around a protected garden
-            courtyard, with clubhouses for meals, fitness, reading and visits from family.
-          </p>
-          <DistrictPageLink districtKey="heritage">Explore Heritage Grove</DistrictPageLink>
-        </div>
-        <div className="flex flex-col gap-3">
-          <h3 className="text-[1.0625rem] font-bold">Planned here</h3>
-          <ul className="flex flex-wrap gap-2">
-            {heritage.places.map((place) => (
-              <li key={place.name} className="rounded-full bg-linen px-4 py-2 text-[1.0625rem]">
-                {place.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Reveal>
+      <ResearchCallout slug="growing-older-by-the-lake" size="large" className="mt-8 sm:mt-10" />
     </section>
   );
 }

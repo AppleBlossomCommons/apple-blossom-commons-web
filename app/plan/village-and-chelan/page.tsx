@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { Outdoors, Village, Walking } from "@/components/plan/PlanPlaceSections";
 import { PlanSubHero, WhyChelan } from "@/components/plan/PlanSections";
 import { DoorwayCards, type Doorway } from "@/components/site/DoorwayCards";
@@ -36,15 +35,6 @@ export default function VillageAndChelanPage() {
         id="village-outdoors-title"
         title="The Village and Chelan"
         lede="A small village at the center, lanes and trails designed for walking, and a large share of the land kept open, in a valley people come to for its four seasons."
-      />
-      <PlanPageNav
-        current="/plan/village-and-chelan"
-        sections={[
-          { id: "village", label: "The village" },
-          { id: "walking", label: "Walking" },
-          { id: "outdoors", label: "Parks and trails" },
-          { id: "why-chelan", label: "Why Chelan" },
-        ]}
       />
       <Village />
       <Walking />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { MovedSections } from "@/components/plan/MovedSections";
 import { PlanExplorer } from "@/components/plan/PlanExplorer";
-import { PlanPageNav } from "@/components/plan/PlanPageNav";
 import { GuidingIdeas } from "@/components/plan/PlanPlaceSections";
 import { Vision } from "@/components/plan/PlanVisionSections";
 import { FitsTogether, PlanIntro } from "@/components/plan/PlanSections";
@@ -55,14 +54,6 @@ export default function PlanPage() {
           title: "The plan",
           lede: "A long-range plan near Lake Chelan, meant to grow slowly, one neighborhood at a time. Choose a district to see what is planned there.",
         }}
-      />
-      <PlanPageNav
-        current="/plan"
-        sections={[
-          { id: "vision", label: "The idea" },
-          { id: "fits", label: "How it fits together" },
-          { id: "guiding-ideas", label: "What guides the plan" },
-        ]}
       />
       <PlanIntro />
       <Vision />

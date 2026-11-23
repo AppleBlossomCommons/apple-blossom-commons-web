@@ -1,17 +1,18 @@
 import Image, { type StaticImageData } from "next/image";
-import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
-import { ResearchLink } from "@/components/research/ResearchLink";
-import { DistrictPageLink } from "@/components/plan/PlanPlaceSections";
-import { FaqItem } from "@/components/site/FaqItem";
+import { ResearchCallout } from "@/components/research/ResearchCallout";
 import { ConceptText } from "@/components/site/Places";
+import { DistrictLink } from "@/components/transitions/TransitionLinks";
+import { getDistrictByKey, type DistrictKey } from "@/lib/districts";
 import { getPlaceImage, PLAN_IMAGE_DIR, visionImages, type PlaceImage } from "@/lib/place-images";
 import coupleBiking from "@/public/images/home/couple-biking-orchard.jpg";
 import coupleWalking from "@/public/images/home/couple-walking-path.jpg";
 import cottageDoor from "@/public/images/home/cottage-door-wreath.jpg";
+import heritageGarden from "@/public/images/home/heritage-garden-raised-beds.jpg";
 import lakeView from "@/public/images/home/lake-chelan-view.jpg";
 import morningMug from "@/public/images/home/morning-mug-lake.jpg";
 import neighborsFence from "@/public/images/home/neighbors-garden-fence.jpg";
+import orchardKitchen from "@/public/images/home/orchard-grove-kitchen.jpg";
 
 /**
  * The Life Plan part of The Plan: Neighborhoods for a lifetime, rebuilt image-first on Nov 20, 2026 (owner: "too
@@ -22,14 +23,12 @@ import neighborsFence from "@/public/images/home/neighbors-garden-fence.jpg";
  * - The ten reasons (was the BenefitCluster word cloud) sit in four photo groups, all readable
  *   without clicking.
  * - "What makes this one different" is a photo band.
- * - The three questions moved to the end of the page (LifePlanQuestions).
  */
 
 const sectionPad = "px-5 py-16 sm:px-[clamp(16px,4vw,56px)] sm:py-[120px]";
 const headingClass = "text-[34px] leading-none sm:text-[clamp(40px,4.2vw,60px)]";
 const introClass = "max-w-[760px] text-xl leading-normal sm:text-[23px]";
 const subheadingClass = "text-2xl leading-[1.1] tracking-[-0.02em] sm:text-[30px]";
-const inlineLink = "font-bold text-hearth underline decoration-sage-deep decoration-2 underline-offset-4 hover:decoration-hearth";
 
 /* ------------------------------------------------------------------------------------------------
  * Photos
@@ -61,6 +60,16 @@ const standIns = {
   lakeView: { src: lakeView, alt: "A garden terrace with a lawn and flowering shrubs looking out over the lake and hills." },
   cottageDoor: { src: cottageDoor, alt: "The front door of a single-storey cottage, with a wreath, planters and apple blossoms.", focus: "object-[50%_40%]" },
   neighborsFence: { src: neighborsFence, alt: "Two older neighbors talking over a garden fence, with blossoming trees behind them.", focus: "object-[50%_55%]" },
+  heritageGarden: {
+    src: heritageGarden,
+    alt: "An older woman in a wheelchair plants herbs in a raised garden bed with a smiling care aide, outside a single-storey building with a timber porch.",
+    focus: "object-[40%_50%]",
+  },
+  orchardKitchen: {
+    src: orchardKitchen,
+    alt: "An older couple laughs while cooking together in a bright kitchen with timber beams and tall windows onto pines and lavender.",
+    focus: "object-[45%_50%]",
+  },
   coupleBiking: { src: coupleBiking, alt: "An older couple rides bicycles down a gravel lane between blossoming trees, with the lake in the distance." },
 } satisfies Record<string, Photo>;
 
@@ -149,15 +158,75 @@ export function LifePlan() {
 
       <h3 className={`${subheadingClass} mb-6 sm:mb-8`}>One community, four levels of support</h3>
       <CarePath />
-      <p className="mt-8 max-w-[640px] sm:mt-10">
-        <strong>Orchard Grove</strong> is planned for the first step, with cottages and townhomes for active adults.{" "}
-        <strong>Heritage Grove</strong>, next door, is planned for the other three, so more support is a short walk away. Most people move
-        in at the first step.
-      </p>
-      <div className="mt-6 flex flex-col gap-x-10 gap-y-2 sm:flex-row sm:flex-wrap">
-        <DistrictPageLink districtKey="orchardgrove">Explore Orchard Grove</DistrictPageLink>
-      </div>
+      <GroveCards />
     </section>
+  );
+}
+
+/**
+ * Where each level is planned, as two photo cards that line up under the path on wide screens:
+ * Orchard Grove under step 1, Heritage Grove across steps 2 to 4. Each whole card is one link to
+ * the district page. Copy is the paragraph it replaced (Nov 22, 2026), split between the two, with "the other three" named.
+ */
+const groves: { key: DistrictKey; steps: string; text: string; photo: Photo; span: string }[] = [
+  {
+    key: "orchardgrove",
+    steps: "Step 1",
+    text: "Cottages and townhomes for active adults are planned here. Most people move in at this step.",
+    photo: standIns.orchardKitchen,
+    span: "min-[1100px]:col-span-1",
+  },
+  {
+    key: "heritage",
+    steps: "Steps 2 to 4",
+    text: "Next door, planned for assisted living, memory care and nursing care, so more support is a short walk away.",
+    photo: standIns.heritageGarden,
+    span: "min-[1100px]:col-span-3",
+  },
+];
+
+function GroveCards() {
+  return (
+    <ul className="mt-10 grid grid-cols-1 gap-6 min-[640px]:grid-cols-2 sm:mt-14 min-[1100px]:grid-cols-4">
+      {groves.map((g, i) => {
+        const d = getDistrictByKey(g.key);
+        return (
+          <Reveal
+            key={g.key}
+            as="li"
+            kind="card"
+            index={i}
+            className={`group relative isolate flex min-h-[340px] flex-col justify-end overflow-hidden rounded-card focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-hearth sm:min-h-[440px] ${g.span}`}
+          >
+            {/* Decorative: the district name and text on the card say where it leads. */}
+            <Image
+              src={g.photo.src}
+              alt=""
+              fill
+              sizes={i === 0 ? "(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw" : "(min-width: 1100px) 75vw, (min-width: 640px) 50vw, 100vw"}
+              // Hover (or keyboard focus) eases the photo in to 106%, like the doorway cards.
+              className={`-z-[2] object-cover transition-transform duration-[1100ms] ease-(--ease-out) motion-safe:group-hover:scale-[1.06] motion-safe:group-focus-within:scale-[1.06] ${g.photo.focus ?? ""}`}
+            />
+            <span aria-hidden="true" className="absolute inset-0 -z-[1] bg-gradient-to-t from-[rgb(38_30_26/0.88)] via-[rgb(38_30_26/0.55)] to-[rgb(38_30_26/0.05)]" />
+            <div className="flex max-w-[460px] flex-col gap-2 p-6 text-white sm:p-7">
+              <p className="text-[0.8125rem] font-bold uppercase tracking-[0.08em] text-white/90">{g.steps}</p>
+              <h4 className="text-[28px] font-bold leading-[1.05] tracking-[-0.015em] text-white sm:text-[32px]">
+                <DistrictLink
+                  district={{ slug: d.slug, color: d.color }}
+                  className="text-white no-underline outline-none after:absolute after:inset-0 after:content-['']"
+                >
+                  {d.name}
+                </DistrictLink>
+              </h4>
+              <p className="text-white/95">{g.text}</p>
+              <p aria-hidden="true" className="mt-1 font-bold text-white">
+                Explore {d.name}&nbsp;→
+              </p>
+            </div>
+          </Reveal>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -309,41 +378,9 @@ export function DifferentBand() {
             next to family homes, parks, trails, a small village of cafés and tasting rooms, and a hospital campus.
           </p>
           <p>Grandchildren can visit the park, and a coffee in the village is a short stroll from home.</p>
-          <ResearchLink slug="learning-from-others">What other communities teach us</ResearchLink>
+          <ResearchCallout slug="learning-from-others" surface="linen" className="mt-2" />
         </div>
       </Reveal>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------------------------------------
- * Three quick questions (moved to the end of the page)
- * --------------------------------------------------------------------------------------------- */
-
-export function LifePlanQuestions() {
-  return (
-    <section aria-labelledby="questions-title" className={sectionPad}>
-      <div className="grid items-start gap-8 min-[1000px]:grid-cols-[minmax(0,380px)_1fr] min-[1000px]:gap-20">
-        <h2 id="questions-title" className={subheadingClass}>
-          Three quick questions
-        </h2>
-        <div>
-          {/* Same answers as the Participate FAQs, so the site says one thing. No 55+ claim, no fee promise. */}
-          <FaqItem question="Is it only for people 55 and older? Will there be entrance fees?">
-            It&apos;s too early to say.{" "}
-            <Link href="/participate#update-list" className={inlineLink}>
-              Join the update list
-            </Link>{" "}
-            to hear as plans firm up.
-          </FaqItem>
-          <FaqItem question="Can I stay if my care needs change?">
-            That&apos;s the goal. Independent homes, assisted living, memory care and nursing care are planned in one connected community.
-          </FaqItem>
-          <FaqItem question="When could I move in?">
-            It&apos;s too early to say. Each neighborhood comes when there&apos;s real demand for it, and we&apos;ll share timing as plans firm up.
-          </FaqItem>
-        </div>
-      </div>
     </section>
   );
 }
