@@ -131,8 +131,11 @@ console.log(problems ? `\nDone, with ${problems} thing(s) to look at above.` : "
 
 /**
  * The cover is a linen text block above a full-width photo whose top edge is straight. Find the
- * first row, below the top fifth of the page, where nearly every pixel differs from the linen
- * background (sampled at the top-left corner), and the next few rows do too.
+ * first row, below the top fifth of the page, where most pixels differ from the linen background
+ * (sampled at the top-left corner), and the rows over the next 2.5% of the page do too.
+ * "Most" is 60%, not nearly all: a photo with pale sky along its top edge (Reports 5 and 6, v2)
+ * has rows only 70–85% off-linen. Text rows stay well under that (20% at most), and the long
+ * check keeps a line of type from passing for the photo's edge.
  */
 function findPhotoBand(px, width, height) {
   const at = (x, y) => (y * width + x) * 3;
@@ -144,10 +147,13 @@ function findPhotoBand(px, width, height) {
       const d = Math.abs(px[i] - bg[0]) + Math.abs(px[i + 1] - bg[1]) + Math.abs(px[i + 2] - bg[2]);
       if (d > 24) off++;
     }
-    return off / Math.ceil(width / 2) > 0.97;
+    return off / Math.ceil(width / 2) > 0.6;
   };
-  for (let y = Math.floor(height * 0.2); y < height - 8; y++) {
-    if ([0, 2, 4, 6, 8].every((k) => rowIsPhoto(y + k))) return y;
+  const span = Math.round(height * 0.025);
+  for (let y = Math.floor(height * 0.2); y < height - span; y++) {
+    let photo = true;
+    for (let k = 0; k <= span && photo; k += 2) photo = rowIsPhoto(y + k);
+    if (photo) return y;
   }
   return null;
 }
