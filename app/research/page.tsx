@@ -65,10 +65,34 @@ export default function ResearchPage() {
               people need as they grow older, how care is reached today, and what a small village could add. Each one is short, written in plain
               language, and lists its sources so you can check our work.
             </Reveal>
+            {reports.length > 0 && (
+              <Reveal as="div" kind="fade" className="mt-2 border-t border-line pt-5 sm:mt-4 sm:pt-6">
+                <h2 className={`mb-2 ${eyebrow}`}>In this library</h2>
+                <ol className="flex flex-col">
+                  {reports.map((r) => (
+                    <li key={r.slug} className="border-b border-line last:border-b-0">
+                      <a
+                        href={`#report-${r.slug}`}
+                        className="group flex min-h-11 items-baseline gap-4 py-2.5 text-hearth no-underline hover:text-hearth"
+                      >
+                        <span className="w-6 shrink-0 text-[0.9375rem] font-bold tabular-nums text-muted">
+                          {String(r.number).padStart(2, "0")}
+                        </span>
+                        <span className="shrink-0 font-bold group-hover:underline group-hover:decoration-sage-deep group-hover:decoration-2 group-hover:underline-offset-4">
+                          {r.title}
+                        </span>
+                        <span className="hidden min-w-0 truncate text-muted sm:inline">{r.subtitle}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+            )}
           </div>
           <div className="relative aspect-[3/2] min-[1000px]:aspect-auto min-[1000px]:min-h-[560px]">
-            {/* Decorative landscape: the heading beside it carries the page's message. */}
-            <Image src="/images/research/report-03-photo.jpg" alt="" fill priority sizes="(min-width: 1000px) 45vw, 100vw" className="object-cover" />
+            {/* Decorative landscape: the heading beside it carries the page's message. Its own file, so
+                rerunning prepare:research (which rewrites the report-NN-photo images) never changes it. */}
+            <Image src="/images/research/library-hero-lake.jpg" alt="" fill priority sizes="(min-width: 1000px) 45vw, 100vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -76,12 +100,17 @@ export default function ResearchPage() {
       {/* Reports */}
       {reports.length > 0 && (
         <section id="reports" aria-labelledby="reports-title" className={sectionPad}>
-          <Reveal as="h2" kind="head" id="reports-title" className={`mb-10 sm:mb-14 ${sectionTitle}`}>
-            Read the reports
-          </Reveal>
+          <div className="mb-10 flex flex-col gap-4 sm:mb-14 min-[1000px]:flex-row min-[1000px]:items-end min-[1000px]:justify-between min-[1000px]:gap-10">
+            <Reveal as="h2" kind="head" id="reports-title" className={sectionTitle}>
+              Read the reports
+            </Reveal>
+            <Reveal as="p" kind="fade" className="max-w-[460px] text-muted sm:text-lg">
+              Each report has a short summary on this site and a full PDF to download, with every source listed.
+            </Reveal>
+          </div>
           <ul className="grid gap-4 min-[1000px]:grid-cols-2 sm:gap-5">
             {reports.map((r, i) => (
-              <ReportCard key={r.slug} report={r} index={i} />
+              <ReportCard key={r.slug} id={`report-${r.slug}`} report={r} index={i} />
             ))}
           </ul>
         </section>
@@ -99,25 +128,33 @@ export default function ResearchPage() {
         </Reveal>
       </section>
 
-      {/* More reports on the way */}
+      {/* More reports on the way: outlined cards on the same shelf as the published ones */}
       {planned.length > 0 && (
         <section id="coming-next" aria-labelledby="coming-next-title" className={sectionPad}>
-          <Reveal as="h2" kind="head" id="coming-next-title" className={`mb-6 sm:mb-8 ${sectionTitle}`}>
+          <Reveal as="h2" kind="head" id="coming-next-title" className={`mb-4 ${sectionTitle}`}>
             More reports on the way
           </Reveal>
-          <Reveal kind="fade" className="flex max-w-[760px] flex-col gap-4 sm:text-xl">
-            <p>We&apos;re working on more reports, including:</p>
-            <ul className="flex flex-col gap-3">
-              {planned.map((p) => (
-                <li key={p.number} className="flex gap-3">
-                  <span aria-hidden="true" className="mt-[0.6em] size-2 shrink-0 rounded-full bg-sage-deep" />
-                  <span>
-                    <span className="font-bold">{p.title}:</span> {p.subtitle}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <Reveal as="p" kind="fade" className="mb-10 max-w-[640px] sm:mb-14 sm:text-xl">
+            We&apos;re working on more reports, including:
           </Reveal>
+          <ul className="grid gap-4 sm:gap-5 md:grid-cols-2">
+            {planned.map((p, i) => (
+              <Reveal
+                as="li"
+                kind="card"
+                index={i}
+                key={p.number}
+                className="flex flex-col gap-2.5 rounded-card border-2 border-dashed border-line p-5 sm:p-7"
+              >
+                <p className={eyebrow}>Report {p.number}</p>
+                <h3 className="text-[24px] leading-[1.1] tracking-[-0.015em] sm:text-[28px]">{p.title}</h3>
+                <p className="text-muted">{p.subtitle}</p>
+                <span className="mt-1 inline-flex h-7 items-center self-start rounded-full bg-sand px-3 text-[0.875rem] font-bold text-hearth">
+                  In preparation
+                </span>
+              </Reveal>
+            ))}
+          </ul>
         </section>
       )}
 

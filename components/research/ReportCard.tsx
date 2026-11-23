@@ -33,18 +33,22 @@ export function ReportCard({
   index = 0,
   compact = false,
   titleAs: Title = "h3",
+  id,
 }: {
   report: Report;
   index?: number;
   compact?: boolean;
   titleAs?: "h2" | "h3";
+  /** Anchor for in-page links (the library's contents list). */
+  id?: string;
 }) {
   return (
     <Reveal
       as="li"
       kind="card"
       index={index}
-      className={`grid items-start gap-5 rounded-card bg-sand ${compact ? "grid-cols-[88px_minmax(0,1fr)] p-5 sm:grid-cols-[104px_minmax(0,1fr)] sm:p-6" : "grid-cols-[96px_minmax(0,1fr)] p-5 sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-7 sm:p-7"}`}
+      id={id}
+      className={`grid scroll-mt-24 items-start gap-5 rounded-card bg-sand ${compact ? "grid-cols-[88px_minmax(0,1fr)] p-5 sm:grid-cols-[104px_minmax(0,1fr)] sm:p-6" : "grid-cols-[96px_minmax(0,1fr)] p-5 sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-7 sm:p-7"}`}
     >
       {/* Decorative: the title beside it names the report (docs/15, section 8). */}
       <Image
